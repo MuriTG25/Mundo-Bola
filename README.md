@@ -1,4 +1,5 @@
 # Mundo-Bola
 É um projeto que simulo um sistema de cadastro de produtos de uma loja de bolas
-
-Ainda está em fase pré-alpha (onde o foco neste momento é apenas aplicar os conceitos feitos na aula) e também o fato de estar fazendo projetos não relacionados a cursos de Android/Kotlin e não correr o risco de ficar enferrujado)
+Nesta fase pré alpha vou focar em fazer coisas mais simples, só colocando tela de lista de bolas, cadastro de bolas e tela de detalhes do produto
+Ja estou incluindo o navigation, room, hilt, compose
+Além de fazer o uso de uiState e view model para gerenciamento de estado da tela
