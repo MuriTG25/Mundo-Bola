@@ -24,8 +24,8 @@ fun ListaDeBolasScreen(
     LazyVerticalGrid(
         modifier = modifier.padding(
             top = margemPadrao,
-            start = margemPadrao,
             bottom = margemPadrao,
+            start = margemPadrao
         ),
         verticalArrangement = Arrangement.spacedBy(margemPadrao),
         horizontalArrangement = Arrangement.spacedBy(margemPadrao),

@@ -7,10 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.mundobola.infraestrutura.navigation.MundoBolaNavHost
+import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRota
+import br.com.alura.mundobola.infraestrutura.navigation.listaDeBolasRota
+import br.com.alura.mundobola.infraestrutura.navigation.navegarParaCadastroDeBolas
 import br.com.alura.mundobola.ui.screen.ScaffoldScreen
 import br.com.alura.mundobola.ui.theme.BallStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +41,28 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun TelaApp() {
     val navController = rememberNavController()
-    ScaffoldScreen (){
+    val backStackEntryState by navController.currentBackStackEntryAsState()
+    val destinoAtual = backStackEntryState?.destination
+    val mostraFab = when(destinoAtual?.route) {
+        listaDeBolasRota -> true
+        else -> false
+    }
+    val mostraBusca = when(destinoAtual?.route) {
+        listaDeBolasRota -> true
+        else -> false
+    }
+    val texto = when(destinoAtual?.route){
+        cadastroDeBolasRota -> "Cadastrar Bola"
+        else -> stringResource(id = R.string.app_name)
+    }
+    ScaffoldScreen (
+        noClicaFab = {
+            navController.navegarParaCadastroDeBolas()
+        },
+        mostraFab = mostraFab,
+        mostraBusca = mostraBusca,
+        texto = texto,
+    ){
         MundoBolaNavHost(navHostController = navController)
     }
 }

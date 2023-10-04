@@ -13,5 +13,6 @@ fun MundoBolaNavHost(
         startDestination = listaDeBolasRota,
     ){
         ListaDeBolasNavController()
+        CadastroDeBolasNavController()
     }
 }

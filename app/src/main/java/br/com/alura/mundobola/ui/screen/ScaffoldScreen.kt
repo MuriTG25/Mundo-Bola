@@ -11,20 +11,27 @@ import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 
 @Composable
 fun ScaffoldScreen(
-    nabusca: () -> Unit = {},
+    texto: String = "",
+    naBusca: () -> Unit = {},
     noClicaFab: () -> Unit = {},
+    mostraFab: Boolean = true,
+    mostraBusca: Boolean = true,
     conteudo: @Composable () -> Unit,
 ) {
     Scaffold (
         topBar = {
             TopAppBarComponent(
-                nabusca
+                naBusca = naBusca,
+                mostraBusca = mostraBusca,
+                texto = texto,
             )
         },
         floatingActionButton = {
-            FloatActionButtonComponent(
-                noClicaFab
-            )
+            if(mostraFab){
+                FloatActionButtonComponent(
+                    noClicaFab
+                )
+            }
         }
     ){
         Box (
