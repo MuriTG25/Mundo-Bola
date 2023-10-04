@@ -5,38 +5,44 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import br.com.alura.mundobola.R
 import br.com.alura.mundobola.ui.components.scaffold.FloatActionButtonComponent
 import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 
 @Composable
 fun ScaffoldScreen(
     texto: String = "",
-    naBusca: () -> Unit = {},
-    noClicaFab: () -> Unit = {},
-    mostraFab: Boolean = true,
     mostraBusca: Boolean = true,
+    naBusca: () -> Unit = {},
+    mostraFab: Boolean = true,
+    noClicaFab: () -> Unit = {},
+    mostraVolta: Boolean = true,
+    noClicaVolta: () -> Unit = {},
     conteudo: @Composable () -> Unit,
 ) {
-    Scaffold (
+    Scaffold(
         topBar = {
             TopAppBarComponent(
-                naBusca = naBusca,
+                noClicaBusca = naBusca,
                 mostraBusca = mostraBusca,
                 texto = texto,
+                mostraVolta = mostraVolta,
+                noClicaVolta = noClicaVolta,
             )
         },
         floatingActionButton = {
-            if(mostraFab){
+            if (mostraFab) {
                 FloatActionButtonComponent(
                     noClicaFab
                 )
             }
         }
-    ){
-        Box (
+    ) {
+        Box(
             modifier = Modifier.padding(it)
-        ){
+        ) {
             conteudo()
         }
     }
@@ -44,6 +50,19 @@ fun ScaffoldScreen(
 
 @Preview(showSystemUi = true)
 @Composable
-private fun ScaffoldScreenPreview() {
-    ScaffoldScreen(){}
+private fun ScaffoldScreenPreviewTelaPrincipal() {
+    ScaffoldScreen(
+        texto = stringResource(id = R.string.app_name),
+        mostraVolta = false,
+    ) {}
+}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun ScaffoldScreenPreviewOutrasTelas() {
+    ScaffoldScreen(
+        texto = stringResource(id = R.string.app_name),
+        mostraBusca = false,
+        mostraFab = false,
+    ) {}
 }

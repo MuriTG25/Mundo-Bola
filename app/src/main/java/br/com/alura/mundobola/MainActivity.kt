@@ -43,26 +43,30 @@ private fun TelaApp() {
     val navController = rememberNavController()
     val backStackEntryState by navController.currentBackStackEntryAsState()
     val destinoAtual = backStackEntryState?.destination
-    val mostraFab = when(destinoAtual?.route) {
-        listaDeBolasRota -> true
-        else -> false
-    }
-    val mostraBusca = when(destinoAtual?.route) {
-        listaDeBolasRota -> true
-        else -> false
-    }
-    val texto = when(destinoAtual?.route){
-        cadastroDeBolasRota -> "Cadastrar Bola"
-        else -> stringResource(id = R.string.app_name)
-    }
     ScaffoldScreen (
         noClicaFab = {
             navController.navegarParaCadastroDeBolas()
         },
-        mostraFab = mostraFab,
-        mostraBusca = mostraBusca,
-        texto = texto,
-    ){
+        mostraFab = when(destinoAtual?.route) {
+            listaDeBolasRota -> true
+            else -> false
+        },
+        mostraBusca =  when(destinoAtual?.route) {
+            listaDeBolasRota -> true
+            else -> false
+        },
+        texto = when(destinoAtual?.route){
+            cadastroDeBolasRota -> "Cadastrar Bola"
+            else -> stringResource(id = R.string.app_name)
+        },
+        mostraVolta =  when(destinoAtual?.route) {
+            cadastroDeBolasRota -> true
+            else -> false
+        },
+        noClicaVolta = {
+            navController.popBackStack()
+        }
+            ){
         MundoBolaNavHost(navHostController = navController)
     }
 }
