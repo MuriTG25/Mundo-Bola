@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "br.com.alura.ballstore"
+    namespace = "br.com.alura.mundobola"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "br.com.alura.ballstore"
+        applicationId = "br.com.alura.mundobola"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -69,7 +69,7 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material3:material3:1.1.2")
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
     implementation ("androidx.navigation:navigation-compose:$navigationVersion")
     // https://mvnrepository.com/artifact/androidx.datastore/datastore-preferences
@@ -82,7 +82,7 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.02"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.2")
     val hiltVersion = "2.48"
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
