@@ -22,11 +22,7 @@ fun ListaDeBolasScreen(
     navegarParaADescricao: (Bola) -> Unit = {},
 ) {
     LazyVerticalGrid(
-        modifier = modifier.padding(
-            top = margemPadrao,
-            bottom = margemPadrao,
-            start = margemPadrao
-        ),
+        modifier = modifier.padding(margemPadrao),
         verticalArrangement = Arrangement.spacedBy(margemPadrao),
         horizontalArrangement = Arrangement.spacedBy(margemPadrao),
         columns = GridCells.Fixed(2),

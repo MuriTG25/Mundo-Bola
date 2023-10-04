@@ -4,14 +4,19 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,8 +34,8 @@ fun ProdutoBolaComponent(
 ) {
     Surface (
         modifier = modifier
-            .heightIn(200.dp,300.dp)
-            .width(200.dp),
+            .heightIn(230.dp,300.dp)
+            .widthIn(160.dp,200.dp),
         shape = RoundedCornerShape(margemPadrao),
         shadowElevation = 4.dp,
         border = BorderStroke(2.dp, color = Color.Black)
@@ -42,7 +47,10 @@ fun ProdutoBolaComponent(
             verticalArrangement = Arrangement.spacedBy(margemPadrao/2)
         ){
             ImagemBolaComponent(
-                modifier = modifier.align(Alignment.CenterHorizontally),
+                modifier = modifier
+                    .align(Alignment.CenterHorizontally)
+                    .size(100.dp)
+                    .clip(CircleShape),
                 imagemDaBola = bola.imagem
             )
             TextoProdutoComponent(

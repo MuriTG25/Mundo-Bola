@@ -15,21 +15,20 @@ import coil.compose.AsyncImage
 @Composable
 fun ImagemBolaComponent(
     modifier: Modifier = Modifier,
-    imagemDaBola: String? = null
+    imagemDaBola: String? = null,
+    escala: ContentScale = ContentScale.Crop
 ) {
     AsyncImage(
-        modifier = modifier
-            .size(100.dp)
-            .clip(CircleShape),
+        modifier = modifier,
         model = imagemDaBola,
         contentDescription = "imagem da bola",
-        contentScale = ContentScale.Crop,
+        contentScale = escala,
         placeholder = painterResource(id = R.drawable.ic_imagem_nao_encontrado),
         error = painterResource(id = R.drawable.ic_imagem_nao_encontrado),
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun ImagemBolaComponentPreview() {
     ImagemBolaComponent()

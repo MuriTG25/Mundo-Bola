@@ -15,13 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun CampoDeTextoComponent(
     modifier: Modifier = Modifier,
+    nomeDoCampo: String = "",
+    dicaDoCampo: String = "",
     texto: String = "",
     naMudancaDeTexto: (String) -> Unit = {},
-    nomeDoCampo: String = "",
     maiuscula: KeyboardCapitalization = KeyboardCapitalization.Words,
     acaoDeEnter: ImeAction = ImeAction.Next,
     tipoDeTeclado: KeyboardType = KeyboardType.Text,
-    maximoDeLinhas: Int = 1
+    minimoDeLinhas: Int = 1,
+    maximoDeLinhas: Int = 1,
 
 ) {
     OutlinedTextField(
@@ -31,11 +33,15 @@ fun CampoDeTextoComponent(
         label = {
             Text(text = nomeDoCampo)
         },
+        placeholder = {
+            Text(text = dicaDoCampo)
+        },
         keyboardOptions = KeyboardOptions(
             capitalization = maiuscula,
             imeAction = acaoDeEnter,
             keyboardType = tipoDeTeclado
         ),
+        minLines = minimoDeLinhas,
         maxLines = maximoDeLinhas,
         shape = RoundedCornerShape(15),
     )
