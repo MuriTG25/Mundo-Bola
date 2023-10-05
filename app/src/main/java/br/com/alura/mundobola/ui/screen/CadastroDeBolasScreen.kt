@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.aplicacao.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.ui.components.cadastrodebolas.BotaoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.CampoDeTextoComponent
+import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
 import br.com.alura.mundobola.ui.extra.margemPadrao
 
@@ -62,6 +63,16 @@ fun CadastroDeBolasScreen(
                 texto = state.campoDoPreco,
                 naMudancaDeTexto = state.alteracaoDoCampoPreco,
                 tipoDeTeclado = KeyboardType.Decimal,
+            )
+            DropdownMenuComponent(
+                modifier = Modifier.fillMaxWidth(),
+                expandir = state.expandirMenuMarca,
+                alteracaoDeExpansao = state.alteracaoExpansaoMenuMarca,
+                texto = "Marca",
+                listaDeMarcas = state.listaDeMarcas,
+                pegaIdMarca = state.pegaIdMarca,
+                campoMarca = state.campoMarca,
+                alteracaoDoCampoMarca = state.alteracaoDoCampoMarca,
             )
             CampoDeTextoComponent(
                 nomeDoCampo = "Descrição",

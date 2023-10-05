@@ -10,6 +10,12 @@ data class CadastroDeBolasUiState(
     val alteracaoDoCampoPreco: (String) -> Unit = {},
     val campoDaDescricao: String = "",
     val alteracaoDoCampoDescricao: (String) -> Unit = {},
+    val expandirMenuMarca: Boolean = false,
+    val alteracaoExpansaoMenuMarca: (Boolean) -> Unit = {},
+    val idMarca: String = "",
+    val pegaIdMarca: (String) -> Unit = {},
+    val campoMarca: String = "",
+    val alteracaoDoCampoMarca: (String) -> Unit = {},
 ) {
 
 }

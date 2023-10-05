@@ -15,7 +15,12 @@ fun NavGraphBuilder.CadastroDeBolasNavController() {
     composable(cadastroDeBolasRota) {
         val viewModel = hiltViewModel<CadastrodeBolasViewModel>()
         val uiState by viewModel.uiState.collectAsState()
-        CadastroDeBolasScreen(state = uiState)
+        CadastroDeBolasScreen(
+            state = uiState,
+            noClicarSalvar = {
+                viewModel.clicarSalvar()
+            }
+        )
     }
 }
 
