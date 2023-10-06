@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -25,17 +26,20 @@ import br.com.alura.mundobola.ui.components.cadastrodebolas.CampoDeTextoComponen
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
+import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import coil.request.ImageRequest
 
 @Composable
 fun CadastroDeBolasScreen(
     modifier: Modifier = Modifier,
     state: CadastroDeBolasUiState,
+    noCarregarImagem: (String) -> Unit = {},
     noClicarSalvar: () -> Unit = {},
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         //TODO talvez eu altere como a imagem é exibida para ser mais intuitivo e com um visual melhor
-        ImagemBolaComponent(
+        ImagemBolaComponentComRequest(
             modifier = Modifier
                 .background(Color.LightGray)
                 .fillMaxWidth()
@@ -43,6 +47,7 @@ fun CadastroDeBolasScreen(
                 .clickable {
                     state.noClickDaImagem(true)
                 },
+            imagemDaBola = ImageRequest.Builder(LocalContext.current).data(state.fotoBola).build(),
             escala = ContentScale.FillHeight
         )
         Column(
@@ -94,8 +99,13 @@ fun CadastroDeBolasScreen(
         if (state.mostraDialogImagem) {
             //TODO ainda a implementar o dialog
             DialogCadastroImagem(
+                imagemBola =state.fotoBola,
+                alteracaoDaImagemBola = state.alteracaoDaImagemDaBola,
                 noClickSair = {
                     state.noClickDaImagem(false)
+                },
+                noClickConfirmar = {
+                    noCarregarImagem(it)
                 }
             )
         }

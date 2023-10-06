@@ -13,6 +13,10 @@ fun MundoBolaNavHost(
         startDestination = listaDeBolasRota,
     ){
         ListaDeBolasNavController()
-        CadastroDeBolasNavController()
+        CadastroDeBolasNavController(
+            voltarTelaAnterior = {
+                navHostController.navegarParaListaDeBolas()
+            }
+        )
     }
 }

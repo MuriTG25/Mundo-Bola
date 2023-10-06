@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 
 internal const val cadastroDeBolasRota = "cadastroDeBolas"
 
-fun NavGraphBuilder.CadastroDeBolasNavController() {
+fun NavGraphBuilder.CadastroDeBolasNavController(
+    voltarTelaAnterior: () -> Unit = {},
+) {
     composable(cadastroDeBolasRota) {
         val viewModel = hiltViewModel<CadastrodeBolasViewModel>()
         val uiState by viewModel.uiState.collectAsState()
@@ -23,7 +25,11 @@ fun NavGraphBuilder.CadastroDeBolasNavController() {
             noClicarSalvar = {
                 coroutineScope.launch {
                     viewModel.clicarSalvar()
+                    voltarTelaAnterior()
                 }
+            },
+            noCarregarImagem = {linkImagem ->
+                viewModel.carregarImagem(linkImagem)
             }
         )
     }

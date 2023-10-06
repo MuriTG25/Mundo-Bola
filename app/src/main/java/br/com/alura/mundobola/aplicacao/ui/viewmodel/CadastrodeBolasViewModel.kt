@@ -2,6 +2,7 @@ package br.com.alura.mundobola.aplicacao.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import br.com.alura.mundobola.aplicacao.dao.BolaDao
 import br.com.alura.mundobola.aplicacao.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
@@ -13,7 +14,9 @@ import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
-class CadastrodeBolasViewModel @Inject constructor() : ViewModel() {
+class CadastrodeBolasViewModel @Inject constructor(
+    private val bolaDao: BolaDao
+) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -56,6 +59,11 @@ class CadastrodeBolasViewModel @Inject constructor() : ViewModel() {
                         mostraDialogImagem = it
                     )
                 },
+                alteracaoDaImagemDaBola = {
+                    _uiState.value = _uiState.value.copy(
+                        fotoBola = it
+                    )
+                },
             )
         }
     }
@@ -68,9 +76,18 @@ class CadastrodeBolasViewModel @Inject constructor() : ViewModel() {
                 preco = campoDoPreco.toBigDecimal(),
                 marcaId = idMarca,
                 descricao = campoDaDescricao,
+                imagem = fotoBola,
                 dataCriacao = LocalDateTime.now()
             )
+            bolaDao.adicionarBola(bola)
             Log.i("CadastrodeBolasViewModel", "Bola Salva: $bola")
         }
+    }
+
+    fun carregarImagem(linkImagem: String) {
+        _uiState.value = _uiState.value.copy(
+            fotoBola = linkImagem,
+            mostraDialogImagem = false,
+        )
     }
 }
