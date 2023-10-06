@@ -16,6 +16,8 @@ data class CadastroDeBolasUiState(
     val pegaIdMarca: (String) -> Unit = {},
     val campoMarca: String = "",
     val alteracaoDoCampoMarca: (String) -> Unit = {},
+    val mostraDialogImagem: Boolean = false,
+    val noClickDaImagem: (Boolean) -> Unit = {},
 ) {
 
 }

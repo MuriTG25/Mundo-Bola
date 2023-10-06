@@ -1,12 +1,13 @@
 package br.com.alura.mundobola.ui.components.cadastrodebolas
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.ui.components.listadebolas.TextoProdutoComponent
 import br.com.alura.mundobola.ui.theme.AppPrimaryColor
 import br.com.alura.mundobola.ui.theme.CorDosElementosScaffolds
@@ -15,17 +16,19 @@ import br.com.alura.mundobola.ui.theme.CorDosElementosScaffolds
 fun BotaoComponent(
     modifier: Modifier = Modifier,
     texto: String = "",
+    fontSize: TextUnit = 18.sp,
     noClicarBotao: () -> Unit = {}
 ) {
     Button(
         onClick = noClicarBotao,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         shape = RoundedCornerShape(20),
         colors = ButtonDefaults.buttonColors(containerColor = AppPrimaryColor),
 
     ) {
         TextoProdutoComponent(
             texto = texto,
+            fontSize = fontSize,
             color = CorDosElementosScaffolds
         )
     }

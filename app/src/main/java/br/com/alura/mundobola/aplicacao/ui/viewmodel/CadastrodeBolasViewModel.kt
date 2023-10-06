@@ -50,12 +50,17 @@ class CadastrodeBolasViewModel @Inject constructor() : ViewModel() {
                     _uiState.value = _uiState.value.copy(
                         idMarca = it
                     )
-                }
+                },
+                noClickDaImagem = {
+                    _uiState.value = _uiState.value.copy(
+                        mostraDialogImagem = it
+                    )
+                },
             )
         }
     }
 
-    fun clicarSalvar() {
+    suspend fun clicarSalvar() {
         with(_uiState.value) {
             val bola = Bola(
                 nome = campoDoNome,

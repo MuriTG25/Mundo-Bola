@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.aplicacao.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.ui.components.cadastrodebolas.BotaoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.CampoDeTextoComponent
+import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
 import br.com.alura.mundobola.ui.extra.margemPadrao
@@ -29,28 +30,28 @@ import br.com.alura.mundobola.ui.extra.margemPadrao
 @Composable
 fun CadastroDeBolasScreen(
     modifier: Modifier = Modifier,
-    noClickDaImagem: () -> Unit = {},
     state: CadastroDeBolasUiState,
     noClicarSalvar: () -> Unit = {},
 ) {
-    Column (modifier = modifier.fillMaxSize()){
+    Column(modifier = modifier.fillMaxSize()) {
+        //TODO talvez eu altere como a imagem é exibida para ser mais intuitivo e com um visual melhor
         ImagemBolaComponent(
             modifier = Modifier
                 .background(Color.LightGray)
                 .fillMaxWidth()
                 .height(200.dp)
                 .clickable {
-                    noClickDaImagem()
+                    state.noClickDaImagem(true)
                 },
             escala = ContentScale.FillHeight
         )
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(margemPadrao)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(margemPadrao)
-        ){
+        ) {
             CampoDeTextoComponent(
                 nomeDoCampo = "Nome",
                 dicaDoCampo = "Insira o nome da Bola",
@@ -66,9 +67,9 @@ fun CadastroDeBolasScreen(
             )
             DropdownMenuComponent(
                 modifier = Modifier.fillMaxWidth(),
+                textoDoCampo = "Marca",
                 expandir = state.expandirMenuMarca,
                 alteracaoDeExpansao = state.alteracaoExpansaoMenuMarca,
-                texto = "Marca",
                 listaDeMarcas = state.listaDeMarcas,
                 pegaIdMarca = state.pegaIdMarca,
                 campoMarca = state.campoMarca,
@@ -88,6 +89,14 @@ fun CadastroDeBolasScreen(
                 modifier = Modifier.fillMaxWidth(),
                 texto = "Salvar",
                 noClicarBotao = noClicarSalvar,
+            )
+        }
+        if (state.mostraDialogImagem) {
+            //TODO ainda a implementar o dialog
+            DialogCadastroImagem(
+                noClickSair = {
+                    state.noClickDaImagem(false)
+                }
             )
         }
     }

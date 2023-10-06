@@ -1,6 +1,7 @@
 package br.com.alura.mundobola.ui.components.cadastrodebolas
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -16,13 +17,13 @@ import br.com.alura.mundobola.dominio.Marca
 @Composable
 fun DropdownMenuComponent(
     modifier: Modifier = Modifier,
-    texto: String = "",
+    textoDoCampo: String = "",
     expandir: Boolean = false,
     alteracaoDeExpansao: (Boolean) -> Unit = {},
     listaDeMarcas: List<Marca> = emptyList(),
     pegaIdMarca: (String) -> Unit = {},
     campoMarca: String = "",
-    alteracaoDoCampoMarca: (String) -> Unit = {}
+    alteracaoDoCampoMarca: (String) -> Unit = {},
 ) {
     ExposedDropdownMenuBox(
         modifier = modifier.fillMaxWidth(),
@@ -38,12 +39,13 @@ fun DropdownMenuComponent(
             value = campoMarca,
             onValueChange = { },
             label = {
-                Text(text = texto)
+                Text(text = textoDoCampo)
             },
             readOnly = true,
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandir)
-            }
+            },
+            shape = RoundedCornerShape(15)
         )
         ExposedDropdownMenu(
             expanded = expandir,
@@ -51,6 +53,7 @@ fun DropdownMenuComponent(
                 alteracaoDeExpansao(!expandir)
             }
         ) {
+            //TODO talvez eu implemente o leading icon com o simbolo das marcas
             listaDeMarcas.forEach {
                 DropdownMenuItem(
                     text = {
