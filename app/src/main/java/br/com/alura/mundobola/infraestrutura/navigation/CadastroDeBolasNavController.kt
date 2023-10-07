@@ -26,8 +26,7 @@ fun NavGraphBuilder.CadastroDeBolasNavController(
             state = uiState,
             noClicarSalvar = {
                 coroutineScope.launch {
-                    val deuCerto = viewModel.clicarSalvar()
-                    if(deuCerto){
+                    viewModel.clicarSalvar(){
                         voltarTelaAnterior()
                     }
                 }

@@ -1,19 +1,13 @@
 package br.com.alura.mundobola.ui.viewmodel
 
-import android.content.Context
-import android.util.Log
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.alura.mundobola.aplicacao.dao.BolaDao
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
-import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -25,10 +19,11 @@ import javax.inject.Inject
 @HiltViewModel
 class CadastrodeBolasViewModel @Inject constructor(
     private val repositorio: MundoBolaRepositorio,
-    @ApplicationContext private val context: Context
+    private val application: Application,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
+    private val context = application.applicationContext
 
     init {
         _uiState.update { cadastroDeBolasUiState ->
@@ -86,14 +81,13 @@ class CadastrodeBolasViewModel @Inject constructor(
         }
     }
 
-    suspend fun clicarSalvar():Boolean {
+    suspend fun clicarSalvar(irParaTelaPrincipal: ()-> Unit = {}) {
         with(_uiState.value) {
             if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()){
                 _uiState.value = _uiState.value.copy(
                     campoNomeObrigatorio = true,
                     campoPrecoObrigatorio = true,
                 )
-                return false
             }
             else{
                 val precoConvertido: BigDecimal? = try {
@@ -111,9 +105,10 @@ class CadastrodeBolasViewModel @Inject constructor(
                         dataCriacao = LocalDateTime.now()
                     )
                     repositorio.adicionarBola(bola)
-                    //TODO tenho que melhorar esse final de validacao
+                    context.mensagemDeAviso("Bola cadastrada com sucesso")
+                    irParaTelaPrincipal()
+                    //TODO trocar toast por Alert Dialog
                 } ?: context.mensagemDeAviso("Formato de preço invalido")
-                return true
             }
         }
     }
