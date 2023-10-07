@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.aplicacao.ui.stateholder
+package br.com.alura.mundobola.ui.stateholder
 
 import br.com.alura.mundobola.dominio.Bola
 

@@ -1,21 +1,31 @@
-package br.com.alura.mundobola.aplicacao.ui.viewmodel
+package br.com.alura.mundobola.ui.viewmodel
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.dao.BolaDao
-import br.com.alura.mundobola.aplicacao.ui.stateholder.CadastroDeBolasUiState
+import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
+import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 @HiltViewModel
 class CadastrodeBolasViewModel @Inject constructor(
-    private val bolaDao: BolaDao
+    private val repositorio: MundoBolaRepositorio,
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
@@ -25,12 +35,14 @@ class CadastrodeBolasViewModel @Inject constructor(
             cadastroDeBolasUiState.copy(
                 alteracaoDoCampoNome = {
                     _uiState.value = _uiState.value.copy(
-                        campoDoNome = it
+                        campoDoNome = it,
+                        campoNomeObrigatorio = false
                     )
                 },
                 alteracaoDoCampoPreco = {
                     _uiState.value = _uiState.value.copy(
-                        campoDoPreco = it
+                        campoDoPreco = it,
+                        campoPrecoObrigatorio = false
                     )
                 },
                 alteracaoDoCampoDescricao = {
@@ -48,7 +60,6 @@ class CadastrodeBolasViewModel @Inject constructor(
                         campoMarca = it
                     )
                 },
-                listaDeMarcas = amostraDeListaDeMarcas,
                 pegaIdMarca = {
                     _uiState.value = _uiState.value.copy(
                         idMarca = it
@@ -66,21 +77,44 @@ class CadastrodeBolasViewModel @Inject constructor(
                 },
             )
         }
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    listaDeMarcas = repositorio.listaDeMarcas()
+                )
+            }
+        }
     }
 
-    suspend fun clicarSalvar() {
+    suspend fun clicarSalvar():Boolean {
         with(_uiState.value) {
-            val bola = Bola(
-                nome = campoDoNome,
-                //TODO validação do BigDecimal para não ocorrer exceção
-                preco = campoDoPreco.toBigDecimal(),
-                marcaId = idMarca,
-                descricao = campoDaDescricao,
-                imagem = fotoBola,
-                dataCriacao = LocalDateTime.now()
-            )
-            bolaDao.adicionarBola(bola)
-            Log.i("CadastrodeBolasViewModel", "Bola Salva: $bola")
+            if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()){
+                _uiState.value = _uiState.value.copy(
+                    campoNomeObrigatorio = true,
+                    campoPrecoObrigatorio = true,
+                )
+                return false
+            }
+            else{
+                val precoConvertido: BigDecimal? = try {
+                    campoDoPreco.toBigDecimal()
+                } catch (e: NumberFormatException) {
+                    null
+                }
+                precoConvertido?.let {
+                    val bola = Bola(
+                        nome = campoDoNome,
+                        preco = it,
+                        marcaId = idMarca,
+                        descricao = campoDaDescricao,
+                        imagem = fotoBola,
+                        dataCriacao = LocalDateTime.now()
+                    )
+                    repositorio.adicionarBola(bola)
+                    //TODO tenho que melhorar esse final de validacao
+                } ?: context.mensagemDeAviso("Formato de preço invalido")
+                return true
+            }
         }
     }
 

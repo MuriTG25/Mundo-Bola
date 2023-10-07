@@ -20,11 +20,12 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.alura.mundobola.aplicacao.ui.stateholder.CadastroDeBolasUiState
+import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.ui.components.cadastrodebolas.BotaoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.CampoDeTextoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
+import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
@@ -57,19 +58,29 @@ fun CadastroDeBolasScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(margemPadrao)
         ) {
-            CampoDeTextoComponent(
-                nomeDoCampo = "Nome",
-                dicaDoCampo = "Insira o nome da Bola",
-                texto = state.campoDoNome,
-                naMudancaDeTexto = state.alteracaoDoCampoNome,
-            )
-            CampoDeTextoComponent(
-                nomeDoCampo = "Preço",
-                dicaDoCampo = "Insira o preço da bola",
-                texto = state.campoDoPreco,
-                naMudancaDeTexto = state.alteracaoDoCampoPreco,
-                tipoDeTeclado = KeyboardType.Decimal,
-            )
+            Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
+                if (state.campoNomeObrigatorio){
+                    TextoCampoObrigatorioComponent(texto = "Nome")
+                }
+                CampoDeTextoComponent(
+                    nomeDoCampo = "Nome",
+                    dicaDoCampo = "Insira o nome da Bola",
+                    texto = state.campoDoNome,
+                    naMudancaDeTexto = state.alteracaoDoCampoNome,
+                )
+            }
+            Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
+                if (state.campoPrecoObrigatorio){
+                    TextoCampoObrigatorioComponent(texto = "Preço")
+                }
+                CampoDeTextoComponent(
+                    nomeDoCampo = "Preço",
+                    dicaDoCampo = "Insira o preço da bola",
+                    texto = state.campoDoPreco,
+                    naMudancaDeTexto = state.alteracaoDoCampoPreco,
+                    tipoDeTeclado = KeyboardType.Decimal,
+                )
+            }
             DropdownMenuComponent(
                 modifier = Modifier.fillMaxWidth(),
                 textoDoCampo = "Marca",

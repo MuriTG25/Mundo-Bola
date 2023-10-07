@@ -9,7 +9,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import br.com.alura.mundobola.aplicacao.ui.stateholder.ListaDeBolasUiState
+import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.components.listadebolas.ProdutoBolaComponent
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas

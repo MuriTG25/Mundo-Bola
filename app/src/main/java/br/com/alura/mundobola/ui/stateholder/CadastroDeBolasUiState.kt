@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.aplicacao.ui.stateholder
+package br.com.alura.mundobola.ui.stateholder
 
 import br.com.alura.mundobola.dominio.Marca
 
@@ -19,5 +19,8 @@ data class CadastroDeBolasUiState(
     val mostraDialogImagem: Boolean = false,
     val noClickDaImagem: (Boolean) -> Unit = {},
     val fotoBola: String = "",
-    val alteracaoDaImagemDaBola: (String) -> Unit = {}
+    val alteracaoDaImagemDaBola: (String) -> Unit = {},
+    val campoNomeObrigatorio: Boolean = false,
+    val campoPrecoObrigatorio: Boolean = false,
+
 )

@@ -1,9 +1,9 @@
-package br.com.alura.mundobola.aplicacao.ui.viewmodel
+package br.com.alura.mundobola.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.dao.BolaDao
-import br.com.alura.mundobola.aplicacao.ui.stateholder.ListaDeBolasUiState
+import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
