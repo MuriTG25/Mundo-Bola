@@ -59,7 +59,7 @@ fun CadastroDeBolasScreen(
             verticalArrangement = Arrangement.spacedBy(margemPadrao)
         ) {
             Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
-                if (state.campoNomeObrigatorio){
+                if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()){
                     TextoCampoObrigatorioComponent(texto = "Nome")
                 }
                 CampoDeTextoComponent(
@@ -70,7 +70,7 @@ fun CadastroDeBolasScreen(
                 )
             }
             Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
-                if (state.campoPrecoObrigatorio){
+                if (state.campoPrecoObrigatorio && state.campoDoPreco.isBlank()){
                     TextoCampoObrigatorioComponent(texto = "Preço")
                 }
                 CampoDeTextoComponent(
@@ -108,7 +108,6 @@ fun CadastroDeBolasScreen(
             )
         }
         if (state.mostraDialogImagem) {
-            //TODO ainda a implementar o dialog
             DialogCadastroImagem(
                 imagemBola =state.fotoBola,
                 alteracaoDaImagemBola = state.alteracaoDaImagemDaBola,

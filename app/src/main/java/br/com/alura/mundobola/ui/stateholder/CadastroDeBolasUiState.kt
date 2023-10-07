@@ -22,5 +22,4 @@ data class CadastroDeBolasUiState(
     val alteracaoDaImagemDaBola: (String) -> Unit = {},
     val campoNomeObrigatorio: Boolean = false,
     val campoPrecoObrigatorio: Boolean = false,
-
 )
