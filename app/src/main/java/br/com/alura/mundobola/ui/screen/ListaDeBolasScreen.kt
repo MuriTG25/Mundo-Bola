@@ -19,7 +19,7 @@ import br.com.alura.mundobola.ui.extra.margemPadrao
 fun ListaDeBolasScreen(
     modifier: Modifier = Modifier,
     state: ListaDeBolasUiState,
-    navegarParaADescricao: (Bola) -> Unit = {},
+    navegarParaADescricao: (String) -> Unit = {},
 ) {
     LazyVerticalGrid(
         modifier = modifier.padding(margemPadrao),
@@ -30,7 +30,7 @@ fun ListaDeBolasScreen(
         items(state.listaDeBolas) { bola ->
             ProdutoBolaComponent(
                 modifier = Modifier.clickable {
-                    navegarParaADescricao(bola)
+                    navegarParaADescricao(bola.bolaId)
                 },
                 bola = bola,
             )
