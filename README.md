@@ -48,9 +48,10 @@ Plugin utilizados:
 
 # Beta
 
-Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola<br />
+Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola.<br />
 Além disso, teremos uma tela mais focado em gerenciamento de estoque e outro para cadastro de produto.<br />
 Haverá um sistema de login de usuários, com sistema de limitação de acesso para algumas features apenas para aqueles que tem permissão de adm.<br />
+As imagens não serão mais salvas em url e sim num sistema de armazenamento interno do app, com possiblidade de buscar imagens dentro do aparelho android.<br />
 Terá um uma redesign maior na parte de UX/UI do aplicativo.<br />
 
 Plugin utilizados:
@@ -61,15 +62,15 @@ Plugin utilizados:
  - Coil Compose
  - Room
  - DataStore
+ - Documentfile
  - Junit
  - Mockk
  - Navigation Test
 
 # Lançamento (1.0)
-Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit) <br />
-Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end <br />
-Se houver futuras atualizações, serão apenas correções de bug e/ou pequenas implementações
-
+Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit). <br />
+Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end. <br />
+Se houver futuras atualizações, serão apenas correções de bug e/ou pequenas implementações.
 
 Plugin utilizados (aplicativo):
  - Hilt
