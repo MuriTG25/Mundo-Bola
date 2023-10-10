@@ -1,7 +1,7 @@
 # Mundo-Bola
 ![](https://raw.githubusercontent.com/MuriTG25/Mundo-Bola/main/mundo-bola-logo.jpeg)
 
-É um projeto que simulo um sistema de cadastro de produtos e genrenciamento de estoque de uma loja de bolas<br />
+É um projeto que simula um sistema de cadastro de produtos e genrenciamento de estoque de uma loja de bolas<br />
 Ele foi desenvolvido no sistema Android em Kotlin e conta com o sistema do Jetpack Compose para implementação de telas<br />
 O aplicativo roda em aparelhos android a partir da versão 7.0 (SDK 24) até a versão mais atual (até o momento), a 14 (SDK 34)<br />
 Ele usa principios de arquitetura android e utiliza o modelo MVVM <br />
