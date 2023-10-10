@@ -50,7 +50,7 @@ Plugin utilizados:
 
 Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola<br />
 Além disso, teremos uma tela mais focado em gerenciamento de estoque e outro para cadastro de produto.<br />
-Haverá um sistema de login de usuários, com sistema de limitação de acesso apenas aqueles que tem permissão de adm.<br />
+Haverá um sistema de login de usuários, com sistema de limitação de acesso para algumas features apenas para aqueles que tem permissão de adm.<br />
 Terá um uma redesign maior na parte de UX/UI do aplicativo.<br />
 
 Plugin utilizados:
