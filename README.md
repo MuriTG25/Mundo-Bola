@@ -36,6 +36,7 @@ Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Roo
  - Aba lateral que mostra a aba de marcas
  - Cadastro e alteração das marcas
  - Opções de ordenamento dos produtos
+ - Dentro da classe bola haverá outra subclasse que adiciona mais detalhes da bola
 
 Plugin utilizados:
  - Hilt
