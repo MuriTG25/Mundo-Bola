@@ -1,6 +1,6 @@
 # Mundo-Bola
 É um projeto que simulo um sistema de cadastro de produtos e genrenciamento de estoque de uma loja de bolas<br />
-Ele foi desenvolvido em Kotlin no sistema Android e conta com o sistema do Jetpack Compose para implementação de telas<br />
+Ele foi desenvolvido no sistema Android em Kotlin e conta com o sistema do Jetpack Compose para implementação de telas<br />
 O aplicativo roda em aparelhos android a partir da versão 7.0 (SDK 24) até a versão mais atual (até o momento), a 14 (SDK 34)<br />
 Ele usa principios de arquitetura android e utiliza o modelo MVVM <br />
 Além do aplicativo, farei um modelo físico do banco de dados, ae também farei um banco de dados no MySQL para simular o funcionamento do mesmo. <br />
