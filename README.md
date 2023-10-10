@@ -3,6 +3,7 @@
 Ele foi desenvolvido em Kotlin no sistema Android e conta com o sistema do Jetpack Compose para implementação de telas<br />
 O aplicativo roda em aparelhos android a partir da versão 7.0 (SDK 24) até a versão mais atual (até o momento), a 14 (SDK 34)<br />
 Ele usa principios de arquitetura android e utiliza o modelo MVVM <br />
+Além do aplicativo, farei um modelo físico do banco de dados, ae também farei um banco de dados no MySQL para simular o funcionamento do mesmo. <br />
 O projeto está dividido em 4 fases<br />
 
 # Fase atual
@@ -24,5 +25,66 @@ Plugin utilizados:
  - Material 3
  - Coil Compose
 
-#Fase atual
-# Pré Alpha
+# Fases futuras
+# Alpha
+
+Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Room. Além disso, pretendo implementar outras features, como:
+ - Busca de produtos pelo nome do produto e da marca
+ - Tela de bolas por marca
+ - Aba lateral que mostra a aba de marcas
+ - Cadastro e alteração das marcas
+ - Opções de ordenamento dos produtos
+
+Plugin utilizados:
+ - Hilt
+ - Navigation
+ - Jetpack Compose
+ - Material 3
+ - Coil Compose
+ - Room
+ - Junit
+ - Mockk
+ - Navigation Test
+
+# Beta
+
+Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola<br />
+Além disso, teremos uma tela mais focado em gerenciamento de estoque e outro para cadastro de produto.<br />
+Haverá um sistema de login de usuários, com sistema de limitação de acesso apenas aqueles que tem permissão de adm.<br />
+Terá um uma redesign maior na parte de UX/UI do aplicativo.<br />
+
+Plugin utilizados:
+ - Hilt
+ - Navigation
+ - Jetpack Compose
+ - Material 3
+ - Coil Compose
+ - Room
+ - DataStore
+ - Junit
+ - Mockk
+ - Navigation Test
+
+# Lançamento (1.0)
+Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit) <br />
+Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end <br />
+Se houver futuras atualizações, serão apenas correções de bug e pequenas implementações
+
+
+Plugin utilizados (aplicativo):
+ - Hilt
+ - Navigation
+ - Jetpack Compose
+ - Material 3
+ - Coil Compose
+ - Room
+ - DataStore
+ - Junit
+ - Mockk
+ - Navigation Test
+
+
+Plugin utilizados(servidor em Kotlin):
+ - Spring boot
+ - Retrofit
+ - Não defini o resto
