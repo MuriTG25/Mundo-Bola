@@ -24,6 +24,7 @@ import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
+import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogErroPrecoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponentComRequest
@@ -115,6 +116,13 @@ fun CadastroDeBolasScreen(
                 },
                 noClickConfirmar = {
                     noCarregarImagem(it)
+                }
+            )
+        }
+        if(state.mostraDialogErroPreco){
+            DialogErroPrecoComponent(
+                fecharDialog = {
+                    state.noCLickDialogErroPreco(false)
                 }
             )
         }

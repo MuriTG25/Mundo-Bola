@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 fun String.paraBigDecimal() = try {
-    this.toBigDecimal()
+    val formatado = this.replace(",",".").replace("-","")
+    formatado.toBigDecimal()
 } catch (e: NumberFormatException) {
     null
 }

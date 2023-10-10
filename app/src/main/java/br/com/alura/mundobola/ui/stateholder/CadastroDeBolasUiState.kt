@@ -18,6 +18,8 @@ data class CadastroDeBolasUiState(
     val alteracaoDoCampoMarca: (String) -> Unit = {},
     val mostraDialogImagem: Boolean = false,
     val noClickDaImagem: (Boolean) -> Unit = {},
+    val mostraDialogErroPreco: Boolean = false,
+    val noCLickDialogErroPreco: (Boolean) -> Unit = {},
     val fotoBola: String = "",
     val alteracaoDaImagemDaBola: (String) -> Unit = {},
     val campoNomeObrigatorio: Boolean = false,

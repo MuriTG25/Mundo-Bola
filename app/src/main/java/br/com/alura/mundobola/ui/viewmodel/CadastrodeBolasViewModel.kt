@@ -1,6 +1,7 @@
 package br.com.alura.mundobola.ui.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.extra.estaVazio
@@ -10,6 +11,7 @@ import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -70,6 +72,11 @@ class CadastrodeBolasViewModel @Inject constructor(
                         fotoBola = it
                     )
                 },
+                noCLickDialogErroPreco = {
+                    _uiState.value = _uiState.value.copy(
+                        mostraDialogErroPreco = false
+                    )
+                }
             )
         }
         viewModelScope.launch {
@@ -103,9 +110,15 @@ class CadastrodeBolasViewModel @Inject constructor(
                     application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
                     irParaTelaPrincipal()
                     //TODO trocar toast por Alert Dialog
-                } ?: application.applicationContext.mensagemDeAviso("Formato de preço invalido")
+                } ?: mensagemDeErroNoPreco()
             }
         }
+    }
+
+    private fun mensagemDeErroNoPreco() {
+        _uiState.value = _uiState.value.copy(
+            mostraDialogErroPreco = true,
+        )
     }
 
     fun carregarImagem(linkImagem: String) {
