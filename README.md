@@ -68,7 +68,7 @@ Plugin utilizados:
 # Lançamento (1.0)
 Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit) <br />
 Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end <br />
-Se houver futuras atualizações, serão apenas correções de bug e pequenas implementações
+Se houver futuras atualizações, serão apenas correções de bug e/ou pequenas implementações
 
 
 Plugin utilizados (aplicativo):
@@ -79,6 +79,7 @@ Plugin utilizados (aplicativo):
  - Coil Compose
  - Room
  - DataStore
+ - Ktor (pode ser Retrofit)
  - Junit
  - Mockk
  - Navigation Test
