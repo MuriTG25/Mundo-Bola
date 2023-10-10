@@ -5,7 +5,7 @@ O aplicativo roda em aparelhos android a partir da versão 7.0 (SDK 24) até a v
 Ele usa principios de arquitetura android e utiliza o modelo MVVM <br />
 O projeto está dividido em 4 fases<br />
 
-#Fase atual
+# Fase atual
 # Pré Alpha
 
 Nesta fase farei uma implementação mais simples, onde vou apenas fazer um sistema de cadastro de bolas.<br />
