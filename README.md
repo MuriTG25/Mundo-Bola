@@ -1,5 +1,5 @@
 # Mundo-Bola
-![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+![](https://raw.githubusercontent.com/MuriTG25/Mundo-Bola/main/mundo-bola-logo.jpeg)
 
 É um projeto que simulo um sistema de cadastro de produtos e genrenciamento de estoque de uma loja de bolas<br />
 Ele foi desenvolvido no sistema Android em Kotlin e conta com o sistema do Jetpack Compose para implementação de telas<br />
