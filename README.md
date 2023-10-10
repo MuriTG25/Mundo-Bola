@@ -1,4 +1,6 @@
 # Mundo-Bola
+![](https://pandao.github.io/editor.md/examples/images/4.jpg)
+
 É um projeto que simulo um sistema de cadastro de produtos e genrenciamento de estoque de uma loja de bolas<br />
 Ele foi desenvolvido no sistema Android em Kotlin e conta com o sistema do Jetpack Compose para implementação de telas<br />
 O aplicativo roda em aparelhos android a partir da versão 7.0 (SDK 24) até a versão mais atual (até o momento), a 14 (SDK 34)<br />
@@ -7,7 +9,7 @@ Além do aplicativo, farei um modelo físico do banco de dados, e também farei 
 O projeto está dividido em 4 fases<br />
 
 # Fase atual
-# Pré Alpha
+### Pré Alpha
 
 Nesta fase farei uma implementação mais simples, onde vou apenas fazer um sistema de cadastro de bolas.<br />
 Ele se constiste em 3 telas diferentes:<br />
@@ -26,7 +28,7 @@ Plugin utilizados:
  - Coil Compose
 
 # Fases futuras
-# Alpha
+### Alpha
 
 Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Room. Além disso, pretendo implementar outras features, como:
  - Busca de produtos pelo nome do produto e da marca
@@ -46,7 +48,7 @@ Plugin utilizados:
  - Mockk
  - Navigation Test
 
-# Beta
+### Beta
 
 Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola.<br />
 Além disso, teremos uma tela mais focado em gerenciamento de estoque e outro para cadastro de produto.<br />
@@ -67,7 +69,7 @@ Plugin utilizados:
  - Mockk
  - Navigation Test
 
-# Lançamento (1.0)
+### Lançamento (1.0)
 Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit). <br />
 Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end. <br />
 Se houver futuras atualizações, serão apenas correções de bug e/ou pequenas implementações.
