@@ -2,6 +2,7 @@ package br.com.alura.mundobola.aplicacao.dao
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.dominio.Bola
+import br.com.alura.mundobola.dominio.Marca
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.time.LocalDateTime
@@ -28,6 +29,7 @@ class BolaDao(){
                 dataCriacao = LocalDateTime.now()
             ),
             Bola(
+                bolaId = "da6d14aa-9125-4f5a-871e-bbca635c9255",
                 nome = "Jabulani",
                 preco = "1090.90".toBigDecimal(),
                 marcaId = "4946112a-b895-4c8f-b5c1-1c8dc0b65dee",
@@ -69,5 +71,10 @@ class BolaDao(){
 
     suspend fun adicionarBola(bola: Bola){
         listaDeBolas.add(bola)
+    }
+    suspend fun encontrarBolaPeloId(id: String):Bola?{
+        return listaDeBolas.firstOrNull{
+            it.bolaId == id
+        }
     }
 }

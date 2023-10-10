@@ -30,4 +30,9 @@ class MarcaDao() {
         private val listaDeMarcasStateFlow = MutableStateFlow<List<Marca>>(listaDeMarcas)
     }
     suspend fun listaDeMarcas() = listaDeMarcasStateFlow.asStateFlow()
+    suspend fun encontrarMarcaPeloId(id: String):Marca?{
+        return listaDeMarcas.firstOrNull{
+            it.marcaId == id
+        }
+    }
 }

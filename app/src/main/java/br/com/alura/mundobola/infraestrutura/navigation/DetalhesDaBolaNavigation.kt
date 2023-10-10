@@ -27,7 +27,7 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
             }
             DetalhesDaBolaScreen(
                 state = state,
-                id = id
+                navegarDeVolta = navegarParaTelaAnterior
             )
         }?: LaunchedEffect(key1 = Unit){
             navegarParaTelaAnterior()

@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.ui.components.listadebolas
+package br.com.alura.mundobola.ui.components.comum
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

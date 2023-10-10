@@ -21,13 +21,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
-import br.com.alura.mundobola.ui.components.cadastrodebolas.BotaoComponent
-import br.com.alura.mundobola.ui.components.cadastrodebolas.CampoDeTextoComponent
+import br.com.alura.mundobola.ui.components.comum.BotaoComponent
+import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
-import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
-import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponentComRequest
+import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
 import coil.request.ImageRequest
 

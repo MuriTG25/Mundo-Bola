@@ -21,4 +21,13 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun listaDeMarcas():List<Marca>{
         return marcaDao.listaDeMarcas().value
     }
+    suspend fun encontrarBolaPeloId(id:String): Bola?{
+        return bolaDao.encontrarBolaPeloId(id)
+    }
+    suspend fun encontrarMarcaPeloId(id:String): Marca?{
+        return marcaDao.encontrarMarcaPeloId(id)
+    }
+    suspend fun encontrarNomeMarcaPeloId(id:String): String?{
+        return marcaDao.encontrarMarcaPeloId(id)?.nome
+    }
 }

@@ -2,9 +2,9 @@ package br.com.alura.mundobola.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.alura.mundobola.aplicacao.dao.BolaDao
+import br.com.alura.mundobola.aplicacao.modelo.view.paraBolaView
+import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
-import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,15 +14,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListaDeBolasViewModel @Inject constructor(
-   private val bolaDao: BolaDao
-): ViewModel() {
+    private val repositorio: MundoBolaRepositorio,
+) : ViewModel() {
     private val _uiState = MutableStateFlow(ListaDeBolasUiState())
     val uiState = _uiState.asStateFlow()
+
     init {
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    listaDeBolas = bolaDao.listaDeBolas().value
+            _uiState.update {listaDeBolasUiState->
+                listaDeBolasUiState.copy(
+                    listaDeBolas = repositorio.listaDeBolas().map {
+                        it.paraBolaView()
+                    }
                 )
             }
         }

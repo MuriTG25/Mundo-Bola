@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.ui.components.cadastrodebolas
+package br.com.alura.mundobola.ui.components.comum
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape

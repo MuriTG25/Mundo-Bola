@@ -20,15 +20,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.alura.mundobola.dominio.Bola
+import br.com.alura.mundobola.aplicacao.modelo.view.BolaView
+import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
+import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 import br.com.alura.mundobola.ui.extra.bolaDeAmostra
 import br.com.alura.mundobola.ui.extra.margemPadrao
-import br.com.alura.mundobola.ui.extra.paraMoedaBrasileira
 
 @Composable
 fun ProdutoBolaComponent(
     modifier: Modifier = Modifier,
-    bola: Bola,
+    bola: BolaView,
 ) {
     Surface (
         modifier = modifier
@@ -57,7 +58,7 @@ fun ProdutoBolaComponent(
                 fontWeight = FontWeight.Bold
             )
             TextoProdutoComponent(
-                texto = bola.preco.paraMoedaBrasileira(),
+                texto = bola.preco,
                 maxLines = 1,
             )
         }

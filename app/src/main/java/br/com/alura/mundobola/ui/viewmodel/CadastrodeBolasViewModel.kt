@@ -3,6 +3,8 @@ package br.com.alura.mundobola.ui.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.alura.mundobola.aplicacao.extra.estaVazio
+import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
@@ -12,7 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.inject.Inject
 
@@ -23,7 +24,6 @@ class CadastrodeBolasViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
-    private val context = application.applicationContext
 
     init {
         _uiState.update { cadastroDeBolasUiState ->
@@ -90,25 +90,20 @@ class CadastrodeBolasViewModel @Inject constructor(
                 )
             }
             else{
-                val precoConvertido: BigDecimal? = try {
-                    campoDoPreco.toBigDecimal()
-                } catch (e: NumberFormatException) {
-                    null
-                }
-                precoConvertido?.let {
+                campoDoPreco.paraBigDecimal()?.let {
                     val bola = Bola(
                         nome = campoDoNome,
                         preco = it,
-                        marcaId = idMarca,
-                        descricao = campoDaDescricao,
-                        imagem = fotoBola,
+                        marcaId = idMarca.estaVazio(),
+                        descricao = campoDaDescricao.estaVazio(),
+                        imagem = fotoBola.estaVazio(),
                         dataCriacao = LocalDateTime.now()
                     )
                     repositorio.adicionarBola(bola)
-                    context.mensagemDeAviso("Bola cadastrada com sucesso")
+                    application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
                     irParaTelaPrincipal()
                     //TODO trocar toast por Alert Dialog
-                } ?: context.mensagemDeAviso("Formato de preço invalido")
+                } ?: application.applicationContext.mensagemDeAviso("Formato de preço invalido")
             }
         }
     }

@@ -8,7 +8,7 @@ data class Bola(
     val bolaId: String = UUID.randomUUID().toString(),
     val nome: String,
     val preco: BigDecimal,
-    val marcaId: String,
+    val marcaId: String? = null,
     val descricao: String? = null,
     val imagem: String? = null,
     val dataCriacao: LocalDateTime,

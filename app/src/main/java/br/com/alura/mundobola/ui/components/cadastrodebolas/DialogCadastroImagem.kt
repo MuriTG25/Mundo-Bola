@@ -19,7 +19,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import br.com.alura.mundobola.ui.components.listadebolas.ImagemBolaComponent
+import br.com.alura.mundobola.ui.components.comum.BotaoComponent
+import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
+import br.com.alura.mundobola.ui.components.comum.DialogComponent
+import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.extra.margemPadrao
 
 @Composable
@@ -30,48 +33,40 @@ fun DialogCadastroImagem(
     noClickSair: () -> Unit = {},
     noClickConfirmar: (String) -> Unit = {},
 ) {
-    Dialog(onDismissRequest = noClickSair) {
-        Column(
-            modifier
-                .clip(RoundedCornerShape(5))
-                .heightIn(300.dp, 600.dp)
-                .widthIn(400.dp)
-                .background(Color.White)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(margemPadrao)
+    DialogComponent(
+        modifier = modifier,
+        noClickSair = noClickSair
+    ) {
+        ImagemBolaComponent(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 200.dp),
+            imagemDaBola = imagemBola,
+            escala = ContentScale.FillHeight
+        )
+        CampoDeTextoComponent(
+            modifier = Modifier.fillMaxWidth(),
+            texto = imagemBola,
+            nomeDoCampo = "Url da Imagem",
+            dicaDoCampo = "Insira o link contendo a imagem da bola",
+            naMudancaDeTexto = alteracaoDaImagemBola,
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            ImagemBolaComponent(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = 200.dp),
-                imagemDaBola = imagemBola,
-                escala = ContentScale.FillHeight
+            BotaoComponent(
+                noClicarBotao = noClickSair,
+                fontSize = 16.sp,
+                texto = "Cancelar"
             )
-            CampoDeTextoComponent(
-                modifier = Modifier.fillMaxWidth(),
-                texto = imagemBola,
-                nomeDoCampo = "Url da Imagem",
-                dicaDoCampo = "Insira o link contendo a imagem da bola",
-                naMudancaDeTexto = alteracaoDaImagemBola,
+            BotaoComponent(
+                noClicarBotao = {
+                    noClickConfirmar(imagemBola)
+                },
+                fontSize = 16.sp,
+                texto = "Confirmar"
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
-                BotaoComponent(
-                    noClicarBotao = noClickSair,
-                    fontSize = 16.sp,
-                    texto = "Cancelar"
-                )
-                BotaoComponent(
-                    noClicarBotao = {
-                        noClickConfirmar(imagemBola)
-                    },
-                    fontSize = 16.sp,
-                    texto = "Confirmar"
-                )
-            }
         }
     }
 }
