@@ -21,9 +21,9 @@ class ListaDeBolasViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _uiState.update {listaDeBolasUiState->
-                listaDeBolasUiState.copy(
-                    listaDeBolas = repositorio.listaDeBolas().map {
+            repositorio.listaDeBolas().collect{lista ->
+                _uiState.value = _uiState.value.copy(
+                    listaDeBolas = lista.map {
                         it.paraBolaView()
                     }
                 )

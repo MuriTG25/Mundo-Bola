@@ -1,26 +1,37 @@
 package br.com.alura.mundobola
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.mundobola.infraestrutura.navigation.MundoBolaNavHost
+import br.com.alura.mundobola.infraestrutura.navigation.bolaIdRota
 import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRota
+import br.com.alura.mundobola.infraestrutura.navigation.detalhesDaBolaRota
 import br.com.alura.mundobola.infraestrutura.navigation.listaDeBolasRota
 import br.com.alura.mundobola.infraestrutura.navigation.navegarParaCadastroDeBolas
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.screen.ScaffoldScreen
 import br.com.alura.mundobola.ui.theme.BallStoreTheme
+import br.com.alura.mundobola.ui.viewmodel.ScaffoldViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -40,32 +51,54 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun TelaApp() {
+private fun TelaApp(
+) {
     val navController = rememberNavController()
     val backStackEntryState by navController.currentBackStackEntryAsState()
+    val idPelaRota = backStackEntryState?.arguments?.getString(bolaIdRota)
     val destinoAtual = backStackEntryState?.destination
+    val rotaAtual = destinoAtual?.route
+    val coroutineScope = rememberCoroutineScope()
+    val viewModel = hiltViewModel<ScaffoldViewModel>()
+    val context = LocalContext.current
     ScaffoldScreen (
+        texto = when(rotaAtual){
+            cadastroDeBolasRota -> "Cadastrar Bola"
+            detalhesDaBolaRota -> "Detalhes da Bola"
+            else -> stringResource(id = R.string.app_name)
+        },
+        mostraFab = when(rotaAtual) {
+            listaDeBolasRota -> true
+            else -> false
+        },
         noClicaFab = {
             navController.navegarParaCadastroDeBolas()
         },
-        mostraFab = when(destinoAtual?.route) {
-            listaDeBolasRota -> true
-            else -> false
-        },
-        mostraBusca =  when(destinoAtual?.route) {
-            listaDeBolasRota -> true
-            else -> false
-        },
-        texto = when(destinoAtual?.route){
-            cadastroDeBolasRota -> "Cadastrar Bola"
-            else -> stringResource(id = R.string.app_name)
-        },
-        mostraVolta =  when(destinoAtual?.route) {
-            cadastroDeBolasRota -> true
+        mostraBusca =  false,
+        mostraVolta =  when(rotaAtual) {
+            cadastroDeBolasRota, detalhesDaBolaRota -> true
             else -> false
         },
         noClicaVolta = {
-            navController.popBackStack()
+            navController.navigateUp()
+        },
+        mostraEditaEDelete = when(rotaAtual){
+            detalhesDaBolaRota -> true
+            else -> false
+        },
+        noClicaEdita = {
+            coroutineScope.launch {
+                viewModel.editaUsuario("")
+            }
+        },
+        noClicaDeleta = {
+            coroutineScope.launch{
+                idPelaRota?.let {
+                    viewModel.deletaUsuario(it)
+                    context.mensagemDeAviso("Bola Deletada com sucesso")
+                } ?: context.mensagemDeAviso("Falha ao deletar a bola")
+                navController.navigateUp()
+            }
         }
             ){
         MundoBolaNavHost(

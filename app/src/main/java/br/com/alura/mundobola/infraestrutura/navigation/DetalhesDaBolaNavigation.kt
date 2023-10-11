@@ -10,14 +10,16 @@ import androidx.navigation.compose.composable
 import br.com.alura.mundobola.ui.screen.DetalhesDaBolaScreen
 import br.com.alura.mundobola.ui.viewmodel.DetalhesDaBolaViewModel
 
-internal const val detalhesDaBolaRota = "detalhesDaBola"
+private const val detalhesDaBolaRotaInicio = "detalhesDaBola"
 internal const val bolaIdRota = "bolaId"
+internal const val detalhesDaBolaRota = "$detalhesDaBolaRotaInicio/{$bolaIdRota}"
+
 
 fun NavGraphBuilder.DetalhesDaBolaNavController(
     navegarParaTelaAnterior: () -> Unit = {}
 ){
     composable(
-        "$detalhesDaBolaRota/{$bolaIdRota}"
+        detalhesDaBolaRota
     ){ backStackEntry ->
         backStackEntry.arguments?.getString(bolaIdRota)?.let {id->
             val viewModel = hiltViewModel<DetalhesDaBolaViewModel>()
@@ -36,5 +38,5 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
 }
 
 fun NavController.navegarParaTelaDeDetalhes(id: String){
-    navigate("$detalhesDaBolaRota/$id")
+    navigate("$detalhesDaBolaRotaInicio/$id")
 }

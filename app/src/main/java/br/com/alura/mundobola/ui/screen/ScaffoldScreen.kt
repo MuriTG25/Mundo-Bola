@@ -20,6 +20,9 @@ fun ScaffoldScreen(
     noClicaFab: () -> Unit = {},
     mostraVolta: Boolean = true,
     noClicaVolta: () -> Unit = {},
+    mostraEditaEDelete: Boolean = true,
+    noClicaEdita: () -> Unit = {},
+    noClicaDeleta: () -> Unit = {},
     conteudo: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -30,6 +33,9 @@ fun ScaffoldScreen(
                 texto = texto,
                 mostraVolta = mostraVolta,
                 noClicaVolta = noClicaVolta,
+                mostraEditaEDeleta = mostraEditaEDelete,
+                noClicaEdita = noClicaEdita,
+                noClicaDeleta = noClicaDeleta
             )
         },
         floatingActionButton = {

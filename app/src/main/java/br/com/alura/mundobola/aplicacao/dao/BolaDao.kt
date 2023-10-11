@@ -3,8 +3,10 @@ package br.com.alura.mundobola.aplicacao.dao
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.emitAll
 import java.time.LocalDateTime
 import javax.inject.Singleton
 
@@ -70,11 +72,18 @@ class BolaDao(){
     suspend fun listaDeBolas() = listaDeBolasStateFlow.asStateFlow()
 
     suspend fun adicionarBola(bola: Bola){
-        listaDeBolas.add(bola)
+        listaDeBolasStateFlow.value = listaDeBolasStateFlow.value + bola
     }
     suspend fun encontrarBolaPeloId(id: String):Bola?{
-        return listaDeBolas.firstOrNull{
+        return listaDeBolasStateFlow.value.firstOrNull{
             it.bolaId == id
         }
+    }
+    suspend fun deletaBola(bola: Bola){
+        listaDeBolasStateFlow.value = listaDeBolasStateFlow.value - bola
+    }
+    suspend fun editaBola(
+        id: String,
+    ){
     }
 }
