@@ -27,3 +27,5 @@ fun String.estaVazio(): String?{
         this
     }
 }
+
+const val ID_CONTATO = "id_contato"

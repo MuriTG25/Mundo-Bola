@@ -15,9 +15,6 @@ class ScaffoldViewModel @Inject constructor(
 ):ViewModel() {
     private val _uiState = MutableStateFlow(ScaffoldUiState())
     val uiState = _uiState.asStateFlow()
-    suspend fun editaUsuario(id:String){
-
-    }
     suspend fun deletaUsuario(id: String){
         repositorio.deletaBola(id)
     }

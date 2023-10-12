@@ -1,16 +1,12 @@
 package br.com.alura.mundobola
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -20,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
 import br.com.alura.mundobola.infraestrutura.navigation.MundoBolaNavHost
-import br.com.alura.mundobola.infraestrutura.navigation.bolaIdRota
-import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRota
+import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRotaCompleto
 import br.com.alura.mundobola.infraestrutura.navigation.detalhesDaBolaRota
 import br.com.alura.mundobola.infraestrutura.navigation.listaDeBolasRota
 import br.com.alura.mundobola.infraestrutura.navigation.navegarParaCadastroDeBolas
@@ -55,7 +51,7 @@ private fun TelaApp(
 ) {
     val navController = rememberNavController()
     val backStackEntryState by navController.currentBackStackEntryAsState()
-    val idPelaRota = backStackEntryState?.arguments?.getString(bolaIdRota)
+    val idPelaRota = backStackEntryState?.arguments?.getString(ID_CONTATO)
     val destinoAtual = backStackEntryState?.destination
     val rotaAtual = destinoAtual?.route
     val coroutineScope = rememberCoroutineScope()
@@ -63,7 +59,7 @@ private fun TelaApp(
     val context = LocalContext.current
     ScaffoldScreen (
         texto = when(rotaAtual){
-            cadastroDeBolasRota -> "Cadastrar Bola"
+            cadastroDeBolasRotaCompleto -> "Cadastrar Bola"
             detalhesDaBolaRota -> "Detalhes da Bola"
             else -> stringResource(id = R.string.app_name)
         },
@@ -72,11 +68,11 @@ private fun TelaApp(
             else -> false
         },
         noClicaFab = {
-            navController.navegarParaCadastroDeBolas()
+            navController.navegarParaCadastroDeBolas("rota")
         },
         mostraBusca =  false,
         mostraVolta =  when(rotaAtual) {
-            cadastroDeBolasRota, detalhesDaBolaRota -> true
+            cadastroDeBolasRotaCompleto, detalhesDaBolaRota -> true
             else -> false
         },
         noClicaVolta = {
@@ -88,7 +84,9 @@ private fun TelaApp(
         },
         noClicaEdita = {
             coroutineScope.launch {
-                viewModel.editaUsuario("")
+                idPelaRota?.let {
+                    navController.navegarParaCadastroDeBolas(it)
+                }
             }
         },
         noClicaDeleta = {

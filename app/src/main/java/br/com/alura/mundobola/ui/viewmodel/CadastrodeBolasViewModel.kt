@@ -1,17 +1,15 @@
 package br.com.alura.mundobola.ui.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.extra.estaVazio
 import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
-import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
+import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -26,6 +24,7 @@ class CadastrodeBolasViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
+
 
     init {
         _uiState.update { cadastroDeBolasUiState ->
@@ -59,7 +58,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                 },
                 pegaIdMarca = {
                     _uiState.value = _uiState.value.copy(
-                        idMarca = it
+                        marcaId = it
                     )
                 },
                 noClickDaImagem = {
@@ -88,28 +87,66 @@ class CadastrodeBolasViewModel @Inject constructor(
         }
     }
 
-    suspend fun clicarSalvar(irParaTelaPrincipal: ()-> Unit = {}) {
+    suspend fun carregaBola(id: String) {
+        repositorio.encontrarBolaPeloId(id)?.let { bola ->
+            with(bola) {
+                _uiState.value = _uiState.value.copy(
+                    bolaId = bolaId,
+                    campoDoNome = nome,
+                    campoDoPreco = preco.toPlainString(),
+                    dataCriacao = dataCriacao
+                )
+                descricao?.let {
+                    _uiState.value = _uiState.value.copy(
+                        campoDaDescricao = it
+                    )
+                }
+                imagem?.let {
+                    _uiState.value = _uiState.value.copy(
+                        fotoBola = it
+                    )
+                }
+                marcaId?.let {
+                    _uiState.value = _uiState.value.copy(
+                        marcaId = marcaId
+                    )
+                    repositorio.encontrarNomeMarcaPeloId(it)?.let {nomeMarca ->
+                        _uiState.value = _uiState.value.copy(
+                            campoMarca = nomeMarca
+                        )
+
+                    }
+                }
+            }
+        }
+    }
+
+    suspend fun clicarSalvar(irParaTelaPrincipal: () -> Unit = {}) {
         with(_uiState.value) {
-            if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()){
+            if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()) {
                 _uiState.value = _uiState.value.copy(
                     campoNomeObrigatorio = true,
                     campoPrecoObrigatorio = true,
                 )
-            }
-            else{
+            } else {
                 campoDoPreco.paraBigDecimal()?.let {
-                    val bola = Bola(
-                        nome = campoDoNome,
-                        preco = it,
-                        marcaId = idMarca.estaVazio(),
-                        descricao = campoDaDescricao.estaVazio(),
-                        imagem = fotoBola.estaVazio(),
-                        dataCriacao = LocalDateTime.now()
-                    )
-                    repositorio.adicionarBola(bola)
-                    application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
-                    irParaTelaPrincipal()
-                    //TODO trocar toast por Alert Dialog
+                    if (_uiState.value.bolaId.isBlank()){
+                        val bola = Bola(
+                            nome = campoDoNome,
+                            preco = it,
+                            marcaId = marcaId.estaVazio(),
+                            descricao = campoDaDescricao.estaVazio(),
+                            imagem = fotoBola.estaVazio(),
+                            dataCriacao = LocalDateTime.now()
+                        )
+                        repositorio.adicionarBola(bola)
+                        application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
+                        irParaTelaPrincipal()
+                    }
+                    else{
+                        //TODO preciso implementar edição de bola
+                        application.applicationContext.mensagemDeAviso("Ainda preciso implementar")
+                    }
                 } ?: mensagemDeErroNoPreco()
             }
         }

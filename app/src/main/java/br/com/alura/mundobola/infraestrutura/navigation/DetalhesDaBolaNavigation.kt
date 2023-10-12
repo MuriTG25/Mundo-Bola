@@ -7,12 +7,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
 import br.com.alura.mundobola.ui.screen.DetalhesDaBolaScreen
 import br.com.alura.mundobola.ui.viewmodel.DetalhesDaBolaViewModel
 
 private const val detalhesDaBolaRotaInicio = "detalhesDaBola"
-internal const val bolaIdRota = "bolaId"
-internal const val detalhesDaBolaRota = "$detalhesDaBolaRotaInicio/{$bolaIdRota}"
+internal const val detalhesDaBolaRota = "$detalhesDaBolaRotaInicio/{$ID_CONTATO}"
 
 
 fun NavGraphBuilder.DetalhesDaBolaNavController(
@@ -21,7 +21,7 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
     composable(
         detalhesDaBolaRota
     ){ backStackEntry ->
-        backStackEntry.arguments?.getString(bolaIdRota)?.let {id->
+        backStackEntry.arguments?.getString(ID_CONTATO)?.let { id->
             val viewModel = hiltViewModel<DetalhesDaBolaViewModel>()
             val state by viewModel.uiState.collectAsState()
             LaunchedEffect(key1 = Unit){
