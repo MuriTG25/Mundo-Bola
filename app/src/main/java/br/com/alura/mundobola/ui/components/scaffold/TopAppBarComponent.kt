@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
@@ -16,8 +17,6 @@ import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.R
 import br.com.alura.mundobola.ui.components.comum.IconTopAppBarComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
-import br.com.alura.mundobola.ui.theme.AppPrimaryColor
-import br.com.alura.mundobola.ui.theme.CorDosElementosScaffolds
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,7 +37,7 @@ fun TopAppBarComponent(
                 maxLines = 1,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                color = CorDosElementosScaffolds
+                color = MaterialTheme.colorScheme.onPrimary
             )
         },
         actions = {
@@ -70,7 +69,7 @@ fun TopAppBarComponent(
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = AppPrimaryColor
+            containerColor = MaterialTheme.colorScheme.primary
         ),
     )
 }

@@ -25,7 +25,7 @@ import br.com.alura.mundobola.infraestrutura.navigation.listaDeBolasRota
 import br.com.alura.mundobola.infraestrutura.navigation.navegarParaCadastroDeBolas
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.screen.ScaffoldScreen
-import br.com.alura.mundobola.ui.theme.BallStoreTheme
+import br.com.alura.mundobola.ui.theme.MundoBolaTheme
 import br.com.alura.mundobola.ui.viewmodel.ScaffoldViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BallStoreTheme {
+            MundoBolaTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

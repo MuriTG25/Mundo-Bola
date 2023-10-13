@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,7 +42,7 @@ fun ProdutoBolaComponent(
     ){
         Column (
             modifier = modifier
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.onTertiary)
                 .padding(margemPadrao),
             verticalArrangement = Arrangement.spacedBy(margemPadrao/2)
         ){
