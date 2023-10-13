@@ -88,17 +88,19 @@ class CadastrodeBolasViewModel @Inject constructor(
             )
         }
         viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    listaDeMarcas = repositorio.listaDeMarcas()
-                )
+            repositorio.listaDeMarcas().collect{listaDeMarcas ->
+                _uiState.update {
+                    it.copy(
+                        listaDeMarcas = listaDeMarcas
+                    )
+                }
             }
         }
     }
 
     suspend fun carregaBola(id: String) {
-        repositorio.encontrarBolaPeloId(id).collect {
-            it?.let { bola ->
+        repositorio.encontrarBolaPeloId(id).collect {coletaBola ->
+            coletaBola?.let { bola ->
                 with(bola) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
@@ -117,14 +119,16 @@ class CadastrodeBolasViewModel @Inject constructor(
                             fotoBola = it
                         )
                     }
-                    marcaId?.let {
+                    marcaId?.let {idDaMarca ->
                         _uiState.value = _uiState.value.copy(
                             marcaId = marcaId
                         )
-                        repositorio.encontrarNomeMarcaPeloId(it)?.let { nomeMarca ->
-                            _uiState.value = _uiState.value.copy(
-                                campoMarca = nomeMarca
-                            )
+                        repositorio.encontrarNomeMarcaPeloId(idDaMarca).collect{coletaMarca->
+                            coletaMarca?.let { nomeMarca ->
+                                _uiState.value = _uiState.value.copy(
+                                    campoMarca = nomeMarca
+                                )
+                            }
                         }
                     }
                 }

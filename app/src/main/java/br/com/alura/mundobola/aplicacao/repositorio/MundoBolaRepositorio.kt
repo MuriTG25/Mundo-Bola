@@ -21,33 +21,39 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun adicionarBola(bola: Bola){
         bolaDao.adicionarBola(bola)
     }
-    suspend fun listaDeMarcas():List<Marca>{
-        return marcaDao.listaDeMarcas().value
+    suspend fun listaDeMarcas(): StateFlow<List<Marca>> {
+        return marcaDao.listaDeMarcas()
     }
     suspend fun encontrarBolaPeloId(id:String): Flow<Bola?> {
         return flow {
            emit(bolaDao.encontrarBolaPeloId(id))
         }
     }
-    suspend fun encontrarMarcaPeloId(id:String): Marca?{
-        return marcaDao.encontrarMarcaPeloId(id)
+    suspend fun encontrarMarcaPeloId(id:String): Flow<Marca?> {
+        return flow {
+            emit(marcaDao.encontrarMarcaPeloId(id))
+        }
     }
-    suspend fun encontrarNomeMarcaPeloId(id:String): String?{
-        return marcaDao.encontrarMarcaPeloId(id)?.nome
+    suspend fun encontrarNomeMarcaPeloId(id:String): Flow<String?> {
+        return flow {
+            emit(marcaDao.encontrarMarcaPeloId(id)?.nome)
+        }
     }
     suspend fun deletaBola(id: String){
-        val bolaEncotrada = bolaDao.encontrarBolaPeloId(id)
-        bolaEncotrada?.let {
-            bolaDao.deletaBola(it)
+        encontrarBolaPeloId(id).collect{ bolaEncotrada ->
+            bolaEncotrada?.let {
+                bolaDao.deletaBola(it)
+            }
         }
     }
     suspend fun editaBola(
         novaBola: Bola,
     ){
-        val bolaEncotrada = bolaDao.encontrarBolaPeloId(novaBola.bolaId)
-        bolaEncotrada?.let {
-            bolaDao.deletaBola(it)
-            bolaDao.adicionarBola(novaBola)
+        encontrarBolaPeloId(novaBola.bolaId).collect{ bolaEncotrada ->
+            bolaEncotrada?.let {
+                bolaDao.deletaBola(it)
+                bolaDao.adicionarBola(novaBola)
+            }
         }
     }
 }

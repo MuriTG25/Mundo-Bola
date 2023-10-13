@@ -82,8 +82,4 @@ class BolaDao(){
     suspend fun deletaBola(bola: Bola){
         listaDeBolasStateFlow.value = listaDeBolasStateFlow.value - bola
     }
-    suspend fun editaBola(
-        id: String,
-    ){
-    }
 }

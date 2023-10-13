@@ -19,8 +19,8 @@ class DetalhesDaBolaViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(DetalhesDaBolaUiState())
     val uiState = _uiState.asStateFlow()
     suspend fun buscaPorId(id: String) {
-        repositorio.encontrarBolaPeloId(id).collect {
-            it?.let { bola ->
+        repositorio.encontrarBolaPeloId(id).collect { coleta ->
+            coleta?.let { bola ->
                 with(bola.paraBolaView()) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
@@ -32,12 +32,14 @@ class DetalhesDaBolaViewModel @Inject constructor(
                         dataAlteracaoBola = dataAlteracao,
                     )
                 }
-                bola.marcaId?.let {
-                    repositorio.encontrarNomeMarcaPeloId(it)?.let { nome ->
-                        _uiState.value = _uiState.value.copy(
-                            nomeDaMarca = nome
-                        )
-                    } ?: marcaNaoEncontrada()
+                bola.marcaId?.let { idDaMarca ->
+                    repositorio.encontrarNomeMarcaPeloId(idDaMarca).collect { coletaMarca ->
+                        coletaMarca?.let { nome ->
+                            _uiState.value = _uiState.value.copy(
+                                nomeDaMarca = nome
+                            )
+                        } ?: marcaNaoEncontrada()
+                    }
                 } ?: marcaNaoEncontrada()
             } ?: telaDeErro()
         }
