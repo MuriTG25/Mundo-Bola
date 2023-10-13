@@ -28,4 +28,6 @@ fun String.estaVazio(): String?{
     }
 }
 
-const val ID_CONTATO = "id_contato"
+const val ID_BOLA = "id_contato"
+
+const val ID_GENERICO = "generico"

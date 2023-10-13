@@ -1,11 +1,11 @@
 package br.com.alura.mundobola.ui.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
+import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
+import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
 import br.com.alura.mundobola.aplicacao.extra.estaVazio
 import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
@@ -28,12 +28,12 @@ class CadastrodeBolasViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
-    private val bolaId = stateHandle.get<String>(ID_CONTATO)
+    private val bolaId = stateHandle.get<String>(ID_BOLA)
 
     init {
         viewModelScope.launch {
-            bolaId?.let{
-                carregaBola(it)
+            if (bolaId != null && bolaId != ID_GENERICO){
+                carregaBola(bolaId)
             }
         }
         _uiState.update { cadastroDeBolasUiState ->
@@ -99,7 +99,6 @@ class CadastrodeBolasViewModel @Inject constructor(
     suspend fun carregaBola(id: String) {
         repositorio.encontrarBolaPeloId(id).collect {
             it?.let { bola ->
-                Log.i("CadastrodeBolasViewModel", "id da Bola: $bola")
                 with(bola) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
@@ -129,7 +128,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                         }
                     }
                 }
-            }
+            }?: application.applicationContext.mensagemDeAviso("Bola não encontrada")
         }
     }
 

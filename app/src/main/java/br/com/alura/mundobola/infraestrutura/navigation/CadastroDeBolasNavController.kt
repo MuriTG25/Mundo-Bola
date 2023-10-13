@@ -7,20 +7,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
+import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
 import br.com.alura.mundobola.ui.viewmodel.CadastrodeBolasViewModel
 import br.com.alura.mundobola.ui.screen.CadastroDeBolasScreen
 import kotlinx.coroutines.launch
 
 internal const val cadastroDeBolasRota = "cadastroDeBolas"
-internal const val cadastroDeBolasRotaCompleto = "$cadastroDeBolasRota/{$ID_CONTATO}"
+internal const val cadastroDeBolasRotaCompleto = "$cadastroDeBolasRota/{$ID_BOLA}"
 
 fun NavGraphBuilder.CadastroDeBolasNavController(
     irParaTelaPrincipal: () -> Unit = {},
     irParaATelaDeDetalhes: (String) -> Unit = {},
 ) {
     composable(cadastroDeBolasRotaCompleto) { backStackEntry->
-        backStackEntry.arguments?.getString(ID_CONTATO)?.let {
+        backStackEntry.arguments?.getString(ID_BOLA)?.let {
             val viewModel = hiltViewModel<CadastrodeBolasViewModel>()
             val uiState by viewModel.uiState.collectAsState()
             val coroutineScope = rememberCoroutineScope()

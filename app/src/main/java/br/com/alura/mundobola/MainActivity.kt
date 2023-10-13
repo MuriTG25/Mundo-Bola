@@ -16,7 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
+import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
+import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
 import br.com.alura.mundobola.infraestrutura.navigation.MundoBolaNavHost
 import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRotaCompleto
 import br.com.alura.mundobola.infraestrutura.navigation.detalhesDaBolaRota
@@ -51,7 +52,7 @@ private fun TelaApp(
 ) {
     val navController = rememberNavController()
     val backStackEntryState by navController.currentBackStackEntryAsState()
-    val idPelaRota = backStackEntryState?.arguments?.getString(ID_CONTATO)
+    val idPelaRota = backStackEntryState?.arguments?.getString(ID_BOLA)
     val destinoAtual = backStackEntryState?.destination
     val rotaAtual = destinoAtual?.route
     val coroutineScope = rememberCoroutineScope()
@@ -68,7 +69,7 @@ private fun TelaApp(
             else -> false
         },
         noClicaFab = {
-            navController.navegarParaCadastroDeBolas("rota")
+            navController.navegarParaCadastroDeBolas(ID_GENERICO)
         },
         mostraBusca =  false,
         mostraVolta =  when(rotaAtual) {
