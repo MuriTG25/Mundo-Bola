@@ -1,8 +1,11 @@
 package br.com.alura.mundobola.ui.viewmodel
 
 import android.app.Application
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.alura.mundobola.aplicacao.extra.ID_CONTATO
 import br.com.alura.mundobola.aplicacao.extra.estaVazio
 import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
@@ -20,13 +23,19 @@ import javax.inject.Inject
 @HiltViewModel
 class CadastrodeBolasViewModel @Inject constructor(
     private val repositorio: MundoBolaRepositorio,
+    stateHandle: SavedStateHandle,
     private val application: Application,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
-
+    private val bolaId = stateHandle.get<String>(ID_CONTATO)
 
     init {
+        viewModelScope.launch {
+            bolaId?.let{
+                carregaBola(it)
+            }
+        }
         _uiState.update { cadastroDeBolasUiState ->
             cadastroDeBolasUiState.copy(
                 alteracaoDoCampoNome = {
@@ -88,40 +97,46 @@ class CadastrodeBolasViewModel @Inject constructor(
     }
 
     suspend fun carregaBola(id: String) {
-        repositorio.encontrarBolaPeloId(id)?.let { bola ->
-            with(bola) {
-                _uiState.value = _uiState.value.copy(
-                    bolaId = bolaId,
-                    campoDoNome = nome,
-                    campoDoPreco = preco.toPlainString(),
-                    dataCriacao = dataCriacao
-                )
-                descricao?.let {
+        repositorio.encontrarBolaPeloId(id).collect {
+            it?.let { bola ->
+                Log.i("CadastrodeBolasViewModel", "id da Bola: $bola")
+                with(bola) {
                     _uiState.value = _uiState.value.copy(
-                        campoDaDescricao = it
+                        bolaId = bolaId,
+                        campoDoNome = nome,
+                        campoDoPreco = preco.toPlainString(),
+                        dataCriacao = dataCriacao,
+                        ehBolaNova = false,
                     )
-                }
-                imagem?.let {
-                    _uiState.value = _uiState.value.copy(
-                        fotoBola = it
-                    )
-                }
-                marcaId?.let {
-                    _uiState.value = _uiState.value.copy(
-                        marcaId = marcaId
-                    )
-                    repositorio.encontrarNomeMarcaPeloId(it)?.let {nomeMarca ->
+                    descricao?.let {
                         _uiState.value = _uiState.value.copy(
-                            campoMarca = nomeMarca
+                            campoDaDescricao = it
                         )
-
+                    }
+                    imagem?.let {
+                        _uiState.value = _uiState.value.copy(
+                            fotoBola = it
+                        )
+                    }
+                    marcaId?.let {
+                        _uiState.value = _uiState.value.copy(
+                            marcaId = marcaId
+                        )
+                        repositorio.encontrarNomeMarcaPeloId(it)?.let { nomeMarca ->
+                            _uiState.value = _uiState.value.copy(
+                                campoMarca = nomeMarca
+                            )
+                        }
                     }
                 }
             }
         }
     }
 
-    suspend fun clicarSalvar(irParaTelaPrincipal: () -> Unit = {}) {
+    suspend fun clicarSalvar(
+        irParaTelaPrincipal: () -> Unit = {},
+        irParaATelaDeDetalhes: (String) -> Unit = {},
+    ) {
         with(_uiState.value) {
             if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()) {
                 _uiState.value = _uiState.value.copy(
@@ -130,7 +145,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                 )
             } else {
                 campoDoPreco.paraBigDecimal()?.let {
-                    if (_uiState.value.bolaId.isBlank()){
+                    if (_uiState.value.ehBolaNova) {
                         val bola = Bola(
                             nome = campoDoNome,
                             preco = it,
@@ -142,10 +157,21 @@ class CadastrodeBolasViewModel @Inject constructor(
                         repositorio.adicionarBola(bola)
                         application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
                         irParaTelaPrincipal()
-                    }
-                    else{
+                    } else {
+                        val bola = Bola(
+                            bolaId = bolaId,
+                            nome = campoDoNome,
+                            preco = it,
+                            marcaId = marcaId.estaVazio(),
+                            descricao = campoDaDescricao.estaVazio(),
+                            imagem = fotoBola.estaVazio(),
+                            dataCriacao = dataCriacao,
+                            dataAlteracao = LocalDateTime.now()
+                        )
+                        repositorio.editaBola(bola)
                         //TODO preciso implementar edição de bola
-                        application.applicationContext.mensagemDeAviso("Ainda preciso implementar")
+                        application.applicationContext.mensagemDeAviso("Bola editada com sucesso")
+                        irParaATelaDeDetalhes(bolaId)
                     }
                 } ?: mensagemDeErroNoPreco()
             }

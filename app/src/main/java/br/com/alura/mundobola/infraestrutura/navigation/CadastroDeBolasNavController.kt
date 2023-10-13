@@ -16,25 +16,24 @@ internal const val cadastroDeBolasRota = "cadastroDeBolas"
 internal const val cadastroDeBolasRotaCompleto = "$cadastroDeBolasRota/{$ID_CONTATO}"
 
 fun NavGraphBuilder.CadastroDeBolasNavController(
-    voltarTelaAnterior: () -> Unit = {},
+    irParaTelaPrincipal: () -> Unit = {},
+    irParaATelaDeDetalhes: (String) -> Unit = {},
 ) {
     composable(cadastroDeBolasRotaCompleto) { backStackEntry->
-        backStackEntry.arguments?.getString(ID_CONTATO)?.let { id ->
+        backStackEntry.arguments?.getString(ID_CONTATO)?.let {
             val viewModel = hiltViewModel<CadastrodeBolasViewModel>()
             val uiState by viewModel.uiState.collectAsState()
             val coroutineScope = rememberCoroutineScope()
-            if(id != "rota"){
-                coroutineScope.launch {
-                    viewModel.carregaBola(id)
-                }
-            }
             CadastroDeBolasScreen(
                 state = uiState,
                 noClicarSalvar = {
                     coroutineScope.launch {
-                        viewModel.clicarSalvar(){
-                            voltarTelaAnterior()
-                        }
+                        viewModel.clicarSalvar(
+                            irParaTelaPrincipal = irParaTelaPrincipal,
+                            irParaATelaDeDetalhes = {
+                                irParaATelaDeDetalhes(it)
+                            },
+                        )
                     }
                 },
                 noCarregarImagem = {linkImagem ->

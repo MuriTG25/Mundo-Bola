@@ -1,8 +1,6 @@
 package br.com.alura.mundobola.infraestrutura.navigation
 
-import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 
@@ -14,15 +12,19 @@ fun MundoBolaNavHost(
         navController = navHostController,
         startDestination = listaDeBolasRota,
     ){
+        //TODO preciso corrigir fluxo navegação
         ListaDeBolasNavController(
             navegarParaADescricao = {
                 navHostController.navegarParaTelaDeDetalhes(it)
             }
         )
         CadastroDeBolasNavController(
-            voltarTelaAnterior = {
+            irParaTelaPrincipal = {
                 navHostController.navegarParaListaDeBolas()
             },
+            irParaATelaDeDetalhes = {
+                navHostController.navegarParaTelaDeDetalhes(it)
+            }
         )
         DetalhesDaBolaNavController(
             navegarParaTelaAnterior = {

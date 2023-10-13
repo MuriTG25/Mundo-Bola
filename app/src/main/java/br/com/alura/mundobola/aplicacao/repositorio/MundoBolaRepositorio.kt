@@ -4,7 +4,9 @@ import br.com.alura.mundobola.aplicacao.dao.BolaDao
 import br.com.alura.mundobola.aplicacao.dao.MarcaDao
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,8 +24,10 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun listaDeMarcas():List<Marca>{
         return marcaDao.listaDeMarcas().value
     }
-    suspend fun encontrarBolaPeloId(id:String): Bola?{
-        return bolaDao.encontrarBolaPeloId(id)
+    suspend fun encontrarBolaPeloId(id:String): Flow<Bola?> {
+        return flow {
+           emit(bolaDao.encontrarBolaPeloId(id))
+        }
     }
     suspend fun encontrarMarcaPeloId(id:String): Marca?{
         return marcaDao.encontrarMarcaPeloId(id)
@@ -38,10 +42,9 @@ class MundoBolaRepositorio @Inject constructor(
         }
     }
     suspend fun editaBola(
-        id: String,
         novaBola: Bola,
     ){
-        val bolaEncotrada = bolaDao.encontrarBolaPeloId(id)
+        val bolaEncotrada = bolaDao.encontrarBolaPeloId(novaBola.bolaId)
         bolaEncotrada?.let {
             bolaDao.deletaBola(it)
             bolaDao.adicionarBola(novaBola)

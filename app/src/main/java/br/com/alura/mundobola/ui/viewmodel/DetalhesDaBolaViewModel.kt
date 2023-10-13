@@ -8,6 +8,7 @@ import br.com.alura.mundobola.ui.stateholder.DetalhesDaBolaUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -18,26 +19,28 @@ class DetalhesDaBolaViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(DetalhesDaBolaUiState())
     val uiState = _uiState.asStateFlow()
     suspend fun buscaPorId(id: String) {
-        repositorio.encontrarBolaPeloId(id)?.let {bola ->
-            with(bola.paraBolaView()) {
-                _uiState.value = _uiState.value.copy(
-                    bolaId = bolaId,
-                    nomeBola = nome,
-                    precoDaBola = preco,
-                    descricaoDaBola = descricao,
-                    imagemDaBola = imagem,
-                    dataCriacaoBola = dataCriacao,
-                    dataAlteracaoBola = dataAlteracao,
+        repositorio.encontrarBolaPeloId(id).collect {
+            it?.let { bola ->
+                with(bola.paraBolaView()) {
+                    _uiState.value = _uiState.value.copy(
+                        bolaId = bolaId,
+                        nomeBola = nome,
+                        precoDaBola = preco,
+                        descricaoDaBola = descricao,
+                        imagemDaBola = imagem,
+                        dataCriacaoBola = dataCriacao,
+                        dataAlteracaoBola = dataAlteracao,
                     )
-            }
-            bola.marcaId?.let {
-                repositorio.encontrarNomeMarcaPeloId(it)?.let { nome ->
+                }
+                bola.marcaId?.let {
+                    repositorio.encontrarNomeMarcaPeloId(it)?.let { nome ->
                         _uiState.value = _uiState.value.copy(
                             nomeDaMarca = nome
                         )
+                    } ?: marcaNaoEncontrada()
                 } ?: marcaNaoEncontrada()
-            } ?: marcaNaoEncontrada()
-        }?: telaDeErro()
+            } ?: telaDeErro()
+        }
     }
 
     private fun marcaNaoEncontrada() {
