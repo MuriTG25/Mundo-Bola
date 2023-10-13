@@ -8,6 +8,14 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-fun Context.mensagemDeAviso(texto: String) = Toast.makeText(this, texto, Toast.LENGTH_LONG).show()
+fun Context.mensagemDeAviso(
+    texto: String,
+    tempoMensagem: Int = Toast.LENGTH_SHORT,
+) =
+    Toast.makeText(
+        this,
+        texto,
+        tempoMensagem,
+    ).show()
 
 
