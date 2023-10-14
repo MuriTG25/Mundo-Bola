@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
+import br.com.alura.mundobola.ui.extra.tamanhoFonteMini
 
 @Composable
 fun TextoCampoObrigatorioComponent(
@@ -17,7 +18,7 @@ fun TextoCampoObrigatorioComponent(
         modifier = modifier,
         texto = "*Campo de $texto é obrigatório",
         maxLines = 1,
-        fontSize = 12.sp,
+        fontSize = tamanhoFonteMini,
         color = Color.Red,
 
     )

@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import br.com.alura.mundobola.ui.extra.tamanhoFontePadrao
 
 @Composable
 fun TextoProdutoComponent(
@@ -18,7 +19,7 @@ fun TextoProdutoComponent(
     texto: String,
     maxLines: Int = 2,
     textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 18.sp,
+    fontSize: TextUnit = tamanhoFontePadrao,
     overflow: TextOverflow = TextOverflow.Ellipsis,
     fontWeight: FontWeight = FontWeight.Normal,
     color: Color = Color.Black

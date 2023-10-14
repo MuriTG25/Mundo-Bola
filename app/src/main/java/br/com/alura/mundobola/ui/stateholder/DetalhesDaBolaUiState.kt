@@ -10,4 +10,9 @@ data class DetalhesDaBolaUiState(
     val dataCriacaoBola: String = "",
     val dataAlteracaoBola: String = "",
     val usuarioEncontrado: Boolean = true,
+    val expandirImagem: Boolean = false,
+    val noClickDaImagem: (Boolean) -> Unit = {},
+    val expandirDescricao: Boolean = false,
+    val noClickDaDescricao: (Boolean) -> Unit = {}
 )
+

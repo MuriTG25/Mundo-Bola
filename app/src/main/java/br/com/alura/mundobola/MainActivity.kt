@@ -77,7 +77,7 @@ private fun TelaApp(
             else -> false
         },
         noClicaVolta = {
-            navController.navigateUp()
+            navController.popBackStack()
         },
         mostraEditaEDelete = when(rotaAtual){
             detalhesDaBolaRota -> true
@@ -96,7 +96,7 @@ private fun TelaApp(
                     viewModel.deletaUsuario(it)
                     context.mensagemDeAviso("Bola Deletada com sucesso")
                 } ?: context.mensagemDeAviso("Falha ao deletar a bola")
-                navController.navigateUp()
+                navController.popBackStack()
             }
         }
             ){

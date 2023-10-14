@@ -1,6 +1,9 @@
 package br.com.alura.mundobola.ui.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
 import br.com.alura.mundobola.aplicacao.modelo.view.paraBolaView
 import br.com.alura.mundobola.aplicacao.modelo.view.paraMarcaView
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
@@ -10,14 +13,41 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetalhesDaBolaViewModel @Inject constructor(
     private val repositorio: MundoBolaRepositorio,
+    stateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DetalhesDaBolaUiState())
     val uiState = _uiState.asStateFlow()
+    private val id = stateHandle.get<String>(ID_BOLA)
+
+    init {
+        viewModelScope.launch {
+            id?.let {
+                buscaPorId(it)
+            }
+        }
+        _uiState.update { detalhesDaBolaUiState ->
+            detalhesDaBolaUiState.copy(
+                noClickDaImagem = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirImagem = it
+                    )
+                },
+                noClickDaDescricao = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirDescricao = it
+                    )
+                },
+            )
+
+        }
+    }
+
     suspend fun buscaPorId(id: String) {
         repositorio.encontrarBolaPeloId(id).collect { coleta ->
             coleta?.let { bola ->
@@ -48,7 +78,7 @@ class DetalhesDaBolaViewModel @Inject constructor(
     private fun marcaNaoEncontrada() {
         _uiState.update {
             it.copy(
-                nomeDaMarca = "Marca não encontrada"
+                nomeDaMarca = ""
             )
         }
     }

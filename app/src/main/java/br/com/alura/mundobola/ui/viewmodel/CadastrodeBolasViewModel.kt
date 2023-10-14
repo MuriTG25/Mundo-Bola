@@ -155,7 +155,8 @@ class CadastrodeBolasViewModel @Inject constructor(
                             marcaId = marcaId.estaVazio(),
                             descricao = campoDaDescricao.estaVazio(),
                             imagem = fotoBola.estaVazio(),
-                            dataCriacao = LocalDateTime.now()
+                            dataCriacao = LocalDateTime.now(),
+                            dataAlteracao = null
                         )
                         repositorio.adicionarBola(bola)
                         application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")

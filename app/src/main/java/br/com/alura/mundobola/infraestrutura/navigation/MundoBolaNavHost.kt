@@ -28,7 +28,7 @@ fun MundoBolaNavHost(
         )
         DetalhesDaBolaNavController(
             navegarParaTelaAnterior = {
-                navHostController.navigateUp()
+                navHostController.popBackStack()
             }
         )
     }

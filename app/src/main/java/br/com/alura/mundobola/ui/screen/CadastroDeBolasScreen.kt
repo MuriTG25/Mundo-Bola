@@ -30,6 +30,7 @@ import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponen
 import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.tamanhoCaixaPadrao
 import coil.request.ImageRequest
 
 @Composable
@@ -45,7 +46,7 @@ fun CadastroDeBolasScreen(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(tamanhoCaixaPadrao)
                 .clickable {
                     state.noClickDaImagem(true)
                 },

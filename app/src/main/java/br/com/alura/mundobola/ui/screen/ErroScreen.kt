@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.tamanhoFonteGrande
 
 @Composable
 fun ErroScreen(
@@ -27,7 +27,7 @@ fun ErroScreen(
         horizontalAlignment = Alignment.CenterHorizontally){
         TextoProdutoComponent(
             texto = "Falha ao $descricaoErro",
-            fontSize = 24.sp,
+            fontSize = tamanhoFonteGrande,
         )
         BotaoComponent(
             texto = "Voltar",

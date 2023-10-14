@@ -45,5 +45,7 @@ fun NavGraphBuilder.CadastroDeBolasNavController(
 }
 
 fun NavController.navegarParaCadastroDeBolas(id: String) {
-    navigate("$cadastroDeBolasRota/$id")
+    navigate("$cadastroDeBolasRota/$id"){
+        launchSingleTop = true
+    }
 }

@@ -14,6 +14,9 @@ import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
 import br.com.alura.mundobola.ui.components.comum.DialogComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
+import br.com.alura.mundobola.ui.extra.tamanhoCaixaPadrao
+import br.com.alura.mundobola.ui.extra.tamanhoFontePadrao
+import br.com.alura.mundobola.ui.extra.tamanhoFontePequena
 
 @Composable
 fun DialogCadastroImagem(
@@ -30,7 +33,7 @@ fun DialogCadastroImagem(
         ImagemBolaComponent(
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(max = 200.dp),
+                .heightIn(max = tamanhoCaixaPadrao),
             imagemDaBola = imagemBola,
             escala = ContentScale.FillHeight
         )
@@ -47,14 +50,14 @@ fun DialogCadastroImagem(
         ) {
             BotaoComponent(
                 noClicarBotao = noClickSair,
-                fontSize = 16.sp,
+                fontSize = tamanhoFontePequena,
                 texto = "Cancelar"
             )
             BotaoComponent(
                 noClicarBotao = {
                     noClickConfirmar(imagemBola)
                 },
-                fontSize = 16.sp,
+                fontSize = tamanhoFontePequena,
                 texto = "Confirmar"
             )
         }

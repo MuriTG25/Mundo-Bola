@@ -24,9 +24,6 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
         backStackEntry.arguments?.getString(ID_BOLA)?.let { id->
             val viewModel = hiltViewModel<DetalhesDaBolaViewModel>()
             val state by viewModel.uiState.collectAsState()
-            LaunchedEffect(key1 = Unit){
-                viewModel.buscaPorId(id)
-            }
             DetalhesDaBolaScreen(
                 state = state,
                 navegarDeVolta = navegarParaTelaAnterior
@@ -38,5 +35,8 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
 }
 
 fun NavController.navegarParaTelaDeDetalhes(id: String){
-    navigate("$detalhesDaBolaRotaInicio/$id")
+    navigate("$detalhesDaBolaRotaInicio/$id"){
+        launchSingleTop = true
+        popUpTo("$cadastroDeBolasRota/$id")
+    }
 }

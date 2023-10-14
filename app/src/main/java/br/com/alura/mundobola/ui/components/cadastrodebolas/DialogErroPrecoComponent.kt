@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.DialogComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
+import br.com.alura.mundobola.ui.extra.tamanhoCaixaPadrao
 
 @Composable
 fun DialogErroPrecoComponent(
@@ -17,7 +18,7 @@ fun DialogErroPrecoComponent(
 ) {
     DialogComponent(
         modifier = modifier,
-        alturaMinima = 200.dp,
+        alturaMinima = tamanhoCaixaPadrao,
         noClickSair = fecharDialog
     ) {
         TextoProdutoComponent(

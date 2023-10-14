@@ -8,20 +8,20 @@ data class BolaView(
     val bolaId: String,
     val nome: String,
     val preco: String,
-    val marcaId: String = "Sem Marca",
-    val descricao: String = "Sem Descrição",
+    val marcaId: String,
+    val descricao: String,
     val imagem: String = "",
     val dataCriacao: String,
-    val dataAlteracao: String = "Sem Alteração",
+    val dataAlteracao: String,
 )
 
 fun Bola.paraBolaView() = BolaView(
     bolaId = bolaId,
     nome = nome,
     preco = preco.paraMoedaBrasileira(),
-    marcaId = marcaId ?: "Sem Marca",
-    descricao = descricao ?: "Sem Descrição",
+    marcaId = marcaId ?: "",
+    descricao = descricao ?: "",
     imagem = imagem ?: "",
     dataCriacao = dataCriacao.dataFormatada(),
-    dataAlteracao = dataAlteracao?.dataFormatada() ?: "Sem Alteração",
+    dataAlteracao = dataAlteracao?.dataFormatada() ?: "",
 )
