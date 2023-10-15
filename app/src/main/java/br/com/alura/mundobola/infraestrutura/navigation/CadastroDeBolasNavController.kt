@@ -46,6 +46,6 @@ fun NavGraphBuilder.CadastroDeBolasNavController(
 
 fun NavController.navegarParaCadastroDeBolas(id: String) {
     navigate("$cadastroDeBolasRota/$id"){
-        launchSingleTop = true
+        popBackStack("$cadastroDeBolasRota/$id", true)
     }
 }

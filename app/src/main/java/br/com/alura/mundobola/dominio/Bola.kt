@@ -11,7 +11,7 @@ data class Bola(
     val marcaId: String? = null,
     val descricao: String? = null,
     val imagem: String? = null,
-    val dataCriacao: LocalDateTime,
+    val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val dataAlteracao: LocalDateTime? = null,
     val estaAtivo: Boolean = true,
 )

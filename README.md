@@ -38,7 +38,7 @@ A injeção de dependências será feita com o Hilt.<br />
 O sistema que carrega as imagens será feita pelo Coil Compose, através de url da imagem. <br />
 O sistema de armazenamento ainda vai ser em lista com o DAO, na próxima fase será implementada o banco de dados.<br />
 Uso do Repositório para comunicação entre o DAO e o View Model. <br />
-E os testes automatizados, por falta de tempo, serão feitos posteriormente (talvez no final desta versão ou inicial da seguinte)<br />
+Foram feitos testes de unidade e testes de de UI \(ainda não foram feitos testes com Mock por não ter o que mockar) <br />
 
 # Plugin utilizados
 
@@ -47,4 +47,7 @@ E os testes automatizados, por falta de tempo, serão feitos posteriormente (tal
  - Jetpack Compose
  - Material 3
  - Coil Compose
+ - Junit 4
+ - Kluent
+ - Navigation Tests
 

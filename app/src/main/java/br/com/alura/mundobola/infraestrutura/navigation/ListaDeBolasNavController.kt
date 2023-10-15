@@ -28,5 +28,8 @@ fun NavGraphBuilder.ListaDeBolasNavController(
 fun NavController.navegarParaListaDeBolas(){
     navigate(listaDeBolasRota){
         launchSingleTop = true
+        popUpTo(graph.id){
+            inclusive = true
+        }
     }
 }
