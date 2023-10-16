@@ -37,8 +37,8 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
 fun NavController.navegarParaTelaDeDetalhes(id: String){
     navigate("$detalhesDaBolaRotaInicio/$id"){
         launchSingleTop = true
-        popUpTo("$cadastroDeBolasRota/$id"){
-            inclusive = true
+        popUpTo(listaDeBolasRota){
+            inclusive = false
         }
     }
 }

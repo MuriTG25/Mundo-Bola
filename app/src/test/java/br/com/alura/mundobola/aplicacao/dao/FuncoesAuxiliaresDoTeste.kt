@@ -29,3 +29,13 @@ val BolaDeTesteSimples = Bola(
     nome = "Bola Nike",
     preco = "49.99".toBigDecimal()
     )
+
+val BolaJaExistente = Bola(
+    bolaId = "a4216a2e-a33a-4857-b47d-1d17b921c1a6",
+    nome = "Total90",
+    preco = "99.90".toBigDecimal(),
+    marcaId = "849324c0-2d2d-4097-87f4-68dae63b2f5b",
+    descricao = LoremIpsum(30).values.first(),
+    dataCriacao = LocalDateTime.now(),
+    imagem = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg",
+)
