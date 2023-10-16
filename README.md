@@ -18,7 +18,8 @@ Ele se constiste em 3 telas diferentes:<br />
  - Tela de detalhes do produto: tela onde veremos mais detalhes do produto, e onde poderemos editar e deletar o produto.
 
 Ele conta com sistema de navegação entre telas com o navigation, sistema de gerenciamento de estados com View Model e Ui State, injeção de dependências com o Hilt.<br />
-O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada. E os testes automatizados, por falta de tempo, serão feitos posteriormente (talvez no final desta versão ou inicial da seguinte)<br />
+Serão feitos testes de unidade e testes de UI.<br />
+O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada.<br />
 
 Plugin utilizados:
  - Hilt
@@ -26,6 +27,9 @@ Plugin utilizados:
  - Jetpack Compose
  - Material 3
  - Coil Compose
+ - Junit
+ - Kluent
+ - Navigation Test
 
 # Fases futuras
 ### Alpha
@@ -46,6 +50,7 @@ Plugin utilizados:
  - Coil Compose
  - Room
  - Junit
+ - Kluent
  - Mockk
  - Navigation Test
 
@@ -67,6 +72,7 @@ Plugin utilizados:
  - DataStore
  - Documentfile
  - Junit
+ - Kluent
  - Mockk
  - Navigation Test
 
@@ -84,7 +90,8 @@ Plugin utilizados (aplicativo):
  - Room
  - DataStore
  - Ktor (pode ser Retrofit)
- - Junit
+- Junit
+ - Kluent
  - Mockk
  - Navigation Test
 
