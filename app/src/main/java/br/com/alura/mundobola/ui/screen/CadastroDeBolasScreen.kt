@@ -9,13 +9,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -40,7 +43,9 @@ fun CadastroDeBolasScreen(
     noCarregarImagem: (String) -> Unit = {},
     noClicarSalvar: () -> Unit = {},
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState())) {
         //TODO talvez eu altere como a imagem é exibida para ser mais intuitivo e com um visual melhor
         ImagemBolaComponentComRequest(
             modifier = Modifier
@@ -56,12 +61,14 @@ fun CadastroDeBolasScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(margemPadrao)
-                .verticalScroll(rememberScrollState()),
+                .padding(margemPadrao),
             verticalArrangement = Arrangement.spacedBy(margemPadrao)
         ) {
-            Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
-                if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()){
+            val focusManager = LocalFocusManager.current
+            val acaoDoTeclado = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Next) })
+            Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
+                if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()) {
                     TextoCampoObrigatorioComponent(texto = "Nome")
                 }
                 CampoDeTextoComponent(
@@ -69,10 +76,11 @@ fun CadastroDeBolasScreen(
                     dicaDoCampo = "Insira o nome da Bola",
                     texto = state.campoDoNome,
                     naMudancaDeTexto = state.alteracaoDoCampoNome,
+                    acaoDoTeclado = acaoDoTeclado
                 )
             }
-            Column (verticalArrangement = Arrangement.spacedBy(margemPadrao/4)){
-                if (state.campoPrecoObrigatorio && state.campoDoPreco.isBlank()){
+            Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
+                if (state.campoPrecoObrigatorio && state.campoDoPreco.isBlank()) {
                     TextoCampoObrigatorioComponent(texto = "Preço")
                 }
                 CampoDeTextoComponent(
@@ -81,6 +89,7 @@ fun CadastroDeBolasScreen(
                     texto = state.campoDoPreco,
                     naMudancaDeTexto = state.alteracaoDoCampoPreco,
                     tipoDeTeclado = KeyboardType.Decimal,
+                    acaoDoTeclado = acaoDoTeclado
                 )
             }
             DropdownMenuComponent(
@@ -101,7 +110,7 @@ fun CadastroDeBolasScreen(
                 maiuscula = KeyboardCapitalization.Sentences,
                 acaoDeEnter = ImeAction.None,
                 minimoDeLinhas = 5,
-                maximoDeLinhas = 20
+                maximoDeLinhas = 20,
             )
             BotaoComponent(
                 modifier = Modifier.fillMaxWidth(),
@@ -111,7 +120,7 @@ fun CadastroDeBolasScreen(
         }
         if (state.mostraDialogImagem) {
             DialogCadastroImagem(
-                imagemBola =state.fotoBola,
+                imagemBola = state.fotoBola,
                 alteracaoDaImagemBola = state.alteracaoDaImagemDaBola,
                 noClickSair = {
                     state.noClickDaImagem(false)
@@ -121,7 +130,7 @@ fun CadastroDeBolasScreen(
                 }
             )
         }
-        if(state.mostraDialogErroPreco){
+        if (state.mostraDialogErroPreco) {
             DialogErroPrecoComponent(
                 fecharDialog = {
                     state.noCLickDialogErroPreco(false)

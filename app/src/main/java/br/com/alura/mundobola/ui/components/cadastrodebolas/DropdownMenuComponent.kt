@@ -3,6 +3,7 @@ package br.com.alura.mundobola.ui.components.cadastrodebolas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -47,7 +48,7 @@ fun DropdownMenuComponent(
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandir)
             },
-            shape = RoundedCornerShape(15)
+            shape = RoundedCornerShape(15),
         )
         ExposedDropdownMenu(
             modifier = Modifier.background(MaterialTheme.colorScheme.background),

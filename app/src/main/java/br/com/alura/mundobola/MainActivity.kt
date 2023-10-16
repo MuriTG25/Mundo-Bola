@@ -1,12 +1,14 @@
 package br.com.alura.mundobola
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -51,6 +53,14 @@ class MainActivity : ComponentActivity() {
 private fun TelaApp(
 ) {
     val navController = rememberNavController()
+    LaunchedEffect(Unit) {
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            val routes = navController.currentBackStack.value.map {
+                it.destination.route
+            }
+            Log.i("MainActivity", "on Create: back stack - $routes")
+        }
+    }
     val backStackEntryState by navController.currentBackStackEntryAsState()
     val idPelaRota = backStackEntryState?.arguments?.getString(ID_BOLA)
     val destinoAtual = backStackEntryState?.destination
