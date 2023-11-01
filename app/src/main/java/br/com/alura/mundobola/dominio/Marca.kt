@@ -7,7 +7,7 @@ data class Marca(
     val marcaId: String = UUID.randomUUID().toString(),
     val nome: String,
     val imagem: String? = null,
-    val dataCriacao: LocalDateTime,
+    val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val dataAlteracao: LocalDateTime? = null,
     val estaAtivo: Boolean = true,
 )

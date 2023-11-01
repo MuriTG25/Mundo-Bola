@@ -1,14 +1,11 @@
 package br.com.alura.mundobola.aplicacao.dao
 
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.coroutineScope
+import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
+import br.com.alura.mundobola.auxiliarTeste.BolaJaExistenteParaTestes
+import br.com.alura.mundobola.auxiliarTeste.listaBolaCompletaNome
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldBeNull
@@ -46,12 +43,12 @@ class BolaDaoTest{
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
         tamanhoDaLista.shouldBeEqualTo(6)
         listaDeBolas?.let {
-            it + BolaDeTesteCompleta
+            it + bolaDeTesteCompleta
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
         tamanhoDaLista.shouldBeEqualTo(6)
         val novaLista = listaDeBolas?.let {
-            it + BolaDeTesteCompleta
+            it + bolaDeTesteCompleta
         }
         novaLista?.size.shouldBeEqualTo(7)
     }
@@ -65,7 +62,7 @@ class BolaDaoTest{
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
         tamanhoDaLista.shouldBeEqualTo(6)
         listaDeBolas?.let {
-            it - BolaJaExistente
+            it - BolaJaExistenteParaTestes
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
         tamanhoDaLista.shouldBeEqualTo(6)
@@ -76,14 +73,14 @@ class BolaDaoTest{
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
         tamanhoDaLista.shouldBeEqualTo(6)
-        bolaDao.adicionarBola(BolaDeTesteCompleta)
+        bolaDao.adicionarBola(bolaDeTesteCompleta)
         val listaAtualizada = bolaDao.listaDeBolas().firstOrNull()
         listaAtualizada?.size.shouldBeEqualTo(7)
         listaAtualizada?.last()?.nome?.shouldBeEqualTo("Bola Nike")
     }
     @Test
     fun `Deve retornar uma bola, Quando buscamos o mesmo pelo id`(): Unit = runBlocking {
-        val bolaEncontrada = bolaDao.encontrarBolaPeloId(BolaJaExistente.bolaId)
+        val bolaEncontrada = bolaDao.encontrarBolaPeloId(BolaJaExistenteParaTestes.bolaId)
         bolaEncontrada?.nome?.shouldBeEqualTo("Total90")
     }
     @Test
@@ -96,7 +93,7 @@ class BolaDaoTest{
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
         tamanhoDaLista.shouldBeEqualTo(6)
-        val bolaEncontrada = bolaDao.encontrarBolaPeloId(BolaJaExistente.bolaId)
+        val bolaEncontrada = bolaDao.encontrarBolaPeloId(BolaJaExistenteParaTestes.bolaId)
         bolaEncontrada?.let {
             bolaDao.deletaBola(it)
         }

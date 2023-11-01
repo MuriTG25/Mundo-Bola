@@ -8,12 +8,12 @@ data class MarcaView(
     val nome: String,
     val imagem: String = "",
     val dataCriacao: String,
-    val dataAlteracao: String = "Não Alterado",
+    val dataAlteracao: String = "",
 )
 fun Marca.paraMarcaView() = MarcaView(
     marcaId = marcaId,
     nome = nome,
     imagem = imagem ?: "",
     dataCriacao = dataCriacao.dataFormatada(),
-    dataAlteracao = dataAlteracao?.dataFormatada() ?: "Não Alterado",
+    dataAlteracao = dataAlteracao?.dataFormatada() ?: "",
 )
