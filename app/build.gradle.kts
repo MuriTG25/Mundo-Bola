@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "br.com.alura.mundobola.ConfiguradorTesteHilt"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -69,7 +69,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.1.2")
-
     val navigationVersion = "2.7.3"
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
     implementation ("androidx.navigation:navigation-compose:$navigationVersion")
@@ -77,17 +76,16 @@ dependencies {
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-testing
     androidTestImplementation ("androidx.navigation:navigation-testing:$navigationVersion")
-
     val hiltVersion = "2.48"
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
-
+    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
     val roomVersion = "2.5.2"
     implementation ("androidx.room:room-runtime:$roomVersion")
     ksp ("androidx.room:room-compiler:$roomVersion")
     implementation ("androidx.room:room-ktx:$roomVersion")
-
     testImplementation("org.amshove.kluent:kluent-android:1.73")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")

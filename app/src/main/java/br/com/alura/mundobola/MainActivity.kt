@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
@@ -42,7 +43,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    TelaApp()
+                    val navController = rememberNavController()
+                    TelaApp(navController)
                 }
             }
         }
@@ -50,9 +52,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun TelaApp(
+internal fun TelaApp(
+    navController: NavHostController
 ) {
-    val navController = rememberNavController()
     LaunchedEffect(Unit) {
         navController.addOnDestinationChangedListener { _, _, _ ->
             val routes = navController.currentBackStack.value.map {
@@ -70,7 +72,7 @@ private fun TelaApp(
     val context = LocalContext.current
     ScaffoldScreen (
         texto = when(rotaAtual){
-            cadastroDeBolasRotaCompleto -> "Cadastrar Bola"
+            cadastroDeBolasRotaCompleto ->  "Cadastrar/Editar Bola"
             detalhesDaBolaRota -> "Detalhes da Bola"
             else -> stringResource(id = R.string.app_name)
         },
@@ -119,7 +121,7 @@ private fun TelaApp(
 @Preview(showSystemUi = true)
 @Composable
 private fun TelaAppPreview() {
-    TelaApp()
+    TelaApp(rememberNavController())
 }
 
 

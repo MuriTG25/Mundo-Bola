@@ -81,6 +81,7 @@ class MundoBolaRepositorioTest {
             }
         }
 
+    //TODO teste não concluido, estou esperando ajuda da alura
     @Test
     fun `Deve chamar encontrarBolaPeloId e DeletarBola do BolaDao, Quando chamar deletar Bola do repositorio`(): Unit =
         runBlocking {
@@ -97,4 +98,9 @@ class MundoBolaRepositorioTest {
             }
         }
 
+    @Test
+    fun `Deve chamar encontrarBolaPeloId, Adicionar Bola e DeletarBola do BolaDao, Quando chamar editar Bola do repositorio`(): Unit =
+        runBlocking {
+        //TODO estou esperando a resposta da alura
+        }
 }
