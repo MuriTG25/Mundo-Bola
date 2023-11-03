@@ -81,7 +81,6 @@ class MundoBolaRepositorioTest {
             }
         }
 
-    //TODO teste não concluido, estou esperando ajuda da alura
     @Test
     fun `Deve chamar encontrarBolaPeloId e DeletarBola do BolaDao, Quando chamar deletar Bola do repositorio`(): Unit =
         runBlocking {
@@ -89,18 +88,32 @@ class MundoBolaRepositorioTest {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
             } returns mockkClass(Bola::class)
             coEvery {
-                bolaDao.deletaBola(bolaDeTesteCompleta)
+                bolaDao.deletaBola(any())
             } returns Unit
             repositorio.deletaBola("c6fec989-5440-49b5-8b03-8236556f46ab")
             coVerifySequence {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
-                bolaDao.deletaBola(bolaDeTesteCompleta)
+                bolaDao.deletaBola(any())
             }
         }
 
     @Test
     fun `Deve chamar encontrarBolaPeloId, Adicionar Bola e DeletarBola do BolaDao, Quando chamar editar Bola do repositorio`(): Unit =
         runBlocking {
-        //TODO estou esperando a resposta da alura
+            coEvery {
+                bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
+            } returns mockkClass(Bola::class)
+            coEvery {
+                bolaDao.deletaBola(any())
+            } returns Unit
+            coEvery {
+                bolaDao.adicionarBola(any())
+            } returns Unit
+            repositorio.editaBola(bolaDeTesteCompleta)
+            coVerifySequence {
+                bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
+                bolaDao.deletaBola(any())
+                bolaDao.adicionarBola(any())
+            }
         }
 }
