@@ -10,12 +10,12 @@ fun ComposeContentTestRule.verificaSeMostraOComponentPeloTexto(texto: String){
     onNodeWithText(texto).assertIsDisplayed()
 }
 fun ComposeContentTestRule.verificaSeNaoMostraOComponentPeloTexto(texto: String){
-    onNodeWithText(texto).assertIsNotDisplayed()
+    onNodeWithText(texto).assertDoesNotExist()
 }
 fun ComposeContentTestRule.verificaSeMostraOComponentePelaDescricao(descricao: String){
     onNodeWithContentDescription(descricao).assertIsDisplayed()
 }
 fun ComposeContentTestRule.verificaSeNaoMostraOComponentePelaDescricao(descricao: String){
-    onNodeWithContentDescription(descricao).assertIsNotDisplayed()
+    onNodeWithContentDescription(descricao).assertDoesNotExist()
 }
 

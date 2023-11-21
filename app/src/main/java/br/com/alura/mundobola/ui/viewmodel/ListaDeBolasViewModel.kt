@@ -21,13 +21,17 @@ class ListaDeBolasViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repositorio.listaDeBolas().collect{lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaView()
-                    }
-                )
-            }
+            carregaLista()
+        }
+    }
+
+    private suspend fun carregaLista() {
+        repositorio.listaDeBolas().collect { lista ->
+            _uiState.value = _uiState.value.copy(
+                listaDeBolas = lista.map {
+                    it.paraBolaView()
+                }
+            )
         }
     }
 }

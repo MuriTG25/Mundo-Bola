@@ -69,21 +69,22 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.1.2")
-    val navigationVersion = "2.7.3"
-    // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
-    implementation ("androidx.navigation:navigation-compose:$navigationVersion")
     // https://mvnrepository.com/artifact/androidx.datastore/datastore-preferences
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    val navigationVersion = "2.7.5"
+    // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
+    implementation ("androidx.navigation:navigation-compose:$navigationVersion")
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-testing
     androidTestImplementation ("androidx.navigation:navigation-testing:$navigationVersion")
-    val hiltVersion = "2.48"
+    val hiltVersion = "2.48.1"
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.hilt:hilt-work:1.1.0")
     androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-work:1.1.0")
-    implementation("androidx.work:work-runtime-ktx:2.8.1")
     val roomVersion = "2.5.2"
     implementation ("androidx.room:room-runtime:$roomVersion")
     ksp ("androidx.room:room-compiler:$roomVersion")

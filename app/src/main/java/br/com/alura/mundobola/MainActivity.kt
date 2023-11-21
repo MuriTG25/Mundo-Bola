@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-internal fun TelaApp(
+private fun TelaApp(
     navController: NavHostController
 ) {
     LaunchedEffect(Unit) {
@@ -60,7 +60,6 @@ internal fun TelaApp(
             val routes = navController.currentBackStack.value.map {
                 it.destination.route
             }
-            Log.i("MainActivity", "on Create: back stack - $routes")
         }
     }
     val backStackEntryState by navController.currentBackStackEntryAsState()
