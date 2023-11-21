@@ -1,15 +1,5 @@
 package br.com.alura.mundobola.auxiliardoteste
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import br.com.alura.mundobola.ui.components.comum.IconTopAppBarComponent
-import br.com.alura.mundobola.R
-import br.com.alura.mundobola.infraestrutura.navigation.cadastroDeBolasRotaCompleto
-
-
-
 val tituloTelaLista = "Mundo Bola"
 val tituloTelaCadastro = "Cadastrar/Editar Bola"
 val tituloTelaDetalhes = "Detalhes da Bola"
@@ -18,3 +8,23 @@ val iconeEdicaoDescricao = "Editar bola"
 val iconeDeletarDescricao = "Deletar bola"
 val iconeVoltarDescricao = "Voltar para a tela anterior"
 val iconeFABDescricao = "Adicionar Produto"
+
+val textoNomeCadastroTela = "Nome"
+val textoPrecoCadastroTela = "Preço"
+val textoMarcaCadastroTela = "Marca"
+val textoDescricaoCadastroTela = "Descrição"
+val textoSalvarCadastroTela = "Salvar"
+val descricaoImagemCadastroTela = "imagem da bola"
+
+val descricaoImagemScaffoldCadastroTela = "imagem da bola"
+val textoUrlScaffoldCadastroTela = "Url da Imagem"
+val dicaUrlScaffoldCadastroTela = "Insira o link contendo a imagem da bola"
+val textoCancelarScaffoldCadastroTela = "Cancelar"
+val textoConfirmarScaffoldCadastroTela = "Confirmar"
+
+
+val textoDescricaoProdutoTelaDetalhes = "Sobre o produto:"
+val textoMarcaTelaDetalhes = "Marca: "
+val textoDataCriacaoTelaDetalhes = "Criado em: "
+val textoDataAlteracaoTelaDetalhes = "Alterado em: "
+
