@@ -1,6 +1,8 @@
 package br.com.alura.mundobola.auxiliardoteste
 
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
@@ -9,10 +11,10 @@ import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.test.espresso.Espresso
+import okhttp3.internal.wait
 
 fun ComposeContentTestRule.verificaSeMostraOComponentPeloTexto(texto: String) {
     onNodeWithText(texto).assertIsDisplayed()
@@ -56,12 +58,26 @@ fun ComposeContentTestRule.clicaNoPrimeiroElementoPeloNome(texto: String) {
 fun ComposeContentTestRule.clicaNoElementoPelaDescricao(texto: String) {
     onNodeWithContentDescription(texto).performClick()
 }
+fun ComposeContentTestRule.verificaSeOElementoEClicavel(texto: String){
+    onNodeWithText(texto).assertHasClickAction()
+}
 
 fun ComposeContentTestRule.esperaAteATelaAparecer(
     texto: String,
     vezes: Int = 1,
 ) {
     waitUntil {
+        this.onAllNodesWithText(texto)
+            .fetchSemanticsNodes()
+            .size == vezes
+    }
+}
+fun ComposeContentTestRule.esperaAteATelaAparecerComTempo(
+    texto: String,
+    vezes: Int = 1,
+    tempo: Long = 3_000L,
+) {
+    waitUntil (tempo){
         this.onAllNodesWithText(texto)
             .fetchSemanticsNodes()
             .size == vezes

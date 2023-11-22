@@ -10,12 +10,16 @@ import br.com.alura.mundobola.auxiliardoteste.descricaoImagemScaffoldCadastroTel
 import br.com.alura.mundobola.auxiliardoteste.dicaUrlScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.digitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
+import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempo
 import br.com.alura.mundobola.auxiliardoteste.fechaOTeclado
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
+import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
+import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.marcaPenaltyTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.placeholderDescricaoCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.placeholderNomeCadastroTela
@@ -56,6 +60,10 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeFABDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
     }
+    private fun clicaBotaoSalvar(){
+        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+    }
 
     @Test
     fun deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds(){
@@ -94,6 +102,15 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.verificaSeMostraOComponentPeloTexto(dicaUrlScaffoldCadastroTela)
     }
     @Test
+    fun deveMostarAsOpcoesDeMarcas_QuandoClicarnosNoCampoMarca(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentPeloTexto(marcaNikeTexto)
+        testeDoNavigation.verificaSeMostraOComponentPeloTexto(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentPeloTexto(marcaPenaltyTexto)
+    }
+    @Test
     fun deveMostarOsTextosDoPlaceholder_QuandoClicarmosNoCampoDeTextoVazio(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDoNavigation.clicaNoElementoPeloNome(textoNomeCadastroTela)
@@ -115,8 +132,7 @@ class CadastroDeBolasScreenKtTest{
     @Test
     fun deveAparecerMensagemDeCampoObrigatorio_QuandoApertarSalvarSemDigitarNada(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
-        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        clicaBotaoSalvar()
         testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
         testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
     }
@@ -125,8 +141,7 @@ class CadastroDeBolasScreenKtTest{
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaTeste)
         fechaOTeclado()
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
-        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        clicaBotaoSalvar()
         testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
     }
@@ -135,10 +150,40 @@ class CadastroDeBolasScreenKtTest{
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         fechaOTeclado()
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
-        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        clicaBotaoSalvar()
         testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
     }
-
+    @Test
+    fun deveDesaparecerMensagemDeNomeObrigatorio_QuandoDigitarmosAlgoNoCampoDeNome(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        fechaOTeclado()
+        testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
+    }
+    @Test
+    fun deveDesaparecerMensagemDePrecoObrigatorio_QuandoDigitarmosAlgoNoCampoDePreco(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaTeste)
+        fechaOTeclado()
+        testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
+    }
+    //TODO AINDA NÃO CONSEGUI FAZER ESPERAR POR TEMPO
+//    @Test
+//    fun deveCadastrarUmaBolaNova_QuandoDigitarmosApenasNomeEPreco(){
+//        vaiParaATelaDeCadastroPelaTelaDeLista()
+//        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+//        fechaOTeclado()
+//        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaTeste)
+//        fechaOTeclado()
+//        clicaBotaoSalvar()
+//        testeDoNavigation.esperaAteATelaAparecerComTempo("Total90")
+//        testeDoNavigation.scrollaAteOElementoPeloNome(nomeBolaTeste)
+//        testeDoNavigation.verificaSeMostraOComponentPeloTexto(nomeBolaTeste)
+//        testeDoNavigation.verificaSeMostraOComponentPeloTexto(precoBolaTeste)
+//    }
 }
