@@ -18,7 +18,7 @@ import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
-import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentPeloTexto
+import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentPeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
@@ -35,7 +35,7 @@ class ListaDeBolasScreenKtTest{
     val testeDoNavigation = createAndroidComposeRule(MainActivity::class.java)
     @Test
     fun deveMostrarFabENomeApp_QuandoEstiverNaTelaDeBolas(){
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(tituloTelaLista)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaDetalhes)
         testeDoNavigation.verificaSeMostraOComponentePelaDescricao(iconeFABDescricao)
@@ -48,14 +48,14 @@ class ListaDeBolasScreenKtTest{
     fun deveIrParaATelaDeCadastros_QuandoApertarNoBotaoDoFab(){
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeFABDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoNomeCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
         testeDoNavigation.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroTela)
     }
     @Test
     fun deveIrParaATelaDeDetalhes_QuandoApertarEmUmProduto(){
         testeDoNavigation.clicaNoElementoPeloNome("Jabulani")
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoDescricaoProdutoTelaDetalhes)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(textoMarcaTelaDetalhes)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
     }
 }

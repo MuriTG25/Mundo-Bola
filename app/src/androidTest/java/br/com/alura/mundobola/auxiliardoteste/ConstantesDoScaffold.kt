@@ -1,5 +1,6 @@
 package br.com.alura.mundobola.auxiliardoteste
 
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.aplicacao.extra.dataFormatada
 import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
 import java.time.LocalDateTime
@@ -41,11 +42,16 @@ val textoDataCriacaoTelaDetalhes = "Criado em: "
 val textoDataAlteracaoTelaDetalhes = "Alterado em: "
 
 val nomeBolaTeste = "Mercurial"
-val precoBolaTeste = "19.90"
+val precoBolaLimpoTeste = "19.90"
+val precoBolaEditadoTeste = "19.90".toBigDecimal().paraMoedaBrasileira()
+val urlBolaTeste = "https://images.tcdn.com.br/img/img_prod/728938/bola_futebol_de_campo_nike_mercurial_fade_13461_1_e9fb3615f52f43fc6d3e89b43f565731.png"
+val descricaoBolaTeste = LoremIpsum(10).values.first()
+
 val marcaNikeTexto = "Nike"
 val marcaAdidasTexto = "Adidas"
 val marcaPenaltyTexto = "Penalty"
 
+val nomeOutraBolaExiste = "Total90"
 val nomeBolaExistente = "Jabulani"
 val precoBolaExistenteEditado = "1090.90".toBigDecimal().paraMoedaBrasileira()
 val precoBolaExistenteOriginal = "1090.90"

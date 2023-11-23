@@ -31,51 +31,51 @@ class BolaDaoTest{
             it.nome
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
     }
     @Test
-    fun `Deve não adicionar bolas, Quando fazemos alteração na lista diretamente nele, a lista é só de leitura e está protegida`(): Unit = runBlocking{
+    fun `Deve nao adicionar bolas, Quando fazemos alteracao na lista diretamente nele, a lista eh so de leitura e esta protegida`(): Unit = runBlocking{
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
         val listaDeNomes = listaDeBolas?.joinToString {
             it.nome
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
         listaDeBolas?.let {
             it + bolaDeTesteCompleta
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
         val novaLista = listaDeBolas?.let {
             it + bolaDeTesteCompleta
         }
-        novaLista?.size.shouldBeEqualTo(7)
+        novaLista?.size.shouldBeEqualTo(6)
     }
     @Test
-    fun `Deve não retirar bolas, quando fazemos alteração na lista diretamente nele, a lista é só de leitura e está protegida`(): Unit = runBlocking{
+    fun `Deve nao retirar bolas, quando fazemos alteracao na lista diretamente nele, a lista eh so de leitura e esta protegida`(): Unit = runBlocking{
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
         val listaDeNomes = listaDeBolas?.joinToString {
             it.nome
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
         listaDeBolas?.let {
             it - BolaJaExistenteParaTestes
         }
         listaDeNomes.shouldBeEqualTo(listaBolaCompletaNome)
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
     }
 
     @Test
-    fun `Deve adicionar uma bola nova, Quando utilizamos a função adicionarBola `(): Unit = runBlocking {
+    fun `Deve adicionar uma bola nova, Quando utilizamos a funcao adicionarBola `(): Unit = runBlocking {
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
         bolaDao.adicionarBola(bolaDeTesteCompleta)
         val listaAtualizada = bolaDao.listaDeBolas().firstOrNull()
-        listaAtualizada?.size.shouldBeEqualTo(7)
+        listaAtualizada?.size.shouldBeEqualTo(6)
         listaAtualizada?.last()?.nome?.shouldBeEqualTo("Bola Nike")
     }
     @Test
@@ -89,16 +89,16 @@ class BolaDaoTest{
         bolaEncontrada.shouldBeNull()
     }
     @Test
-    fun `Deve deletar uma bola, Quando utilizamos a função de deletarBola `(): Unit = runBlocking {
+    fun `Deve deletar uma bola, Quando utilizamos a funcao de deletarBola `(): Unit = runBlocking {
         val listaDeBolas = bolaDao.listaDeBolas().firstOrNull()
         val tamanhoDaLista = listaDeBolas?.size
-        tamanhoDaLista.shouldBeEqualTo(6)
+        tamanhoDaLista.shouldBeEqualTo(5)
         val bolaEncontrada = bolaDao.encontrarBolaPeloId(BolaJaExistenteParaTestes.bolaId)
         bolaEncontrada?.let {
             bolaDao.deletaBola(it)
         }
         val listaAtualizada = bolaDao.listaDeBolas().firstOrNull()
-        listaAtualizada?.size.shouldBeEqualTo(5)
+        listaAtualizada?.size.shouldBeEqualTo(4)
     }
 
 

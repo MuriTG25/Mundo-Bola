@@ -23,14 +23,6 @@ class BolaDao(){
                 imagem = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg",
             ),
             Bola(
-                bolaId = "7cbc19a7-77d8-4fac-a8a9-057716b1c7fb",
-                nome = LoremIpsum(10).values.first(),
-                preco = "39.90".toBigDecimal(),
-                marcaId = "4946112a-b895-4c8f-b5c1-1c8dc0b65dee",
-                descricao = LoremIpsum(10).values.first(),
-                dataCriacao = LocalDateTime.now()
-            ),
-            Bola(
                 bolaId = "da6d14aa-9125-4f5a-871e-bbca635c9255",
                 nome = "Jabulani",
                 preco = "1090.90".toBigDecimal(),

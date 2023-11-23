@@ -20,7 +20,7 @@ import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
-import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentPeloTexto
+import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentPeloTexto
@@ -45,7 +45,7 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun deveMostrarOBotaoDeVoltaExcluirEEditar_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(tituloTelaDetalhes)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaLista)
         testeDoNavigation.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
@@ -65,10 +65,10 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(nomeBolaExistente)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(precoBolaExistenteEditado)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(marcaAdidasTexto)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(dataCriacaoBolaExistente)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaExistenteEditado)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
     }
     @Test
     fun deveSerPossivel_QuandoVerificarmosOCampoDeDetalhes(){
@@ -80,15 +80,23 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto("Total90")
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto("Total90")
     }
     @Test
-    fun deveIrParaATelaDeCadastro_QuandoClicarmosNoBotaoEditar(){
+    fun deveIrParaATelaDeCadastroComDadosPreenchidos_QuandoClicarmosNoBotaoEditar(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(nomeBolaExistente)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(precoBolaExistenteOriginal)
-        testeDoNavigation.verificaSeMostraOComponentPeloTexto(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaExistenteOriginal)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+    }
+    @Test
+    fun deveExcluirOsDados_QuandoApertarNoBotaoDeDeletar(){
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
+        testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(nomeBolaExistente)
     }
 }

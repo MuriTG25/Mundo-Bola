@@ -16,7 +16,7 @@ class BolaViewTest{
         bolaSimplesConvertida.shouldBeInstanceOf(BolaView::class)
     }
     @Test
-    fun`Deve retornar preço Convertido em String, Quando convertemos Bola Em BolaView`(){
+    fun`Deve retornar preco Convertido em String, Quando convertemos Bola Em BolaView`(){
         val precoBola = bolaSimplesConvertida.preco
         precoBola.shouldBeInstanceOf(String::class)
         BolaDeTesteSimples.preco.shouldBeEqualTo("49.99".toBigDecimal())
@@ -32,14 +32,14 @@ class BolaViewTest{
         bolaSimplesConvertida.marcaId.shouldBeEqualTo("")
     }
     @Test
-    fun `Deve retornar a Descrição, Quando buscarmos a descrição da bola`(){
+    fun `Deve retornar a Descricao, Quando buscarmos a descricao da bola`(){
         bolaCompletaConvertida.descricao.shouldBeEqualTo(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales\n" +
                     "laoreet"
         )
     }
     @Test
-    fun `Deve retornar String Vazia, Quando buscarmos bola com a Descrição nula`(){
+    fun `Deve retornar String Vazia, Quando buscarmos bola com a Descricao nula`(){
         BolaDeTesteSimples.descricao.shouldBeNull()
         bolaSimplesConvertida.descricao.shouldBeEqualTo("")
     }
@@ -55,7 +55,7 @@ class BolaViewTest{
         bolaSimplesConvertida.imagem.shouldBeEqualTo("")
     }
     @Test
-    fun`Deve retornar Data de Criação Convertido em String, Quando convertemos Bola Em BolaView`(){
+    fun`Deve retornar Data de Criacao Convertido em String, Quando convertemos Bola Em BolaView`(){
         val dataCriacao = bolaCompletaConvertida.dataCriacao
         dataCriacao.shouldBeInstanceOf(String::class)
         bolaDeTesteCompleta.dataCriacao.shouldBeEqualTo(dataParaTestes)
@@ -69,7 +69,7 @@ class BolaViewTest{
         dataAlteracao.shouldBeEqualTo("14/08/2022")
     }
     @Test
-    fun `Deve retornar String Vazia, Quando buscarmos a data de alteração da bola nula`(){
+    fun `Deve retornar String Vazia, Quando buscarmos a data de alteracao da bola nula`(){
         BolaDeTesteSimples.dataAlteracao.shouldBeNull()
         bolaSimplesConvertida.dataAlteracao.shouldBeEqualTo("")
     }

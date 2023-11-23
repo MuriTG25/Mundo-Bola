@@ -1,6 +1,5 @@
 package br.com.alura.mundobola.auxiliardoteste
 
-import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
@@ -12,11 +11,11 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.test.espresso.Espresso
-import okhttp3.internal.wait
 
-fun ComposeContentTestRule.verificaSeMostraOComponentPeloTexto(texto: String) {
+fun ComposeContentTestRule.verificaSeMostraOComponentePeloTexto(texto: String) {
     onNodeWithText(texto).assertIsDisplayed()
 }
 
@@ -27,7 +26,12 @@ fun ComposeContentTestRule.verificaSeExisteOComponentPeloTexto(texto: String) {
 fun ComposeContentTestRule.verificaSeNaoExisteOComponentPeloTexto(texto: String) {
     onNodeWithText(texto).assertDoesNotExist()
 }
-
+fun ComposeContentTestRule.verificaSeMostraOComponentePeloTextoMaisDe1Vez(
+    texto: String,
+    vezes: Int,
+) {
+    onAllNodesWithText(texto).assertCountEquals(vezes)
+}
 fun ComposeContentTestRule.verificaSeMostraOComponentePelaDescricao(descricao: String) {
     onNodeWithContentDescription(descricao).assertIsDisplayed()
 }
@@ -100,4 +104,13 @@ fun ComposeContentTestRule.digitaNoCampoDeTexto(
     textoADigitar: String
 ){
     onNodeWithText(nomeDoCampo).performTextInput(textoADigitar)
+    fechaOTeclado()
+}
+fun ComposeContentTestRule.limpaEDigitaNoCampoDeTexto(
+    nomeDoCampo: String,
+    textoADigitar: String
+){
+    onNodeWithText(nomeDoCampo).performTextClearance()
+    onNodeWithText(nomeDoCampo).performTextInput(textoADigitar)
+    fechaOTeclado()
 }

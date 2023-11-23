@@ -14,7 +14,7 @@ class BolaTest{
         bolaMinima.bolaId.length.shouldBeEqualTo(36)
     }
     @Test
-    fun `Deve retornar o horário atual, Quando criarmos uma bola sem inserir data de criação`(){
+    fun `Deve retornar o horario atual, Quando criarmos uma bola sem inserir data de criacao`(){
         bolaMinima.dataCriacao.toLocalDate().shouldBeEqualTo(LocalDate.now())
     }
 }

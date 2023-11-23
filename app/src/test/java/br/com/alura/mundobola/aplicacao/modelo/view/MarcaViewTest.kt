@@ -27,7 +27,7 @@ class MarcaViewTest{
         marcaSimplesConvertida.imagem.shouldBeEqualTo("")
     }
     @Test
-    fun`Deve retornar Data de Criação Convertido em String, Quando convertemos para MarcaView`(){
+    fun`Deve retornar Data de Criacao Convertido em String, Quando convertemos para MarcaView`(){
         val dataCriacao = marcaCompletaConvertida.dataCriacao
         dataCriacao.shouldBeInstanceOf(String::class)
         marcaCompletaParaTestes.dataCriacao.shouldBeEqualTo(dataParaTestes)
@@ -41,7 +41,7 @@ class MarcaViewTest{
         dataAlteracao.shouldBeEqualTo("14/08/2022")
     }
     @Test
-    fun `Deve retornar String Vazia, Quando buscarmos a data de alteração da bola nula`(){
+    fun `Deve retornar String Vazia, Quando buscarmos a data de alteracao da bola nula`(){
         marcaSimpleParaTestes.dataAlteracao.shouldBeNull()
         marcaSimplesConvertida.dataAlteracao.shouldBeEqualTo("")
     }

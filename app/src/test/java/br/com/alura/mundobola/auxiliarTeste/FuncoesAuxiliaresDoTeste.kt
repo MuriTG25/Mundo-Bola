@@ -5,8 +5,7 @@ import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
 import java.time.LocalDateTime
 
-val listaBolaCompletaNome = """Total90, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales
-laoreet, Jabulani, Penalty Lider Campo, Penalty Lider Campo, Penalty Lider Campo""".trimIndent()
+val listaBolaCompletaNome = """Total90, Jabulani, Penalty Lider Campo, Penalty Lider Campo, Penalty Lider Campo""".trimIndent()
 
 
 const val idNike = "849324c0-2d2d-4097-87f4-68dae63b2f5b"

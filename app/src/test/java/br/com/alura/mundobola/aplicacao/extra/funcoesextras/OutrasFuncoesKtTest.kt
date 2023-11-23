@@ -24,7 +24,7 @@ class OutrasFuncoesKtTest {
         valorConvertido.shouldBeEqualTo("R\$ 19,90")
     }
     @Test
-    fun `Deve retornar o mesmo valor, quando a String não está vazia`(){
+    fun `Deve retornar o mesmo valor, quando a String nao esta vazia`(){
         val stringNaoVazia = "a".estaVazio()
         stringNaoVazia.shouldBeEqualTo("a")
     }

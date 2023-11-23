@@ -12,7 +12,7 @@ class MarcaDaoTest {
     private val marcaDao = MarcaDao()
 
     @Test
-    fun `Deve retornar lista, quando chamamos a função lista de Marcas`(): Unit = runBlocking {
+    fun `Deve retornar lista, quando chamamos a funcao lista de Marcas`(): Unit = runBlocking {
         val listaDeProdutos = marcaDao.listaDeMarcas().firstOrNull()
         listaDeProdutos?.size.shouldBeEqualTo(3)
         listaDeProdutos?.joinToString { marca ->
@@ -20,17 +20,17 @@ class MarcaDaoTest {
         }.shouldBeEqualTo("Adidas, Nike, Penalty")
     }
     @Test
-    fun `Deve retornar uma marca, Quando chamarmos a função de encontrar por id valido`(): Unit = runBlocking{
+    fun `Deve retornar uma marca, Quando chamarmos a funcao de encontrar por id valido`(): Unit = runBlocking{
         val marcaEncontrada = marcaDao.encontrarMarcaPeloId(idNike)
         marcaEncontrada?.nome.shouldBeEqualTo("Nike")
     }
     @Test
-    fun `Deve retornar null, Quando chamarmos a função de encontrar por id inválido`(): Unit = runBlocking{
+    fun `Deve retornar null, Quando chamarmos a funcao de encontrar por id invalido`(): Unit = runBlocking{
         val marcaEncontrada = marcaDao.encontrarMarcaPeloId("fcvdsfdsfsdfsd")
         marcaEncontrada.shouldBeNull()
     }
     @Test
-    fun `Deve não alterar a lista, Quando inserirmos uma marca nova`(): Unit = runBlocking{
+    fun `Deve nao alterar a lista, Quando inserirmos uma marca nova`(): Unit = runBlocking{
         val listaDeProdutos = marcaDao.listaDeMarcas().firstOrNull()
         val tamanhoLista = listaDeProdutos?.size
         tamanhoLista.shouldBeEqualTo(3)

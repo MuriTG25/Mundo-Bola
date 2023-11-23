@@ -26,6 +26,7 @@ class MundoBolaRepositorioTest {
     fun `Deve chamar a lista de bolas do boladao, Quando chamar a lista de bolas do repositorio`(): Unit =
         runBlocking {
             coEvery {
+                bolaDao.listaDeBolas()
             } returns mockk()
             repositorio.listaDeBolas()
             coVerify {
@@ -34,7 +35,7 @@ class MundoBolaRepositorioTest {
         }
 
     @Test
-    fun `Deve chamar adição de bola do BolaDao, Quando chamar a adição de bolas do repositorio`(): Unit =
+    fun `Deve chamar adicao de bola do BolaDao, Quando chamar a adicao de bolas do repositorio`(): Unit =
         runBlocking {
             coEvery {
                 bolaDao.adicionarBola(bolaDeTesteCompleta)
