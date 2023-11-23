@@ -1,7 +1,10 @@
 package br.com.alura.mundobola.ui.screen
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import br.com.alura.mundobola.MainActivity
+import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
@@ -16,7 +19,10 @@ import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteEditado
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteOriginal
+import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
+import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
@@ -37,6 +43,7 @@ class DetalhesDaBolaScreenKtTest{
     val hiltRule = HiltAndroidRule(this)
     @get:Rule(order = 1)
     val testeDoNavigation = createAndroidComposeRule(MainActivity::class.java)
+    private val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private fun vaiParaATelaDeDetalhes(nomeProduto:String){
         testeDoNavigation.clicaNoElementoPeloNome(nomeProduto)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
@@ -58,6 +65,15 @@ class DetalhesDaBolaScreenKtTest{
     fun deveAbrirODialogComImagem_QuandoClicaNaImagem(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
+            descricaoImagemCadastroTela, 2
+        )
+    }
+    @Test
+    fun devemManterDialogComImagem_QuandoRotacionarmosODispositivo(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        uiDevice.rotacionarATela()
         testeDoNavigation.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
             descricaoImagemCadastroTela, 2
         )
@@ -98,5 +114,29 @@ class DetalhesDaBolaScreenKtTest{
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(nomeBolaExistente)
+    }
+    @Test
+    fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarPeloAppAposTerEditadoBola(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
+    }
+    @Test
+    fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarDoAndroidAposTerEditadoBola(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        apertaOBotaoDeVoltar()
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
     }
 }

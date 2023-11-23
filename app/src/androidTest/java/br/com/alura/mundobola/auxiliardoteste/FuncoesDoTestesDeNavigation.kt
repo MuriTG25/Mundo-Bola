@@ -14,6 +14,8 @@ import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.test.espresso.Espresso
+import androidx.test.uiautomator.UiDevice
+import androidx.test.uiautomator.UiSelector
 
 fun ComposeContentTestRule.verificaSeMostraOComponentePeloTexto(texto: String) {
     onNodeWithText(texto).assertIsDisplayed()
@@ -101,16 +103,29 @@ fun ComposeContentTestRule.scrollaAteOElementoPeloNome(texto: String) {
 }
 fun ComposeContentTestRule.digitaNoCampoDeTexto(
     nomeDoCampo: String,
-    textoADigitar: String
+    textoADigitar: String,
 ){
     onNodeWithText(nomeDoCampo).performTextInput(textoADigitar)
     fechaOTeclado()
 }
 fun ComposeContentTestRule.limpaEDigitaNoCampoDeTexto(
     nomeDoCampo: String,
-    textoADigitar: String
+    textoADigitar: String,
 ){
     onNodeWithText(nomeDoCampo).performTextClearance()
     onNodeWithText(nomeDoCampo).performTextInput(textoADigitar)
     fechaOTeclado()
+}
+fun UiDevice.rotacionarATela(){
+    setOrientationLeft()
+}
+fun UiDevice.minimizarOAppEReabrir(){
+    pressHome()
+    pressRecentApps()
+    val mundoBolaIcone = findObject(
+        UiSelector().text("Mundo Bola")
+    )
+    mundoBolaIcone.click()
+
+
 }

@@ -100,4 +100,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.2")
+    // https://mvnrepository.com/artifact/androidx.test.uiautomator/uiautomator
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0-alpha05")
+
 }

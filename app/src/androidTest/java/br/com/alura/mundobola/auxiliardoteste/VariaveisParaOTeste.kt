@@ -43,6 +43,7 @@ val textoDataAlteracaoTelaDetalhes = "Alterado em: "
 
 val nomeBolaTeste = "Mercurial"
 val precoBolaLimpoTeste = "19.90"
+val precoBolaComVirgula = "19,90"
 val precoBolaEditadoTeste = "19.90".toBigDecimal().paraMoedaBrasileira()
 val urlBolaTeste = "https://images.tcdn.com.br/img/img_prod/728938/bola_futebol_de_campo_nike_mercurial_fade_13461_1_e9fb3615f52f43fc6d3e89b43f565731.png"
 val descricaoBolaTeste = LoremIpsum(10).values.first()
@@ -56,3 +57,10 @@ val nomeBolaExistente = "Jabulani"
 val precoBolaExistenteEditado = "1090.90".toBigDecimal().paraMoedaBrasileira()
 val precoBolaExistenteOriginal = "1090.90"
 val dataCriacaoBolaExistente = LocalDateTime.now().dataFormatada()
+
+val mensagemDeErroPreco = "Utilize \",\" ou \".\" apenas para separar o real do centavos:\n ex: \"200,00 ou 200.00\"\n E não utilize outros símbolos, como \"-\", \"/\" para o preço"
+val precoComSimboloInvalido = "19/90"
+val precoComPontoEVirgula = "1.019,90"
+val precoCom2Pontos = "1.019.90"
+val precoCom2Virgulas = "1.019,90"
+val precoComSimboloNegativo = "-19.90"

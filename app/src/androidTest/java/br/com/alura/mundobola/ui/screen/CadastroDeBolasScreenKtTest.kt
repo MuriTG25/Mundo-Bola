@@ -1,6 +1,8 @@
 package br.com.alura.mundobola.ui.screen
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import br.com.alura.mundobola.MainActivity
 import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
@@ -23,14 +25,23 @@ import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaPenaltyTexto
+import br.com.alura.mundobola.auxiliardoteste.mensagemDeErroPreco
+import br.com.alura.mundobola.auxiliardoteste.minimizarOAppEReabrir
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.nomeOutraBolaExiste
 import br.com.alura.mundobola.auxiliardoteste.placeholderDescricaoCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.placeholderNomeCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.placeholderPrecoCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.precoBolaComVirgula
 import br.com.alura.mundobola.auxiliardoteste.precoBolaEditadoTeste
 import br.com.alura.mundobola.auxiliardoteste.precoBolaLimpoTeste
+import br.com.alura.mundobola.auxiliardoteste.precoCom2Pontos
+import br.com.alura.mundobola.auxiliardoteste.precoCom2Virgulas
+import br.com.alura.mundobola.auxiliardoteste.precoComPontoEVirgula
+import br.com.alura.mundobola.auxiliardoteste.precoComSimboloInvalido
+import br.com.alura.mundobola.auxiliardoteste.precoComSimboloNegativo
+import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldCadastroTela
@@ -68,6 +79,9 @@ class CadastroDeBolasScreenKtTest{
     val hiltRule = HiltAndroidRule(this)
     @get:Rule(order = 1)
     val testeDoNavigation = createAndroidComposeRule(MainActivity::class.java)
+    private val uiDevice = UiDevice.getInstance(
+        InstrumentationRegistry.getInstrumentation()
+    )
     private fun vaiParaATelaDeCadastroPelaTelaDeLista(){
         testeDoNavigation.clicaNoElementoPelaDescricao(iconeFABDescricao)
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
@@ -81,6 +95,9 @@ class CadastroDeBolasScreenKtTest{
     private fun clicaBotaoSalvar(){
         testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDoNavigation.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+    }
+    private fun scrollaAteOFinalDaTela(){
+        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
     }
 
     @Test
@@ -102,7 +119,7 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoPrecoCadastroTela)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoMarcaCadastroTela)
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        scrollaAteOFinalDaTela()
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoDescricaoCadastroTela)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoSalvarCadastroTela)
     }
@@ -122,7 +139,7 @@ class CadastroDeBolasScreenKtTest{
     @Test
     fun deveMostarAsOpcoesDeMarcas_QuandoClicarnosNoCampoMarca(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        scrollaAteOFinalDaTela()
         testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
@@ -145,6 +162,43 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
     }
+    @Test
+    fun deveManterAUrl_QuandoApertarParaConcluirEVoltarParaAMesmaTela(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoUrlScaffoldCadastroTela,urlBolaTeste)
+        testeDoNavigation.clicaNoElementoPeloNome(textoConfirmarScaffoldCadastroTela)
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(urlBolaTeste)
+    }
+    @Test
+    fun deveManterAUrl_QuandoApertarParaCancelarEVoltarParaAMesmaTela(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoUrlScaffoldCadastroTela,urlBolaTeste)
+        testeDoNavigation.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(urlBolaTeste)
+    }
+    @Test
+    fun deveManterAUrlEOScaffold_QuandoRotacionarATela(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoUrlScaffoldCadastroTela,urlBolaTeste)
+        uiDevice.rotacionarATela()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoUrlScaffoldCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(urlBolaTeste)
+    }
+    @Test
+    fun deveManterAUrlEOScaffold_QuandoMinimizarmosEReabrirmosOApp(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDoNavigation.digitaNoCampoDeTexto(textoUrlScaffoldCadastroTela,urlBolaTeste)
+        uiDevice.minimizarOAppEReabrir()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoUrlScaffoldCadastroTela)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(urlBolaTeste)
+    }
+
     @Test
     fun deveAparecerMensagemDeCampoObrigatorio_QuandoApertarSalvarSemDigitarNada(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
@@ -186,6 +240,81 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
     }
     @Test
+    fun deveTrocarOQueApareceNoCampoDeMarca_QuandoSelecionarmosUmaMarca(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        scrollaAteOFinalDaTela()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoMarcaCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaPenaltyTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaPenaltyTexto)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+    }
+    @Test
+    fun deveMostarMensagemDeErro_QuandoColocarmosUmValorInvalido(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoComSimboloInvalido)
+        scrollaAteOFinalDaTela()
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(mensagemDeErroPreco)
+    }
+    @Test
+    fun deveMostarMensagemDeErro_QuandoColocarmosUmValorComVirgulaEPonto(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoComPontoEVirgula)
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(mensagemDeErroPreco)
+    }
+    @Test
+    fun deveMostarMensagemDeErro_QuandoColocarmosUmValorCom2Virgulas(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoCom2Virgulas)
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(mensagemDeErroPreco)
+    }
+    @Test
+    fun deveMostarMensagemDeErro_QuandoColocarmosUmValorCom2Pontos(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoCom2Pontos)
+        clicaBotaoSalvar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(mensagemDeErroPreco)
+    }
+    @Test
+    fun deveCadastrarUmaBola_QuandoColocarmosPrecoComValorNegativo(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoComSimboloNegativo)
+        clicaBotaoSalvar()
+        testeDoNavigation.esperaAteATelaAparecerComTempo(nomeOutraBolaExiste)
+        testeDoNavigation.scrollaAteOElementoPeloNome(nomeBolaTeste)
+        testeDoNavigation.clicaNoElementoPeloNome(nomeBolaTeste)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
+    }
+    @Test
+    fun deveCadastrarUmaBola_QuandoColocarmosPrecoUtilizandoVirgula(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaComVirgula)
+        clicaBotaoSalvar()
+        testeDoNavigation.esperaAteATelaAparecerComTempo(nomeOutraBolaExiste)
+        testeDoNavigation.scrollaAteOElementoPeloNome(nomeBolaTeste)
+        testeDoNavigation.clicaNoElementoPeloNome(nomeBolaTeste)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
+    }
+
+    @Test
     fun deveCadastrarUmaBolaNova_QuandoDigitarmosApenasNomeEPreco(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
@@ -209,7 +338,7 @@ class CadastroDeBolasScreenKtTest{
         testeDoNavigation.clicaNoElementoPeloNome(textoConfirmarScaffoldCadastroTela)
         testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        scrollaAteOFinalDaTela()
         testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
         testeDoNavigation.clicaNoElementoPeloNome(marcaAdidasTexto)
         testeDoNavigation.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
@@ -232,7 +361,7 @@ class CadastroDeBolasScreenKtTest{
         vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente)
         testeDoNavigation.limpaEDigitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         testeDoNavigation.limpaEDigitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
-        testeDoNavigation.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        scrollaAteOFinalDaTela()
         testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
         testeDoNavigation.clicaNoElementoPeloNome(marcaPenaltyTexto)
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
@@ -251,5 +380,57 @@ class CadastroDeBolasScreenKtTest{
         )
         testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoDataAlteracaoTelaDetalhes)
     }
-    //TODO teste que faltam: preco invalido, fluxo de navegação de edicao, alteracao no campo de marca
+    @Test
+    fun deveVoltarParaTelaDeDetalhesEDepoisParaTelaDeLista_QuandoApertarmosOBotaoDeVoltaDoApp(){
+        vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDoNavigation.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
+    }
+    @Test
+    fun deveVoltarParaTelaDeDetalhesEDepoisParaTelaDeLista_QuandoApertarmosOBotaoDeVoltaDoAndroid(){
+        vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente)
+        apertaOBotaoDeVoltar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
+        apertaOBotaoDeVoltar()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
+        testeDoNavigation.esperaAteATelaAparecer(tituloTelaLista)
+    }
+    @Test
+    fun deveManterOsDadosDigitados_QuandoRotacionarATela(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
+        scrollaAteOFinalDaTela()
+        testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDoNavigation.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
+        uiDevice.rotacionarATela()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaLimpoTeste)
+        scrollaAteOFinalDaTela()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
+    }
+    @Test
+    fun deveManterOsDadosDigitados_QuandoMinimizarATelaEReabrir(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDoNavigation.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
+        testeDoNavigation.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
+        scrollaAteOFinalDaTela()
+        testeDoNavigation.clicaNoElementoPeloNome(textoMarcaCadastroTela)
+        testeDoNavigation.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDoNavigation.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
+        uiDevice.minimizarOAppEReabrir()
+        fechaOTeclado()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(precoBolaLimpoTeste)
+        scrollaAteOFinalDaTela()
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDoNavigation.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
+    }
 }

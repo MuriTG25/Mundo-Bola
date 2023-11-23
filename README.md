@@ -45,7 +45,7 @@ O sistema que carrega as imagens será feita pelo Coil Compose, através de url 
 A recuperação dos IDs da bola para o view model de cada tela será feito pelo SavedStateHandle. <br />
 O sistema de armazenamento ainda vai ser em lista com o DAO, na próxima fase será implementada o banco de dados.<br />
 Uso do Repositório para comunicação entre o DAO e o View Model. <br />
-Foram feitos testes de unidade e testes de de UI \(ainda não foram feitos testes com Mock por não ter o que mockar) <br />
+Foram feitos testes de unidade, testes de Mock e testes de de UI  <br />
 
 # Plugin utilizados
 
@@ -57,4 +57,7 @@ Foram feitos testes de unidade e testes de de UI \(ainda não foram feitos teste
  - Junit 4
  - Kluent
  - Navigation Tests
-
+ - Mockk
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
