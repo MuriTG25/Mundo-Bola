@@ -18,7 +18,7 @@ Ele se constiste em 3 telas diferentes:<br />
  - Tela de detalhes do produto: tela onde veremos mais detalhes do produto, e onde poderemos editar e deletar o produto.
 
 Ele conta com sistema de navegação entre telas com o navigation, sistema de gerenciamento de estados com View Model e Ui State, injeção de dependências com o Hilt.<br />
-Serão feitos testes de unidade e testes de UI.<br />
+Serão feitos testes de unidade, testes de Mock e testes de UI.<br />
 O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada.<br />
 
 Plugin utilizados:
@@ -30,6 +30,10 @@ Plugin utilizados:
  - Junit
  - Kluent
  - Navigation Test
+ - Mockk
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
 
 # Fases futuras
 ### Alpha
@@ -53,6 +57,9 @@ Plugin utilizados:
  - Kluent
  - Mockk
  - Navigation Test
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
 
 ### Beta
 
@@ -75,6 +82,9 @@ Plugin utilizados:
  - Kluent
  - Mockk
  - Navigation Test
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
 
 ### Lançamento (1.0)
 Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit). <br />
@@ -94,6 +104,9 @@ Plugin utilizados (aplicativo):
  - Kluent
  - Mockk
  - Navigation Test
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
 
 
 Plugin utilizados(servidor em Kotlin):
