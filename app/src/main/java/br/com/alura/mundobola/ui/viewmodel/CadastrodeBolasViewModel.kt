@@ -24,6 +24,7 @@ import javax.inject.Inject
 class CadastrodeBolasViewModel @Inject constructor(
     private val repositorio: MundoBolaRepositorio,
     stateHandle: SavedStateHandle,
+    //TODO tirar a application daqui
     private val application: Application,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
@@ -101,6 +102,7 @@ class CadastrodeBolasViewModel @Inject constructor(
     suspend fun carregaBola(id: String) {
         repositorio.encontrarBolaPeloId(id).collect {coletaBola ->
             coletaBola?.let { bola ->
+                //TODO refatorar em apenas 1 copy
                 with(bola) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
@@ -132,6 +134,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                         }
                     }
                 }
+                //TODO tirar esse toast daqui
             }?: application.applicationContext.mensagemDeAviso("Bola não encontrada")
         }
     }
@@ -159,6 +162,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                             dataAlteracao = null
                         )
                         repositorio.adicionarBola(bola)
+                        //TODO tirar esse toast daqui
                         application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
                         irParaTelaPrincipal()
                     } else {
@@ -173,7 +177,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                             dataAlteracao = LocalDateTime.now()
                         )
                         repositorio.editaBola(bola)
-                        //TODO preciso implementar edição de bola
+                        //TODO tirar esse toast daqui
                         application.applicationContext.mensagemDeAviso("Bola editada com sucesso")
                         irParaATelaDeDetalhes(bolaId)
                     }

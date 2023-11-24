@@ -69,6 +69,7 @@ private fun TelaApp(
     val coroutineScope = rememberCoroutineScope()
     val viewModel = hiltViewModel<ScaffoldViewModel>()
     val context = LocalContext.current
+    //TODO tirar o scaffold da main activity e implementar cada um em sua screen
     ScaffoldScreen (
         texto = when(rotaAtual){
             cadastroDeBolasRotaCompleto ->  "Cadastrar/Editar Bola"
