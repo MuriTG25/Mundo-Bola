@@ -28,4 +28,7 @@ data class CadastroDeBolasUiState(
     val campoNomeObrigatorio: Boolean = false,
     val campoPrecoObrigatorio: Boolean = false,
     val ehBolaNova: Boolean = true,
+    val mensagemErroCarregamento: Boolean = false,
+    val mensagemCadastroConcluido: Boolean = false,
+    val mensagemEdicaoConcluido: Boolean = false,
 )

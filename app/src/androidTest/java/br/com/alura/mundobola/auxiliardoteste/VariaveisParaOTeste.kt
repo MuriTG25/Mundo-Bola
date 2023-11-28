@@ -21,6 +21,10 @@ val textoDescricaoCadastroTela = "Descrição"
 val textoSalvarCadastroTela = "Salvar"
 val descricaoImagemCadastroTela = "imagem da bola"
 
+val mensagemToastCadastroSucesso = "Bola cadastrada com sucesso"
+val textoToastEdicaoSucesso = "Bola editada com sucesso"
+val textoToastCarregamentoFalha = "Bola não encontrada"
+
 val placeholderNomeCadastroTela = "Insira o nome da Bola"
 val placeholderPrecoCadastroTela = "Insira o preço da bola"
 val placeholderDescricaoCadastroTela = "Insira uma descrição com mais detalhes sobre o produto"
@@ -57,6 +61,8 @@ val nomeBolaExistente = "Jabulani"
 val precoBolaExistenteEditado = "1090.90".toBigDecimal().paraMoedaBrasileira()
 val precoBolaExistenteOriginal = "1090.90"
 val dataCriacaoBolaExistente = LocalDateTime.now().dataFormatada()
+val descricaoBolaExistente = LoremIpsum(10).values.first()
+val imagemBolaExistente = "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg"
 
 val mensagemDeErroPreco = "Utilize \",\" ou \".\" apenas para separar o real do centavos:\n ex: \"200,00 ou 200.00\"\n E não utilize outros símbolos, como \"-\", \"/\" para o preço"
 val precoComSimboloInvalido = "19/90"

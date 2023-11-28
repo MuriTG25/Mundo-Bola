@@ -32,30 +32,30 @@ class ListaDeBolasScreenKtTest{
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
     @get:Rule(order = 1)
-    val testeDoNavigation = createAndroidComposeRule(MainActivity::class.java)
+    val testeDeUi = createAndroidComposeRule(MainActivity::class.java)
     @Test
     fun deveMostrarFabENomeApp_QuandoEstiverNaTelaDeBolas(){
-        testeDoNavigation.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
-        testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
-        testeDoNavigation.verificaSeNaoExisteOComponentPeloTexto(tituloTelaDetalhes)
-        testeDoNavigation.verificaSeMostraOComponentePelaDescricao(iconeFABDescricao)
-        testeDoNavigation.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
-        testeDoNavigation.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
-        testeDoNavigation.verificaSeNaoExisteOComponentePelaDescricao(iconeEdicaoDescricao)
-        testeDoNavigation.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltarDescricao)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeFABDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeEdicaoDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltarDescricao)
     }
     @Test
     fun deveIrParaATelaDeCadastros_QuandoApertarNoBotaoDoFab(){
-        testeDoNavigation.clicaNoElementoPelaDescricao(iconeFABDescricao)
-        testeDoNavigation.esperaAteATelaAparecer(tituloTelaCadastro)
-        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
-        testeDoNavigation.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroTela)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeFABDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
+        testeDeUi.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroTela)
     }
     @Test
     fun deveIrParaATelaDeDetalhes_QuandoApertarEmUmProduto(){
-        testeDoNavigation.clicaNoElementoPeloNome("Jabulani")
-        testeDoNavigation.esperaAteATelaAparecer(tituloTelaDetalhes)
-        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
-        testeDoNavigation.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
+        testeDeUi.clicaNoElementoPeloNome("Jabulani")
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
     }
 }

@@ -1,14 +1,17 @@
 package br.com.alura.mundobola.auxiliardoteste
 
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
@@ -101,6 +104,9 @@ fun apertaOBotaoDeVoltar() {
 fun ComposeContentTestRule.scrollaAteOElementoPeloNome(texto: String) {
     onNodeWithText(texto).performScrollTo()
 }
+fun ComposeContentTestRule.scrollaAteOElementoPelaDescricao(texto: String) {
+    onNodeWithContentDescription(texto).performScrollTo()
+}
 fun ComposeContentTestRule.digitaNoCampoDeTexto(
     nomeDoCampo: String,
     textoADigitar: String,
@@ -119,6 +125,7 @@ fun ComposeContentTestRule.limpaEDigitaNoCampoDeTexto(
 fun UiDevice.rotacionarATela(){
     setOrientationLeft()
 }
+
 fun UiDevice.minimizarOAppEReabrir(){
     pressHome()
     pressRecentApps()
@@ -126,6 +133,5 @@ fun UiDevice.minimizarOAppEReabrir(){
         UiSelector().text("Mundo Bola")
     )
     mundoBolaIcone.click()
-
-
 }
+

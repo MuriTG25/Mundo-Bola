@@ -1,5 +1,6 @@
 package br.com.alura.mundobola.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponen
 import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.extra.tamanhoCaixaPadrao
 import coil.request.ImageRequest
 
@@ -40,6 +42,7 @@ import coil.request.ImageRequest
 fun CadastroDeBolasScreen(
     modifier: Modifier = Modifier,
     state: CadastroDeBolasUiState,
+    context:Context = LocalContext.current,
     noCarregarImagem: (String) -> Unit = {},
     noClicarSalvar: () -> Unit = {},
 ) {
@@ -136,6 +139,19 @@ fun CadastroDeBolasScreen(
                     state.noCLickDialogErroPreco(false)
                 }
             )
+        }
+        //TODO talvez eu altere o toast para snackbar
+        if(state.mensagemErroCarregamento
+            || state.mensagemCadastroConcluido
+            || state.mensagemEdicaoConcluido
+            ){
+            val mensagem:String = when {
+                state.mensagemErroCarregamento -> "Bola não encontrada"
+                state.mensagemCadastroConcluido -> "Bola cadastrada com sucesso"
+                state.mensagemEdicaoConcluido -> "Bola editada com sucesso"
+                else -> ""
+            }
+            context.mensagemDeAviso(mensagem)
         }
     }
 }

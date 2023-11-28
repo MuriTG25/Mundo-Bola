@@ -24,8 +24,6 @@ import javax.inject.Inject
 class CadastrodeBolasViewModel @Inject constructor(
     private val repositorio: MundoBolaRepositorio,
     stateHandle: SavedStateHandle,
-    //TODO tirar a application daqui
-    private val application: Application,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(CadastroDeBolasUiState())
     val uiState = _uiState.asStateFlow()
@@ -102,7 +100,6 @@ class CadastrodeBolasViewModel @Inject constructor(
     suspend fun carregaBola(id: String) {
         repositorio.encontrarBolaPeloId(id).collect {coletaBola ->
             coletaBola?.let { bola ->
-                //TODO refatorar em apenas 1 copy
                 with(bola) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
@@ -110,17 +107,9 @@ class CadastrodeBolasViewModel @Inject constructor(
                         campoDoPreco = preco.toPlainString(),
                         dataCriacao = dataCriacao,
                         ehBolaNova = false,
+                        campoDaDescricao = descricao ?: "",
+                        fotoBola = imagem ?: ""
                     )
-                    descricao?.let {
-                        _uiState.value = _uiState.value.copy(
-                            campoDaDescricao = it
-                        )
-                    }
-                    imagem?.let {
-                        _uiState.value = _uiState.value.copy(
-                            fotoBola = it
-                        )
-                    }
                     marcaId?.let {idDaMarca ->
                         _uiState.value = _uiState.value.copy(
                             marcaId = marcaId
@@ -134,8 +123,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                         }
                     }
                 }
-                //TODO tirar esse toast daqui
-            }?: application.applicationContext.mensagemDeAviso("Bola não encontrada")
+            } ?: mensagemErroCarregamento()
         }
     }
 
@@ -162,8 +150,7 @@ class CadastrodeBolasViewModel @Inject constructor(
                             dataAlteracao = null
                         )
                         repositorio.adicionarBola(bola)
-                        //TODO tirar esse toast daqui
-                        application.applicationContext.mensagemDeAviso("Bola cadastrada com sucesso")
+                        mensagemCadastroSucesso()
                         irParaTelaPrincipal()
                     } else {
                         val bola = Bola(
@@ -177,12 +164,33 @@ class CadastrodeBolasViewModel @Inject constructor(
                             dataAlteracao = LocalDateTime.now()
                         )
                         repositorio.editaBola(bola)
-                        //TODO tirar esse toast daqui
-                        application.applicationContext.mensagemDeAviso("Bola editada com sucesso")
+                        mensagemEdicaoSucesso()
                         irParaATelaDeDetalhes(bolaId)
                     }
                 } ?: mensagemDeErroNoPreco()
             }
+        }
+    }
+//TODO preciso alterar a maneira que triggero toast
+    private fun mensagemCadastroSucesso() {
+        _uiState.update { cadastroDeBolasUiState ->
+            cadastroDeBolasUiState.copy(
+                mensagemCadastroConcluido = true
+            )
+        }
+    }
+    private fun mensagemEdicaoSucesso() {
+        _uiState.update { cadastroDeBolasUiState ->
+            cadastroDeBolasUiState.copy(
+                mensagemEdicaoConcluido = true
+            )
+        }
+    }
+    private fun mensagemErroCarregamento() {
+        _uiState.update { cadastroDeBolasUiState ->
+            cadastroDeBolasUiState.copy(
+                mensagemErroCarregamento = true
+            )
         }
     }
 
