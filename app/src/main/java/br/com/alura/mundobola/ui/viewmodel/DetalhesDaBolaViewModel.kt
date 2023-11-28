@@ -90,4 +90,9 @@ class DetalhesDaBolaViewModel @Inject constructor(
             )
         }
     }
+
+    suspend fun deletaBola(id: String) {
+        repositorio.deletaBola(id)
+        // TODO adicionar snackbar com mensagem "Bola Deletada com sucesso"
+    }
 }

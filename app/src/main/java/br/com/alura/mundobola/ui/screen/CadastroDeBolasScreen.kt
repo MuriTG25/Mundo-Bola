@@ -16,7 +16,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -24,7 +23,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
@@ -42,116 +40,127 @@ import coil.request.ImageRequest
 fun CadastroDeBolasScreen(
     modifier: Modifier = Modifier,
     state: CadastroDeBolasUiState,
+    tituloTela: String = "",
     context:Context = LocalContext.current,
     noCarregarImagem: (String) -> Unit = {},
+    noClicaVolta: () -> Unit = {},
     noClicarSalvar: () -> Unit = {},
 ) {
-    Column(modifier = modifier
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState())) {
-        //TODO talvez eu altere como a imagem é exibida para ser mais intuitivo e com um visual melhor
-        ImagemBolaComponentComRequest(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .fillMaxWidth()
-                .height(tamanhoCaixaPadrao)
-                .clickable {
-                    state.noClickDaImagem(true)
-                },
-            imagemDaBola = ImageRequest.Builder(LocalContext.current).data(state.fotoBola).build(),
-            escala = ContentScale.FillHeight
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(margemPadrao),
-            verticalArrangement = Arrangement.spacedBy(margemPadrao)
-        ) {
-            val focusManager = LocalFocusManager.current
-            val acaoDoTeclado = KeyboardActions(
-                onNext = { focusManager.moveFocus(FocusDirection.Next) })
-            Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
-                if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()) {
-                    TextoCampoObrigatorioComponent(texto = "Nome")
+    ScaffoldScreen (
+        titulo = tituloTela,
+//        "Cadastrar/Editar Bola",
+        mostraBusca = false,
+        mostraFab = false,
+        mostraEditaEDelete = false,
+        noClicaVolta = noClicaVolta,
+    ){
+        Column(modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())) {
+            //TODO talvez eu altere como a imagem é exibida para ser mais intuitivo e com um visual melhor
+            ImagemBolaComponentComRequest(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .fillMaxWidth()
+                    .height(tamanhoCaixaPadrao)
+                    .clickable {
+                        state.noClickDaImagem(true)
+                    },
+                imagemDaBola = ImageRequest.Builder(LocalContext.current).data(state.fotoBola).build(),
+                escala = ContentScale.FillHeight
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(margemPadrao),
+                verticalArrangement = Arrangement.spacedBy(margemPadrao)
+            ) {
+                val focusManager = LocalFocusManager.current
+                val acaoDoTeclado = KeyboardActions(
+                    onNext = { focusManager.moveFocus(FocusDirection.Next) })
+                Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
+                    if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()) {
+                        TextoCampoObrigatorioComponent(texto = "Nome")
+                    }
+                    CampoDeTextoComponent(
+                        nomeDoCampo = "Nome",
+                        dicaDoCampo = "Insira o nome da Bola",
+                        texto = state.campoDoNome,
+                        naMudancaDeTexto = state.alteracaoDoCampoNome,
+                        acaoDoTeclado = acaoDoTeclado
+                    )
                 }
+                Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
+                    if (state.campoPrecoObrigatorio && state.campoDoPreco.isBlank()) {
+                        TextoCampoObrigatorioComponent(texto = "Preço")
+                    }
+                    CampoDeTextoComponent(
+                        nomeDoCampo = "Preço",
+                        dicaDoCampo = "Insira o preço da bola",
+                        texto = state.campoDoPreco,
+                        naMudancaDeTexto = state.alteracaoDoCampoPreco,
+                        tipoDeTeclado = KeyboardType.Decimal,
+                        acaoDoTeclado = acaoDoTeclado
+                    )
+                }
+                DropdownMenuComponent(
+                    modifier = Modifier.fillMaxWidth(),
+                    textoDoCampo = "Marca",
+                    expandir = state.expandirMenuMarca,
+                    alteracaoDeExpansao = state.alteracaoExpansaoMenuMarca,
+                    listaDeMarcas = state.listaDeMarcas,
+                    pegaIdMarca = state.pegaIdMarca,
+                    campoMarca = state.campoMarca,
+                    alteracaoDoCampoMarca = state.alteracaoDoCampoMarca,
+                )
                 CampoDeTextoComponent(
-                    nomeDoCampo = "Nome",
-                    dicaDoCampo = "Insira o nome da Bola",
-                    texto = state.campoDoNome,
-                    naMudancaDeTexto = state.alteracaoDoCampoNome,
-                    acaoDoTeclado = acaoDoTeclado
+                    nomeDoCampo = "Descrição",
+                    dicaDoCampo = "Insira uma descrição com mais detalhes sobre o produto",
+                    texto = state.campoDaDescricao,
+                    naMudancaDeTexto = state.alteracaoDoCampoDescricao,
+                    maiuscula = KeyboardCapitalization.Sentences,
+                    acaoDeEnter = ImeAction.None,
+                    minimoDeLinhas = 5,
+                    maximoDeLinhas = 20,
+                )
+                BotaoComponent(
+                    modifier = Modifier.fillMaxWidth(),
+                    texto = "Salvar",
+                    noClicarBotao = noClicarSalvar,
                 )
             }
-            Column(verticalArrangement = Arrangement.spacedBy(margemPadrao / 4)) {
-                if (state.campoPrecoObrigatorio && state.campoDoPreco.isBlank()) {
-                    TextoCampoObrigatorioComponent(texto = "Preço")
-                }
-                CampoDeTextoComponent(
-                    nomeDoCampo = "Preço",
-                    dicaDoCampo = "Insira o preço da bola",
-                    texto = state.campoDoPreco,
-                    naMudancaDeTexto = state.alteracaoDoCampoPreco,
-                    tipoDeTeclado = KeyboardType.Decimal,
-                    acaoDoTeclado = acaoDoTeclado
+            if (state.mostraDialogImagem) {
+                DialogCadastroImagem(
+                    imagemBola = state.fotoBola,
+                    alteracaoDaImagemBola = state.alteracaoDaImagemDaBola,
+                    noClickSair = {
+                        state.noClickDaImagem(false)
+                    },
+                    noClickConfirmar = {
+                        noCarregarImagem(it)
+                    }
                 )
             }
-            DropdownMenuComponent(
-                modifier = Modifier.fillMaxWidth(),
-                textoDoCampo = "Marca",
-                expandir = state.expandirMenuMarca,
-                alteracaoDeExpansao = state.alteracaoExpansaoMenuMarca,
-                listaDeMarcas = state.listaDeMarcas,
-                pegaIdMarca = state.pegaIdMarca,
-                campoMarca = state.campoMarca,
-                alteracaoDoCampoMarca = state.alteracaoDoCampoMarca,
-            )
-            CampoDeTextoComponent(
-                nomeDoCampo = "Descrição",
-                dicaDoCampo = "Insira uma descrição com mais detalhes sobre o produto",
-                texto = state.campoDaDescricao,
-                naMudancaDeTexto = state.alteracaoDoCampoDescricao,
-                maiuscula = KeyboardCapitalization.Sentences,
-                acaoDeEnter = ImeAction.None,
-                minimoDeLinhas = 5,
-                maximoDeLinhas = 20,
-            )
-            BotaoComponent(
-                modifier = Modifier.fillMaxWidth(),
-                texto = "Salvar",
-                noClicarBotao = noClicarSalvar,
-            )
-        }
-        if (state.mostraDialogImagem) {
-            DialogCadastroImagem(
-                imagemBola = state.fotoBola,
-                alteracaoDaImagemBola = state.alteracaoDaImagemDaBola,
-                noClickSair = {
-                    state.noClickDaImagem(false)
-                },
-                noClickConfirmar = {
-                    noCarregarImagem(it)
-                }
-            )
-        }
-        if (state.mostraDialogErroPreco) {
-            DialogErroPrecoComponent(
-                fecharDialog = {
-                    state.noCLickDialogErroPreco(false)
-                }
-            )
-        }
-        //TODO talvez eu altere o toast para snackbar
-        if(state.mensagemErroCarregamento
-            || state.mensagemCadastroConcluido
-            || state.mensagemEdicaoConcluido
+            if (state.mostraDialogErroPreco) {
+                DialogErroPrecoComponent(
+                    fecharDialog = {
+                        state.noCLickDialogErroPreco(false)
+                    }
+                )
+            }
+            //TODO talvez eu altere o toast para snackbar
+            if(state.mensagemErroCarregamento
+                || state.mensagemCadastroConcluido
+                || state.mensagemEdicaoConcluido
             ){
-            val mensagem:String = when {
-                state.mensagemErroCarregamento -> "Bola não encontrada"
-                state.mensagemCadastroConcluido -> "Bola cadastrada com sucesso"
-                state.mensagemEdicaoConcluido -> "Bola editada com sucesso"
-                else -> ""
+                val mensagem:String = when {
+                    state.mensagemErroCarregamento -> "Bola não encontrada"
+                    state.mensagemCadastroConcluido -> "Bola cadastrada com sucesso"
+                    state.mensagemEdicaoConcluido -> "Bola editada com sucesso"
+                    else -> ""
+                }
+                context.mensagemDeAviso(mensagem)
             }
-            context.mensagemDeAviso(mensagem)
         }
     }
 }

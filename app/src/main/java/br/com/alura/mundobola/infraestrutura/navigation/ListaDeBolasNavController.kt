@@ -12,7 +12,8 @@ import br.com.alura.mundobola.ui.screen.ListaDeBolasScreen
 internal const val listaDeBolasRota = "listaDeBolas"
 
 fun NavGraphBuilder.ListaDeBolasNavController(
-    navegarParaADescricao: (String) -> Unit = {}
+    navegarParaADescricao: (String) -> Unit = {},
+    navegarParaCadastro: () -> Unit = {},
 ){
     composable(listaDeBolasRota){
         val viewModel = hiltViewModel<ListaDeBolasViewModel>()
@@ -21,7 +22,8 @@ fun NavGraphBuilder.ListaDeBolasNavController(
             state = uiState,
             navegarParaADescricao = {
                 navegarParaADescricao(it)
-            }
+            },
+            noClicaFab = navegarParaCadastro
         )
     }
 }

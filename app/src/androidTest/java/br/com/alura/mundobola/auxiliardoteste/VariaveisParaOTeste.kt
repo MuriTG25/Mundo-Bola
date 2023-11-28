@@ -6,7 +6,8 @@ import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
 import java.time.LocalDateTime
 
 val tituloTelaLista = "Mundo Bola"
-val tituloTelaCadastro = "Cadastrar/Editar Bola"
+val tituloTelaCadastro = "Cadastrar Bola"
+val tituloTelaEdicao = "Editar Bola"
 val tituloTelaDetalhes = "Detalhes da Bola"
 val iconeBuscaDescricao = "Buscar produto pelo nome"
 val iconeEdicaoDescricao = "Editar bola"

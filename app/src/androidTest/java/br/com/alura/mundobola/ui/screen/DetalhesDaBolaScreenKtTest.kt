@@ -28,6 +28,7 @@ import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
@@ -57,6 +58,7 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
         testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaEdicao)
         testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
@@ -105,7 +107,7 @@ class DetalhesDaBolaScreenKtTest{
     fun deveIrParaATelaDeCadastroComDadosPreenchidos_QuandoClicarmosNoBotaoEditar(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaExistenteOriginal)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
@@ -127,7 +129,7 @@ class DetalhesDaBolaScreenKtTest{
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarPeloAppAposTerEditadoBola(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
@@ -139,7 +141,7 @@ class DetalhesDaBolaScreenKtTest{
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarDoAndroidAposTerEditadoBola(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)

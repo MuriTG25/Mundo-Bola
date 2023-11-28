@@ -60,6 +60,7 @@ import br.com.alura.mundobola.auxiliardoteste.mensagemToastCadastroSucesso
 import br.com.alura.mundobola.auxiliardoteste.textoUrlScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.urlBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
@@ -91,7 +92,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.clicaNoElementoPeloNome(nomeProduto)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
     }
     private fun clicaBotaoSalvar(){
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
@@ -112,6 +113,11 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
+    }
+    @Test
+    fun deveMostarONomeDaTelaDeEdicao_QuandoFormosParaATelaDeCastroPeloTelaDeDetalhes(){
+        vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaEdicao)
     }
     @Test
     fun deveMostarOsElementosDaTela_QuandoEstivermosNaTelaDeCadastro(){
@@ -157,9 +163,16 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeExisteOComponentPeloTexto(placeholderDescricaoCadastroTela)
     }
     @Test
-    fun deveVoltarParaATelaPrincipal_QuandoApertarOBotaoDeVolta(){
+    fun deveVoltarParaATelaPrincipal_QuandoVoltamosPeloAndroid(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         apertaOBotaoDeVoltar()
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
+    }
+    @Test
+    fun deveVoltarParaATelaPrincipal_QuandoApertarOBotaoDeVolta(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
     }

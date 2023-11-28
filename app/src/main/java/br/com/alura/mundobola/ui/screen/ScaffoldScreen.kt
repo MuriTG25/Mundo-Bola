@@ -3,17 +3,20 @@ package br.com.alura.mundobola.ui.screen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.alura.mundobola.R
+import br.com.alura.mundobola.ui.components.comum.SnackBarComponent
 import br.com.alura.mundobola.ui.components.scaffold.FloatActionButtonComponent
 import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 
 @Composable
 fun ScaffoldScreen(
-    texto: String = "",
+    titulo: String = "",
+    snackbarHostState: SnackbarHostState = SnackbarHostState(),
     mostraBusca: Boolean = true,
     naBusca: () -> Unit = {},
     mostraFab: Boolean = true,
@@ -30,7 +33,7 @@ fun ScaffoldScreen(
             TopAppBarComponent(
                 noClicaBusca = naBusca,
                 mostraBusca = mostraBusca,
-                texto = texto,
+                texto = titulo,
                 mostraVolta = mostraVolta,
                 noClicaVolta = noClicaVolta,
                 mostraEditaEDeleta = mostraEditaEDelete,
@@ -44,6 +47,11 @@ fun ScaffoldScreen(
                     noClicaFab
                 )
             }
+        },
+        snackbarHost = {
+            SnackBarComponent(
+                snackbarHostState = snackbarHostState
+            )
         }
     ) {
         Box(
@@ -58,17 +66,28 @@ fun ScaffoldScreen(
 @Composable
 private fun ScaffoldScreenPreviewTelaPrincipal() {
     ScaffoldScreen(
-        texto = stringResource(id = R.string.app_name),
+        titulo = stringResource(id = R.string.app_name),
         mostraVolta = false,
+        mostraEditaEDelete = false
     ) {}
 }
 
 @Preview(showSystemUi = true)
 @Composable
-private fun ScaffoldScreenPreviewOutrasTelas() {
+private fun ScaffoldScreenPreviewCadastro() {
     ScaffoldScreen(
-        texto = stringResource(id = R.string.app_name),
+        titulo = "Cadastrar Bola",
         mostraBusca = false,
         mostraFab = false,
+    ) {}
+}
+@Preview(showSystemUi = true)
+@Composable
+private fun ScaffoldScreenPreviewDetalhes() {
+    ScaffoldScreen(
+        titulo = "Detalhes da bola",
+        mostraBusca = false,
+        mostraFab = false,
+        mostraEditaEDelete = false,
     ) {}
 }

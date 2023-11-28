@@ -38,143 +38,154 @@ fun DetalhesDaBolaScreen(
     modifier: Modifier = Modifier,
     state: DetalhesDaBolaUiState,
     navegarDeVolta: () -> Unit = {},
+    noClicaEdita: () -> Unit = {},
+    noClicaDeleta: () -> Unit = {},
 ) {
-    if (state.usuarioEncontrado) {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .background(Color.White)
-                .verticalScroll(rememberScrollState()),
-        ) {
-            ImagemBolaComponent(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primaryContainer)
-                    .height(200.dp)
-                    .clickable {
-                        state.noClickDaImagem(true)
-                    },
-                imagemDaBola = state.imagemDaBola,
-                escala = ContentScale.FillHeight
-            )
+    ScaffoldScreen (
+        titulo = "Detalhes da Bola",
+        mostraBusca = false,
+        mostraFab = false,
+        noClicaVolta = navegarDeVolta,
+        noClicaEdita = noClicaEdita,
+        noClicaDeleta = noClicaDeleta,
+    ){
+        if (state.usuarioEncontrado) {
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxSize()
-                    .padding(margemPadrao)
-                    .background(Color.White),
-                verticalArrangement = Arrangement.spacedBy(margemPadrao),
+                    .background(Color.White)
+                    .verticalScroll(rememberScrollState()),
             ) {
-                TextoProdutoComponent(
-                    texto = state.nomeBola,
-                    fontSize = tamanhoFonteTitulo,
-                    fontWeight = FontWeight.Bold
+                ImagemBolaComponent(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .height(200.dp)
+                        .clickable {
+                            state.noClickDaImagem(true)
+                        },
+                    imagemDaBola = state.imagemDaBola,
+                    escala = ContentScale.FillHeight
                 )
-                TextoProdutoComponent(
-                    texto = state.precoDaBola,
-                    fontSize = tamanhoFonteGrande,
-                    fontWeight = FontWeight.Bold
-                )
-                if (!state.descricaoDaBola.isBlank()) {
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(Color.White)
-                            .clickable {
-                                state.noClickDaDescricao(!state.expandirDescricao)
-                            },
-                        shape = RoundedCornerShape(margemPadrao),
-                        shadowElevation = 4.dp,
-                        border = BorderStroke(1.dp, color = Color.Black),
-                    ) {
-                        Column(
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(margemPadrao)
+                        .background(Color.White),
+                    verticalArrangement = Arrangement.spacedBy(margemPadrao),
+                ) {
+                    TextoProdutoComponent(
+                        texto = state.nomeBola,
+                        fontSize = tamanhoFonteTitulo,
+                        fontWeight = FontWeight.Bold
+                    )
+                    TextoProdutoComponent(
+                        texto = state.precoDaBola,
+                        fontSize = tamanhoFonteGrande,
+                        fontWeight = FontWeight.Bold
+                    )
+                    if (!state.descricaoDaBola.isBlank()) {
+                        Surface(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(Color.White)
-                                .padding(margemPadrao / 2)
+                                .clickable {
+                                    state.noClickDaDescricao(!state.expandirDescricao)
+                                },
+                            shape = RoundedCornerShape(margemPadrao),
+                            shadowElevation = 4.dp,
+                            border = BorderStroke(1.dp, color = Color.Black),
                         ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color.White)
+                                    .padding(margemPadrao / 2)
+                            ) {
+                                TextoProdutoComponent(
+                                    texto = "Sobre o produto:",
+                                    fontSize = tamanhoFonteMedia,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                val tamanhoDescricao = if (state.expandirDescricao) {
+                                    Int.MAX_VALUE
+                                } else {
+                                    5
+                                }
+                                TextoProdutoComponent(
+                                    texto = state.descricaoDaBola, maxLines = tamanhoDescricao
+                                )
+                            }
+                        }
+                    }
+                    if (!state.nomeDaMarca.isBlank()) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
                             TextoProdutoComponent(
-                                texto = "Sobre o produto:",
+                                texto = "Marca: ",
                                 fontSize = tamanhoFonteMedia,
                                 fontWeight = FontWeight.Bold
                             )
-                            val tamanhoDescricao = if (state.expandirDescricao) {
-                                Int.MAX_VALUE
-                            } else {
-                                5
-                            }
                             TextoProdutoComponent(
-                                texto = state.descricaoDaBola, maxLines = tamanhoDescricao
+                                texto = state.nomeDaMarca,
+                                fontSize = tamanhoFonteMedia
                             )
                         }
                     }
-                }
-                if (!state.nomeDaMarca.isBlank()) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        TextoProdutoComponent(
-                            texto = "Marca: ",
-                            fontSize = tamanhoFonteMedia,
-                            fontWeight = FontWeight.Bold
-                        )
-                        TextoProdutoComponent(
-                            texto = state.nomeDaMarca,
-                            fontSize = tamanhoFonteMedia
-                        )
-                    }
-                }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(margemPadrao / 2)
-                ) {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        TextoProdutoComponent(
-                            texto = "Criado em: ",
-                            fontSize = tamanhoFonteMini,
-                            fontWeight = FontWeight.Bold
-                        )
-                        TextoProdutoComponent(
-                            texto = state.dataCriacaoBola,
-                            fontSize = tamanhoFonteMini
-                        )
-                    }
-                    if (!state.dataAlteracaoBola.isBlank()) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(margemPadrao / 2)
+                    ) {
                         Row(modifier = Modifier.fillMaxWidth()) {
                             TextoProdutoComponent(
-                                texto = "Alterado em: ",
+                                texto = "Criado em: ",
                                 fontSize = tamanhoFonteMini,
                                 fontWeight = FontWeight.Bold
                             )
                             TextoProdutoComponent(
-                                texto = state.dataAlteracaoBola,
+                                texto = state.dataCriacaoBola,
                                 fontSize = tamanhoFonteMini
                             )
                         }
+                        if (!state.dataAlteracaoBola.isBlank()) {
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                TextoProdutoComponent(
+                                    texto = "Alterado em: ",
+                                    fontSize = tamanhoFonteMini,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                TextoProdutoComponent(
+                                    texto = state.dataAlteracaoBola,
+                                    fontSize = tamanhoFonteMini
+                                )
+                            }
+                        }
+                    }
+                }
+                if (state.expandirImagem) {
+                    DialogComponent(
+                        modifier = Modifier.padding(margemPadrao / 2),
+                        alturaMaxima = 800.dp,
+                        larguraMaxima = 600.dp,
+                        noClickSair = {
+                            state.noClickDaImagem(false)
+                        }
+                    ) {
+                        ImagemBolaComponent(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(MaterialTheme.colorScheme.primaryContainer),
+                            imagemDaBola = state.imagemDaBola,
+                            escala = ContentScale.FillWidth,
+                        )
                     }
                 }
             }
-            if (state.expandirImagem) {
-                DialogComponent(
-                    modifier = Modifier.padding(margemPadrao / 2),
-                    alturaMaxima = 800.dp,
-                    larguraMaxima = 600.dp,
-                    noClickSair = {
-                        state.noClickDaImagem(false)
-                    }
-                ) {
-                    ImagemBolaComponent(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.primaryContainer),
-                        imagemDaBola = state.imagemDaBola,
-                        escala = ContentScale.FillWidth,
-                    )
-                }
-            }
+        } else {
+            ErroScreen(
+                descricaoErro = "buscar a bola",
+                navegarDeVolta = navegarDeVolta
+            )
         }
-    } else {
-        ErroScreen(
-            descricaoErro = "buscar a bola",
-            navegarDeVolta = navegarDeVolta
-        )
     }
 }
 
