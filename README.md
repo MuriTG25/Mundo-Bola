@@ -19,7 +19,7 @@ Ele se constiste em 3 telas diferentes:<br />
 
 Ele conta com sistema de navegação entre telas com o navigation, sistema de gerenciamento de estados com View Model e Ui State, injeção de dependências com o Hilt.<br />
 Serão feitos testes de unidade, testes de Mock e testes de UI.<br />
-O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada.<br />
+O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada o banco de dados.<br />
 
 Plugin utilizados:
  - Hilt
@@ -44,7 +44,6 @@ Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Roo
  - Aba lateral que mostra a aba de marcas
  - Cadastro e alteração das marcas
  - Opções de ordenamento dos produtos
- - Dentro da classe bola haverá outra subclasse que adiciona mais detalhes da bola
 
 Plugin utilizados:
  - Hilt
@@ -63,10 +62,9 @@ Plugin utilizados:
 
 ### Beta
 
-Nesta fase faremos a implementação do sistema de estoque, acrescentando o gerenciamento de quantidade de produtos em estoque para cada bola.<br />
-Além disso, teremos uma tela mais focado em gerenciamento de estoque e outro para cadastro de produto.<br />
-Haverá um sistema de login de usuários, com sistema de limitação de acesso para algumas features apenas para aqueles que tem permissão de adm.<br />
+Nesta fase faremos um sistema de login de usuários, com sistema de limitação de acesso para algumas features apenas para aqueles que tem permissão de adm.<br />
 As imagens não serão mais salvas em url e sim num sistema de armazenamento interno do app, com possiblidade de buscar imagens dentro do aparelho android.<br />
+Dentro da classe bola, haverá outra subclasse que adiciona mais detalhes da bola.</br>
 Terá um uma redesign maior na parte de UX/UI do aplicativo.<br />
 
 Plugin utilizados:
@@ -89,7 +87,7 @@ Plugin utilizados:
 ### Lançamento (1.0)
 Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit). <br />
 Pode ser que criemos ou não um servidor local bem simples para armazenar o banco de dados em um sistema bem simples de back-end. <br />
-Se houver futuras atualizações, serão apenas correções de bug e/ou pequenas implementações.
+Se houver futuras atualizações neste aplicativo, serão apenas correções de bug e/ou pequenas implementações.
 
 Plugin utilizados (aplicativo):
  - Hilt
@@ -112,4 +110,16 @@ Plugin utilizados (aplicativo):
 Plugin utilizados(servidor em Kotlin):
  - Spring boot
  - Retrofit
- - Não defini o resto
+ - Não defini o resto</br></br>
+
+ # Mundo Bola Armazém
+
+ Anteriormente na fase beta, percebi que essa implementação seria mais complexa e teria que crescer muito o projeto de uma maneira abrupta.</br>
+ A implementação em questão era do sistema de estoque, onde criariamos um sistema de gerenciamento de quantidade de produtos em estoque para cada bola.</br>
+Decidi então criar um aplicativo novo, separando em 2. Um deles, é o que já foi implementado, o Mundo Bola cadastro, focado em cadastro de bolas e marcas.</br>
+E esse novo aplicativo, o Mundo Bola Armazem, que será um aplicativo focado em gerenciamento de quantidade de itens de uma loja.</br></br>
+Nesta fase  teremos 2 módulos no mesmo projeto. Ou seja, teremos um projeto multimodular, onde teremos reaproveitamento de implemetações do primeiro aplicativo no outro.</br>
+E além disso, alteramentos a versão do build.gradle para a versão Catalog, que é melhor para projetos multimodulares.
+
+
+
