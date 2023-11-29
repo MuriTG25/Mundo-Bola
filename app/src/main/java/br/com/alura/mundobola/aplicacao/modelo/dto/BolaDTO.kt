@@ -1,10 +1,10 @@
-package br.com.alura.mundobola.aplicacao.modelo.view
+package br.com.alura.mundobola.aplicacao.modelo.dto
 
 import br.com.alura.mundobola.aplicacao.extra.dataFormatada
 import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
 import br.com.alura.mundobola.dominio.Bola
 
-data class BolaView(
+data class BolaDTO(
     val bolaId: String,
     val nome: String,
     val preco: String,
@@ -15,7 +15,7 @@ data class BolaView(
     val dataAlteracao: String,
 )
 
-fun Bola.paraBolaView() = BolaView(
+fun Bola.paraBolaDTO() = BolaDTO(
     bolaId = bolaId,
     nome = nome,
     preco = preco.paraMoedaBrasileira(),

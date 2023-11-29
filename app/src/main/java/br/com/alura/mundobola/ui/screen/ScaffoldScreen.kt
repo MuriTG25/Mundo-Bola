@@ -17,13 +17,13 @@ import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 fun ScaffoldScreen(
     titulo: String = "",
     snackbarHostState: SnackbarHostState = SnackbarHostState(),
-    mostraBusca: Boolean = true,
+    mostraBusca: Boolean = false,
     naBusca: () -> Unit = {},
-    mostraFab: Boolean = true,
+    mostraFab: Boolean = false,
     noClicaFab: () -> Unit = {},
-    mostraVolta: Boolean = true,
+    mostraVolta: Boolean = false,
     noClicaVolta: () -> Unit = {},
-    mostraEditaEDelete: Boolean = true,
+    mostraEditaEDelete: Boolean = false,
     noClicaEdita: () -> Unit = {},
     noClicaDeleta: () -> Unit = {},
     conteudo: @Composable () -> Unit,
@@ -67,8 +67,7 @@ fun ScaffoldScreen(
 private fun ScaffoldScreenPreviewTelaPrincipal() {
     ScaffoldScreen(
         titulo = stringResource(id = R.string.app_name),
-        mostraVolta = false,
-        mostraEditaEDelete = false
+        mostraFab = true
     ) {}
 }
 
@@ -77,8 +76,7 @@ private fun ScaffoldScreenPreviewTelaPrincipal() {
 private fun ScaffoldScreenPreviewCadastro() {
     ScaffoldScreen(
         titulo = "Cadastrar Bola",
-        mostraBusca = false,
-        mostraFab = false,
+        mostraVolta = true
     ) {}
 }
 @Preview(showSystemUi = true)
@@ -86,8 +84,7 @@ private fun ScaffoldScreenPreviewCadastro() {
 private fun ScaffoldScreenPreviewDetalhes() {
     ScaffoldScreen(
         titulo = "Detalhes da bola",
-        mostraBusca = false,
-        mostraFab = false,
-        mostraEditaEDelete = false,
+        mostraVolta = true,
+        mostraEditaEDelete = true
     ) {}
 }

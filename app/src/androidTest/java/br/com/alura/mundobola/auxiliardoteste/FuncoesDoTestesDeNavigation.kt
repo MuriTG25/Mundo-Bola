@@ -1,17 +1,14 @@
 package br.com.alura.mundobola.auxiliardoteste
 
-import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
@@ -59,6 +56,7 @@ fun ComposeContentTestRule.verificaSeNaoExisteOComponentePelaDescricao(descricao
 fun ComposeContentTestRule.clicaNoElementoPeloNome(texto: String) {
     onNodeWithText(texto).performClick()
 }
+
 
 fun ComposeContentTestRule.clicaNoPrimeiroElementoPeloNome(texto: String) {
     onAllNodesWithText(texto).onFirst().performClick()

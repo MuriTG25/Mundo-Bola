@@ -24,7 +24,10 @@ import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteOriginal
 import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
+import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
@@ -75,6 +78,27 @@ class DetalhesDaBolaScreenKtTest{
         )
     }
     @Test
+    fun deveAbrirDialogDeConfirmacaDeExclusao_QuandoApertarNoBotaoDeDeletar(){
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
+    }
+    @Test
+    fun deveVoltarParaTelaDeDetalhesSemExcluir_QuandoApertarNoBotaoDeCancelar(){
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoPerguntaScaffoldDetalhesTela)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+    }
+    @Test
     fun devemManterDialogComImagem_QuandoRotacionarmosODispositivo(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
@@ -118,10 +142,11 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(imagemBolaExistente)
     }
     @Test
-    fun deveExcluirOsDados_QuandoApertarNoBotaoDeDeletar(){
+    fun deveExcluirOsDados_QuandoApertarNoBotaoDeDeletarEConfirmar(){
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentPeloTexto(nomeBolaExistente)
     }

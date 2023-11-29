@@ -2,7 +2,7 @@ package br.com.alura.mundobola.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.alura.mundobola.aplicacao.modelo.view.paraBolaView
+import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +29,7 @@ class ListaDeBolasViewModel @Inject constructor(
         repositorio.listaDeBolas().collect { lista ->
             _uiState.value = _uiState.value.copy(
                 listaDeBolas = lista.map {
-                    it.paraBolaView()
+                    it.paraBolaDTO()
                 }
             )
         }

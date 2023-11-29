@@ -49,9 +49,7 @@ fun CadastroDeBolasScreen(
     ScaffoldScreen (
         titulo = tituloTela,
 //        "Cadastrar/Editar Bola",
-        mostraBusca = false,
-        mostraFab = false,
-        mostraEditaEDelete = false,
+        mostraVolta = true,
         noClicaVolta = noClicaVolta,
     ){
         Column(modifier = modifier

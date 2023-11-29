@@ -4,14 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
-import br.com.alura.mundobola.aplicacao.modelo.view.paraBolaView
-import br.com.alura.mundobola.aplicacao.modelo.view.paraMarcaView
+import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.DetalhesDaBolaUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,6 +41,11 @@ class DetalhesDaBolaViewModel @Inject constructor(
                         expandirDescricao = it
                     )
                 },
+                noClickConfirmacaoExclusao = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirConfirmacaoExclusao = it
+                    )
+                }
             )
 
         }
@@ -51,7 +54,7 @@ class DetalhesDaBolaViewModel @Inject constructor(
     suspend fun buscaPorId(id: String) {
         repositorio.encontrarBolaPeloId(id).collect { coleta ->
             coleta?.let { bola ->
-                with(bola.paraBolaView()) {
+                with(bola.paraBolaDTO()) {
                     _uiState.value = _uiState.value.copy(
                         bolaId = bolaId,
                         nomeBola = nome,

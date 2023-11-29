@@ -1,5 +1,7 @@
 package br.com.alura.mundobola.aplicacao.modelo.view
 
+import br.com.alura.mundobola.aplicacao.modelo.dto.MarcaDTO
+import br.com.alura.mundobola.aplicacao.modelo.dto.paraMarcaDTO
 import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
 import br.com.alura.mundobola.auxiliarTeste.marcaCompletaParaTestes
 import br.com.alura.mundobola.auxiliarTeste.marcaSimpleParaTestes
@@ -8,12 +10,12 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldBeNull
 import org.junit.Test
 
-class MarcaViewTest{
-    private val marcaSimplesConvertida = marcaSimpleParaTestes.paraMarcaView()
-    val marcaCompletaConvertida = marcaCompletaParaTestes.paraMarcaView()
+class MarcaDTOTest{
+    private val marcaSimplesConvertida = marcaSimpleParaTestes.paraMarcaDTO()
+    val marcaCompletaConvertida = marcaCompletaParaTestes.paraMarcaDTO()
     @Test
     fun `Deve retornar MarcaView, Quando buscarmos a classe do objeto`(){
-        marcaSimplesConvertida.shouldBeInstanceOf(MarcaView::class)
+        marcaSimplesConvertida.shouldBeInstanceOf(MarcaDTO::class)
     }
     @Test
     fun `Deve retornar a Url da Imagem, Quando buscarmos a imagem da marca`(){

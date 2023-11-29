@@ -25,10 +25,8 @@ fun ListaDeBolasScreen(
 ) {
     ScaffoldScreen (
         titulo = stringResource(id = R.string.app_name),
-        mostraBusca = false,
+        mostraFab = true,
         noClicaFab = noClicaFab,
-        mostraVolta = false,
-        mostraEditaEDelete = false,
     ){
         LazyVerticalGrid(
             modifier = modifier.padding(margemPadrao),

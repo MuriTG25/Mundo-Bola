@@ -17,3 +17,6 @@ val tamanhoCaixaPadrao = 200.dp
 
 val larguraDialogPadrao = 400.dp
 val alturaDialogPadrao = 600.dp
+
+val alturaDialogPequenaMin = 100.dp
+val alturaDialogPequenaMax = 300.dp

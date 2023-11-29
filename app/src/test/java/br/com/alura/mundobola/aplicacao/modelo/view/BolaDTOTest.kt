@@ -1,5 +1,7 @@
 package br.com.alura.mundobola.aplicacao.modelo.view
 
+import br.com.alura.mundobola.aplicacao.modelo.dto.BolaDTO
+import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
 import br.com.alura.mundobola.auxiliarTeste.BolaDeTesteSimples
 import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
@@ -8,12 +10,12 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldBeNull
 import org.junit.Test
 
-class BolaViewTest{
-    private val bolaSimplesConvertida = BolaDeTesteSimples.paraBolaView()
-    private val bolaCompletaConvertida = bolaDeTesteCompleta.paraBolaView()
+class BolaDTOTest{
+    private val bolaSimplesConvertida = BolaDeTesteSimples.paraBolaDTO()
+    private val bolaCompletaConvertida = bolaDeTesteCompleta.paraBolaDTO()
     @Test
     fun `Deve retornar BolaView, Quando buscarmos a classe do objeto`(){
-        bolaSimplesConvertida.shouldBeInstanceOf(BolaView::class)
+        bolaSimplesConvertida.shouldBeInstanceOf(BolaDTO::class)
     }
     @Test
     fun`Deve retornar preco Convertido em String, Quando convertemos Bola Em BolaView`(){

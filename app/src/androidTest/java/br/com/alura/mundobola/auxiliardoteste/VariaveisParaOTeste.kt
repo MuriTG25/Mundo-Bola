@@ -40,6 +40,10 @@ val dicaUrlScaffoldCadastroTela = "Insira o link contendo a imagem da bola"
 val textoCancelarScaffoldCadastroTela = "Cancelar"
 val textoConfirmarScaffoldCadastroTela = "Confirmar"
 
+val textoPerguntaScaffoldDetalhesTela = "Deseja mesmo excluir essa bola?"
+val textoCancelarScaffoldDetalhesTela = "Cancelar"
+val textoConfirmarScaffoldDetalhesTela = "Confirmar"
+
 
 val textoDescricaoProdutoTelaDetalhes = "Sobre o produto:"
 val textoMarcaTelaDetalhes = "Marca: "

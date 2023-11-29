@@ -13,7 +13,6 @@ fun MundoBolaNavHost(
         navController = navHostController,
         startDestination = listaDeBolasRota,
     ){
-        //TODO preciso corrigir fluxo navegação
         ListaDeBolasNavController(
             navegarParaADescricao = {
                 navHostController.navegarParaTelaDeDetalhes(it)

@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.ui.components.comum.DialogComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
+import br.com.alura.mundobola.ui.components.detalhesdabola.DialogConfirmacaoExclusaoComponent
+import br.com.alura.mundobola.ui.components.detalhesdabola.DialogImagemComponent
 import br.com.alura.mundobola.ui.extra.bolaDeAmostra
 import br.com.alura.mundobola.ui.extra.margemPadrao
 import br.com.alura.mundobola.ui.extra.tamanhoFonteGrande
@@ -41,15 +43,18 @@ fun DetalhesDaBolaScreen(
     noClicaEdita: () -> Unit = {},
     noClicaDeleta: () -> Unit = {},
 ) {
-    ScaffoldScreen (
-        titulo = "Detalhes da Bola",
-        mostraBusca = false,
-        mostraFab = false,
-        noClicaVolta = navegarDeVolta,
-        noClicaEdita = noClicaEdita,
-        noClicaDeleta = noClicaDeleta,
-    ){
-        if (state.usuarioEncontrado) {
+
+    if (state.usuarioEncontrado) {
+        ScaffoldScreen(
+            titulo = "Detalhes da Bola",
+            mostraVolta = true,
+            mostraEditaEDelete = true,
+            noClicaVolta = navegarDeVolta,
+            noClicaEdita = noClicaEdita,
+            noClicaDeleta = {
+                state.noClickConfirmacaoExclusao(true)
+            },
+        ) {
             Column(
                 modifier = modifier
                     .fillMaxSize()
@@ -162,30 +167,29 @@ fun DetalhesDaBolaScreen(
                     }
                 }
                 if (state.expandirImagem) {
-                    DialogComponent(
+                    DialogImagemComponent(
                         modifier = Modifier.padding(margemPadrao / 2),
-                        alturaMaxima = 800.dp,
-                        larguraMaxima = 600.dp,
-                        noClickSair = {
+                        noClickkSair = {
                             state.noClickDaImagem(false)
+                        },
+                        imagemDaBola = state.imagemDaBola,
+                    )
+                }
+                if (state.expandirConfirmacaoExclusao) {
+                    DialogConfirmacaoExclusaoComponent(
+                        noClickDeletar = noClicaDeleta,
+                        noClickSair = {
+                            state.noClickConfirmacaoExclusao(false)
                         }
-                    ) {
-                        ImagemBolaComponent(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.primaryContainer),
-                            imagemDaBola = state.imagemDaBola,
-                            escala = ContentScale.FillWidth,
-                        )
-                    }
+                    )
                 }
             }
-        } else {
-            ErroScreen(
-                descricaoErro = "buscar a bola",
-                navegarDeVolta = navegarDeVolta
-            )
         }
+    } else {
+        ErroScreen(
+            descricaoErro = "buscar a bola",
+            navegarDeVolta = navegarDeVolta
+        )
     }
 }
 

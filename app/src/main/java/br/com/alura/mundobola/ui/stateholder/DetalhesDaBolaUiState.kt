@@ -13,6 +13,8 @@ data class DetalhesDaBolaUiState(
     val expandirImagem: Boolean = false,
     val noClickDaImagem: (Boolean) -> Unit = {},
     val expandirDescricao: Boolean = false,
-    val noClickDaDescricao: (Boolean) -> Unit = {}
+    val expandirConfirmacaoExclusao: Boolean = false,
+    val noClickConfirmacaoExclusao: (Boolean) -> Unit = {},
+    val noClickDaDescricao: (Boolean) -> Unit = {},
 )
 
