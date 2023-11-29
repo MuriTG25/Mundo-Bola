@@ -96,6 +96,10 @@ class DetalhesDaBolaViewModel @Inject constructor(
 
     suspend fun deletaBola(id: String) {
         repositorio.deletaBola(id)
-        // TODO adicionar snackbar com mensagem "Bola Deletada com sucesso"
+        _uiState.update {
+            it.copy(
+                ativarToast = true,
+            )
+        }
     }
 }

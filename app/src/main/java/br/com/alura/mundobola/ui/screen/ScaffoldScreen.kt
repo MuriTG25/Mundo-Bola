@@ -16,7 +16,7 @@ import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 @Composable
 fun ScaffoldScreen(
     titulo: String = "",
-    snackbarHostState: SnackbarHostState = SnackbarHostState(),
+//    snackbarHostState: SnackbarHostState = SnackbarHostState(),
     mostraBusca: Boolean = false,
     naBusca: () -> Unit = {},
     mostraFab: Boolean = false,
@@ -48,11 +48,11 @@ fun ScaffoldScreen(
                 )
             }
         },
-        snackbarHost = {
-            SnackBarComponent(
-                snackbarHostState = snackbarHostState
-            )
-        }
+//        snackbarHost = {
+//            SnackBarComponent(
+//                snackbarHostState = snackbarHostState
+//            )
+//        }
     ) {
         Box(
             modifier = Modifier.padding(it)

@@ -14,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.layout.ContentScale
@@ -157,7 +158,9 @@ fun CadastroDeBolasScreen(
                     state.mensagemEdicaoConcluido -> "Bola editada com sucesso"
                     else -> ""
                 }
-                context.mensagemDeAviso(mensagem)
+                LaunchedEffect( Unit){
+                    context.mensagemDeAviso(mensagem)
+                }
             }
         }
     }

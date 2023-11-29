@@ -1,5 +1,6 @@
 package br.com.alura.mundobola.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,19 +17,21 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.alura.mundobola.ui.components.comum.DialogComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 import br.com.alura.mundobola.ui.components.detalhesdabola.DialogConfirmacaoExclusaoComponent
 import br.com.alura.mundobola.ui.components.detalhesdabola.DialogImagemComponent
 import br.com.alura.mundobola.ui.extra.bolaDeAmostra
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.extra.tamanhoFonteGrande
 import br.com.alura.mundobola.ui.extra.tamanhoFonteMedia
 import br.com.alura.mundobola.ui.extra.tamanhoFonteMini
@@ -39,11 +42,11 @@ import br.com.alura.mundobola.ui.stateholder.DetalhesDaBolaUiState
 fun DetalhesDaBolaScreen(
     modifier: Modifier = Modifier,
     state: DetalhesDaBolaUiState,
+    context: Context = LocalContext.current,
     navegarDeVolta: () -> Unit = {},
     noClicaEdita: () -> Unit = {},
     noClicaDeleta: () -> Unit = {},
 ) {
-
     if (state.usuarioEncontrado) {
         ScaffoldScreen(
             titulo = "Detalhes da Bola",
@@ -182,6 +185,12 @@ fun DetalhesDaBolaScreen(
                             state.noClickConfirmacaoExclusao(false)
                         }
                     )
+                }
+                //TODO talvez eu substitua o toast pelo Snackbar
+                if(state.ativarToast){
+                    LaunchedEffect(key1 = Unit){
+                        context.mensagemDeAviso("Bola Deletada com sucesso")
+                    }
                 }
             }
         }

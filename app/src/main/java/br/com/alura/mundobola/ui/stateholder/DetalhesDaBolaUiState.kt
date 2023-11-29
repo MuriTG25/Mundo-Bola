@@ -16,5 +16,6 @@ data class DetalhesDaBolaUiState(
     val expandirConfirmacaoExclusao: Boolean = false,
     val noClickConfirmacaoExclusao: (Boolean) -> Unit = {},
     val noClickDaDescricao: (Boolean) -> Unit = {},
+    val ativarToast: Boolean = false,
 )
 
