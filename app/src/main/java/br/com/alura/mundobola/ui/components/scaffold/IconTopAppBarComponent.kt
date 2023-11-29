@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.ui.components.comum
+package br.com.alura.mundobola.ui.components.scaffold
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack

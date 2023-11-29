@@ -3,13 +3,11 @@ package br.com.alura.mundobola.ui.screen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.alura.mundobola.R
-import br.com.alura.mundobola.ui.components.comum.SnackBarComponent
 import br.com.alura.mundobola.ui.components.scaffold.FloatActionButtonComponent
 import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 
@@ -48,6 +46,7 @@ fun ScaffoldScreen(
                 )
             }
         },
+        //TODO talvez implemente snackbar no lugar do toast
 //        snackbarHost = {
 //            SnackBarComponent(
 //                snackbarHostState = snackbarHostState

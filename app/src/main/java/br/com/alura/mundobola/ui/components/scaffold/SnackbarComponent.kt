@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.ui.components.comum
+package br.com.alura.mundobola.ui.components.scaffold
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 
 @Composable
 fun SnackBarComponent(

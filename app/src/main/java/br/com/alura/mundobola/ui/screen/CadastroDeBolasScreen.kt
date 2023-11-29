@@ -148,7 +148,7 @@ fun CadastroDeBolasScreen(
                 )
             }
             //TODO talvez eu altere o toast para snackbar
-            if(state.mensagemErroCarregamento
+            if( state.mensagemErroCarregamento
                 || state.mensagemCadastroConcluido
                 || state.mensagemEdicaoConcluido
             ){
@@ -158,7 +158,7 @@ fun CadastroDeBolasScreen(
                     state.mensagemEdicaoConcluido -> "Bola editada com sucesso"
                     else -> ""
                 }
-                LaunchedEffect( Unit){
+                LaunchedEffect(Unit){
                     context.mensagemDeAviso(mensagem)
                 }
             }

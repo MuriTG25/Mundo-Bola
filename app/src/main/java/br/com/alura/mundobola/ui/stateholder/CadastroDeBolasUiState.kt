@@ -4,7 +4,6 @@ import br.com.alura.mundobola.dominio.Marca
 import java.time.LocalDateTime
 
 data class CadastroDeBolasUiState(
-    val tituloTela: String = "",
     val listaDeMarcas: List<Marca> = emptyList(),
     val bolaId: String = "",
     val campoDoNome: String = "",

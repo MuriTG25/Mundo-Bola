@@ -37,7 +37,6 @@ class CadastrodeBolasViewModel @Inject constructor(
         }
         _uiState.update { cadastroDeBolasUiState ->
             cadastroDeBolasUiState.copy(
-                tituloTela = "Cadastrar Bola",
                 alteracaoDoCampoNome = {
                     _uiState.value = _uiState.value.copy(
                         campoDoNome = it,
@@ -103,7 +102,6 @@ class CadastrodeBolasViewModel @Inject constructor(
             coletaBola?.let { bola ->
                 with(bola) {
                     _uiState.value = _uiState.value.copy(
-                        tituloTela= "Editar Bola",
                         bolaId = bolaId,
                         campoDoNome = nome,
                         campoDoPreco = preco.toPlainString(),
