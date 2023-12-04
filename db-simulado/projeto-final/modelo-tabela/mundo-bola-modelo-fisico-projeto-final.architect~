@@ -40,7 +40,7 @@
     <column id="COL10" populated="true" UUID="823fed79-e382-40be-a8e5-d7ae50f4c5cc" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_criador_usuario_cpf_seq" defaultValue="" name="criador_usuario_cpf" nullable="0" physicalName="criador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL11" populated="true" UUID="9cce0128-17f8-4990-9c94-109e5398aeaf" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="0" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL11" populated="true" UUID="9cce0128-17f8-4990-9c94-109e5398aeaf" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="1" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -75,7 +75,7 @@
     <column id="COL20" populated="true" UUID="7d19d97e-0b90-4847-8bcb-86c45834957e" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_criador_usuario_cpf_seq" defaultValue="" name="criador_usuario_cpf" nullable="0" physicalName="criador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL21" populated="true" UUID="7dc61be2-665b-4a4c-9de6-5987177f4ba0" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="0" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL21" populated="true" UUID="7dc61be2-665b-4a4c-9de6-5987177f4ba0" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="1" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -154,7 +154,7 @@
     <column id="COL42" populated="true" UUID="85860289-443e-4c34-a99b-1ae7c146452f" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_criador_usuario_cpf_seq" defaultValue="" name="criador_usuario_cpf" nullable="0" physicalName="criador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL43" populated="true" UUID="abae1125-8345-422a-a545-5c92ae40b499" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="0" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL43" populated="true" UUID="abae1125-8345-422a-a545-5c92ae40b499" autoIncrement="false" autoIncrementSequenceName="Tb_USUARIO_alterador_usuario_cpf_seq" defaultValue="" name="alterador_usuario_cpf" nullable="1" physicalName="alterador_usuario_cpf" precision="14" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     </folder>
@@ -274,7 +274,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.GenericDDLGenerator" allow-connection="true"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.414213562373095" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB1" x="36" y="153" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB14" x="30" y="366" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB24" x="39" y="25" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
