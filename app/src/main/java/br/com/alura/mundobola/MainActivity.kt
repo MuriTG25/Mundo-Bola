@@ -35,11 +35,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun TelaApp(
-    navController: NavHostController
+    navController: NavHostController,
 ) {
-        MundoBolaNavHost(
-            navHostController = navController,
-        )
+    MundoBolaNavHost(
+        navHostController = navController,
+    )
 }
 
 @Preview(showSystemUi = true)
