@@ -1,20 +1,28 @@
 package br.com.alura.mundobola.aplicacao.repositorio
 
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.aplicacao.dao.BolaDao
 import br.com.alura.mundobola.aplicacao.dao.MarcaDao
+import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
 import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
+import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
+import br.com.alura.mundobola.auxiliarTeste.idNike
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
+import io.mockk.Called
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifySequence
+import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit4.MockKRule
 import io.mockk.mockk
 import io.mockk.mockkClass
 import io.mockk.mockkConstructor
+import io.mockk.mockkStatic
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
@@ -31,6 +39,16 @@ class MundoBolaRepositorioTest {
     lateinit var repositorio: MundoBolaRepositorio
 
     private val bolaMockada = mockkClass(Bola::class)
+    private val bolaMockadaCompleta = mockk<Bola>{
+        every { bolaId } returns "c6fec989-5440-49b5-8b03-8236556f46ab"
+        every { nome } returns "Bola Nike"
+        every { preco } returns "49.99".toBigDecimal()
+        every { marcaId } returns idNike
+        every { descricao } returns LoremIpsum(10).values.first()
+        every { dataCriacao } returns dataParaTestes
+        every { dataAlteracao } returns dataParaTestes
+        every { imagem } returns "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg"
+    }
     private val marcaMockada = mockkClass(Marca::class)
 
     @get:Rule
@@ -98,7 +116,7 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
-            } returns bolaDeTesteCompleta
+            } returns bolaMockadaCompleta
             repositorio.deletaBola("c6fec989-5440-49b5-8b03-8236556f46ab")
             coVerifySequence {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
@@ -111,8 +129,8 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
-            } returns bolaDeTesteCompleta
-            repositorio.editaBola(bolaDeTesteCompleta)
+            } returns bolaMockadaCompleta
+            repositorio.editaBola(bolaMockadaCompleta)
             coVerifySequence {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
                 bolaDao.deletaBola(any())
