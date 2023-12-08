@@ -9,27 +9,32 @@ import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifySequence
+import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
+import io.mockk.junit4.MockKRule
 import io.mockk.mockk
 import io.mockk.mockkClass
+import io.mockk.mockkConstructor
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class MundoBolaRepositorioTest {
-    @MockK
-    private val bolaDao = mockk<BolaDao>()
-    @MockK
-    private val marcaDao = mockk<MarcaDao>()
-    private val repositorio by lazy {
-        MundoBolaRepositorio(bolaDao, marcaDao)
-    }
-    @Before
-    fun setUp(){
-        MockKAnnotations.init(this)
-    }
+    @MockK(relaxUnitFun = true)
+    private lateinit var bolaDao: BolaDao
+    @MockK(relaxUnitFun = true)
+    private lateinit var marcaDao: MarcaDao
+    @InjectMockKs
+    lateinit var repositorio: MundoBolaRepositorio
+
+    private val bolaMockada = mockkClass(Bola::class)
+    private val marcaMockada = mockkClass(Marca::class)
+
+    @get:Rule
+    val mockkRule = MockKRule(this)
 
     @Test
     fun `Deve chamar a lista de bolas do boladao, Quando chamar a lista de bolas do repositorio`(): Unit =
@@ -46,12 +51,9 @@ class MundoBolaRepositorioTest {
     @Test
     fun `Deve chamar adicao de bola do BolaDao, Quando chamar a adicao de bolas do repositorio`(): Unit =
         runBlocking {
-            coEvery {
-                bolaDao.adicionarBola(bolaDeTesteCompleta)
-            } returns (Unit)
-            repositorio.adicionarBola(bolaDeTesteCompleta)
+            repositorio.adicionarBola(bolaMockada)
             coVerify {
-                bolaDao.adicionarBola(bolaDeTesteCompleta)
+                bolaDao.adicionarBola(bolaMockada)
             }
         }
 
@@ -72,8 +74,8 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 bolaDao.encontrarBolaPeloId("")
-            } returns mockkClass(Bola::class)
-            repositorio.encontrarBolaPeloId("")?.firstOrNull()
+            } returns bolaMockada
+            repositorio.encontrarBolaPeloId("").firstOrNull()
             coVerify {
                 bolaDao.encontrarBolaPeloId("")
             }
@@ -84,8 +86,8 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 marcaDao.encontrarMarcaPeloId("")
-            } returns mockkClass(Marca::class)
-            repositorio.encontrarMarcaPeloId("")?.firstOrNull()
+            } returns marcaMockada
+            repositorio.encontrarMarcaPeloId("").firstOrNull()
             coVerify {
                 marcaDao.encontrarMarcaPeloId("")
             }
@@ -96,10 +98,7 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
-            } returns mockkClass(Bola::class)
-            coEvery {
-                bolaDao.deletaBola(any())
-            } returns Unit
+            } returns bolaDeTesteCompleta
             repositorio.deletaBola("c6fec989-5440-49b5-8b03-8236556f46ab")
             coVerifySequence {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
@@ -112,13 +111,7 @@ class MundoBolaRepositorioTest {
         runBlocking {
             coEvery {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
-            } returns mockkClass(Bola::class)
-            coEvery {
-                bolaDao.deletaBola(any())
-            } returns Unit
-            coEvery {
-                bolaDao.adicionarBola(any())
-            } returns Unit
+            } returns bolaDeTesteCompleta
             repositorio.editaBola(bolaDeTesteCompleta)
             coVerifySequence {
                 bolaDao.encontrarBolaPeloId("c6fec989-5440-49b5-8b03-8236556f46ab")
