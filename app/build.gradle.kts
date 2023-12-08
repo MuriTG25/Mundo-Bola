@@ -102,5 +102,4 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
     // https://mvnrepository.com/artifact/androidx.test.uiautomator/uiautomator
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0-alpha05")
-
 }

@@ -1,6 +1,8 @@
 package br.com.alura.mundobola.ui.viewmodel
 
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.viewModelScope
 import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
@@ -26,7 +28,8 @@ class ListaDeBolasViewModel @Inject constructor(
     }
 
     private suspend fun carregaLista() {
-        repositorio.listaDeBolas().collect { lista ->
+        repositorio.listaDeBolas()
+            .collect { lista ->
             _uiState.value = _uiState.value.copy(
                 listaDeBolas = lista.map {
                     it.paraBolaDTO()

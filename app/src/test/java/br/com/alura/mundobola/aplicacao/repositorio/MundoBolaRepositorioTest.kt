@@ -5,21 +5,30 @@ import br.com.alura.mundobola.aplicacao.dao.MarcaDao
 import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.coVerifySequence
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.mockkClass
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 
 class MundoBolaRepositorioTest {
+    @MockK
     private val bolaDao = mockk<BolaDao>()
+    @MockK
     private val marcaDao = mockk<MarcaDao>()
     private val repositorio by lazy {
         MundoBolaRepositorio(bolaDao, marcaDao)
+    }
+    @Before
+    fun setUp(){
+        MockKAnnotations.init(this)
     }
 
     @Test

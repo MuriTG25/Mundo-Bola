@@ -97,7 +97,7 @@ class CadastrodeBolasViewModel @Inject constructor(
         }
     }
 
-    suspend fun carregaBola(id: String) {
+    private suspend fun carregaBola(id: String) {
         repositorio.encontrarBolaPeloId(id).collect {coletaBola ->
             coletaBola?.let { bola ->
                 with(bola) {
