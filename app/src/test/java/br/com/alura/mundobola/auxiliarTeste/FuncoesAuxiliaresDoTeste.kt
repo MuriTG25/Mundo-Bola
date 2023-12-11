@@ -1,6 +1,7 @@
 package br.com.alura.mundobola.auxiliarTeste
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
 import java.time.LocalDateTime
@@ -26,6 +27,21 @@ val bolaDeTesteCompleta = Bola(
     )
 
 val BolaDeTesteSimples = Bola(
+    nome = "Bola Nike",
+    preco = "49.99".toBigDecimal()
+    )
+val bolaEntityDeTesteCompleta = BolaEntity(
+    bolaId = "c6fec989-5440-49b5-8b03-8236556f46ab",
+    nome = "Bola Nike",
+    preco = "49.99".toBigDecimal(),
+    marcaId = idNike,
+    descricao = LoremIpsum(10).values.first(),
+    dataCriacao = dataParaTestes,
+    dataAlteracao = dataParaTestes,
+    imagem = "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg",
+    )
+
+val bolaEntityDeTesteSimples = BolaEntity(
     nome = "Bola Nike",
     preco = "49.99".toBigDecimal()
     )
