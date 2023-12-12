@@ -9,5 +9,4 @@ data class Usuario(
     val senha: String,
     val dataCriacao: LocalDateTime,
     val dataAlteracao: LocalDateTime,
-    val estaAtivo: Boolean = true,
 )

@@ -31,7 +31,6 @@ data class BolaEntity(
     val imagem: String? = null,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val dataAlteracao: LocalDateTime? = null,
-    val estaAtivo: Boolean = true,
 )
 
 fun BolaEntity.toBola() = Bola(
@@ -43,6 +42,5 @@ fun BolaEntity.toBola() = Bola(
     imagem = imagem,
     dataCriacao = dataCriacao,
     dataAlteracao = dataAlteracao,
-    estaAtivo = estaAtivo
 )
 

@@ -16,7 +16,6 @@ data class MarcaEntity(
     val imagem: String? = null,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val dataAlteracao: LocalDateTime? = null,
-    val estaAtivo: Boolean = true,
 )
 fun MarcaEntity.toMarca() = Marca(
     marcaId = marcaId,
@@ -24,5 +23,4 @@ fun MarcaEntity.toMarca() = Marca(
     imagem = imagem,
     dataCriacao = dataCriacao,
     dataAlteracao = dataAlteracao,
-    estaAtivo = estaAtivo
 )
