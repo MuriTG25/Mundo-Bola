@@ -27,6 +27,27 @@ class ListaDeBolasViewModel @Inject constructor(
         viewModelScope.launch {
             carregaLista()
         }
+        _uiState.update { listaDeBolasUiState ->
+            listaDeBolasUiState.copy (
+                noClicaBusca = {
+                    _uiState.value = _uiState.value.copy(
+                        mostraTituloEIconeBusca = false
+                    )
+                },
+                noClicaVolta = {
+                    _uiState.value = _uiState.value.copy(
+                        mostraTituloEIconeBusca = true,
+                        textoDeBusca = ""
+                    )
+                },
+                naMudancaDaBusca = {texto ->
+                    _uiState.value = _uiState.value.copy(
+                        textoDeBusca = texto
+                    )
+                }
+            )
+
+        }
     }
 
     private suspend fun carregaLista() {
@@ -44,4 +65,5 @@ class ListaDeBolasViewModel @Inject constructor(
             )
         }
     }
+
 }

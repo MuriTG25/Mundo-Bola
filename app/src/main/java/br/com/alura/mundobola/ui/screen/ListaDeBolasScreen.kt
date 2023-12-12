@@ -21,12 +21,21 @@ fun ListaDeBolasScreen(
     modifier: Modifier = Modifier,
     state: ListaDeBolasUiState,
     noClicaFab: () -> Unit = {},
+    noClicaRealizarBusca: () -> Unit = {},
     navegarParaADescricao: (String) -> Unit = {},
 ) {
     ScaffoldScreen (
         titulo = stringResource(id = R.string.app_name),
+        mostraTitulo = state.mostraTituloEIconeBusca,
         mostraFab = true,
+        mostraBusca = state.mostraTituloEIconeBusca,
+        noClicaBusca = state.noClicaBusca,
         noClicaFab = noClicaFab,
+        mostraTextoBusca = !state.mostraTituloEIconeBusca,
+        textoBusca = state.textoDeBusca,
+        naMudancaDaBusca = state.naMudancaDaBusca,
+        noClicaRealizarBusca = noClicaRealizarBusca,
+        noClicaVoltaBusca = state.noClicaVolta,
     ){
         LazyVerticalGrid(
             modifier = modifier.padding(margemPadrao),

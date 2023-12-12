@@ -15,8 +15,9 @@ import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 fun ScaffoldScreen(
     titulo: String = "",
 //    snackbarHostState: SnackbarHostState = SnackbarHostState(),
+    mostraTitulo: Boolean = true,
     mostraBusca: Boolean = false,
-    naBusca: () -> Unit = {},
+    noClicaBusca: () -> Unit = {},
     mostraFab: Boolean = false,
     noClicaFab: () -> Unit = {},
     mostraVolta: Boolean = false,
@@ -24,19 +25,30 @@ fun ScaffoldScreen(
     mostraEditaEDelete: Boolean = false,
     noClicaEdita: () -> Unit = {},
     noClicaDeleta: () -> Unit = {},
+    mostraTextoBusca: Boolean = false,
+    textoBusca: String = "",
+    naMudancaDaBusca: (String) -> Unit = {},
+    noClicaRealizarBusca: () -> Unit = {},
+    noClicaVoltaBusca: () -> Unit = {},
     conteudo: @Composable () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBarComponent(
-                noClicaBusca = naBusca,
+                mostraTitulo = mostraTitulo,
+                noClicaBusca = noClicaBusca,
                 mostraBusca = mostraBusca,
                 texto = titulo,
                 mostraVolta = mostraVolta,
                 noClicaVolta = noClicaVolta,
                 mostraEditaEDeleta = mostraEditaEDelete,
                 noClicaEdita = noClicaEdita,
-                noClicaDeleta = noClicaDeleta
+                noClicaDeleta = noClicaDeleta,
+                mostraTextoBusca = mostraTextoBusca,
+                textoBusca = textoBusca,
+                naMudancaDaBusca = naMudancaDaBusca,
+                noClicaRealizarBusca = noClicaRealizarBusca,
+                noClicaVoltaBusca = noClicaVoltaBusca
             )
         },
         floatingActionButton = {
@@ -66,7 +78,19 @@ fun ScaffoldScreen(
 private fun ScaffoldScreenPreviewTelaPrincipal() {
     ScaffoldScreen(
         titulo = stringResource(id = R.string.app_name),
-        mostraFab = true
+        mostraFab = true,
+        mostraBusca = true
+    ) {}
+}
+@Preview(showSystemUi = true)
+@Composable
+private fun ScaffoldScreenPreviewTelaPrincipalBusca() {
+    ScaffoldScreen(
+        titulo = stringResource(id = R.string.app_name),
+        mostraTitulo = false,
+        mostraFab = true,
+        mostraBusca = false,
+        mostraTextoBusca = true
     ) {}
 }
 

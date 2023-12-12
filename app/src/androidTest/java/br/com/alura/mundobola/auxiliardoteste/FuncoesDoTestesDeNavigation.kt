@@ -25,7 +25,7 @@ fun ComposeContentTestRule.verificaSeExisteOComponentPeloTexto(texto: String) {
     onNodeWithText(texto).assertExists()
 }
 
-fun ComposeContentTestRule.verificaSeNaoExisteOComponentPeloTexto(texto: String) {
+fun ComposeContentTestRule.verificaSeNaoExisteOComponentePeloTexto(texto: String) {
     onNodeWithText(texto).assertDoesNotExist()
 }
 fun ComposeContentTestRule.verificaSeMostraOComponentePeloTextoMaisDe1Vez(
@@ -65,8 +65,11 @@ fun ComposeContentTestRule.clicaNoPrimeiroElementoPeloNome(texto: String) {
 fun ComposeContentTestRule.clicaNoElementoPelaDescricao(texto: String) {
     onNodeWithContentDescription(texto).performClick()
 }
-fun ComposeContentTestRule.verificaSeOElementoEClicavel(texto: String){
+fun ComposeContentTestRule.verificaSeOElementoEClicavelPeloTexto(texto: String){
     onNodeWithText(texto).assertHasClickAction()
+}
+fun ComposeContentTestRule.verificaSeOElementoEClicavelPelaDescricao(texto: String){
+    onNodeWithContentDescription(texto).assertHasClickAction()
 }
 
 fun ComposeContentTestRule.esperaAteATelaAparecer(

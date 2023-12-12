@@ -118,7 +118,7 @@ fun CadastroDeBolasScreen(
                     texto = state.campoDaDescricao,
                     naMudancaDeTexto = state.alteracaoDoCampoDescricao,
                     maiuscula = KeyboardCapitalization.Sentences,
-                    acaoDeEnter = ImeAction.None,
+                    acaoDoEnter = ImeAction.None,
                     minimoDeLinhas = 5,
                     maximoDeLinhas = 20,
                 )

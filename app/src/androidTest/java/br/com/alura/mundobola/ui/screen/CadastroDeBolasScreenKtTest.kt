@@ -9,6 +9,7 @@ import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.descricaoBolaTeste
+import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.dicaUrlScaffoldCadastroTela
@@ -17,9 +18,11 @@ import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempo
 import br.com.alura.mundobola.auxiliardoteste.fechaOTeclado
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
@@ -56,7 +59,6 @@ import br.com.alura.mundobola.auxiliardoteste.textoNomeObrigatorioCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoPrecoCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoPrecoObrigatorioCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
-import br.com.alura.mundobola.auxiliardoteste.mensagemToastCadastroSucesso
 import br.com.alura.mundobola.auxiliardoteste.textoUrlScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
@@ -68,7 +70,7 @@ import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTex
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTextoMaisDe1Vez
-import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentPeloTexto
+import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -106,8 +108,11 @@ class CadastroDeBolasScreenKtTest{
     fun deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaCadastro)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaDetalhes)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaLista)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
@@ -226,7 +231,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
         clicaBotaoSalvar()
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
     }
     @Test
     fun deveAparecerMensagemDePrecoObrigatorio_QuandoApertarSalvarSoDigitandoNome(){
@@ -234,7 +239,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         clicaBotaoSalvar()
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
     }
     @Test
     fun deveDesaparecerMensagemDeNomeObrigatorio_QuandoDigitarmosAlgoNoCampoDeNome(){
@@ -243,7 +248,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
         testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         fechaOTeclado()
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoNomeObrigatorioCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
     }
     @Test
     fun deveDesaparecerMensagemDePrecoObrigatorio_QuandoDigitarmosAlgoNoCampoDePreco(){
@@ -251,7 +256,7 @@ class CadastroDeBolasScreenKtTest{
         clicaBotaoSalvar()
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoPrecoObrigatorioCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
     }
     @Test
     fun deveTrocarOQueApareceNoCampoDeMarca_QuandoSelecionarmosUmaMarca(){
@@ -344,8 +349,8 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoDataAlteracaoTelaDetalhes)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoDescricaoProdutoTelaDetalhes)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDataAlteracaoTelaDetalhes)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
     }
     @Test
     fun deveCadastrarUmaNovaBola_QuandoInserirmosTodosOsDados(){

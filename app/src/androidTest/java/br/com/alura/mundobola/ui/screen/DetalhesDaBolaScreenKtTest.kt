@@ -9,12 +9,15 @@ import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.descricaoBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.imagemBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
@@ -36,9 +39,9 @@ import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez
-import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentPeloTexto
+import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
-import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavel
+import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavelPeloTexto
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
@@ -60,14 +63,17 @@ class DetalhesDaBolaScreenKtTest{
     fun deveMostrarOBotaoDeVoltaExcluirEEditar_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaCadastro)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaEdicao)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(tituloTelaLista)
-        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
-        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaEdicao)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaLista)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
     }
     @Test
     fun deveAbrirODialogComImagem_QuandoClicaNaImagem(){
@@ -92,9 +98,9 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoPerguntaScaffoldDetalhesTela)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoCancelarScaffoldCadastroTela)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
     }
@@ -118,7 +124,7 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun deveSerPossivel_QuandoVerificarmosOCampoDeDetalhes(){
         vaiParaATelaDeDetalhes(nomeBolaExistente)
-        testeDeUi.verificaSeOElementoEClicavel(textoDescricaoProdutoTelaDetalhes)
+        testeDeUi.verificaSeOElementoEClicavelPeloTexto(textoDescricaoProdutoTelaDetalhes)
     }
     @Test
     fun deveVoltarParaATelaPrincipal_QuandoClicarmosNoBotaoVolta(){
@@ -148,7 +154,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
-        testeDeUi.verificaSeNaoExisteOComponentPeloTexto(nomeBolaExistente)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente)
     }
     @Test
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarPeloAppAposTerEditadoBola(){

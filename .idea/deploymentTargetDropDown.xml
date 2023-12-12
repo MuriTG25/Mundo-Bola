@@ -5,6 +5,21 @@
       <entry key="app">
         <State />
       </entry>
+      <entry key="deveAparecerLabelEPlaceholder_QuandoEstivermosComOCampoDePesquisaAberto()">
+        <State />
+      </entry>
+      <entry key="deveAparecerOTexto_quandoDigitarNoCampoDeBusca()">
+        <State />
+      </entry>
+      <entry key="deveFecharCampoDePesquisa_QuandoApertarmosOBotaoDeVoltar()">
+        <State />
+      </entry>
+      <entry key="deveIrParaATelaDeDetalhes_QuandoApertarEmUmProduto()">
+        <State />
+      </entry>
+      <entry key="deveSerClicavelIconeBusca_ImplementacaoAindaNaoFeita()">
+        <State />
+      </entry>
     </value>
   </component>
 </project>
