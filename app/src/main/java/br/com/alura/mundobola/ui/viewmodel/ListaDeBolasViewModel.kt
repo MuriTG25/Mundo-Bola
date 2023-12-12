@@ -31,7 +31,7 @@ class ListaDeBolasViewModel @Inject constructor(
             listaDeBolasUiState.copy (
                 noClicaBusca = {
                     _uiState.value = _uiState.value.copy(
-                        mostraTituloEIconeBusca = false
+                        mostraTituloEIconeBusca = false,
                     )
                 },
                 noClicaVolta = {
@@ -44,7 +44,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     _uiState.value = _uiState.value.copy(
                         textoDeBusca = texto
                     )
-                }
+                },
             )
 
         }

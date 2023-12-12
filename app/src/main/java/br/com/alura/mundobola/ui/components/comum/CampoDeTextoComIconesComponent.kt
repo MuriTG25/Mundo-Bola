@@ -14,11 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import br.com.alura.mundobola.ui.components.scaffold.IconTopAppBarComponent
+import br.com.alura.mundobola.ui.extra.tamanhoFontePadrao
 
 @Composable
 fun CampoDeTextoComIconesComponent(
@@ -26,6 +29,7 @@ fun CampoDeTextoComIconesComponent(
     nomeDoCampo: String = "",
     dicaDoCampo: String = "",
     texto: String = "",
+    tamanhoDoTexto: TextUnit = tamanhoFontePadrao,
     naMudancaDeTexto: (String) -> Unit = {},
     maiuscula: KeyboardCapitalization = KeyboardCapitalization.Words,
     acaoDoEnter: ImeAction = ImeAction.Done,
@@ -40,7 +44,8 @@ fun CampoDeTextoComIconesComponent(
         modifier = modifier.fillMaxWidth(),
         value = texto,
         textStyle = TextStyle(
-            color =  MaterialTheme.colorScheme.onPrimary
+            color =  MaterialTheme.colorScheme.onPrimary,
+            fontSize = tamanhoDoTexto,
         ),
         onValueChange = naMudancaDeTexto,
         label = {

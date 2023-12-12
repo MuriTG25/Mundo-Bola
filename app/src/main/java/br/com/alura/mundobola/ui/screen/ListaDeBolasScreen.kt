@@ -62,3 +62,24 @@ private fun ListaDeBolasScreenPreview() {
         state = ListaDeBolasUiState(amostraDeListaDeBolas)
     )
 }
+@Preview(showSystemUi = true)
+@Composable
+private fun ListaDeBolasScreenComCampoDeBuscaPreview() {
+    ListaDeBolasScreen(
+        state = ListaDeBolasUiState(
+            listaDeBolas = amostraDeListaDeBolas,
+            mostraTituloEIconeBusca = false,
+        )
+    )
+}
+@Preview(showSystemUi = true)
+@Composable
+private fun ListaDeBolasScreenComCampoDeBuscaDigitadoPreview() {
+    ListaDeBolasScreen(
+        state = ListaDeBolasUiState(
+            listaDeBolas = amostraDeListaDeBolas,
+            mostraTituloEIconeBusca = false,
+            textoDeBusca = "Total 90"
+        )
+    )
+}
