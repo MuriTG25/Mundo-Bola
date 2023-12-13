@@ -7,7 +7,9 @@ import br.com.alura.mundobola.dominio.Marca
 import java.time.LocalDateTime
 import java.util.UUID
 
-@Entity
+@Entity(
+    tableName = "marca"
+)
 data class MarcaEntity(
     @PrimaryKey(false)
     val marcaId: String = UUID.randomUUID().toString(),

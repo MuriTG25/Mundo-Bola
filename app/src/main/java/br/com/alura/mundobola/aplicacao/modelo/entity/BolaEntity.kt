@@ -17,7 +17,8 @@ import java.util.UUID
             childColumns = arrayOf("marcaId"),
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    tableName = "bola"
 )
 data class BolaEntity(
     @PrimaryKey(false)
