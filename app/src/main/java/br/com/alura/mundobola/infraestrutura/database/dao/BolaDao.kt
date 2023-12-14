@@ -31,5 +31,8 @@ interface BolaDao {
 
     @Query("SELECT * FROM bola ORDER BY :propertie DESC")
     fun listaDeBolasOrdenadaDesc(propertie: String)
+
+    @Query("SELECT * FROM bola WHERE nome LIKE '%' || :nome || '%'")
+    fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity?>>
 }
 
