@@ -3,21 +3,22 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="deveAparecerLabelEPlaceholder_QuandoEstivermosComOCampoDePesquisaAberto()">
-        <State />
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_24.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2023-12-14T11:42:49.424655500Z" />
+        </State>
       </entry>
       <entry key="deveAparecerOTexto_quandoDigitarNoCampoDeBusca()">
-        <State />
-      </entry>
-      <entry key="deveFecharCampoDePesquisa_QuandoApertarmosOBotaoDeVoltar()">
-        <State />
-      </entry>
-      <entry key="deveIrParaATelaDeDetalhes_QuandoApertarEmUmProduto()">
-        <State />
-      </entry>
-      <entry key="deveSerClicavelIconeBusca_ImplementacaoAindaNaoFeita()">
         <State />
       </entry>
     </value>

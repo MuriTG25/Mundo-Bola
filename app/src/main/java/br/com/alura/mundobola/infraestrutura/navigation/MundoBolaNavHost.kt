@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
-
+//TODO pesquisar depois sobre animações em transição de telas
 @Composable
 fun MundoBolaNavHost(
     navHostController: NavHostController,
@@ -14,8 +14,8 @@ fun MundoBolaNavHost(
         startDestination = listaDeBolasRota,
     ){
         ListaDeBolasNavController(
-            navegarParaADescricao = {
-                navHostController.navegarParaTelaDeDetalhes(it)
+            navegarParaADescricao = {id ->
+                navHostController.navegarParaTelaDeDetalhes(id)
             },
             navegarParaCadastro = {
                 navHostController.navegarParaCadastroDeBolas(ID_GENERICO)
@@ -25,8 +25,8 @@ fun MundoBolaNavHost(
             irParaTelaPrincipal = {
                 navHostController.navegarParaListaDeBolas()
             },
-            irParaATelaDeDetalhes = {
-                navHostController.navegarParaTelaDeDetalhes(it)
+            irParaATelaDeDetalhes = {id ->
+                navHostController.navegarParaTelaDeDetalhes(id)
             },
             voltarParaTelaAnterior = {
                 navHostController.popBackStack()

@@ -20,7 +20,7 @@ class BolaDao(){
                 marcaId = "849324c0-2d2d-4097-87f4-68dae63b2f5b",
                 descricao = LoremIpsum(30).values.first(),
                 dataCriacao = LocalDateTime.now(),
-                imagem = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg",
+                imagem = "1",
             ),
             Bola(
                 bolaId = "da6d14aa-9125-4f5a-871e-bbca635c9255",

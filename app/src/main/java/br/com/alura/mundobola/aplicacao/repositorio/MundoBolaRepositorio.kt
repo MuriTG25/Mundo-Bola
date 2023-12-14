@@ -2,6 +2,7 @@ package br.com.alura.mundobola.aplicacao.repositorio
 
 import br.com.alura.mundobola.aplicacao.dao.BolaDao
 import br.com.alura.mundobola.aplicacao.dao.MarcaDao
+import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
 import kotlinx.coroutines.flow.Flow
