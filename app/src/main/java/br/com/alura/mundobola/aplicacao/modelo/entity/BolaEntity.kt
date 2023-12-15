@@ -44,4 +44,15 @@ fun BolaEntity.toBola() = Bola(
     dataCriacao = dataCriacao,
     dataAlteracao = dataAlteracao,
 )
+fun Bola.toBolaEntity() = BolaEntity(
+    bolaId = bolaId,
+    nome = nome,
+    preco = preco,
+    marcaId = marcaId,
+    descricao = descricao,
+    imagem = imagem,
+    dataCriacao = dataCriacao,
+    dataAlteracao = dataAlteracao,
+)
+
 

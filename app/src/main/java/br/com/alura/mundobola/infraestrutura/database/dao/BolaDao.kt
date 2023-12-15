@@ -27,12 +27,12 @@ interface BolaDao {
     suspend fun deletaBola(bolaId: String)
 
     @Query("SELECT * FROM bola ORDER BY :propertie ASC")
-    fun listaDeBolasOrdenadaAsc(propertie: String)
+    fun listaDeBolasOrdenadaAsc(propertie: String): Flow<List<BolaEntity>>
 
     @Query("SELECT * FROM bola ORDER BY :propertie DESC")
-    fun listaDeBolasOrdenadaDesc(propertie: String)
+    fun listaDeBolasOrdenadaDesc(propertie: String): Flow<List<BolaEntity>>
 
     @Query("SELECT * FROM bola WHERE nome LIKE '%' || :nome || '%'")
-    fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity?>>
+    fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity>>
 }
 

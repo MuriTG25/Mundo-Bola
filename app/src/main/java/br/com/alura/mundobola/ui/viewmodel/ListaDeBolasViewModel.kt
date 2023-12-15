@@ -28,7 +28,7 @@ class ListaDeBolasViewModel @Inject constructor(
             carregaLista()
         }
         _uiState.update { listaDeBolasUiState ->
-            listaDeBolasUiState.copy (
+            listaDeBolasUiState.copy(
                 noClicaBusca = {
                     _uiState.value = _uiState.value.copy(
                         mostraTituloEIconeBusca = false,
@@ -39,8 +39,11 @@ class ListaDeBolasViewModel @Inject constructor(
                         mostraTituloEIconeBusca = true,
                         textoDeBusca = ""
                     )
+                    viewModelScope.launch {
+                        carregaLista()
+                    }
                 },
-                naMudancaDaBusca = {texto ->
+                naMudancaDaBusca = { texto ->
                     _uiState.value = _uiState.value.copy(
                         textoDeBusca = texto
                     )
@@ -58,11 +61,25 @@ class ListaDeBolasViewModel @Inject constructor(
                 emptyList()
             )
             .collect { lista ->
-            _uiState.value = _uiState.value.copy(
-                listaDeBolas = lista.map {
-                    it.paraBolaDTO()
+                _uiState.value = _uiState.value.copy(
+                    listaDeBolas = lista.map {
+                        it.paraBolaDTO()
+                    }
+                )
+            }
+    }
+
+    fun realizaABusca() {
+        viewModelScope.launch {
+            repositorio.buscaBolaPorNome(_uiState.value.textoDeBusca)
+                .collect { lista ->
+                    _uiState.value = _uiState.value.copy(
+                        listaDeBolas = lista.map {
+                            it.paraBolaDTO()
+                        }
+                    )
+
                 }
-            )
         }
     }
 

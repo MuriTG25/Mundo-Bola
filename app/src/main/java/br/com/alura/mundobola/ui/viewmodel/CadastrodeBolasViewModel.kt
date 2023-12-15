@@ -114,8 +114,8 @@ class CadastrodeBolasViewModel @Inject constructor(
                         _uiState.value = _uiState.value.copy(
                             marcaId = marcaId
                         )
-                        repositorio.encontrarNomeMarcaPeloId(idDaMarca).collect{coletaMarca->
-                            coletaMarca?.let { nomeMarca ->
+                        repositorio.encontrarMarcaPeloId(idDaMarca).collect{coletaMarca->
+                            coletaMarca?.nome?.let { nomeMarca ->
                                 _uiState.value = _uiState.value.copy(
                                     campoMarca = nomeMarca
                                 )

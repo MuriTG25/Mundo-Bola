@@ -23,7 +23,10 @@ fun NavGraphBuilder.ListaDeBolasNavController(
             navegarParaADescricao = {
                 navegarParaADescricao(it)
             },
-            noClicaFab = navegarParaCadastro
+            noClicaFab = navegarParaCadastro,
+            noClicaRealizarBusca = {
+                viewModel.realizaABusca()
+            }
         )
     }
 }

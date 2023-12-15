@@ -1,13 +1,16 @@
 package br.com.alura.mundobola.aplicacao.repositorio
 
-import br.com.alura.mundobola.aplicacao.dao.BolaDao
-import br.com.alura.mundobola.aplicacao.dao.MarcaDao
-import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
+
+import br.com.alura.mundobola.aplicacao.modelo.entity.toBola
+import br.com.alura.mundobola.aplicacao.modelo.entity.toBolaEntity
+import br.com.alura.mundobola.aplicacao.modelo.entity.toMarca
+import br.com.alura.mundobola.aplicacao.modelo.pojo.toBolaPOJO
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
+import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
+import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,44 +19,45 @@ class MundoBolaRepositorio @Inject constructor(
     private val bolaDao: BolaDao,
     private val marcaDao: MarcaDao,
 ){
-    suspend fun listaDeBolas(): StateFlow<List<Bola>> {
-        return bolaDao.listaDeBolas()
+    suspend fun listaDeBolas(): Flow<List<Bola>> {
+        return bolaDao.listaDeBolas().map { lista->
+            lista.map { bola->
+                bola.toBola()
+            }
+        }
     }
     suspend fun adicionarBola(bola: Bola){
-        bolaDao.adicionarBola(bola)
+        bolaDao.adicionarBola(bola.toBolaEntity())
     }
-    suspend fun listaDeMarcas(): StateFlow<List<Marca>> {
-        return marcaDao.listaDeMarcas()
+    suspend fun listaDeMarcas(): Flow<List<Marca>> {
+        return marcaDao.listaDeMarcas().map {lista ->
+            lista.map {marca->
+                marca.toMarca()
+            }
+        }
     }
     suspend fun encontrarBolaPeloId(id:String): Flow<Bola?> {
-        return flow {
-           emit(bolaDao.encontrarBolaPeloId(id))
+        return bolaDao.encontrarBolaPeloId(id).map {
+            it?.toBola()
         }
     }
     suspend fun encontrarMarcaPeloId(id:String): Flow<Marca?> {
-        return flow {
-            emit(marcaDao.encontrarMarcaPeloId(id))
-        }
-    }
-    suspend fun encontrarNomeMarcaPeloId(id:String): Flow<String?> {
-        return flow {
-            emit(marcaDao.encontrarMarcaPeloId(id)?.nome)
+        return marcaDao.encontraMarcaPeloId(id).map {
+            it.toMarca()
         }
     }
     suspend fun deletaBola(id: String){
-        encontrarBolaPeloId(id).collect{ bolaEncotrada ->
-            bolaEncotrada?.let {
-                bolaDao.deletaBola(it)
-            }
-        }
+        bolaDao.deletaBola(id)
     }
     suspend fun editaBola(
         novaBola: Bola,
     ){
-        encontrarBolaPeloId(novaBola.bolaId).collect{ bolaEncotrada ->
-            bolaEncotrada?.let {
-                bolaDao.deletaBola(it)
-                bolaDao.adicionarBola(novaBola)
+        bolaDao.atualizaBola(novaBola.toBolaPOJO())
+    }
+    suspend fun buscaBolaPorNome(nome: String):Flow<List<Bola>>{
+        return bolaDao.buscaBolasPorNome(nome).map { lista->
+            lista.map {bola ->
+                bola.toBola()
             }
         }
     }

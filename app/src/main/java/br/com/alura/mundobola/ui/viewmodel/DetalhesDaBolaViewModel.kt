@@ -66,8 +66,8 @@ class DetalhesDaBolaViewModel @Inject constructor(
                     )
                 }
                 bola.marcaId?.let { idDaMarca ->
-                    repositorio.encontrarNomeMarcaPeloId(idDaMarca).collect { coletaMarca ->
-                        coletaMarca?.let { nome ->
+                    repositorio.encontrarMarcaPeloId(idDaMarca).collect { coletaMarca ->
+                        coletaMarca?.nome?.let { nome ->
                             _uiState.value = _uiState.value.copy(
                                 nomeDaMarca = nome
                             )
@@ -95,11 +95,11 @@ class DetalhesDaBolaViewModel @Inject constructor(
     }
 
     suspend fun deletaBola(id: String) {
-        repositorio.deletaBola(id)
         _uiState.update {
             it.copy(
                 ativarToast = true,
             )
         }
+        repositorio.deletaBola(id)
     }
 }

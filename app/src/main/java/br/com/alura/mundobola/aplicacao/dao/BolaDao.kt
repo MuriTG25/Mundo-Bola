@@ -2,17 +2,9 @@ package br.com.alura.mundobola.aplicacao.dao
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.dominio.Bola
-import br.com.alura.mundobola.dominio.Marca
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emitAll
 import java.time.LocalDateTime
-import javax.inject.Singleton
 
-class BolaDao(){
-    companion object{
-        private val listaDeBolas = mutableListOf<Bola>(
+private val listaDeBolas = mutableListOf<Bola>(
             Bola(
                 bolaId = "a4216a2e-a33a-4857-b47d-1d17b921c1a6",
                 nome = "Total90",
@@ -59,19 +51,4 @@ class BolaDao(){
                 imagem = "https://cambuci.vteximg.com.br/arquivos/ids/943919-292-292/bola-lider-521303-1710-1.jpg?v=638240930324100000",
             ),
         )
-        private val listaDeBolasStateFlow = MutableStateFlow<List<Bola>>(listaDeBolas)
-    }
-    suspend fun listaDeBolas() = listaDeBolasStateFlow.asStateFlow()
 
-    suspend fun adicionarBola(bola: Bola){
-        listaDeBolasStateFlow.value = listaDeBolasStateFlow.value + bola
-    }
-    suspend fun encontrarBolaPeloId(id: String):Bola?{
-        return listaDeBolasStateFlow.value.firstOrNull{
-            it.bolaId == id
-        }
-    }
-    suspend fun deletaBola(bola: Bola){
-        listaDeBolasStateFlow.value = listaDeBolasStateFlow.value - bola
-    }
-}
