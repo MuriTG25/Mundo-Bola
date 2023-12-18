@@ -61,4 +61,18 @@ class MundoBolaRepositorio @Inject constructor(
             }
         }
     }
+    suspend fun listaDeBolasOrdenadaDesc(property: String):Flow<List<Bola>>{
+        return bolaDao.listaDeBolasOrdenadaDesc(property).map { lista->
+            lista.map {bola->
+                bola.toBola()
+            }
+        }
+    }
+    suspend fun listaDeBolasOrdenadaAsc(property: String):Flow<List<Bola>>{
+        return bolaDao.listaDeBolasOrdenadaAsc(property).map { lista->
+            lista.map {bola->
+                bola.toBola()
+            }
+        }
+    }
 }

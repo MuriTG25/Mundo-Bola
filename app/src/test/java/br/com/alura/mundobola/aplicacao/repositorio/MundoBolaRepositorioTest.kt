@@ -6,7 +6,6 @@ import br.com.alura.mundobola.aplicacao.modelo.pojo.toBolaPOJO
 import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
 import br.com.alura.mundobola.auxiliarTeste.idNike
 import br.com.alura.mundobola.dominio.Bola
-import br.com.alura.mundobola.dominio.Marca
 import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
 import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 import io.mockk.coEvery
@@ -17,23 +16,24 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit4.MockKRule
 import io.mockk.mockk
-import io.mockk.mockkClass
 import io.mockk.mockkStatic
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 
 class MundoBolaRepositorioTest {
-    @MockK(relaxUnitFun = true)
-    private lateinit var bolaDao: BolaDao
 
     @MockK(relaxUnitFun = true)
+    private lateinit var bolaDao: BolaDao
+    @MockK(relaxUnitFun = true)
     private lateinit var marcaDao: MarcaDao
+
     private val toBolaEntity = mockkStatic(Bola::toBolaEntity)
     private val toBolaPOJO = mockkStatic(Bola::toBolaPOJO)
 
     @InjectMockKs
     lateinit var repositorio: MundoBolaRepositorio
+
     private val bolaMockadaCompleta = mockk<Bola> {
         every { bolaId } returns "c6fec989-5440-49b5-8b03-8236556f46ab"
         every { nome } returns "Bola Nike"
@@ -44,7 +44,6 @@ class MundoBolaRepositorioTest {
         every { dataAlteracao } returns dataParaTestes
         every { imagem } returns "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg"
     }
-    private val marcaMockada = mockkClass(Marca::class)
 
     @get:Rule
     val mockkRule = MockKRule(this)
@@ -134,6 +133,28 @@ class MundoBolaRepositorioTest {
             repositorio.buscaBolaPorNome("")
             coVerify {
                 bolaDao.buscaBolasPorNome("")
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasOrdenadaDesc do BolaDao, Quando chamar o listaDeBolasOrdenadaDesc do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasOrdenadaDesc("")
+            } returns mockk()
+            repositorio.listaDeBolasOrdenadaDesc("")
+            coVerify {
+                bolaDao.listaDeBolasOrdenadaDesc("")
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasOrdenadaAsc do BolaDao, Quando chamar o listaDeBolasOrdenadaAsc do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasOrdenadaAsc("")
+            } returns mockk()
+            repositorio.listaDeBolasOrdenadaAsc("")
+            coVerify {
+                bolaDao.listaDeBolasOrdenadaAsc("")
             }
         }
 }
