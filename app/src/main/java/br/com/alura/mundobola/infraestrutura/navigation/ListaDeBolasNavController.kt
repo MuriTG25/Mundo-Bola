@@ -24,9 +24,6 @@ fun NavGraphBuilder.ListaDeBolasNavController(
                 navegarParaADescricao(it)
             },
             noClicaFab = navegarParaCadastro,
-            noClicaRealizarBusca = {
-                viewModel.realizaABusca()
-            }
         )
     }
 }

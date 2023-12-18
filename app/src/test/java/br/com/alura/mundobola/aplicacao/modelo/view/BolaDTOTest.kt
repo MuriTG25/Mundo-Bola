@@ -3,7 +3,7 @@ package br.com.alura.mundobola.aplicacao.modelo.view
 import br.com.alura.mundobola.aplicacao.modelo.dto.BolaDTO
 import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
-import br.com.alura.mundobola.auxiliarTeste.BolaDeTesteSimples
+import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteSimples
 import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -11,7 +11,7 @@ import org.amshove.kluent.shouldBeNull
 import org.junit.Test
 
 class BolaDTOTest{
-    private val bolaSimplesConvertida = BolaDeTesteSimples.paraBolaDTO()
+    private val bolaSimplesConvertida = bolaDeTesteSimples.paraBolaDTO()
     private val bolaCompletaConvertida = bolaDeTesteCompleta.paraBolaDTO()
     @Test
     fun `Deve retornar BolaView, Quando buscarmos a classe do objeto`(){
@@ -21,7 +21,7 @@ class BolaDTOTest{
     fun`Deve retornar preco Convertido em String, Quando convertemos Bola Em BolaView`(){
         val precoBola = bolaSimplesConvertida.preco
         precoBola.shouldBeInstanceOf(String::class)
-        BolaDeTesteSimples.preco.shouldBeEqualTo("49.99".toBigDecimal())
+        bolaDeTesteSimples.preco.shouldBeEqualTo("49.99".toBigDecimal())
         precoBola.shouldBeEqualTo("R\$ 49,99")
     }
     @Test
@@ -30,7 +30,7 @@ class BolaDTOTest{
     }
     @Test
     fun `Deve retornar String Vazia, Quando Buscarmos bola com valor de MarcaID nulo`(){
-        BolaDeTesteSimples.marcaId.shouldBeNull()
+        bolaDeTesteSimples.marcaId.shouldBeNull()
         bolaSimplesConvertida.marcaId.shouldBeEqualTo("")
     }
     @Test
@@ -42,7 +42,7 @@ class BolaDTOTest{
     }
     @Test
     fun `Deve retornar String Vazia, Quando buscarmos bola com a Descricao nula`(){
-        BolaDeTesteSimples.descricao.shouldBeNull()
+        bolaDeTesteSimples.descricao.shouldBeNull()
         bolaSimplesConvertida.descricao.shouldBeEqualTo("")
     }
     @Test
@@ -53,7 +53,7 @@ class BolaDTOTest{
     }
     @Test
     fun `Deve retornar String Vazia, Quando buscarmos a imagem da bola nula`(){
-        BolaDeTesteSimples.imagem.shouldBeNull()
+        bolaDeTesteSimples.imagem.shouldBeNull()
         bolaSimplesConvertida.imagem.shouldBeEqualTo("")
     }
     @Test
@@ -72,7 +72,7 @@ class BolaDTOTest{
     }
     @Test
     fun `Deve retornar String Vazia, Quando buscarmos a data de alteracao da bola nula`(){
-        BolaDeTesteSimples.dataAlteracao.shouldBeNull()
+        bolaDeTesteSimples.dataAlteracao.shouldBeNull()
         bolaSimplesConvertida.dataAlteracao.shouldBeEqualTo("")
     }
 }

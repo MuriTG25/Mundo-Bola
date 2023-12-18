@@ -39,14 +39,14 @@ class ListaDeBolasViewModel @Inject constructor(
                         mostraTituloEIconeBusca = true,
                         textoDeBusca = ""
                     )
-                    viewModelScope.launch {
-                        carregaLista()
-                    }
                 },
                 naMudancaDaBusca = { texto ->
                     _uiState.value = _uiState.value.copy(
                         textoDeBusca = texto
                     )
+                    viewModelScope.launch {
+                        realizaABusca(texto)
+                    }
                 },
             )
 
@@ -69,16 +69,15 @@ class ListaDeBolasViewModel @Inject constructor(
             }
     }
 
-    fun realizaABusca() {
+    private fun realizaABusca(textoDeBusca: String) {
         viewModelScope.launch {
-            repositorio.buscaBolaPorNome(_uiState.value.textoDeBusca)
+            repositorio.buscaBolaPorNome(textoDeBusca)
                 .collect { lista ->
                     _uiState.value = _uiState.value.copy(
-                        listaDeBolas = lista.map {
+                        listaDeBusca = lista.map {
                             it.paraBolaDTO()
                         }
                     )
-
                 }
         }
     }

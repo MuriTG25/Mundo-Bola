@@ -12,6 +12,7 @@ import java.time.LocalDateTime
 class ConvertersTest{
     private val converter = Converters()
     private val dataEmString = "2022-08-14T10:40"
+    private val dataInvalidaEmOutroFormato = "2022-08-14 10:40"
     private val precoBolaEmDouble: Double = 49.99
     @Test
     fun `deve converter em String, quando utilizar o converter em LocalDateTime`(){
@@ -28,6 +29,16 @@ class ConvertersTest{
     @Test
     fun `deve manter null, quando utilizar o deLocalDateTimeParaString em valor null`(){
         converter.deLocalDateTimeParaString(null).
+        shouldBeNull()
+    }
+    @Test
+    fun `deve manter null, quando utilizar o deLocalDateTimeParaString em valor de String vazia`(){
+        converter.deStringParaLocalDateTime("").
+            shouldBeNull()
+    }
+    @Test
+    fun `deve manter null, quando utilizar o deLocalDateTimeParaString em valor em String Invalida`(){
+        converter.deStringParaLocalDateTime(dataInvalidaEmOutroFormato).
             shouldBeNull()
     }
     @Test

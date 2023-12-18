@@ -3,6 +3,7 @@ package br.com.alura.mundobola.infraestrutura.database.converters
 import androidx.room.TypeConverter
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.time.format.DateTimeParseException
 
 class Converters {
     @TypeConverter
@@ -12,7 +13,12 @@ class Converters {
     @TypeConverter
     fun deStringParaLocalDateTime(data:String?):LocalDateTime?{
         return data?.let {
-            LocalDateTime.parse(it)
+            try {
+                LocalDateTime.parse(it)
+            }
+            catch (e: DateTimeParseException){
+                return null
+            }
         }
     }
     @TypeConverter

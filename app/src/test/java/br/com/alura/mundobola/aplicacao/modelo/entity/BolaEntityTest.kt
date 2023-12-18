@@ -1,5 +1,7 @@
 package br.com.alura.mundobola.aplicacao.modelo.entity
 
+import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteCompleta
+import br.com.alura.mundobola.auxiliarTeste.bolaDeTesteSimples
 import br.com.alura.mundobola.auxiliarTeste.bolaEntityDeTesteCompleta
 import br.com.alura.mundobola.auxiliarTeste.bolaEntityDeTesteSimples
 import br.com.alura.mundobola.auxiliarTeste.bolaIdTeste
@@ -21,6 +23,9 @@ import java.time.LocalDateTime
 class BolaEntityTest{
     private val bolaSimplesConvertida = bolaEntityDeTesteSimples.toBola()
     private val bolaCompletaConvertida = bolaEntityDeTesteCompleta.toBola()
+
+    private val bolaEntitySimplesConvertida = bolaDeTesteSimples.toBolaEntity()
+    private val bolaEntityCompletaConvertida = bolaDeTesteCompleta.toBolaEntity()
     @Test
     fun `Deve converter em Bola, Quando utilizarmos o toBola() em uma BolaEntity`(){
         bolaEntityDeTesteSimples.shouldBeInstanceOf<BolaEntity>()
@@ -74,10 +79,70 @@ class BolaEntityTest{
         bolaSimplesConvertida.dataCriacao.toLocalDate().shouldBeEqualTo(LocalDate.now())
     }
     @Test
-    fun `Deve manter a dataDeCriacao como LocalDateTime ou Null, Quando utilizarmos o toBola() em uma BolaEntity`(){
+    fun `Deve manter a dataDeAlteracao como LocalDateTime ou Null, Quando utilizarmos o toBola() em uma BolaEntity`(){
         bolaEntityDeTesteCompleta.dataAlteracao.shouldBeInstanceOf<LocalDateTime>()
         bolaCompletaConvertida.dataAlteracao.shouldBeInstanceOf<LocalDateTime>()
         bolaSimplesConvertida.dataAlteracao.shouldBeNull()
         bolaCompletaConvertida.dataAlteracao.shouldBeEqualTo(dataParaTestes)
+    }
+    //Teste do toBolaEntity
+    @Test
+    fun `Deve converter em BolaEntity, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteSimples.shouldBeInstanceOf<Bola>()
+        bolaEntitySimplesConvertida.shouldBeInstanceOf<BolaEntity>()
+    }
+    @Test
+    fun `Deve manter o id como String, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.bolaId.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.bolaId.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.bolaId.shouldBeEqualTo(bolaIdTeste)
+    }
+    @Test
+    fun `Deve manter o nome como String, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.nome.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.nome.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.nome.shouldBeEqualTo(nomeBolaTeste)
+    }
+    @Test
+    fun `Deve manter o preco como BigDecimal, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.preco.shouldBeInstanceOf<BigDecimal>()
+        bolaEntityCompletaConvertida.preco.shouldBeInstanceOf<BigDecimal>()
+        bolaEntityCompletaConvertida.preco.shouldBeEqualTo(precoBolaTeste)
+    }
+    @Test
+    fun `Deve manter a marcaID como String ou Null, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.marcaId.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.marcaId.shouldBeInstanceOf<String>()
+        bolaEntitySimplesConvertida.marcaId.shouldBeNull()
+        bolaEntityCompletaConvertida.marcaId.shouldBeEqualTo(idNike)
+    }
+    @Test
+    fun `Deve manter a descricao como String ou Null, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.descricao.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.descricao.shouldBeInstanceOf<String>()
+        bolaEntitySimplesConvertida.descricao.shouldBeNull()
+        bolaEntityCompletaConvertida.descricao.shouldBeEqualTo(descricaoBolaTeste)
+    }
+    @Test
+    fun `Deve manter a imagem como String ou Null, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.imagem.shouldBeInstanceOf<String>()
+        bolaEntityCompletaConvertida.imagem.shouldBeInstanceOf<String>()
+        bolaEntitySimplesConvertida.imagem.shouldBeNull()
+        bolaEntityCompletaConvertida.imagem.shouldBeEqualTo(imagemBolaTeste)
+    }
+    @Test
+    fun `Deve manter a dataDeCriacao como LocalDateTime, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.dataCriacao.shouldBeInstanceOf<LocalDateTime>()
+        bolaEntityCompletaConvertida.dataCriacao.shouldBeInstanceOf<LocalDateTime>()
+        bolaEntitySimplesConvertida.dataCriacao.shouldBeInstanceOf<LocalDateTime>()
+        bolaEntityCompletaConvertida.dataCriacao.shouldBeEqualTo(dataParaTestes)
+        bolaEntitySimplesConvertida.dataCriacao.toLocalDate().shouldBeEqualTo(LocalDate.now())
+    }
+    @Test
+    fun `Deve manter a dataDeCriacao como LocalDateTime ou Null, Quando utilizarmos o toBolaEntity() em uma Bola`(){
+        bolaDeTesteCompleta.dataAlteracao.shouldBeInstanceOf<LocalDateTime>()
+        bolaEntityCompletaConvertida.dataAlteracao.shouldBeInstanceOf<LocalDateTime>()
+        bolaEntitySimplesConvertida.dataAlteracao.shouldBeNull()
+        bolaEntityCompletaConvertida.dataAlteracao.shouldBeEqualTo(dataParaTestes)
     }
 }

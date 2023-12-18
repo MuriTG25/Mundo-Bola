@@ -1,4 +1,4 @@
-package br.com.alura.mundobola.aplicacao.dao
+package br.com.alura.mundobola.aplicacao.extra.lista
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.dominio.Bola

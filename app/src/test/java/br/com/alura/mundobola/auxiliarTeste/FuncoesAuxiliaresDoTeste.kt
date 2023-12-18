@@ -33,7 +33,7 @@ val bolaDeTesteCompleta = Bola(
     imagem = "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg",
     )
 
-val BolaDeTesteSimples = Bola(
+val bolaDeTesteSimples = Bola(
     nome = "Bola Nike",
     preco = "49.99".toBigDecimal()
     )

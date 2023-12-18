@@ -11,5 +11,5 @@ interface MarcaDao {
     fun listaDeMarcas(): Flow<List<MarcaEntity>>
 
     @Query("SELECT * FROM marca WHERE marcaId = :marcaId")
-    fun encontraMarcaPeloId(marcaId: String): Flow<MarcaEntity>
+    fun encontrarMarcaPeloId(marcaId: String): Flow<MarcaEntity>
 }

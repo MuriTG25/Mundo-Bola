@@ -24,7 +24,7 @@ fun ListaDeBolasScreen(
     noClicaRealizarBusca: () -> Unit = {},
     navegarParaADescricao: (String) -> Unit = {},
 ) {
-    ScaffoldScreen (
+    ScaffoldScreen(
         titulo = stringResource(id = R.string.app_name),
         mostraTitulo = state.mostraTituloEIconeBusca,
         mostraFab = true,
@@ -36,14 +36,17 @@ fun ListaDeBolasScreen(
         naMudancaDaBusca = state.naMudancaDaBusca,
         noClicaRealizarBusca = noClicaRealizarBusca,
         noClicaVoltaBusca = state.noClicaVolta,
-    ){
+    ) {
         LazyVerticalGrid(
             modifier = modifier.padding(margemPadrao),
             verticalArrangement = Arrangement.spacedBy(margemPadrao),
             horizontalArrangement = Arrangement.spacedBy(margemPadrao),
             columns = GridCells.Fixed(2),
         ) {
-            items(state.listaDeBolas) { bola ->
+            val listaDeBolas = if (state.textoDeBusca.isEmpty())
+                state.listaDeBolas
+            else state.listaDeBusca
+            items(listaDeBolas) { bola ->
                 ProdutoBolaComponent(
                     modifier = Modifier.clickable {
                         navegarParaADescricao(bola.bolaId)
@@ -62,6 +65,7 @@ private fun ListaDeBolasScreenPreview() {
         state = ListaDeBolasUiState(amostraDeListaDeBolas)
     )
 }
+
 @Preview(showSystemUi = true)
 @Composable
 private fun ListaDeBolasScreenComCampoDeBuscaPreview() {
@@ -72,6 +76,7 @@ private fun ListaDeBolasScreenComCampoDeBuscaPreview() {
         )
     )
 }
+
 @Preview(showSystemUi = true)
 @Composable
 private fun ListaDeBolasScreenComCampoDeBuscaDigitadoPreview() {
