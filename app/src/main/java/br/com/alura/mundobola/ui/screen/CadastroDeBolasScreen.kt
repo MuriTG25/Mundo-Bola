@@ -29,7 +29,7 @@ import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogCadastroImagem
 import br.com.alura.mundobola.ui.components.cadastrodebolas.DialogErroPrecoComponent
-import br.com.alura.mundobola.ui.components.cadastrodebolas.DropdownMenuComponent
+import br.com.alura.mundobola.ui.components.cadastrodebolas.ExposedDropdownMenuComponent
 import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponentComRequest
 import br.com.alura.mundobola.ui.extra.margemPadrao
@@ -102,7 +102,7 @@ fun CadastroDeBolasScreen(
                         acaoDoTeclado = acaoDoTeclado
                     )
                 }
-                DropdownMenuComponent(
+                ExposedDropdownMenuComponent(
                     modifier = Modifier.fillMaxWidth(),
                     textoDoCampo = "Marca",
                     expandir = state.expandirMenuMarca,

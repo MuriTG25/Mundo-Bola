@@ -16,7 +16,7 @@ fun ScaffoldScreen(
     titulo: String = "",
 //    snackbarHostState: SnackbarHostState = SnackbarHostState(),
     mostraTitulo: Boolean = true,
-    mostraBusca: Boolean = false,
+    mostraBuscaEOrdenaPor: Boolean = false,
     noClicaBusca: () -> Unit = {},
     mostraFab: Boolean = false,
     noClicaFab: () -> Unit = {},
@@ -30,15 +30,23 @@ fun ScaffoldScreen(
     naMudancaDaBusca: (String) -> Unit = {},
     noClicaRealizarBusca: () -> Unit = {},
     noClicaVoltaBusca: () -> Unit = {},
+    expandirMenu: Boolean = false,
+    alteracaoDaExpansaoMenu: (Boolean) -> Unit = {},
+    noClicaNomeAsc: () -> Unit = {},
+    noClicaNomeDesc: () -> Unit = {},
+    noClicaPrecoAsc: () -> Unit = {},
+    noClicaPrecoDesc: () -> Unit = {},
+    noClicaMaisAntigo: () -> Unit = {},
+    noClicaMaisNovo: () -> Unit = {},
     conteudo: @Composable () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBarComponent(
-                mostraTitulo = mostraTitulo,
-                noClicaBusca = noClicaBusca,
-                mostraBusca = mostraBusca,
                 texto = titulo,
+                mostraTitulo = mostraTitulo,
+                mostraBuscaEOrdenaPor = mostraBuscaEOrdenaPor,
+                noClicaBusca = noClicaBusca,
                 mostraVolta = mostraVolta,
                 noClicaVolta = noClicaVolta,
                 mostraEditaEDeleta = mostraEditaEDelete,
@@ -48,8 +56,16 @@ fun ScaffoldScreen(
                 textoBusca = textoBusca,
                 naMudancaDaBusca = naMudancaDaBusca,
                 noClicaRealizarBusca = noClicaRealizarBusca,
-                noClicaVoltaBusca = noClicaVoltaBusca
-            )
+                noClicaVoltaBusca = noClicaVoltaBusca,
+                expandirMenu = expandirMenu,
+                alteracaoDaExpansaoMenu = alteracaoDaExpansaoMenu,
+                noClicaNomeAsc = noClicaNomeAsc,
+                noClicaNomeDesc = noClicaNomeDesc,
+                noClicaPrecoAsc = noClicaPrecoAsc,
+                noClicaPrecoDesc = noClicaPrecoDesc,
+                noClicaMaisAntigo = noClicaMaisAntigo,
+                noClicaMaisNovo = noClicaMaisNovo
+                )
         },
         floatingActionButton = {
             if (mostraFab) {
@@ -79,7 +95,7 @@ private fun ScaffoldScreenPreviewTelaPrincipal() {
     ScaffoldScreen(
         titulo = stringResource(id = R.string.app_name),
         mostraFab = true,
-        mostraBusca = true
+        mostraBuscaEOrdenaPor = true
     ) {}
 }
 @Preview(showSystemUi = true)
@@ -89,7 +105,7 @@ private fun ScaffoldScreenPreviewTelaPrincipalBusca() {
         titulo = stringResource(id = R.string.app_name),
         mostraTitulo = false,
         mostraFab = true,
-        mostraBusca = false,
+        mostraBuscaEOrdenaPor = false,
         mostraTextoBusca = true
     ) {}
 }

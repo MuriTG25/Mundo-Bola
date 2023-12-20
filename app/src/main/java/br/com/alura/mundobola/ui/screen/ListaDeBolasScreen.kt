@@ -23,19 +23,33 @@ fun ListaDeBolasScreen(
     noClicaFab: () -> Unit = {},
     noClicaRealizarBusca: () -> Unit = {},
     navegarParaADescricao: (String) -> Unit = {},
+    noClicaNomeAsc: () -> Unit = {},
+    noClicaNomeDesc: () -> Unit = {},
+    noClicaPrecoAsc: () -> Unit = {},
+    noClicaPrecoDesc: () -> Unit = {},
+    noClicaMaisAntigo: () -> Unit = {},
+    noClicaMaisNovo: () -> Unit = {},
 ) {
     ScaffoldScreen(
         titulo = stringResource(id = R.string.app_name),
-        mostraTitulo = state.mostraTituloEIconeBusca,
+        mostraTitulo = state.mostraTituloBuscaEOrdenaPor,
         mostraFab = true,
-        mostraBusca = state.mostraTituloEIconeBusca,
+        mostraBuscaEOrdenaPor = state.mostraTituloBuscaEOrdenaPor,
         noClicaBusca = state.noClicaBusca,
         noClicaFab = noClicaFab,
-        mostraTextoBusca = !state.mostraTituloEIconeBusca,
+        mostraTextoBusca = !state.mostraTituloBuscaEOrdenaPor,
         textoBusca = state.textoDeBusca,
         naMudancaDaBusca = state.naMudancaDaBusca,
         noClicaRealizarBusca = noClicaRealizarBusca,
         noClicaVoltaBusca = state.noClicaVolta,
+        expandirMenu = state.expandirMenu,
+        alteracaoDaExpansaoMenu = state.alteracaoDaExpansaoMenu,
+        noClicaNomeAsc = noClicaNomeAsc,
+        noClicaNomeDesc = noClicaNomeDesc,
+        noClicaPrecoAsc = noClicaPrecoAsc,
+        noClicaPrecoDesc = noClicaPrecoDesc,
+        noClicaMaisNovo = noClicaMaisNovo,
+        noClicaMaisAntigo = noClicaMaisAntigo
     ) {
         LazyVerticalGrid(
             modifier = modifier.padding(margemPadrao),
@@ -62,7 +76,7 @@ fun ListaDeBolasScreen(
 @Composable
 private fun ListaDeBolasScreenPreview() {
     ListaDeBolasScreen(
-        state = ListaDeBolasUiState(amostraDeListaDeBolas)
+        state = ListaDeBolasUiState(amostraDeListaDeBolas,)
     )
 }
 
@@ -72,7 +86,7 @@ private fun ListaDeBolasScreenComCampoDeBuscaPreview() {
     ListaDeBolasScreen(
         state = ListaDeBolasUiState(
             listaDeBolas = amostraDeListaDeBolas,
-            mostraTituloEIconeBusca = false,
+            mostraTituloBuscaEOrdenaPor = false,
         )
     )
 }
@@ -83,8 +97,8 @@ private fun ListaDeBolasScreenComCampoDeBuscaDigitadoPreview() {
     ListaDeBolasScreen(
         state = ListaDeBolasUiState(
             listaDeBolas = amostraDeListaDeBolas,
-            mostraTituloEIconeBusca = false,
-            textoDeBusca = "Total 90"
+            mostraTituloBuscaEOrdenaPor = false,
+            textoDeBusca = "Total 90",
         )
     )
 }

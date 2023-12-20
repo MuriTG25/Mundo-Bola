@@ -25,7 +25,7 @@ import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 fun TopAppBarComponent(
     texto: String = "",
     mostraTitulo: Boolean = true,
-    mostraBusca: Boolean = true,
+    mostraBuscaEOrdenaPor: Boolean = true,
     noClicaBusca: () -> Unit = {},
     mostraVolta: Boolean = true,
     noClicaVolta: () -> Unit = {},
@@ -37,11 +37,19 @@ fun TopAppBarComponent(
     naMudancaDaBusca: (String) -> Unit = {},
     noClicaRealizarBusca: () -> Unit = {},
     noClicaVoltaBusca: () -> Unit = {},
+    expandirMenu: Boolean = false,
+    alteracaoDaExpansaoMenu: (Boolean) -> Unit = {},
+    noClicaNomeAsc: () -> Unit = {},
+    noClicaNomeDesc: () -> Unit = {},
+    noClicaPrecoAsc: () -> Unit = {},
+    noClicaPrecoDesc: () -> Unit = {},
+    noClicaMaisAntigo: () -> Unit = {},
+    noClicaMaisNovo: () -> Unit = {},
 
-) {
+    ) {
     CenterAlignedTopAppBar(
         title = {
-            if (mostraTitulo){
+            if (mostraTitulo) {
                 TextoProdutoComponent(
                     texto = texto,
                     maxLines = 1,
@@ -50,9 +58,9 @@ fun TopAppBarComponent(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-            if(mostraTextoBusca){
+            if (mostraTextoBusca) {
                 CampoDeBuscaComponent(
-                    modifier = Modifier.offset(y= (-2).dp),
+                    modifier = Modifier.offset(y = (-2).dp),
                     textoBusca = textoBusca,
                     naMudancaDeBusca = naMudancaDaBusca,
                     noClicaPesquisa = noClicaRealizarBusca,
@@ -61,8 +69,20 @@ fun TopAppBarComponent(
             }
         },
         actions = {
+            if(mostraBuscaEOrdenaPor){
+                DropdowmMenuComponent(
+                    expandir = expandirMenu,
+                    alteracaoDaExpansao = alteracaoDaExpansaoMenu,
+                    noClicaNomeAsc = noClicaNomeAsc,
+                    noClicaNomeDesc = noClicaNomeDesc,
+                    noClicaPrecoAsc = noClicaPrecoAsc,
+                    noClicaPrecoDesc = noClicaPrecoDesc,
+                    noClicaMaisAntigo = noClicaMaisAntigo,
+                    noClicaMaisNovo = noClicaMaisNovo,
+                )
+            }
             IconTopAppBarComponent(
-                mostraElemento = mostraBusca,
+                mostraElemento = mostraBuscaEOrdenaPor,
                 noClicarBotao = noClicaBusca,
                 imagemVetor = Icons.Filled.Search,
                 descricaoBotao = "Buscar produto pelo nome"
@@ -99,27 +119,29 @@ fun TopAppBarComponent(
 private fun TopAppBarComponentPreviewComElementos() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
-        mostraBusca = false,
+        mostraBuscaEOrdenaPor = false,
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun TopAppBarComponentPreviewSemElementos() {
+private fun TopAppBarComponentPreviewTelaLista() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
-        mostraBusca = false,
+        mostraBuscaEOrdenaPor = true,
         mostraVolta = false,
         mostraEditaEDeleta = false,
     )
 }
+
 @Preview(showBackground = true)
 @Composable
 private fun TopAppBarComponentPreviewTelaBusca() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
         mostraTitulo = false,
-        mostraBusca = false,
+        mostraBuscaEOrdenaPor = false,
+        mostraVolta = false,
         mostraEditaEDeleta = false,
         mostraTextoBusca = true,
     )

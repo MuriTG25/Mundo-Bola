@@ -10,6 +10,9 @@ import br.com.alura.mundobola.ui.viewmodel.ListaDeBolasViewModel
 import br.com.alura.mundobola.ui.screen.ListaDeBolasScreen
 
 internal const val listaDeBolasRota = "listaDeBolas"
+private const val nomeProperty = "nome"
+private const val precoProperty = "preco"
+private const val dataCriacaoProperty = "dataCriacao"
 
 fun NavGraphBuilder.ListaDeBolasNavController(
     navegarParaADescricao: (String) -> Unit = {},
@@ -24,6 +27,24 @@ fun NavGraphBuilder.ListaDeBolasNavController(
                 navegarParaADescricao(it)
             },
             noClicaFab = navegarParaCadastro,
+            noClicaNomeAsc = {
+                viewModel.ordenaListaPorAsc(nomeProperty)
+            },
+            noClicaNomeDesc = {
+                viewModel.ordenaListaPorDesc(nomeProperty)
+            },
+            noClicaPrecoAsc = {
+                viewModel.ordenaListaPorAsc(precoProperty)
+            },
+            noClicaPrecoDesc = {
+                viewModel.ordenaListaPorDesc(precoProperty)
+            },
+            noClicaMaisAntigo = {
+                viewModel.ordenaListaPorAsc(dataCriacaoProperty)
+            },
+            noClicaMaisNovo = {
+                viewModel.ordenaListaPorDesc(dataCriacaoProperty)
+            }
         )
     }
 }
