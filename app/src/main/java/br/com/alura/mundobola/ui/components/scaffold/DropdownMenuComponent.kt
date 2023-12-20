@@ -1,14 +1,21 @@
 package br.com.alura.mundobola.ui.components.scaffold
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun DropdowmMenuComponent(
@@ -35,50 +42,50 @@ fun DropdowmMenuComponent(
             }
         )
         DropdownMenu(
-            modifier = Modifier,
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+                .widthIn(200.dp,500.dp),
             expanded = expandir,
             onDismissRequest = {
                 alteracaoDaExpansao(false)
-            }
+            },
+            offset = DpOffset((-40).dp,0.dp)
         ) {
             DropdownMenuItemComponent(
                 texto = "Nome Asc",
                 noClicaItem = {
                     noClicaNomeAsc()
-                    alteracaoDaExpansao(false)
                 }
             )
             DropdownMenuItemComponent(
                 texto = "Nome Desc",
                 noClicaItem = {
                     noClicaNomeDesc()
-                    alteracaoDaExpansao(false)
                 }
             )
             DropdownMenuItemComponent(
                 texto = "Preço Asc",
                 noClicaItem = {
                     noClicaPrecoAsc()
-                    alteracaoDaExpansao(false)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Preço Desc",
                 noClicaItem = {
                     noClicaPrecoDesc()
-                    alteracaoDaExpansao(false)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Mais Novo",
                 noClicaItem = {
                     noClicaMaisNovo()
-                    alteracaoDaExpansao(false)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Mais Antigo",
-                noClicaItem = noClicaMaisAntigo,
+                noClicaItem = {
+                    noClicaMaisAntigo()
+                },
             )
         }
     }

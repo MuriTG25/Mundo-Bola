@@ -10,15 +10,12 @@ import br.com.alura.mundobola.ui.viewmodel.ListaDeBolasViewModel
 import br.com.alura.mundobola.ui.screen.ListaDeBolasScreen
 
 internal const val listaDeBolasRota = "listaDeBolas"
-private const val nomeProperty = "nome"
-private const val precoProperty = "preco"
-private const val dataCriacaoProperty = "dataCriacao"
 
 fun NavGraphBuilder.ListaDeBolasNavController(
     navegarParaADescricao: (String) -> Unit = {},
     navegarParaCadastro: () -> Unit = {},
-){
-    composable(listaDeBolasRota){
+) {
+    composable(listaDeBolasRota) {
         val viewModel = hiltViewModel<ListaDeBolasViewModel>()
         val uiState by viewModel.uiState.collectAsState()
         ListaDeBolasScreen(
@@ -28,30 +25,31 @@ fun NavGraphBuilder.ListaDeBolasNavController(
             },
             noClicaFab = navegarParaCadastro,
             noClicaNomeAsc = {
-                viewModel.ordenaListaPorAsc(nomeProperty)
+                viewModel.listaDeBolasPorNomeAsc()
             },
             noClicaNomeDesc = {
-                viewModel.ordenaListaPorDesc(nomeProperty)
+                viewModel.listaDeBolasPorNomeDesc()
             },
             noClicaPrecoAsc = {
-                viewModel.ordenaListaPorAsc(precoProperty)
+                viewModel.listaDeBolasPorPrecoAsc()
             },
             noClicaPrecoDesc = {
-                viewModel.ordenaListaPorDesc(precoProperty)
+                viewModel.listaDeBolasPorPrecoDesc()
             },
             noClicaMaisAntigo = {
-                viewModel.ordenaListaPorAsc(dataCriacaoProperty)
+                viewModel.listaDeBolasPeloMaisAntigo()
             },
             noClicaMaisNovo = {
-                viewModel.ordenaListaPorDesc(dataCriacaoProperty)
+                viewModel.listaDeBolasPeloMaisNovo()
             }
         )
     }
 }
-fun NavController.navegarParaListaDeBolas(){
-    navigate(listaDeBolasRota){
+
+fun NavController.navegarParaListaDeBolas() {
+    navigate(listaDeBolasRota) {
         launchSingleTop = true
-        popUpTo(graph.id){
+        popUpTo(graph.id) {
             inclusive = true
         }
     }

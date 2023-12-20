@@ -18,61 +18,91 @@ import javax.inject.Singleton
 class MundoBolaRepositorio @Inject constructor(
     private val bolaDao: BolaDao,
     private val marcaDao: MarcaDao,
-){
+) {
     suspend fun listaDeBolas(): Flow<List<Bola>> {
-        return bolaDao.listaDeBolas().map { lista->
-            lista.map { bola->
+        return bolaDao.listaDeBolas().map { lista ->
+            lista.map { bola ->
                 bola.toBola()
             }
         }
     }
-    suspend fun adicionarBola(bola: Bola){
+
+    suspend fun adicionarBola(bola: Bola) {
         bolaDao.adicionarBola(bola.toBolaEntity())
     }
+
     suspend fun listaDeMarcas(): Flow<List<Marca>> {
-        return marcaDao.listaDeMarcas().map {lista ->
-            lista.map {marca->
+        return marcaDao.listaDeMarcas().map { lista ->
+            lista.map { marca ->
                 marca.toMarca()
             }
         }
     }
-    suspend fun encontrarBolaPeloId(id:String): Flow<Bola?> {
+
+    suspend fun encontrarBolaPeloId(id: String): Flow<Bola?> {
         return bolaDao.encontrarBolaPeloId(id).map {
             it?.toBola()
         }
     }
-    suspend fun encontrarMarcaPeloId(id:String): Flow<Marca?> {
+
+    suspend fun encontrarMarcaPeloId(id: String): Flow<Marca?> {
         return marcaDao.encontrarMarcaPeloId(id).map {
             it.toMarca()
         }
     }
-    suspend fun deletaBola(id: String){
+
+    suspend fun deletaBola(id: String) {
         bolaDao.deletaBola(id)
     }
+
     suspend fun editaBola(
         novaBola: Bola,
-    ){
+    ) {
         bolaDao.atualizaBola(novaBola.toBolaPOJO())
     }
-    suspend fun buscaBolaPorNome(nome: String):Flow<List<Bola>>{
-        return bolaDao.buscaBolasPorNome(nome).map { lista->
-            lista.map {bola ->
+
+    suspend fun buscaBolaPorNome(nome: String): Flow<List<Bola>> {
+        return bolaDao.buscaBolasPorNome(nome).map { lista ->
+            lista.map { bola ->
                 bola.toBola()
             }
         }
     }
-    suspend fun listaDeBolasOrdenadaDesc(property: String):Flow<List<Bola>>{
-        return bolaDao.listaDeBolasOrdenadaDesc(property).map { lista->
-            lista.map {bola->
-                bola.toBola()
-            }
+
+    suspend fun listaDeBolasPorNomeAsc(): List<Bola> {
+        return bolaDao.listaDeBolasPorNomeAsc().map { bola ->
+            bola.toBola()
         }
     }
-    suspend fun listaDeBolasOrdenadaAsc(property: String):Flow<List<Bola>>{
-        return bolaDao.listaDeBolasOrdenadaAsc(property).map { lista->
-            lista.map {bola->
-                bola.toBola()
-            }
+
+    suspend fun listaDeBolasPorNomeDesc(): List<Bola> {
+        return bolaDao.listaDeBolasPorNomeDesc().map { bola ->
+            bola.toBola()
         }
     }
+
+    suspend fun listaDeBolasPorPrecoAsc(): List<Bola> {
+        return bolaDao.listaDeBolasPorPrecoAsc().map { bola ->
+            bola.toBola()
+        }
+    }
+
+    suspend fun listaDeBolasPorPrecoDesc(): List<Bola> {
+        return bolaDao.listaDeBolasPorPrecoDesc().map { bola ->
+            bola.toBola()
+        }
+    }
+
+    suspend fun listaDeBolasPeloMaisNovo(): List<Bola> {
+        return bolaDao.listaDeBolasPeloMaisNovo().map { bola ->
+                bola.toBola()
+        }
+    }
+
+    suspend fun listaDeBolasPeloMaisAntigo(): List<Bola> {
+        return bolaDao.listaDeBolasPeloMaisAntigo().map { bola ->
+                bola.toBola()
+        }
+    }
+
 }

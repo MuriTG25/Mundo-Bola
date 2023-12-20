@@ -26,11 +26,18 @@ interface BolaDao {
     @Query("DELETE FROM bola WHERE bolaId = :bolaId")
     suspend fun deletaBola(bolaId: String)
 
-    @Query("SELECT * FROM bola ORDER BY :property ASC")
-    fun listaDeBolasOrdenadaAsc(property: String): Flow<List<BolaEntity>>
-
-    @Query("SELECT * FROM bola ORDER BY :property DESC")
-    fun listaDeBolasOrdenadaDesc(property: String): Flow<List<BolaEntity>>
+    @Query("SELECT * FROM bola ORDER BY nome ASC")
+    suspend fun listaDeBolasPorNomeAsc(): List<BolaEntity>
+    @Query("SELECT * FROM bola ORDER BY nome DESC")
+    suspend fun listaDeBolasPorNomeDesc(): List<BolaEntity>
+    @Query("SELECT * FROM bola ORDER BY preco ASC")
+    suspend fun listaDeBolasPorPrecoAsc(): List<BolaEntity>
+    @Query("SELECT * FROM bola ORDER BY preco DESC")
+    suspend fun listaDeBolasPorPrecoDesc(): List<BolaEntity>
+    @Query("SELECT * FROM bola ORDER BY dataCriacao DESC")
+    suspend fun listaDeBolasPeloMaisNovo(): List<BolaEntity>
+    @Query("SELECT * FROM bola ORDER BY dataCriacao ASC")
+    suspend fun listaDeBolasPeloMaisAntigo(): List<BolaEntity>
 
     @Query("SELECT * FROM bola WHERE nome LIKE '%' || :nome || '%'")
     fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity>>

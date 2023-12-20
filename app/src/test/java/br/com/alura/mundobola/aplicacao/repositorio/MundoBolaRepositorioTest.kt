@@ -136,25 +136,69 @@ class MundoBolaRepositorioTest {
             }
         }
     @Test
-    fun `Deve chamar o listaDeBolasOrdenadaDesc do BolaDao, Quando chamar o listaDeBolasOrdenadaDesc do repositorio`(): Unit =
+    fun `Deve chamar o listaDeBolasPorNomeAsc do BolaDao, Quando chamar o listaDeBolasPorNomeAsc do repositorio`(): Unit =
         runBlocking {
             every {
-                bolaDao.listaDeBolasOrdenadaDesc("")
+                bolaDao.listaDeBolasPorNomeAsc()
             } returns mockk()
-            repositorio.listaDeBolasOrdenadaDesc("")
+            repositorio.listaDeBolasPorNomeAsc()
             coVerify {
-                bolaDao.listaDeBolasOrdenadaDesc("")
+                bolaDao.listaDeBolasPorNomeAsc()
             }
         }
     @Test
-    fun `Deve chamar o listaDeBolasOrdenadaAsc do BolaDao, Quando chamar o listaDeBolasOrdenadaAsc do repositorio`(): Unit =
+    fun `Deve chamar o listaDeBolasPorNomeDesc do BolaDao, Quando chamar o listaDeBolasPorNomeDesc do repositorio`(): Unit =
         runBlocking {
             every {
-                bolaDao.listaDeBolasOrdenadaAsc("")
+                bolaDao.listaDeBolasPorNomeDesc()
             } returns mockk()
-            repositorio.listaDeBolasOrdenadaAsc("")
+            repositorio.listaDeBolasPorNomeDesc()
             coVerify {
-                bolaDao.listaDeBolasOrdenadaAsc("")
+                bolaDao.listaDeBolasPorNomeDesc()
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasPorPrecoAsc do BolaDao, Quando chamar o listaDeBolasPorPrecoAsc do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasPorPrecoAsc()
+            } returns mockk()
+            repositorio.listaDeBolasPorPrecoAsc()
+            coVerify {
+                bolaDao.listaDeBolasPorPrecoAsc()
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasPorPrecoDesc do BolaDao, Quando chamar o listaDeBolasPorPrecoDesc do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasPorPrecoDesc()
+            } returns mockk()
+            repositorio.listaDeBolasPorPrecoDesc()
+            coVerify {
+                bolaDao.listaDeBolasPorPrecoDesc()
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasPeloMaisNovo do BolaDao, Quando chamar o listaDeBolasPeloMaisNovo do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasPeloMaisNovo()
+            } returns mockk()
+            repositorio.listaDeBolasPeloMaisNovo()
+            coVerify {
+                bolaDao.listaDeBolasPeloMaisNovo()
+            }
+        }
+    @Test
+    fun `Deve chamar o listaDeBolasPeloMaisAntigo do BolaDao, Quando chamar o listaDeBolasPeloMaisAntigo do repositorio`(): Unit =
+        runBlocking {
+            every {
+                bolaDao.listaDeBolasPeloMaisAntigo()
+            } returns mockk()
+            repositorio.listaDeBolasPeloMaisAntigo()
+            coVerify {
+                bolaDao.listaDeBolasPeloMaisAntigo()
             }
         }
 }
