@@ -61,7 +61,7 @@ class MundoBolaRepositorio @Inject constructor(
         bolaDao.atualizaBola(novaBola.toBolaPOJO())
     }
 
-    suspend fun buscaBolaPorNome(nome: String): Flow<List<Bola>> {
+    fun buscaBolaPorNome(nome: String): Flow<List<Bola>> {
         return bolaDao.buscaBolasPorNome(nome).map { lista ->
             lista.map { bola ->
                 bola.toBola()
@@ -104,5 +104,4 @@ class MundoBolaRepositorio @Inject constructor(
                 bola.toBola()
         }
     }
-
 }

@@ -13,12 +13,15 @@ import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.stateholder.CadastroDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 @HiltViewModel
 class CadastrodeBolasViewModel @Inject constructor(
@@ -151,7 +154,9 @@ class CadastrodeBolasViewModel @Inject constructor(
                         )
                         repositorio.adicionarBola(bola)
                         mensagemCadastroSucesso()
-                        irParaTelaPrincipal()
+                        viewModelScope.launch(context = Dispatchers.Main){
+                            irParaTelaPrincipal()
+                        }
                     } else {
                         val bola = Bola(
                             bolaId = bolaId,
@@ -165,7 +170,9 @@ class CadastrodeBolasViewModel @Inject constructor(
                         )
                         repositorio.editaBola(bola)
                         mensagemEdicaoSucesso()
-                        irParaATelaDeDetalhes(bolaId)
+                        viewModelScope.launch(Dispatchers.Main){
+                            irParaATelaDeDetalhes(bolaId)
+                        }
                     }
                 } ?: mensagemDeErroNoPreco()
             }

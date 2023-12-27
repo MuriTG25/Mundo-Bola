@@ -24,6 +24,7 @@ import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
+import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
@@ -66,16 +67,23 @@ import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.urlBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
-import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez
+import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTextoMaisDe1Vez
-import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
+import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
+import br.com.alura.mundobola.infraestrutura.database.MundoBolaDatabase
+import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
+import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
 
 @HiltAndroidTest
 class CadastroDeBolasScreenKtTest{
@@ -83,6 +91,13 @@ class CadastroDeBolasScreenKtTest{
     val hiltRule = HiltAndroidRule(this)
     @get:Rule(order = 1)
     val testeDeUi = createAndroidComposeRule(MainActivity::class.java)
+    @Inject
+    lateinit var testDb: MundoBolaDatabase
+    @Inject
+    lateinit var bolaDao: BolaDao
+    @Inject
+    lateinit var marcaDao: MarcaDao
+
     private val uiDevice = UiDevice.getInstance(
         InstrumentationRegistry.getInstrumentation()
     )
@@ -102,6 +117,14 @@ class CadastroDeBolasScreenKtTest{
     }
     private fun scrollaAteOFinalDaTela(){
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+    }
+    @Before
+    fun setUp() = runBlocking{
+        hiltRule.inject()
+    }
+    @After
+    fun finish(){
+        testDb.limpaDatabase()
     }
 
     @Test
@@ -312,9 +335,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoComSimboloNegativo)
         clicaBotaoSalvar()
-        testeDeUi.esperaAteATelaAparecerComTempo(nomeOutraBolaExiste)
-
-        testeDeUi.scrollaAteOElementoPeloNome(nomeBolaTeste)
+        testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaTeste)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaTeste)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)

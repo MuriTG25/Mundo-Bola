@@ -1,0 +1,161 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "0b074cf70df81ae729179d6afe349380",
+    "entities": [
+      {
+        "tableName": "bola",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`bolaId` TEXT NOT NULL, `nome` TEXT NOT NULL, `preco` REAL NOT NULL, `marcaId` TEXT, `descricao` TEXT, `imagem` TEXT, `dataCriacao` TEXT NOT NULL, `dataAlteracao` TEXT, PRIMARY KEY(`bolaId`), FOREIGN KEY(`marcaId`) REFERENCES `marca`(`marcaId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "bolaId",
+            "columnName": "bolaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preco",
+            "columnName": "preco",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "marcaId",
+            "columnName": "marcaId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "descricao",
+            "columnName": "descricao",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imagem",
+            "columnName": "imagem",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataCriacao",
+            "columnName": "dataCriacao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataAlteracao",
+            "columnName": "dataAlteracao",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "bolaId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_bola_nome",
+            "unique": false,
+            "columnNames": [
+              "nome"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bola_nome` ON `${TABLE_NAME}` (`nome`)"
+          },
+          {
+            "name": "index_bola_marcaId",
+            "unique": false,
+            "columnNames": [
+              "marcaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_bola_marcaId` ON `${TABLE_NAME}` (`marcaId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "marca",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "marcaId"
+            ],
+            "referencedColumns": [
+              "marcaId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "marca",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marcaId` TEXT NOT NULL, `nome` TEXT NOT NULL, `imagem` TEXT, `dataCriacao` TEXT NOT NULL, `dataAlteracao` TEXT, PRIMARY KEY(`marcaId`))",
+        "fields": [
+          {
+            "fieldPath": "marcaId",
+            "columnName": "marcaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome",
+            "columnName": "nome",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "imagem",
+            "columnName": "imagem",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dataCriacao",
+            "columnName": "dataCriacao",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dataAlteracao",
+            "columnName": "dataAlteracao",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "marcaId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_marca_nome",
+            "unique": false,
+            "columnNames": [
+              "nome"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_marca_nome` ON `${TABLE_NAME}` (`nome`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0b074cf70df81ae729179d6afe349380')"
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 package br.com.alura.mundobola.aplicacao.repositorio
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
+import br.com.alura.mundobola.aplicacao.modelo.entity.toBola
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBolaEntity
 import br.com.alura.mundobola.aplicacao.modelo.pojo.toBolaPOJO
 import br.com.alura.mundobola.auxiliarTeste.dataParaTestes
@@ -10,6 +12,8 @@ import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
 import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.coVerifyAll
+import io.mockk.coVerifyOrder
 import io.mockk.coVerifySequence
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -30,6 +34,7 @@ class MundoBolaRepositorioTest {
 
     private val toBolaEntity = mockkStatic(Bola::toBolaEntity)
     private val toBolaPOJO = mockkStatic(Bola::toBolaPOJO)
+    private val toBola = mockkStatic(BolaEntity::toBola)
 
     @InjectMockKs
     lateinit var repositorio: MundoBolaRepositorio
@@ -135,21 +140,22 @@ class MundoBolaRepositorioTest {
                 bolaDao.buscaBolasPorNome("")
             }
         }
+    //TODO: tenho que consertar estes testes
     @Test
     fun `Deve chamar o listaDeBolasPorNomeAsc do BolaDao, Quando chamar o listaDeBolasPorNomeAsc do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPorNomeAsc()
             } returns mockk()
             repositorio.listaDeBolasPorNomeAsc()
-            coVerify {
+            coVerify{
                 bolaDao.listaDeBolasPorNomeAsc()
             }
         }
     @Test
     fun `Deve chamar o listaDeBolasPorNomeDesc do BolaDao, Quando chamar o listaDeBolasPorNomeDesc do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPorNomeDesc()
             } returns mockk()
             repositorio.listaDeBolasPorNomeDesc()
@@ -160,7 +166,7 @@ class MundoBolaRepositorioTest {
     @Test
     fun `Deve chamar o listaDeBolasPorPrecoAsc do BolaDao, Quando chamar o listaDeBolasPorPrecoAsc do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPorPrecoAsc()
             } returns mockk()
             repositorio.listaDeBolasPorPrecoAsc()
@@ -171,18 +177,19 @@ class MundoBolaRepositorioTest {
     @Test
     fun `Deve chamar o listaDeBolasPorPrecoDesc do BolaDao, Quando chamar o listaDeBolasPorPrecoDesc do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPorPrecoDesc()
             } returns mockk()
             repositorio.listaDeBolasPorPrecoDesc()
-            coVerify {
+            coVerifyAll {
+                toBola
                 bolaDao.listaDeBolasPorPrecoDesc()
             }
         }
     @Test
     fun `Deve chamar o listaDeBolasPeloMaisNovo do BolaDao, Quando chamar o listaDeBolasPeloMaisNovo do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPeloMaisNovo()
             } returns mockk()
             repositorio.listaDeBolasPeloMaisNovo()
@@ -193,7 +200,7 @@ class MundoBolaRepositorioTest {
     @Test
     fun `Deve chamar o listaDeBolasPeloMaisAntigo do BolaDao, Quando chamar o listaDeBolasPeloMaisAntigo do repositorio`(): Unit =
         runBlocking {
-            every {
+            coEvery {
                 bolaDao.listaDeBolasPeloMaisAntigo()
             } returns mockk()
             repositorio.listaDeBolasPeloMaisAntigo()

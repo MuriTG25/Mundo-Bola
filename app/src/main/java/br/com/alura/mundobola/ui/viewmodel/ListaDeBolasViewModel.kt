@@ -20,10 +20,9 @@ class ListaDeBolasViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(ListaDeBolasUiState())
     val uiState = _uiState.asStateFlow()
-    private val job = viewModelScope
 
     init {
-        job.launch {
+        viewModelScope.launch {
             carregaLista()
         }
         _uiState.update { listaDeBolasUiState ->
