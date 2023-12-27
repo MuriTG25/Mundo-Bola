@@ -46,8 +46,8 @@ class MundoBolaRepositorio @Inject constructor(
     }
 
     suspend fun encontrarMarcaPeloId(id: String): Flow<Marca?> {
-        return marcaDao.encontrarMarcaPeloId(id).map {
-            it.toMarca()
+        return marcaDao.encontrarMarcaPeloId(id).map {marca->
+            marca?.toMarca()
         }
     }
 

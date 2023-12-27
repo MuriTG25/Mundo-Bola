@@ -20,8 +20,11 @@ import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.imagemBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
+import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
-import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteEditado
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteOriginal
 import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
@@ -42,26 +45,52 @@ import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDes
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavelPeloTexto
+import br.com.alura.mundobola.infraestrutura.database.MundoBolaDatabase
+import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
+import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import javax.inject.Inject
 
+//TODO corrigir 1 teste
 @HiltAndroidTest
 class DetalhesDaBolaScreenKtTest{
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
     @get:Rule(order = 1)
     val testeDeUi = createAndroidComposeRule(MainActivity::class.java)
+    @Inject
+    lateinit var testDb: MundoBolaDatabase
+    @Inject
+    lateinit var bolaDao: BolaDao
+    @Inject
+    lateinit var marcaDao: MarcaDao
     private val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private fun vaiParaATelaDeDetalhes(nomeProduto:String){
         testeDeUi.clicaNoElementoPeloNome(nomeProduto)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
     }
+    @Before
+    fun setUp() = runBlocking{
+        hiltRule.inject()
+        insereDadosNoDb(
+            marcaDao = marcaDao,
+            bolaDao = bolaDao
+        )
+    }
+    @After
+    fun finish(){
+        testDb.limpaDatabase()
+    }
 
     @Test
     fun deveMostrarOBotaoDeVoltaExcluirEEditar_QuandoVerificarmosOsScaffolds(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeEdicaoDescricao)
@@ -77,7 +106,7 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveAbrirODialogComImagem_QuandoClicaNaImagem(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
         testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
             descricaoImagemCadastroTela, 2
@@ -85,8 +114,8 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveAbrirDialogDeConfirmacaDeExclusao_QuandoApertarNoBotaoDeDeletar(){
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
@@ -94,19 +123,19 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveVoltarParaTelaDeDetalhesSemExcluir_QuandoApertarNoBotaoDeCancelar(){
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
     }
     @Test
     fun devemManterDialogComImagem_QuandoRotacionarmosODispositivo(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
         uiDevice.rotacionarATela()
         testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
@@ -115,30 +144,32 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaExistenteEditado)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
     }
     @Test
     fun deveSerPossivel_QuandoVerificarmosOCampoDeDetalhes(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.verificaSeOElementoEClicavelPeloTexto(textoDescricaoProdutoTelaDetalhes)
     }
     @Test
     fun deveVoltarParaATelaPrincipal_QuandoClicarmosNoBotaoVolta(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePeloTexto("Total90")
     }
+
     @Test
     fun deveIrParaATelaDeCadastroComDadosPreenchidos_QuandoClicarmosNoBotaoEditar(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        //TODO corrigir esse teste
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaExistenteOriginal)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
@@ -149,16 +180,16 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveExcluirOsDados_QuandoApertarNoBotaoDeDeletarEConfirmar(){
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente)
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente1)
     }
     @Test
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarPeloAppAposTerEditadoBola(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
@@ -170,7 +201,7 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarDoAndroidAposTerEditadoBola(){
-        vaiParaATelaDeDetalhes(nomeBolaExistente)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)

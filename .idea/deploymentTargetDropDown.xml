@@ -2,6 +2,12 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="DetalhesDaBolaScreenKtTest">
+        <State />
+      </entry>
+      <entry key="ListaDeBolasScreenKtTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -18,10 +24,13 @@
           <timeTargetWasSelectedWithDropDown value="2023-12-21T12:07:00.239011200Z" />
         </State>
       </entry>
-      <entry key="deveCadastrarUmaBola_QuandoColocarmosPrecoComValorNegativo()">
+      <entry key="deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes()">
         <State />
       </entry>
-      <entry key="deveMostrarFabIconeBuscaENomeApp_QuandoEstiverNaTelaDeBolas()">
+      <entry key="deveOrdenarALista_QuandoOrganizarmosAListaPeloMaisAntigo()">
+        <State />
+      </entry>
+      <entry key="deveOrdenarALista_QuandoOrganizarmosAListaPeloMaisNovo()">
         <State />
       </entry>
     </value>

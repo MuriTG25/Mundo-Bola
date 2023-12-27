@@ -3,7 +3,6 @@ package br.com.alura.mundobola.auxiliardoteste
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.aplicacao.extra.dataFormatada
 import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
-import java.time.LocalDateTime
 
 val tituloTelaLista = "Mundo Bola"
 val tituloTelaCadastro = "Cadastrar Bola"
@@ -17,6 +16,14 @@ val iconeEdicaoDescricao = "Editar bola"
 val iconeDeletarDescricao = "Deletar bola"
 val iconeVoltarDescricao = "Voltar para a tela anterior"
 val iconeFABDescricao = "Adicionar Produto"
+val iconeOrdenacaoDescricao = "Ordenar a lista por:"
+
+val textoOrdenacaoNomeAsc =  "Nome Asc"
+val textoOrdenacaoNomeDesc = "Nome Desc"
+val textoOrdenacaoPrecoAsc = "Preço Asc"
+val textoOrdenacaoPrecoDesc = "Preço Desc"
+val textoOrdenacaoMaisNovo = "Mais Novo"
+val textoOrdenacaoMaisAntigo = "Mais Antigo"
 
 val labelCampoPesquisa = "Buscar bola"
 val placeholderCampoPesquisa = "Digite o nome da bola desejada"
@@ -67,13 +74,14 @@ val marcaNikeTexto = "Nike"
 val marcaAdidasTexto = "Adidas"
 val marcaPenaltyTexto = "Penalty"
 
-val nomeOutraBolaExiste = "Total90"
-val nomeBolaExistente = "Jabulani"
-val precoBolaExistenteEditado = "1090.90".toBigDecimal().paraMoedaBrasileira()
-val precoBolaExistenteOriginal = "1090.90"
-val dataCriacaoBolaExistente = LocalDateTime.now().dataFormatada()
+val nomeBolaExistente1 = bola1.nome
+val nomeBolaExistente2 = "Bola Nike Premier League Academy"
+val nomeBolaExistente3 = "Jabulani"
+val precoBolaExistenteEditado = "99.90".toBigDecimal().paraMoedaBrasileira()
+val precoBolaExistenteOriginal = bola1.preco.toPlainString()
+val dataCriacaoBolaExistente =  bola1.dataCriacao.dataFormatada()
 val descricaoBolaExistente = LoremIpsum(10).values.first()
-val imagemBolaExistente = "https://s2.glbimg.com/7dzisN-U42ChaQeJA8HPH9F8L4sp0re7dXrg1kCDpXpIoz-HdGixxa_8qOZvMp3w/s.glbimg.com/es/ge/f/original/2012/08/12/jabu.jpg"
+val imagemBolaExistente = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg"
 
 val mensagemDeErroPreco = "Utilize \",\" ou \".\" apenas para separar o real do centavos:\n ex: \"200,00 ou 200.00\"\n E não utilize outros símbolos, como \"-\", \"/\" para o preço"
 val precoComSimboloInvalido = "19/90"
