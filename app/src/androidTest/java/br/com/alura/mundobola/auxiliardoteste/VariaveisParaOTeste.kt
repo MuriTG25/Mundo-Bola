@@ -18,6 +18,7 @@ const val iconeDeletarDescricao = "Deletar bola"
 const val iconeVoltarDescricao = "Voltar para a tela anterior"
 const val iconeFABDescricao = "Adicionar Produto"
 const val iconeOrdenacaoDescricao = "Ordenar a lista por:"
+const val iconeMenuDescricao = "Abrir a aba lateral de Menu"
 
 const val textoOrdenacaoNomeAsc =  "Nome Asc"
 const val textoOrdenacaoNomeDesc = "Nome Desc"

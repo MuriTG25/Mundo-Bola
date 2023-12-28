@@ -17,13 +17,13 @@ import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeMenuDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.imagemBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
-import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteEditado
@@ -99,6 +99,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeMenuDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)

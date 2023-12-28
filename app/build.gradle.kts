@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.hilt
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -51,6 +53,9 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    hilt{
+        enableAggregatingTask = true
     }
     kapt {
         correctErrorTypes = true

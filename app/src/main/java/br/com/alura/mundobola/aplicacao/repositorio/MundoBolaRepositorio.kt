@@ -104,4 +104,9 @@ class MundoBolaRepositorio @Inject constructor(
                 bola.toBola()
         }
     }
+    suspend fun listaDeBolasPorMarca(marcaId: String): List<Bola>{
+        return bolaDao.listaDeBolasPorMarca(marcaId).map { bola ->
+            bola.toBola()
+        }
+    }
 }

@@ -5,6 +5,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,7 +27,7 @@ import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 fun TopAppBarComponent(
     texto: String = "",
     mostraTitulo: Boolean = true,
-    mostraBuscaEOrdenaPor: Boolean = true,
+    mostraBuscaHomeEOrdenaPor: Boolean = true,
     noClicaBusca: () -> Unit = {},
     mostraVolta: Boolean = true,
     noClicaVolta: () -> Unit = {},
@@ -37,6 +39,7 @@ fun TopAppBarComponent(
     naMudancaDaBusca: (String) -> Unit = {},
     noClicaRealizarBusca: () -> Unit = {},
     noClicaVoltaBusca: () -> Unit = {},
+    noClicaHome: () -> Unit = {},
     expandirMenu: Boolean = false,
     alteracaoDaExpansaoMenu: (Boolean) -> Unit = {},
     noClicaNomeAsc: () -> Unit = {},
@@ -69,7 +72,7 @@ fun TopAppBarComponent(
             }
         },
         actions = {
-            if(mostraBuscaEOrdenaPor){
+            if(mostraBuscaHomeEOrdenaPor){
                 DropdowmMenuComponent(
                     expandir = expandirMenu,
                     alteracaoDaExpansao = alteracaoDaExpansaoMenu,
@@ -82,7 +85,7 @@ fun TopAppBarComponent(
                 )
             }
             IconTopAppBarComponent(
-                mostraElemento = mostraBuscaEOrdenaPor,
+                mostraElemento = mostraBuscaHomeEOrdenaPor,
                 noClicarBotao = noClicaBusca,
                 imagemVetor = Icons.Filled.Search,
                 descricaoBotao = "Buscar produto pelo nome"
@@ -107,6 +110,12 @@ fun TopAppBarComponent(
                 imagemVetor = Icons.Filled.ArrowBack,
                 descricaoBotao = "Voltar para a tela anterior"
             )
+            IconTopAppBarComponent(
+                mostraElemento = mostraBuscaHomeEOrdenaPor,
+                noClicarBotao = noClicaHome,
+                imagemVetor = Icons.Filled.Menu,
+                descricaoBotao = "Abrir a aba lateral de Menu"
+            )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary
@@ -119,7 +128,7 @@ fun TopAppBarComponent(
 private fun TopAppBarComponentPreviewComElementos() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
-        mostraBuscaEOrdenaPor = false,
+        mostraBuscaHomeEOrdenaPor = false,
     )
 }
 
@@ -128,7 +137,7 @@ private fun TopAppBarComponentPreviewComElementos() {
 private fun TopAppBarComponentPreviewTelaLista() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
-        mostraBuscaEOrdenaPor = true,
+        mostraBuscaHomeEOrdenaPor = true,
         mostraVolta = false,
         mostraEditaEDeleta = false,
     )
@@ -140,7 +149,7 @@ private fun TopAppBarComponentPreviewTelaBusca() {
     TopAppBarComponent(
         texto = stringResource(id = R.string.app_name),
         mostraTitulo = false,
-        mostraBuscaEOrdenaPor = false,
+        mostraBuscaHomeEOrdenaPor = false,
         mostraVolta = false,
         mostraEditaEDeleta = false,
         mostraTextoBusca = true,

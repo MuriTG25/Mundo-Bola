@@ -14,6 +14,7 @@ import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeMenuDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
@@ -89,13 +90,14 @@ class ListaDeBolasScreenKtTest{
         testDb.limpaDatabase()
     }
     @Test
-    fun deveMostrarFabIconeBuscaIconeOrdenacaoENomeApp_QuandoEstiverNaTelaDeBolas(){
+    fun deveMostrarFabIconeBuscaOrdenacaoMenuENomeApp_QuandoEstiverNaTelaDeBolas(){
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeOrdenacaoDescricao)
+        testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeMenuDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
@@ -125,6 +127,8 @@ class ListaDeBolasScreenKtTest{
         testeDeUi.clicaNoElementoPelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeMenuDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(descricaoCampoBusca)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
@@ -146,10 +150,16 @@ class ListaDeBolasScreenKtTest{
     }
     @Test
     fun deveSerClicavelIconeBusca_ImplementacaoAindaNaoFeita(){
-        //TODO implementação desse botão apenas ao concluir a construção do db
+        //TODO ainda não sei o que fazer com ele
         testeDeUi.clicaNoElementoPelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeBuscaPesquisaDescricao)
     }
+    @Test
+    fun deveSerClicavelIconeHome_ImplementacaoAindaNaoFeita(){
+        //TODO implementação vai ser feita daqui a pouco
+        testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeMenuDescricao)
+    }
+
     @Test
     fun deveAparecerOTexto_quandoDigitarNoCampoDeBusca(){
         testeDeUi.clicaNoElementoPelaDescricao(iconeBuscaDescricao)

@@ -41,5 +41,8 @@ interface BolaDao {
 
     @Query("SELECT * FROM bola WHERE nome LIKE '%' || :nome || '%'")
     fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity>>
+
+    @Query("SELECT * FROM bola WHERE marcaId = :marcaId")
+    suspend fun listaDeBolasPorMarca(marcaId: String): List<BolaEntity>
 }
 

@@ -23,6 +23,7 @@ import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeMenuDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
@@ -70,11 +71,9 @@ import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.urlBolaTeste
-import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
-import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTextoMaisDe1Vez
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.voltarARotacaoDaTela
@@ -147,6 +146,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeMenuDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
