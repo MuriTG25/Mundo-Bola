@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
 import br.com.alura.mundobola.ui.screen.DetalhesDaBolaScreen
 import br.com.alura.mundobola.ui.viewmodel.DetalhesDaBolaViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val detalhesDaBolaRotaInicio = "detalhesDaBola"
@@ -37,12 +38,16 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
                 noClicaDeleta = {
                     coroutineScope.launch {
                         viewModel.deletaBola(id)
-                        navegarParaTelaAnterior()
+                        launch(Dispatchers.Main){
+                            navegarParaTelaAnterior()
+                        }
                     }
                 }
             )
         }?: LaunchedEffect(key1 = Unit){
-            navegarParaTelaAnterior()
+            this.launch(Dispatchers.Main){
+                navegarParaTelaAnterior()
+            }
         }
     }
 }

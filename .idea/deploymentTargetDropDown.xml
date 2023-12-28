@@ -2,10 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="DetalhesDaBolaScreenKtTest">
+      <entry key="CadastroDeBolasScreenKtTest">
         <State />
       </entry>
-      <entry key="ListaDeBolasScreenKtTest">
+      <entry key="DetalhesDaBolaScreenKtTest">
         <State />
       </entry>
       <entry key="app">
@@ -24,13 +24,13 @@
           <timeTargetWasSelectedWithDropDown value="2023-12-21T12:07:00.239011200Z" />
         </State>
       </entry>
-      <entry key="deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes()">
+      <entry key="deveDesaparecerMensagemDePrecoObrigatorio_QuandoDigitarmosAlgoNoCampoDePreco()">
         <State />
       </entry>
-      <entry key="deveOrdenarALista_QuandoOrganizarmosAListaPeloMaisAntigo()">
+      <entry key="deveMostarONomeDaTelaDeEdicao_QuandoFormosParaATelaDeCastroPeloTelaDeDetalhes()">
         <State />
       </entry>
-      <entry key="deveOrdenarALista_QuandoOrganizarmosAListaPeloMaisNovo()">
+      <entry key="deveMostarOsTextosDoPlaceholder_QuandoClicarmosNoCampoDeTextoVazio()">
         <State />
       </entry>
     </value>

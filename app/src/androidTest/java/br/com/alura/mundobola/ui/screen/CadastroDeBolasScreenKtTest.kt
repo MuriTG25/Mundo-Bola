@@ -8,6 +8,7 @@ import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaNova
 import br.com.alura.mundobola.auxiliardoteste.descricaoBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroTela
@@ -22,9 +23,11 @@ import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
+import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
@@ -74,6 +77,7 @@ import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTex
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTextoMaisDe1Vez
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
+import br.com.alura.mundobola.auxiliardoteste.voltarARotacaoDaTela
 import br.com.alura.mundobola.infraestrutura.database.MundoBolaDatabase
 import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
 import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
@@ -131,7 +135,6 @@ class CadastroDeBolasScreenKtTest{
     fun finish(){
         testDb.limpaDatabase()
     }
-    //TODO falta atualizar esse teste
     @Test
     fun deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
@@ -143,6 +146,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
@@ -177,7 +181,8 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(dicaUrlScaffoldCadastroTela)
     }
     @Test
-    fun deveMostarAsOpcoesDeMarcas_QuandoClicarnosNoCampoMarca(){
+    fun deveMostarAsOpcoesDeMarcas_QuandoClicarnosNoCampoMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
         vaiParaATelaDeCadastroPelaTelaDeLista()
         scrollaAteOFinalDaTela()
         testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroTela)
@@ -192,8 +197,10 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(placeholderNomeCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoPrecoCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(placeholderPrecoCadastroTela)
+        fechaOTeclado()
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoDescricaoCadastroTela)
-        testeDeUi.verificaSeExisteOComponentPeloTexto(placeholderDescricaoCadastroTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(placeholderDescricaoCadastroTela)
     }
     @Test
     fun deveVoltarParaATelaPrincipal_QuandoVoltamosPeloAndroid(){
@@ -235,6 +242,8 @@ class CadastroDeBolasScreenKtTest{
         uiDevice.rotacionarATela()
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoUrlScaffoldCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(urlBolaTeste)
+        uiDevice.voltarARotacaoDaTela()
+
     }
     @Test
     fun deveManterAUrlEOScaffold_QuandoMinimizarmosEReabrirmosOApp(){
@@ -266,6 +275,7 @@ class CadastroDeBolasScreenKtTest{
         vaiParaATelaDeCadastroPelaTelaDeLista()
         testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         clicaBotaoSalvar()
+        testeDeUi.scrollaAteOElementoPeloNome(textoPrecoObrigatorioCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
     }
@@ -273,6 +283,7 @@ class CadastroDeBolasScreenKtTest{
     fun deveDesaparecerMensagemDeNomeObrigatorio_QuandoDigitarmosAlgoNoCampoDeNome(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         clicaBotaoSalvar()
+        testeDeUi.scrollaAteOElementoPeloNome(textoNomeObrigatorioCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeObrigatorioCadastroTela)
         testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         fechaOTeclado()
@@ -282,12 +293,15 @@ class CadastroDeBolasScreenKtTest{
     fun deveDesaparecerMensagemDePrecoObrigatorio_QuandoDigitarmosAlgoNoCampoDePreco(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
         clicaBotaoSalvar()
+        testeDeUi.scrollaAteOElementoPeloNome(textoPrecoCadastroTela)
+        testeDeUi.esperaAteATelaAparecer(textoPrecoObrigatorioCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPrecoObrigatorioCadastroTela)
     }
     @Test
-    fun deveTrocarOQueApareceNoCampoDeMarca_QuandoSelecionarmosUmaMarca(){
+    fun deveTrocarOQueApareceNoCampoDeMarca_QuandoSelecionarmosUmaMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
         vaiParaATelaDeCadastroPelaTelaDeLista()
         scrollaAteOFinalDaTela()
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaCadastroTela)
@@ -374,7 +388,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDataAlteracaoTelaDetalhes)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
     }
@@ -388,7 +402,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
         scrollaAteOFinalDaTela()
         testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroTela)
-        testeDeUi.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
         testeDeUi.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
         clicaBotaoSalvar()
         testeDeUi.esperaAteATelaAparecer(nomeBolaExistente2)
@@ -400,12 +414,13 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhes)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
     }
     @Test
-    fun deveEditarUmaBola_QuandoFormosNaTelaDeCadastroPelaEdicao(){
+    fun deveEditarUmaBola_QuandoFormosNaTelaDeCadastroPelaEdicao() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
         vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.limpaEDigitaNoCampoDeTexto(textoNomeCadastroTela, nomeBolaTeste)
         testeDeUi.limpaEDigitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
@@ -423,9 +438,8 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhes)
-        testeDeUi.verificaSeMostraOComponentePeloTextoMaisDe1Vez(
-            dataCriacaoBolaExistente,2
-        )
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataAlteracaoTelaDetalhes)
     }
     @Test
@@ -455,14 +469,16 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
         scrollaAteOFinalDaTela()
         testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroTela)
-        testeDeUi.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
         testeDeUi.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
         uiDevice.rotacionarATela()
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaLimpoTeste)
         scrollaAteOFinalDaTela()
-        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
+        uiDevice.voltarARotacaoDaTela()
+
     }
     @Test
     fun deveManterOsDadosDigitados_QuandoMinimizarATelaEReabrir(){
@@ -471,14 +487,15 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroTela, precoBolaLimpoTeste)
         scrollaAteOFinalDaTela()
         testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroTela)
-        testeDeUi.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
         testeDeUi.digitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
         uiDevice.minimizarOAppEReabrir()
         fechaOTeclado()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaLimpoTeste)
         scrollaAteOFinalDaTela()
-        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
     }
 }

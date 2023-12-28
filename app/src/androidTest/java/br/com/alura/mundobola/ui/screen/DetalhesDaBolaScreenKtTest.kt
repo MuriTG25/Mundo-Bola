@@ -17,6 +17,7 @@ import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeEdicaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeFABDescricao
+import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.imagemBolaExistente
@@ -31,6 +32,7 @@ import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTela
@@ -45,6 +47,7 @@ import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDes
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavelPeloTexto
+import br.com.alura.mundobola.auxiliardoteste.voltarARotacaoDaTela
 import br.com.alura.mundobola.infraestrutura.database.MundoBolaDatabase
 import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
 import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
@@ -57,7 +60,6 @@ import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
 
-//TODO corrigir 1 teste
 @HiltAndroidTest
 class DetalhesDaBolaScreenKtTest{
     @get:Rule(order = 0)
@@ -96,6 +98,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
+        testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
@@ -119,7 +122,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCancelarScaffoldDetalhesTela)
     }
     @Test
     fun deveVoltarParaTelaDeDetalhesSemExcluir_QuandoApertarNoBotaoDeCancelar(){
@@ -141,6 +144,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
             descricaoImagemCadastroTela, 2
         )
+        uiDevice.voltarARotacaoDaTela()
     }
     @Test
     fun deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes(){
@@ -165,13 +169,12 @@ class DetalhesDaBolaScreenKtTest{
 
     @Test
     fun deveIrParaATelaDeCadastroComDadosPreenchidos_QuandoClicarmosNoBotaoEditar(){
-        //TODO corrigir esse teste
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaExistenteOriginal)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaExistente)
         testeDeUi.scrollaAteOElementoPelaDescricao(descricaoImagemCadastroTela)

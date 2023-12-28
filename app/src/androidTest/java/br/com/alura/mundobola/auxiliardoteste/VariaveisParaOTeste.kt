@@ -3,89 +3,91 @@ package br.com.alura.mundobola.auxiliardoteste
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import br.com.alura.mundobola.aplicacao.extra.dataFormatada
 import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
+import java.time.LocalDateTime
 
-val tituloTelaLista = "Mundo Bola"
-val tituloTelaCadastro = "Cadastrar Bola"
-val tituloTelaEdicao = "Editar Bola"
-val tituloTelaDetalhes = "Detalhes da Bola"
-val descricaoCampoBusca = "Campo de texto de busca de bola"
-val iconeBuscaPesquisaDescricao =  "Buscar o produto pelo nome"
-val iconeVoltaPesquisaDescricao = "Fecha a aba de pesquisa"
-val iconeBuscaDescricao = "Buscar produto pelo nome"
-val iconeEdicaoDescricao = "Editar bola"
-val iconeDeletarDescricao = "Deletar bola"
-val iconeVoltarDescricao = "Voltar para a tela anterior"
-val iconeFABDescricao = "Adicionar Produto"
-val iconeOrdenacaoDescricao = "Ordenar a lista por:"
+const val tituloTelaLista = "Mundo Bola"
+const val tituloTelaCadastro = "Cadastrar Bola"
+const val tituloTelaEdicao = "Editar Bola"
+const val tituloTelaDetalhes = "Detalhes da Bola"
+const val descricaoCampoBusca = "Campo de texto de busca de bola"
+const val iconeBuscaPesquisaDescricao =  "Buscar o produto pelo nome"
+const val iconeVoltaPesquisaDescricao = "Fecha a aba de pesquisa"
+const val iconeBuscaDescricao = "Buscar produto pelo nome"
+const val iconeEdicaoDescricao = "Editar bola"
+const val iconeDeletarDescricao = "Deletar bola"
+const val iconeVoltarDescricao = "Voltar para a tela anterior"
+const val iconeFABDescricao = "Adicionar Produto"
+const val iconeOrdenacaoDescricao = "Ordenar a lista por:"
 
-val textoOrdenacaoNomeAsc =  "Nome Asc"
-val textoOrdenacaoNomeDesc = "Nome Desc"
-val textoOrdenacaoPrecoAsc = "Preço Asc"
-val textoOrdenacaoPrecoDesc = "Preço Desc"
-val textoOrdenacaoMaisNovo = "Mais Novo"
-val textoOrdenacaoMaisAntigo = "Mais Antigo"
+const val textoOrdenacaoNomeAsc =  "Nome Asc"
+const val textoOrdenacaoNomeDesc = "Nome Desc"
+const val textoOrdenacaoPrecoAsc = "Preço Asc"
+const val textoOrdenacaoPrecoDesc = "Preço Desc"
+const val textoOrdenacaoMaisNovo = "Mais Novo"
+const val textoOrdenacaoMaisAntigo = "Mais Antigo"
 
-val labelCampoPesquisa = "Buscar bola"
-val placeholderCampoPesquisa = "Digite o nome da bola desejada"
+const val labelCampoPesquisa = "Buscar bola"
+const val placeholderCampoPesquisa = "Digite o nome da bola desejada"
 
-val textoNomeCadastroTela = "Nome"
-val textoPrecoCadastroTela = "Preço"
-val textoMarcaCadastroTela = "Marca"
-val textoDescricaoCadastroTela = "Descrição"
-val textoSalvarCadastroTela = "Salvar"
-val descricaoImagemCadastroTela = "imagem da bola"
+const val textoNomeCadastroTela = "Nome"
+const val textoPrecoCadastroTela = "Preço"
+const val textoMarcaCadastroTela = "Marca"
+const val textoDescricaoCadastroTela = "Descrição"
+const val textoSalvarCadastroTela = "Salvar"
+const val descricaoImagemCadastroTela = "imagem da bola"
 
 val mensagemToastCadastroSucesso = "Bola cadastrada com sucesso"
 val textoToastEdicaoSucesso = "Bola editada com sucesso"
 val textoToastCarregamentoFalha = "Bola não encontrada"
 
-val placeholderNomeCadastroTela = "Insira o nome da Bola"
-val placeholderPrecoCadastroTela = "Insira o preço da bola"
-val placeholderDescricaoCadastroTela = "Insira uma descrição com mais detalhes sobre o produto"
+const val placeholderNomeCadastroTela = "Insira o nome da Bola"
+const val placeholderPrecoCadastroTela = "Insira o preço da bola"
+const val placeholderDescricaoCadastroTela = "Insira uma descrição com mais detalhes sobre o produto"
 
-val textoNomeObrigatorioCadastroTela = "*Campo de Nome é obrigatório"
-val textoPrecoObrigatorioCadastroTela = "*Campo de Preço é obrigatório"
+const val textoNomeObrigatorioCadastroTela = "*Campo de Nome é obrigatório"
+const val textoPrecoObrigatorioCadastroTela = "*Campo de Preço é obrigatório"
 
 
-val descricaoImagemScaffoldCadastroTela = "imagem da bola"
-val textoUrlScaffoldCadastroTela = "Url da Imagem"
-val dicaUrlScaffoldCadastroTela = "Insira o link contendo a imagem da bola"
-val textoCancelarScaffoldCadastroTela = "Cancelar"
-val textoConfirmarScaffoldCadastroTela = "Confirmar"
+const val descricaoImagemScaffoldCadastroTela = "imagem da bola"
+const val textoUrlScaffoldCadastroTela = "Url da Imagem"
+const val dicaUrlScaffoldCadastroTela = "Insira o link contendo a imagem da bola"
+const val textoCancelarScaffoldCadastroTela = "Cancelar"
+const val textoConfirmarScaffoldCadastroTela = "Confirmar"
 
-val textoPerguntaScaffoldDetalhesTela = "Deseja mesmo excluir essa bola?"
+const val textoPerguntaScaffoldDetalhesTela = "Deseja mesmo excluir essa bola?"
 val textoCancelarScaffoldDetalhesTela = "Cancelar"
-val textoConfirmarScaffoldDetalhesTela = "Confirmar"
+const val textoConfirmarScaffoldDetalhesTela = "Confirmar"
 
 
-val textoDescricaoProdutoTelaDetalhes = "Sobre o produto:"
-val textoMarcaTelaDetalhes = "Marca: "
-val textoDataCriacaoTelaDetalhes = "Criado em: "
-val textoDataAlteracaoTelaDetalhes = "Alterado em: "
+const val textoDescricaoProdutoTelaDetalhes = "Sobre o produto:"
+const val textoMarcaTelaDetalhes = "Marca: "
+const val textoDataCriacaoTelaDetalhes = "Criado em: "
+const val textoDataAlteracaoTelaDetalhes = "Alterado em: "
 
-val nomeBolaTeste = "Mercurial"
-val precoBolaLimpoTeste = "19.90"
-val precoBolaComVirgula = "19,90"
+const val nomeBolaTeste = "Mercurial"
+const val precoBolaLimpoTeste = "19.90"
+const val precoBolaComVirgula = "19,90"
 val precoBolaEditadoTeste = "19.90".toBigDecimal().paraMoedaBrasileira()
-val urlBolaTeste = "https://images.tcdn.com.br/img/img_prod/728938/bola_futebol_de_campo_nike_mercurial_fade_13461_1_e9fb3615f52f43fc6d3e89b43f565731.png"
+const val urlBolaTeste = "https://images.tcdn.com.br/img/img_prod/728938/bola_futebol_de_campo_nike_mercurial_fade_13461_1_e9fb3615f52f43fc6d3e89b43f565731.png"
 val descricaoBolaTeste = LoremIpsum(10).values.first()
 
-val marcaNikeTexto = "Nike"
-val marcaAdidasTexto = "Adidas"
-val marcaPenaltyTexto = "Penalty"
+const val marcaNikeTexto = "Nike"
+const val marcaAdidasTexto = "Adidas"
+const val marcaPenaltyTexto = "Penalty"
 
 val nomeBolaExistente1 = bola1.nome
-val nomeBolaExistente2 = "Bola Nike Premier League Academy"
-val nomeBolaExistente3 = "Jabulani"
+const val nomeBolaExistente2 = "Bola Nike Premier League Academy"
+const val nomeBolaExistente3 = "Jabulani"
 val precoBolaExistenteEditado = "99.90".toBigDecimal().paraMoedaBrasileira()
-val precoBolaExistenteOriginal = bola1.preco.toPlainString()
-val dataCriacaoBolaExistente =  bola1.dataCriacao.dataFormatada()
+const val precoBolaExistenteOriginal = "99.9"
+val dataCriacaoBolaExistente: String =  bola1.dataCriacao.dataFormatada()
+val dataCriacaoBolaNova = LocalDateTime.now().dataFormatada()
 val descricaoBolaExistente = LoremIpsum(10).values.first()
-val imagemBolaExistente = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg"
+const val imagemBolaExistente = "https://assets-mantosdofutebol.sfo2.digitaloceanspaces.com/wp-content/uploads/2017/03/bola-PL-Nike-Total-90-Aerrow-2004-2005.jpg"
 
-val mensagemDeErroPreco = "Utilize \",\" ou \".\" apenas para separar o real do centavos:\n ex: \"200,00 ou 200.00\"\n E não utilize outros símbolos, como \"-\", \"/\" para o preço"
-val precoComSimboloInvalido = "19/90"
-val precoComPontoEVirgula = "1.019,90"
-val precoCom2Pontos = "1.019.90"
-val precoCom2Virgulas = "1.019,90"
-val precoComSimboloNegativo = "-19.90"
+const val mensagemDeErroPreco = "Utilize \",\" ou \".\" apenas para separar o real do centavos:\n ex: \"200,00 ou 200.00\"\n E não utilize outros símbolos, como \"-\", \"/\" para o preço"
+const val precoComSimboloInvalido = "19/90"
+const val precoComPontoEVirgula = "1.019,90"
+const val precoCom2Pontos = "1.019.90"
+const val precoCom2Virgulas = "1.019,90"
+const val precoComSimboloNegativo = "-19.90"

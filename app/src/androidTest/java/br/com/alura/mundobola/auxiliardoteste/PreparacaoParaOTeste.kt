@@ -70,3 +70,21 @@ suspend fun insereDadosNoDb(
         bola3
     )
 }
+suspend fun MarcaDao.inserirMaisMarcasNoDb(){
+    adicionarMarca(marca2)
+    adicionarMarca(marca3)
+}
+
+private val marca2 = MarcaEntity(
+"4946112a-b895-4c8f-b5c1-1c8dc0b65dee",
+"Adidas",
+"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Adidas_logo.png/1200px-Adidas_logo.png",
+LocalDateTime.now()
+)
+
+private val marca3 = MarcaEntity(
+"8bc9a223-3a8f-4523-aba8-dc1d9811523b",
+"Penalty",
+"https://seeklogo.com/images/P/penalty-logo-A248974510-seeklogo.com.png",
+LocalDateTime.now()
+)

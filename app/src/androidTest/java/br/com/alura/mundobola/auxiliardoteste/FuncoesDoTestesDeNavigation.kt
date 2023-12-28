@@ -169,6 +169,9 @@ fun ComposeContentTestRule.limpaEDigitaNoCampoDeTexto(
 fun UiDevice.rotacionarATela() {
     setOrientationLeft()
 }
+fun UiDevice.voltarARotacaoDaTela(){
+    setOrientationNatural()
+}
 
 fun UiDevice.minimizarOAppEReabrir() {
     pressHome()
