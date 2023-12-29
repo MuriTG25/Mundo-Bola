@@ -41,6 +41,10 @@ fun NavGraphBuilder.ListaDeBolasNavController(
             },
             noClicaMaisNovo = {
                 viewModel.listaDeBolasPeloMaisNovo()
+            },
+            noClicaMarca = {marcaId ->
+                viewModel.listaDeBolasPorMarca(marcaId)
+
             }
         )
     }

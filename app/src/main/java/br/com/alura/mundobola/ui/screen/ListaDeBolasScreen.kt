@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,7 +18,9 @@ import br.com.alura.mundobola.ui.components.listadebolas.NavigationDrawerCompone
 import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import br.com.alura.mundobola.ui.components.listadebolas.ProdutoBolaComponent
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas
+import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListaDeBolasScreen(
@@ -34,14 +37,21 @@ fun ListaDeBolasScreen(
     noClicaMaisAntigo: () -> Unit = {},
     noClicaMaisNovo: () -> Unit = {},
 ) {
-    val drawerState = rememberDrawerState(
-        initialValue = state.expandirHome,
-        )
-    NavigationDrawerComponent (
+    //TODO tirar esse drawer state daqui
+    //TODO desativar a abertura ao arrastar para o lado
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed,
+    )
+    val coroutineScope = rememberCoroutineScope()
+    NavigationDrawerComponent(
         drawerState = drawerState,
         listaDeMarcas = state.listaDeMarcas,
-        noClicaMarca = noClicaMarca
-    ){
+        noClicaMarca = {marcaId->
+            noClicaMarca(marcaId)
+            coroutineScope.launch {
+                drawerState.close()
+            }
+        }
+    ) {
         ScaffoldScreen(
             titulo = stringResource(id = R.string.app_name),
             mostraTitulo = state.mostraTituloBuscaEOrdenaPor,
@@ -54,9 +64,13 @@ fun ListaDeBolasScreen(
             naMudancaDaBusca = state.naMudancaDaBusca,
             noClicaRealizarBusca = noClicaRealizarBusca,
             noClicaVoltaBusca = state.noClicaVolta,
-            noClicaHome = state.noClicaHome,
-            expandirMenu = state.expandirMenu,
-            alteracaoDaExpansaoMenu = state.alteracaoDaExpansaoMenu,
+            noClicaMenu = {
+                coroutineScope.launch {
+                    drawerState.open()
+                }
+            },
+            expandirBusca = state.expandirOrdenacao,
+            alteracaoDaExpansaoBusca = state.alteracaoDaExpansaoOrdenacao,
             noClicaNomeAsc = noClicaNomeAsc,
             noClicaNomeDesc = noClicaNomeDesc,
             noClicaPrecoAsc = noClicaPrecoAsc,
@@ -90,7 +104,7 @@ fun ListaDeBolasScreen(
 @Composable
 private fun ListaDeBolasScreenPreview() {
     ListaDeBolasScreen(
-        state = ListaDeBolasUiState(amostraDeListaDeBolas,)
+        state = ListaDeBolasUiState(amostraDeListaDeBolas)
     )
 }
 
@@ -113,6 +127,16 @@ private fun ListaDeBolasScreenComCampoDeBuscaDigitadoPreview() {
             listaDeBolas = amostraDeListaDeBolas,
             mostraTituloBuscaEOrdenaPor = false,
             textoDeBusca = "Total 90",
+        )
+    )
+}
+@Preview(showSystemUi = true)
+@Composable
+private fun ListaDeBolasScreenComMenuExpandidoPreview() {
+    ListaDeBolasScreen(
+        state = ListaDeBolasUiState(
+            listaDeBolas = amostraDeListaDeBolas,
+            listaDeMarcas = amostraDeListaDeMarcas
         )
     )
 }

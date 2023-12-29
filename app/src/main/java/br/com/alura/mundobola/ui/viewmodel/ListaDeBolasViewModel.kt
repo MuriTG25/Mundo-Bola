@@ -8,10 +8,7 @@ import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,7 +23,6 @@ class ListaDeBolasViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             carregaLista()
-            carregaMarcas()
         }
         _uiState.update { listaDeBolasUiState ->
             listaDeBolasUiState.copy(
@@ -49,39 +45,32 @@ class ListaDeBolasViewModel @Inject constructor(
                         realizaABusca(texto)
                     }
                 },
-                alteracaoDaExpansaoMenu = {
+                alteracaoDaExpansaoOrdenacao = {
                     _uiState.value = _uiState.value.copy(
-                        expandirMenu = it
+                        expandirOrdenacao = it
                     )
-                }
+                },
             )
 
         }
     }
 
-    private suspend fun carregaMarcas() {
-        repositorio.listaDeMarcas().collect{marcas ->
-            _uiState.value = _uiState.value.copy(
-                listaDeMarcas = marcas.map{
-                    it.paraMarcaDTO()
-                }
-            )
-        }
-    }
 
     private suspend fun carregaLista() {
         repositorio.listaDeBolas()
-            .stateIn(
-                viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
-                emptyList()
-            )
             .collect { lista ->
                 _uiState.value = _uiState.value.copy(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
                 )
+                repositorio.listaDeMarcas().collect { marcas ->
+                    _uiState.value = _uiState.value.copy(
+                        listaDeMarcas = marcas.map {
+                            it.paraMarcaDTO()
+                        }
+                    )
+                }
             }
     }
 
@@ -106,7 +95,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
                 )
             }
         }
@@ -119,7 +108,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
                 )
             }
         }
@@ -132,7 +121,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
                 )
             }
         }
@@ -145,7 +134,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
                 )
             }
         }
@@ -158,7 +147,7 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
                 )
             }
         }
@@ -171,7 +160,19 @@ class ListaDeBolasViewModel @Inject constructor(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()
                     },
-                    expandirMenu = false
+                    expandirOrdenacao = false
+                )
+            }
+        }
+    }
+
+    fun listaDeBolasPorMarca(marcaId: String) {
+        viewModelScope.launch {
+            repositorio.listaDeBolasPorMarca(marcaId).let { lista ->
+                _uiState.value = _uiState.value.copy(
+                    listaDeBolas = lista.map {
+                        it.paraBolaDTO()
+                    }
                 )
             }
         }
