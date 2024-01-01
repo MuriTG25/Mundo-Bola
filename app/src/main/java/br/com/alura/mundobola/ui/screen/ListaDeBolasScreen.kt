@@ -29,6 +29,7 @@ fun ListaDeBolasScreen(
     noClicaFab: () -> Unit = {},
     noClicaRealizarBusca: () -> Unit = {},
     navegarParaADescricao: (String) -> Unit = {},
+    navegarParaOCadastroDeMarca: () -> Unit = {},
     noClicaMarca: (String) -> Unit = {},
     noClicaNomeAsc: () -> Unit = {},
     noClicaNomeDesc: () -> Unit = {},
@@ -50,7 +51,8 @@ fun ListaDeBolasScreen(
             coroutineScope.launch {
                 drawerState.close()
             }
-        }
+        },
+        noClicaCadastrarMarca = navegarParaOCadastroDeMarca
     ) {
         ScaffoldScreen(
             titulo = stringResource(id = R.string.app_name),

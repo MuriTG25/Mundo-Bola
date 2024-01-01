@@ -37,9 +37,9 @@ import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
@@ -75,7 +75,7 @@ class DetalhesDaBolaScreenKtTest{
     private val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
     private fun vaiParaATelaDeDetalhes(nomeProduto:String){
         testeDeUi.clicaNoElementoPeloNome(nomeProduto)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
     }
     @Before
     fun setUp() = runBlocking{
@@ -93,7 +93,7 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun deveMostrarOBotaoDeVoltaExcluirEEditar_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeDeletarDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeEdicaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeVoltarDescricao)
@@ -102,8 +102,8 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeMenuDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaEdicao)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastroBola)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaEdicaoBola)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
@@ -134,7 +134,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
     }
     @Test
@@ -195,10 +195,10 @@ class DetalhesDaBolaScreenKtTest{
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarPeloAppAposTerEditadoBola(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
@@ -207,10 +207,10 @@ class DetalhesDaBolaScreenKtTest{
     fun deveVoltarParaATelaDeListaENaoDeCadastro_QuandoApertaBotaoVoltarDoAndroidAposTerEditadoBola(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
         testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         apertaOBotaoDeVoltar()
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)

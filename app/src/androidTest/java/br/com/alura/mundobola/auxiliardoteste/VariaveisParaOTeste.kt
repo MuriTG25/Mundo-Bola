@@ -6,9 +6,14 @@ import br.com.alura.mundobola.aplicacao.extra.paraMoedaBrasileira
 import java.time.LocalDateTime
 
 const val tituloTelaLista = "Mundo Bola"
-const val tituloTelaCadastro = "Cadastrar Bola"
-const val tituloTelaEdicao = "Editar Bola"
-const val tituloTelaDetalhes = "Detalhes da Bola"
+const val tituloTelaCadastroBola = "Cadastrar Bola"
+const val tituloTelaEdicaoBola = "Editar Bola"
+const val tituloTelaDetalhesBola = "Detalhes da Bola"
+const val tituloTelaCadastroMarca = "Cadastrar Marca"
+const val tituloTelaEdicaoMarca = "Editar Marca"
+const val tituloTelaDetalhesMarca = "Detalhes da Marca"
+
+
 const val descricaoCampoBusca = "Campo de texto de busca de bola"
 const val iconeBuscaPesquisaDescricao =  "Buscar o produto pelo nome"
 const val iconeVoltaPesquisaDescricao = "Fecha a aba de pesquisa"
@@ -29,6 +34,9 @@ const val textoOrdenacaoMaisAntigo = "Mais Antigo"
 
 const val labelCampoPesquisa = "Buscar bola"
 const val placeholderCampoPesquisa = "Digite o nome da bola desejada"
+
+const val textoTituloNavigationDrawer = "Marcas"
+const val textoCadastroNavigationDrawer = "Cadastrar Marca"
 
 const val textoNomeCadastroTela = "Nome"
 const val textoPrecoCadastroTela = "Preço"
@@ -55,6 +63,8 @@ const val dicaUrlScaffoldCadastroTela = "Insira o link contendo a imagem da bola
 const val textoCancelarScaffoldCadastroTela = "Cancelar"
 const val textoConfirmarScaffoldCadastroTela = "Confirmar"
 
+const val descricaoCardBola = "Card do produto"
+
 const val textoPerguntaScaffoldDetalhesTela = "Deseja mesmo excluir essa bola?"
 val textoCancelarScaffoldDetalhesTela = "Cancelar"
 const val textoConfirmarScaffoldDetalhesTela = "Confirmar"
@@ -79,6 +89,9 @@ const val marcaPenaltyTexto = "Penalty"
 val nomeBolaExistente1 = bola1.nome
 const val nomeBolaExistente2 = "Bola Nike Premier League Academy"
 const val nomeBolaExistente3 = "Jabulani"
+const val nomeBolaExtra1 = "Penalty Lider Campo"
+const val nomeBolaExtra2 = "Bola Society Penalty Se7e R2 Ko X"
+const val nomeBolaExtra3 = "Bola Al Rihla Pro"
 val precoBolaExistenteEditado = "99.90".toBigDecimal().paraMoedaBrasileira()
 const val precoBolaExistenteOriginal = "99.9"
 val dataCriacaoBolaExistente: String =  bola1.dataCriacao.dataFormatada()

@@ -66,9 +66,9 @@ import br.com.alura.mundobola.auxiliardoteste.textoPrecoCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoPrecoObrigatorioCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoUrlScaffoldCadastroTela
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicao
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.urlBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
@@ -107,13 +107,13 @@ class CadastroDeBolasScreenKtTest{
     )
     private fun vaiParaATelaDeCadastroPelaTelaDeLista(){
         testeDeUi.clicaNoElementoPelaDescricao(iconeFABDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroBola)
     }
     private fun vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeProduto:String) {
         testeDeUi.clicaNoElementoPeloNome(nomeProduto)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
     }
     private fun clicaBotaoSalvar(){
         testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
@@ -137,11 +137,11 @@ class CadastroDeBolasScreenKtTest{
     @Test
     fun deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds(){
         vaiParaATelaDeCadastroPelaTelaDeLista()
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaCadastro)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaCadastroBola)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhesBola)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
@@ -154,7 +154,7 @@ class CadastroDeBolasScreenKtTest{
     @Test
     fun deveMostarONomeDaTelaDeEdicao_QuandoFormosParaATelaDeCastroPeloTelaDeDetalhes(){
         vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente1)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaEdicao)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaEdicaoBola)
     }
     @Test
     fun deveMostarOsElementosDaTela_QuandoEstivermosNaTelaDeCadastro(){
@@ -356,7 +356,7 @@ class CadastroDeBolasScreenKtTest{
         clicaBotaoSalvar()
         testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaTeste)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaTeste)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
     }
@@ -370,7 +370,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExistente2)
         testeDeUi.scrollaAteOElementoPeloNome(nomeBolaTeste)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaTeste)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
     }
@@ -385,7 +385,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExistente2)
         testeDeUi.scrollaAteOElementoPeloNome(nomeBolaTeste)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaTeste)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
@@ -408,7 +408,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.esperaAteATelaAparecer(nomeBolaExistente2)
         testeDeUi.scrollaAteOElementoPeloNome(nomeBolaTeste)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaTeste)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
@@ -430,7 +430,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
         testeDeUi.limpaEDigitaNoCampoDeTexto(textoDescricaoCadastroTela, descricaoBolaTeste)
         clicaBotaoSalvar()
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaEditadoTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaTeste)
@@ -446,8 +446,8 @@ class CadastroDeBolasScreenKtTest{
     fun deveVoltarParaTelaDeDetalhesEDepoisParaTelaDeLista_QuandoApertarmosOBotaoDeVoltaDoApp(){
         vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
@@ -456,8 +456,8 @@ class CadastroDeBolasScreenKtTest{
     fun deveVoltarParaTelaDeDetalhesEDepoisParaTelaDeLista_QuandoApertarmosOBotaoDeVoltaDoAndroid(){
         vaiParaATelaDeCadastroPelaTelaDeDetalhes(nomeBolaExistente1)
         apertaOBotaoDeVoltar()
-        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhes)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         apertaOBotaoDeVoltar()
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)

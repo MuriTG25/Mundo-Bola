@@ -21,11 +21,11 @@ class DetalhesDaBolaViewModel @Inject constructor(
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DetalhesDaBolaUiState())
     val uiState = _uiState.asStateFlow()
-    private val id = stateHandle.get<String>(ID_BOLA)
+    private val marcaId = stateHandle.get<String>(ID_BOLA)
 
     init {
         viewModelScope.launch {
-            id?.let {
+            marcaId?.let {
                 buscaPorId(it)
             }
         }
@@ -89,7 +89,7 @@ class DetalhesDaBolaViewModel @Inject constructor(
     private fun telaDeErro() {
         _uiState.update {
             it.copy(
-                usuarioEncontrado = false,
+                marcaEncontrada = false,
             )
         }
     }

@@ -47,7 +47,7 @@ fun DetalhesDaBolaScreen(
     noClicaEdita: () -> Unit = {},
     noClicaDeleta: () -> Unit = {},
 ) {
-    if (state.usuarioEncontrado) {
+    if (state.marcaEncontrada) {
         ScaffoldScreen(
             titulo = "Detalhes da Bola",
             mostraVolta = true,
@@ -208,7 +208,7 @@ fun DetalhesDaBolaScreen(
 private fun DetalhesDaBolaScreenPreviewUsuarioEncontrado() {
     DetalhesDaBolaScreen(
         state = DetalhesDaBolaUiState(
-            usuarioEncontrado = true,
+            marcaEncontrada = true,
             nomeBola = bolaDeAmostra.nome,
             precoDaBola = bolaDeAmostra.preco,
             descricaoDaBola = bolaDeAmostra.descricao,
@@ -224,7 +224,7 @@ private fun DetalhesDaBolaScreenPreviewUsuarioEncontrado() {
 private fun DetalhesDaBolaScreenPreviewUsuarioNaoEncontrado() {
     DetalhesDaBolaScreen(
         state = DetalhesDaBolaUiState(
-            usuarioEncontrado = false
+            marcaEncontrada = false
         )
     )
 }

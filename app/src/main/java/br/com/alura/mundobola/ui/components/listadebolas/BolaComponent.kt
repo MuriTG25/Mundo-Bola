@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,20 +34,23 @@ fun ProdutoBolaComponent(
     modifier: Modifier = Modifier,
     bola: BolaDTO,
 ) {
-    Surface (
+    Surface(
         modifier = modifier
-            .heightIn(230.dp,300.dp)
-            .widthIn(160.dp,200.dp),
+            .heightIn(230.dp, 300.dp)
+            .widthIn(160.dp, 200.dp)
+            .semantics {
+                contentDescription = "Card do produto"
+            },
         shape = RoundedCornerShape(margemPadrao),
         shadowElevation = 4.dp,
         border = BorderStroke(2.dp, color = Color.Black)
-    ){
-        Column (
+    ) {
+        Column(
             modifier = modifier
                 .background(MaterialTheme.colorScheme.onTertiary)
                 .padding(margemPadrao),
-            verticalArrangement = Arrangement.spacedBy(margemPadrao/2)
-        ){
+            verticalArrangement = Arrangement.spacedBy(margemPadrao / 2)
+        ) {
             ImagemBolaComponent(
                 modifier = modifier
                     .align(Alignment.CenterHorizontally)

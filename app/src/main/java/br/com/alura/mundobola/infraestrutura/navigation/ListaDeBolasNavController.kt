@@ -12,18 +12,21 @@ import br.com.alura.mundobola.ui.screen.ListaDeBolasScreen
 internal const val listaDeBolasRota = "listaDeBolas"
 
 fun NavGraphBuilder.ListaDeBolasNavController(
-    navegarParaADescricao: (String) -> Unit = {},
-    navegarParaCadastro: () -> Unit = {},
+    navegarParaADescricaoDeBola: (String) -> Unit = {},
+    navegarParaADescricaoDeMarca: (String) -> Unit = {},
+    navegarParaCadastroDeBola: () -> Unit = {},
+    navegarParaOCadastroDeMarca: () -> Unit = {},
 ) {
     composable(listaDeBolasRota) {
         val viewModel = hiltViewModel<ListaDeBolasViewModel>()
         val uiState by viewModel.uiState.collectAsState()
         ListaDeBolasScreen(
             state = uiState,
-            navegarParaADescricao = {
-                navegarParaADescricao(it)
+            navegarParaADescricao = {bolaId->
+                navegarParaADescricaoDeBola(bolaId)
             },
-            noClicaFab = navegarParaCadastro,
+            navegarParaOCadastroDeMarca = navegarParaOCadastroDeMarca,
+            noClicaFab = navegarParaCadastroDeBola,
             noClicaNomeAsc = {
                 viewModel.listaDeBolasPorNomeAsc()
             },
@@ -43,8 +46,7 @@ fun NavGraphBuilder.ListaDeBolasNavController(
                 viewModel.listaDeBolasPeloMaisNovo()
             },
             noClicaMarca = {marcaId ->
-                viewModel.listaDeBolasPorMarca(marcaId)
-
+                navegarParaADescricaoDeMarca(marcaId)
             }
         )
     }

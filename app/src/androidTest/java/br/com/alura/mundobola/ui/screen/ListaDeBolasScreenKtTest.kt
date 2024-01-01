@@ -9,6 +9,7 @@ import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.digitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.esperaAteASumirOElemento
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
+import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempo
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
@@ -19,12 +20,19 @@ import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
+import br.com.alura.mundobola.auxiliardoteste.inserirMaisBolasNoDb
+import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.labelCampoPesquisa
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
+import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
+import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.marcaPenaltyTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente2
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra1
 import br.com.alura.mundobola.auxiliardoteste.placeholderCampoPesquisa
+import br.com.alura.mundobola.auxiliardoteste.textoCadastroNavigationDrawer
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoMarcaTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoNomeCadastroTela
@@ -35,8 +43,12 @@ import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoNomeDesc
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoPrecoAsc
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoPrecoDesc
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastro
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.textoTituloNavigationDrawer
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroMarca
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaPosicaoDoElemento
 import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
@@ -93,8 +105,8 @@ class ListaDeBolasScreenKtTest{
     fun deveMostrarFabIconeBuscaOrdenacaoMenuENomeApp_QuandoEstiverNaTelaDeBolas(){
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaLista)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeBuscaDescricao)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhes)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastroBola)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeFABDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeOrdenacaoDescricao)
         testeDeUi.verificaSeMostraOComponentePelaDescricao(iconeMenuDescricao)
@@ -108,7 +120,7 @@ class ListaDeBolasScreenKtTest{
     @Test
     fun deveIrParaATelaDeCadastros_QuandoApertarNoBotaoDoFab(){
         testeDeUi.clicaNoElementoPelaDescricao(iconeFABDescricao)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastro)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
         testeDeUi.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroTela)
     }
@@ -125,7 +137,7 @@ class ListaDeBolasScreenKtTest{
     @Test
     fun deveAbrirCampoDePesquisa_QuandoClicarNoIconeDeBusca(){
         testeDeUi.clicaNoElementoPelaDescricao(iconeBuscaDescricao)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastro)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(tituloTelaCadastroBola)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeOrdenacaoDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeMenuDescricao)
@@ -155,9 +167,17 @@ class ListaDeBolasScreenKtTest{
         testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeBuscaPesquisaDescricao)
     }
     @Test
-    fun deveSerClicavelIconeHome_ImplementacaoAindaNaoFeita(){
-        //TODO implementação vai ser feita daqui a pouco
-        testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeMenuDescricao)
+    fun deveAbrirONAvigationDrawer_QuandoClicarNoBotaoDeMenu() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExistente1)
+        testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExtra1)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoTituloNavigationDrawer)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCadastroNavigationDrawer)
     }
 
     @Test
@@ -272,14 +292,30 @@ class ListaDeBolasScreenKtTest{
         )
     }
     @Test
-    fun deveIrParaATelaDeDetalhes_QuandoApertarEmUmProduto(){
+    fun deveIrParaATelaDeDetalhesDeProduto_QuandoApertarEmUmProduto(){
         testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
         testeDeUi.clicaNoElementoPeloNome(nomeBolaExistente2)
-        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhes)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(descricaoCampoBusca)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeVoltaPesquisaDescricao)
         testeDeUi.verificaSeNaoExisteOComponentePelaDescricao(iconeBuscaPesquisaDescricao)
+    }
+    @Test
+    fun deveIrParaATelaDeCadastroDeMarca_QuandoApertarNoBotaoDeCadastrarMarca(){
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoCadastroNavigationDrawer)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaCadastroMarca)
+    }
+    @Test
+    fun deveIrParaATelaDeDetalhesDaMarca_QuandoApertarNoBotaoDeAlgumaMarca(){
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesMarca)
     }
 }

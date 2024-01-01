@@ -9,8 +9,11 @@ import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.future.future
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
@@ -64,7 +67,7 @@ class ListaDeBolasViewModel @Inject constructor(
                         it.paraBolaDTO()
                     },
                 )
-                repositorio.listaDeMarcas().collect { marcas ->
+                repositorio.listaDeMarcas().first().let { marcas ->
                     _uiState.value = _uiState.value.copy(
                         listaDeMarcas = marcas.map {
                             it.paraMarcaDTO()
@@ -161,18 +164,6 @@ class ListaDeBolasViewModel @Inject constructor(
                         it.paraBolaDTO()
                     },
                     expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPorMarca(marcaId: String) {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPorMarca(marcaId).let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    }
                 )
             }
         }

@@ -1,10 +1,13 @@
 package br.com.alura.mundobola.ui.components.listadebolas
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemColors
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -25,10 +28,12 @@ fun NavigationDrawerItemComImagemComponent(
     noClicaItem: () -> Unit = {},
 ) {
     NavigationDrawerItem(
-        modifier = modifier.border(
-            BorderStroke(2.dp, color = Color.Black),
-            RoundedCornerShape(10)
-        ),
+        modifier = modifier
+            .border(
+                BorderStroke(2.dp, color = Color.Black),
+                RoundedCornerShape(10)
+            )
+        ,
         label = {
             TextoProdutoComponent(
                 texto = titulo,
@@ -42,6 +47,11 @@ fun NavigationDrawerItemComImagemComponent(
                 escala = ContentScale.FillHeight
             )
         },
+        colors = NavigationDrawerItemDefaults.colors(
+            selectedContainerColor = Color.White,
+            unselectedContainerColor = Color.White
+        ),
+        shape = RoundedCornerShape(10),
         selected = false,
         onClick = noClicaItem,
     )
@@ -64,6 +74,11 @@ fun NavigationDrawerItemSemImagemComponent(
                 maxLines = 1
             )
         },
+        colors = NavigationDrawerItemDefaults.colors(
+            selectedContainerColor = Color.White,
+            unselectedContainerColor = Color.White
+        ),
+        shape = RoundedCornerShape(10),
         selected = false,
         onClick = noClicaItem,
     )

@@ -52,7 +52,7 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
     }
 }
 
-fun NavController.navegarParaTelaDeDetalhes(id: String){
+fun NavController.navegarParaTelaDeDetalhesDaBola(id: String){
     navigate("$detalhesDaBolaRotaInicio/$id"){
         launchSingleTop = true
         popUpTo(listaDeBolasRota){

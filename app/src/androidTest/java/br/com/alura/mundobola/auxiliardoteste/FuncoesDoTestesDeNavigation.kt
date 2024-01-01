@@ -124,7 +124,7 @@ fun ComposeContentTestRule.esperaAteASumirOElemento(
 fun ComposeContentTestRule.esperaAteATelaAparecerComTempo(
     texto: String,
     vezes: Int = 1,
-    tempo: Long = 3_000L,
+    tempo: Long = 3000L,
 ) {
     waitUntil(tempo) {
         this.onAllNodesWithText(texto)

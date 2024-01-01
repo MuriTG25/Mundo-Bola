@@ -4,29 +4,36 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
+
 //TODO pesquisar depois sobre animações em transição de telas
 @Composable
 fun MundoBolaNavHost(
     navHostController: NavHostController,
-) {     
+) {
     NavHost(
         navController = navHostController,
         startDestination = listaDeBolasRota,
-    ){
+    ) {
         ListaDeBolasNavController(
-            navegarParaADescricao = {id ->
-                navHostController.navegarParaTelaDeDetalhes(id)
+            navegarParaADescricaoDeBola = { bolaId ->
+                navHostController.navegarParaTelaDeDetalhesDaBola(bolaId)
             },
-            navegarParaCadastro = {
+            navegarParaADescricaoDeMarca = { marcaId ->
+                navHostController.navegarParaTelaDeDetalhesDaMarca(marcaId)
+            },
+            navegarParaCadastroDeBola = {
                 navHostController.navegarParaCadastroDeBolas(ID_GENERICO)
+            },
+            navegarParaOCadastroDeMarca = {
+                navHostController.navegarParaCadastroDeMarcas(ID_GENERICO)
             }
         )
         CadastroDeBolasNavController(
             irParaTelaPrincipal = {
                 navHostController.navegarParaListaDeBolas()
             },
-            irParaATelaDeDetalhes = {id ->
-                navHostController.navegarParaTelaDeDetalhes(id)
+            irParaATelaDeDetalhes = { bolaId ->
+                navHostController.navegarParaTelaDeDetalhesDaBola(bolaId)
             },
             voltarParaTelaAnterior = {
                 navHostController.popBackStack()
@@ -36,8 +43,21 @@ fun MundoBolaNavHost(
             navegarParaTelaAnterior = {
                 navHostController.popBackStack()
             },
-            navegarParaTelaCadastro = { id ->
-                navHostController.navegarParaCadastroDeBolas(id)
+            navegarParaTelaCadastro = { bolaId ->
+                navHostController.navegarParaCadastroDeBolas(bolaId)
+            }
+        )
+        CadastroDeMarcasNavController(
+            voltarParaATelaAnterior = {
+                navHostController.popBackStack()
+            }
+        )
+        DetalhesDaMarcaNavController(
+            navegarParaTelaAnterior = {
+                navHostController.popBackStack()
+            },
+            navegarParaATelaDeCadastro = { marcaId ->
+                navHostController.navegarParaCadastroDeMarcas(marcaId)
             }
         )
     }

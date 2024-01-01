@@ -31,6 +31,7 @@ fun NavigationDrawerComponent(
     drawerState: DrawerState,
     listaDeMarcas: List<MarcaDTO> = emptyList(),
     noClicaMarca: (String) -> Unit = {},
+    noClicaCadastrarMarca: () -> Unit = {},
     conteudo: @Composable () -> Unit = {},
 ) {
     ModalNavigationDrawer(
@@ -71,6 +72,7 @@ fun NavigationDrawerComponent(
                     }
                     NavigationDrawerItemSemImagemComponent(
                         titulo = "Cadastrar Marca",
+                        noClicaItem = noClicaCadastrarMarca
                     )
                 }
             }

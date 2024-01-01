@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ListaDeBolasScreenKtTest">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>
@@ -13,24 +10,40 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\User\.android\avd\Small_Phone_API_26.avd" />
+                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_26.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-12-21T12:07:00.239011200Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-01-01T12:30:10.143130400Z" />
         </State>
       </entry>
-      <entry key="deveCadastrarUmaNovaBola_QuandoInserirmosTodosOsDados()">
-        <State />
-      </entry>
-      <entry key="deveMostrarFabIconeBuscaOrdenacaoMenuENomeApp_QuandoEstiverNaTelaDeBolas()">
+      <entry key="deveMostarONomeDaTelaDeEdicao_SeAbrirmosATelaPeloDetalhes()">
         <State />
       </entry>
       <entry key="deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds()">
         <State />
       </entry>
-      <entry key="deveSerClicavelIconeHome_ImplementacaoAindaNaoFeita()">
+      <entry key="deveVoltarParaATelaDeDetalhesEDepoisNaTelaDeLista_QuandoClicarmosNoBotaoDeVolta()">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="51de3ed" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-01T14:08:48.065420600Z" />
+        </State>
+      </entry>
+      <entry key="deveVoltarParaATelaDeLista_QuandoClicarmosNoBotaoDeVolta()">
+        <State />
+      </entry>
+      <entry key="deveVoltarParaATelaDeLista_QuandoClicarmosNoVoltaDoAndroid()">
         <State />
       </entry>
     </value>
