@@ -28,11 +28,14 @@ import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.minimizarOAppEReabrir
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
 import br.com.alura.mundobola.auxiliardoteste.nomeMarcaTeste
 import br.com.alura.mundobola.auxiliardoteste.placeholderImagemCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.placeholderNomeCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
 import br.com.alura.mundobola.auxiliardoteste.textoCadastroNavigationDrawer
+import br.com.alura.mundobola.auxiliardoteste.textoNomeObrigatorioCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
@@ -206,9 +209,30 @@ class CadastroDeMarcasScreenKtTest {
         testeDeUi.verificaSeMostraOComponentePeloTexto(imagemMarcaTeste)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
     }
+    @Test
+    fun deveAparecerMensagemDeNomeObrigatorio_QuandoClicarmosEmSalvarSemPreencherOsDados(){
+        vaiParaATelaDeCadastroPelaLista()
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeObrigatorioCadastroMarca)
+    }
+    @Test
+    fun deveDesaparecerMensagemDeNomeObrigatorio_QuandoPreenchermosOCampoDoNome(){
+        vaiParaATelaDeCadastroPelaLista()
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeObrigatorioCadastroMarca)
+        testeDeUi.digitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoNomeObrigatorioCadastroMarca)
+    }
     //TODO teste de UI precisa da implementação da tela de detalhes da marca para estar completo
     @Test
-    fun deveAparecerMensagemDeErro_QuandoClicarmosEmSalvarSemPreencherOsDados(){
-        
+    fun deveCadastrarMarca_QuandoInserirmosApenasONome(){
+        vaiParaATelaDeCadastroPelaLista()
+        testeDeUi.digitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(nomeMarcaTeste)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
     }
 }

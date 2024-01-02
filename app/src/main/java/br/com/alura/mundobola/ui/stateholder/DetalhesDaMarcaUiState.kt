@@ -10,4 +10,8 @@ data class DetalhesDaMarcaUiState(
     val dataAlteracao: String = "",
     val marcaEncontrada: Boolean = true,
     val listaDeBolasDaMarca: List<BolaDTO> = emptyList(),
+    val expandirImagem: Boolean = false,
+    val noClickDaExpansaoDaImagem: (Boolean) -> Unit = {},
+    val expandirListaDeBolas: Boolean = false,
+    val noClickDaExpansaoDaListaDeBolas: (Boolean) -> Unit = {},
 )

@@ -2,25 +2,11 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="CadastroDeMarcasScreenKtTest">
-        <State />
-      </entry>
       <entry key="ListaDeBolasScreenKtTest">
         <State />
       </entry>
       <entry key="app">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_26.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
           <targetSelectedWithDropDown>
             <Target>
               <type value="QUICK_BOOT_TARGET" />
@@ -35,7 +21,16 @@
           <timeTargetWasSelectedWithDropDown value="2024-01-02T16:55:28.054443600Z" />
         </State>
       </entry>
-      <entry key="deveIrParaATelaDeDetalhesDaMarca_QuandoApertarNoBotaoDeAlgumaMarca()">
+      <entry key="deveAparecerMensagemDeErro_QuandoClicarmosEmSalvarSemPreencherOsDados()">
+        <State />
+      </entry>
+      <entry key="deveCadastrarMarca_QuandoInserirmosApenasONome()">
+        <State />
+      </entry>
+      <entry key="deveDesaparecerMensagemDeNomeObrigatorio_QuandoPreenchermosOCampoDoNome()">
+        <State />
+      </entry>
+      <entry key="deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes()">
         <State />
       </entry>
     </value>

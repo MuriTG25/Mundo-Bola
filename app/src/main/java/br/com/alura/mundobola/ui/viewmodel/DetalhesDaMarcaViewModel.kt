@@ -30,6 +30,21 @@ class DetalhesDaMarcaViewModel @Inject constructor(
                 buscaMarca(it)
             }
         }
+        _uiState.update {detalhesDaMarcaUiState ->
+            detalhesDaMarcaUiState.copy(
+                noClickDaExpansaoDaImagem = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirImagem = it
+                    )
+                },
+                noClickDaExpansaoDaListaDeBolas = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirListaDeBolas = it
+                    )
+                }
+            )
+
+        }
     }
 
     private suspend fun buscaMarca(it: String) {
