@@ -207,5 +207,8 @@ class CadastroDeMarcasScreenKtTest {
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
     }
     //TODO teste de UI precisa da implementação da tela de detalhes da marca para estar completo
-    
+    @Test
+    fun deveAparecerMensagemDeErro_QuandoClicarmosEmSalvarSemPreencherOsDados(){
+        
+    }
 }

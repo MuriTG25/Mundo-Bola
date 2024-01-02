@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="CadastroDeMarcasScreenKtTest">
+        <State />
+      </entry>
       <entry key="ListaDeBolasScreenKtTest">
         <State />
       </entry>
@@ -29,8 +32,11 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-02T13:56:00.204340400Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-01-02T16:55:28.054443600Z" />
         </State>
+      </entry>
+      <entry key="deveIrParaATelaDeDetalhesDaMarca_QuandoApertarNoBotaoDeAlgumaMarca()">
+        <State />
       </entry>
     </value>
   </component>
