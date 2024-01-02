@@ -38,23 +38,23 @@ const val placeholderCampoPesquisa = "Digite o nome da bola desejada"
 const val textoTituloNavigationDrawer = "Marcas"
 const val textoCadastroNavigationDrawer = "Cadastrar Marca"
 
-const val textoNomeCadastroTela = "Nome"
-const val textoPrecoCadastroTela = "Preço"
-const val textoMarcaCadastroTela = "Marca"
-const val textoDescricaoCadastroTela = "Descrição"
-const val textoSalvarCadastroTela = "Salvar"
-const val descricaoImagemCadastroTela = "imagem da bola"
+const val textoNomeCadastroBola = "Nome"
+const val textoPrecoCadastroBola = "Preço"
+const val textoMarcaCadastroBola = "Marca"
+const val textoDescricaoCadastroBola = "Descrição"
+const val textoSalvarCadastroBola = "Salvar"
+const val descricaoImagemCadastroBola = "imagem da bola"
 
 val mensagemToastCadastroSucesso = "Bola cadastrada com sucesso"
 val textoToastEdicaoSucesso = "Bola editada com sucesso"
 val textoToastCarregamentoFalha = "Bola não encontrada"
 
-const val placeholderNomeCadastroTela = "Insira o nome da Bola"
-const val placeholderPrecoCadastroTela = "Insira o preço da bola"
-const val placeholderDescricaoCadastroTela = "Insira uma descrição com mais detalhes sobre o produto"
+const val placeholderNomeCadastroBola = "Insira o nome da Bola"
+const val placeholderPrecoCadastroBola = "Insira o preço da bola"
+const val placeholderDescricaoCadastroBola = "Insira uma descrição com mais detalhes sobre o produto"
 
-const val textoNomeObrigatorioCadastroTela = "*Campo de Nome é obrigatório"
-const val textoPrecoObrigatorioCadastroTela = "*Campo de Preço é obrigatório"
+const val textoNomeObrigatorioCadastroBola = "*Campo de Nome é obrigatório"
+const val textoPrecoObrigatorioCadastroBola = "*Campo de Preço é obrigatório"
 
 
 const val descricaoImagemScaffoldCadastroTela = "imagem da bola"
@@ -83,6 +83,7 @@ const val urlBolaTeste = "https://images.tcdn.com.br/img/img_prod/728938/bola_fu
 val descricaoBolaTeste = LoremIpsum(10).values.first()
 
 const val marcaNikeTexto = "Nike"
+const val imagemNikeTexto = "https://logospng.org/wp-content/uploads/nike.jpg"
 const val marcaAdidasTexto = "Adidas"
 const val marcaPenaltyTexto = "Penalty"
 
@@ -105,3 +106,13 @@ const val precoComPontoEVirgula = "1.019,90"
 const val precoCom2Pontos = "1.019.90"
 const val precoCom2Virgulas = "1.019,90"
 const val precoComSimboloNegativo = "-19.90"
+
+const val campoNomeCadastroMarca = "Nome"
+const val placeholderNomeCadastroMarca = "Insira o nome da Marca"
+const val campoImagemCadastroMarca = "Url da Imagem"
+const val placeholderImagemCadastroMarca = "Insira o link contendo a imagem da marca"
+const val textoSalvarCadastroMarca = "Salvar"
+const val textoNomeObrigatorioCadastroMarca = "*Campo de Nome é obrigatório"
+
+const val nomeMarcaTeste = "Umbro"
+const val imagemMarcaTeste = "https://marcas-logos.net/wp-content/uploads/2020/10/umbro-logo.png"

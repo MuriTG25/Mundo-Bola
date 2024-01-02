@@ -10,7 +10,7 @@ import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.descricaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
-import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
@@ -36,7 +36,7 @@ import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTela
-import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
@@ -111,9 +111,9 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun deveAbrirODialogComImagem_QuandoClicaNaImagem(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
-        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroBola)
         testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
-            descricaoImagemCadastroTela, 2
+            descricaoImagemCadastroBola, 2
         )
     }
     @Test
@@ -140,10 +140,10 @@ class DetalhesDaBolaScreenKtTest{
     @Test
     fun devemManterDialogComImagem_QuandoRotacionarmosODispositivo(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
-        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroBola)
         uiDevice.rotacionarATela()
         testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
-            descricaoImagemCadastroTela, 2
+            descricaoImagemCadastroBola, 2
         )
         uiDevice.voltarARotacaoDaTela()
     }
@@ -176,10 +176,10 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         testeDeUi.verificaSeMostraOComponentePeloTexto(precoBolaExistenteOriginal)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
-        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(descricaoBolaExistente)
-        testeDeUi.scrollaAteOElementoPelaDescricao(descricaoImagemCadastroTela)
-        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroTela)
+        testeDeUi.scrollaAteOElementoPelaDescricao(descricaoImagemCadastroBola)
+        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(imagemBolaExistente)
     }
     @Test
@@ -196,8 +196,8 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
-        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
-        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroBola)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
@@ -208,8 +208,8 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
-        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroTela)
-        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroTela)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroBola)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
         apertaOBotaoDeVoltar()
         testeDeUi.esperaAteATelaAparecer(tituloTelaLista)

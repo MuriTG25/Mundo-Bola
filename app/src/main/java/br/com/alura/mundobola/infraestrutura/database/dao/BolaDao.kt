@@ -21,7 +21,7 @@ interface BolaDao {
     fun encontrarBolaPeloId(bolaId: String): Flow<BolaEntity?>
 
     @Update(entity = BolaEntity::class)
-    suspend fun atualizaBola(bola: BolaPOJO)
+    suspend fun editaBola(bola: BolaPOJO)
 
     @Query("DELETE FROM bola WHERE bolaId = :bolaId")
     suspend fun deletaBola(bolaId: String)

@@ -4,8 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import br.com.alura.mundobola.aplicacao.modelo.entity.MarcaEntity
-import br.com.alura.mundobola.dominio.Marca
+import br.com.alura.mundobola.aplicacao.modelo.pojo.MarcaPOJO
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,4 +19,7 @@ interface MarcaDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun adicionarMarca(marca: MarcaEntity)
+
+    @Update(entity = MarcaEntity::class)
+    suspend fun editaMarca(marca: MarcaPOJO)
 }

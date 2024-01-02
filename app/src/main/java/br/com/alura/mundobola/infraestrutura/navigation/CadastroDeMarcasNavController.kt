@@ -11,12 +11,15 @@ import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
 import br.com.alura.mundobola.aplicacao.extra.ID_MARCA
 import br.com.alura.mundobola.ui.screen.CadastroDeMarcasScreen
 import br.com.alura.mundobola.ui.viewmodel.CadastroDeMarcasViewModel
+import kotlinx.coroutines.launch
 
 internal const val cadastroDeMarcasRota = "cadastroDeMarcas"
 internal const val cadastroDeMarcasRotaCompleto = "$cadastroDeMarcasRota/{$ID_MARCA}"
 
 fun NavGraphBuilder.CadastroDeMarcasNavController(
     voltarParaATelaAnterior: () -> Unit = {},
+    irParaATelaDeLista: () -> Unit = {},
+    irParaATelaDeDetalhesDaMarca: (String) -> Unit = {},
 ){
     composable(cadastroDeMarcasRotaCompleto){ backStackEntry ->
         backStackEntry.arguments?.getString(ID_MARCA)?.let {marcaId->
@@ -27,7 +30,15 @@ fun NavGraphBuilder.CadastroDeMarcasNavController(
                 state = uiState,
                 tituloDaTela = if(marcaId == ID_GENERICO) "Cadastrar Marca"
                 else "Editar Marca",
-                noClicaVolta = voltarParaATelaAnterior
+                noClicaVolta = voltarParaATelaAnterior,
+                noClicarSalvar = {
+                    coroutineScope.launch {
+                        viewModel.salvarMarca(
+                            irParaATelaDeLista = irParaATelaDeLista,
+                            irParaATelaDeDetalhesDaMarca = irParaATelaDeDetalhesDaMarca,
+                        )
+                    }
+                }
             )
         }
     }

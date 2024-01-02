@@ -8,6 +8,7 @@ import br.com.alura.mundobola.aplicacao.extra.ID_BOLA
 import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
 import br.com.alura.mundobola.aplicacao.extra.estaVazio
 import br.com.alura.mundobola.aplicacao.extra.paraBigDecimal
+import br.com.alura.mundobola.aplicacao.modelo.pojo.BolaPOJO
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.ui.extra.mensagemDeAviso
@@ -158,14 +159,13 @@ class CadastrodeBolasViewModel @Inject constructor(
                             irParaTelaPrincipal()
                         }
                     } else {
-                        val bola = Bola(
+                        val bola = BolaPOJO(
                             bolaId = bolaId,
                             nome = campoDoNome,
                             preco = it,
                             marcaId = marcaId.estaVazio(),
                             descricao = campoDaDescricao.estaVazio(),
                             imagem = fotoBola.estaVazio(),
-                            dataCriacao = dataCriacao,
                             dataAlteracao = LocalDateTime.now()
                         )
                         repositorio.editaBola(bola)

@@ -4,7 +4,9 @@ package br.com.alura.mundobola.aplicacao.repositorio
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBola
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBolaEntity
 import br.com.alura.mundobola.aplicacao.modelo.entity.toMarca
-import br.com.alura.mundobola.aplicacao.modelo.pojo.toBolaPOJO
+import br.com.alura.mundobola.aplicacao.modelo.entity.toMarcaEntity
+import br.com.alura.mundobola.aplicacao.modelo.pojo.BolaPOJO
+import br.com.alura.mundobola.aplicacao.modelo.pojo.MarcaPOJO
 import br.com.alura.mundobola.dominio.Bola
 import br.com.alura.mundobola.dominio.Marca
 import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
@@ -29,6 +31,9 @@ class MundoBolaRepositorio @Inject constructor(
 
     suspend fun adicionarBola(bola: Bola) {
         bolaDao.adicionarBola(bola.toBolaEntity())
+    }
+    suspend fun adicionarMarca(marca: Marca) {
+        marcaDao.adicionarMarca(marca.toMarcaEntity())
     }
 
     suspend fun listaDeMarcas(): Flow<List<Marca>> {
@@ -55,10 +60,11 @@ class MundoBolaRepositorio @Inject constructor(
         bolaDao.deletaBola(id)
     }
 
-    suspend fun editaBola(
-        novaBola: Bola,
-    ) {
-        bolaDao.atualizaBola(novaBola.toBolaPOJO())
+    suspend fun editaBola(bola: BolaPOJO) {
+        bolaDao.editaBola(bola)
+    }
+    suspend fun editaMarca(marca: MarcaPOJO){
+        marcaDao.editaMarca(marca)
     }
 
     fun buscaBolaPorNome(nome: String): Flow<List<Bola>> {

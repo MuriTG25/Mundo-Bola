@@ -1,0 +1,9 @@
+coisas a melhorar no app:
+ - campo de pesquisa precisa ter o campo de campo selecionado ao clicar no icone de busca
+ - melhorar a implementação da ordenação da lista, que está cheia de boilerplate
+ - melhorar o fluxo da lista de marcas no Navigation Drawer para que esteja atualizado, mas que não pese no carregamento da página da lista
+ - corrigir o erro no teste de integração do repositório
+ - como fazer teste do toast no teste de UI
+ - talvez trocar o toast pelo snackbar
+ - talvez trocar a imagem na tela de cadastro de bolas para ser mais intuítivo ser clicado
+

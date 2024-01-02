@@ -2,8 +2,22 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="ListaDeBolasScreenKtTest">
+        <State />
+      </entry>
       <entry key="app">
         <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_26.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
           <targetSelectedWithDropDown>
             <Target>
               <type value="QUICK_BOOT_TARGET" />
@@ -15,36 +29,8 @@
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-01T12:30:10.143130400Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-01-02T13:56:00.204340400Z" />
         </State>
-      </entry>
-      <entry key="deveMostarONomeDaTelaDeEdicao_SeAbrirmosATelaPeloDetalhes()">
-        <State />
-      </entry>
-      <entry key="deveMostrarOBotaoDeVolta_QuandoVerificarmosOsScaffolds()">
-        <State />
-      </entry>
-      <entry key="deveVoltarParaATelaDeDetalhesEDepoisNaTelaDeLista_QuandoClicarmosNoBotaoDeVolta()">
-        <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="51de3ed" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-01T14:08:48.065420600Z" />
-        </State>
-      </entry>
-      <entry key="deveVoltarParaATelaDeLista_QuandoClicarmosNoBotaoDeVolta()">
-        <State />
-      </entry>
-      <entry key="deveVoltarParaATelaDeLista_QuandoClicarmosNoVoltaDoAndroid()">
-        <State />
       </entry>
     </value>
   </component>

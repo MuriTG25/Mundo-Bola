@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.future.future
 import kotlinx.coroutines.launch
@@ -67,6 +68,7 @@ class ListaDeBolasViewModel @Inject constructor(
                         it.paraBolaDTO()
                     },
                 )
+                //TODO preciso melhorar a implementação desse collect
                 repositorio.listaDeMarcas().first().let { marcas ->
                     _uiState.value = _uiState.value.copy(
                         listaDeMarcas = marcas.map {

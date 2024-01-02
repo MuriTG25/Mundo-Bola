@@ -35,20 +35,19 @@ import br.com.alura.mundobola.auxiliardoteste.placeholderCampoPesquisa
 import br.com.alura.mundobola.auxiliardoteste.textoCadastroNavigationDrawer
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoMarcaTelaDetalhes
-import br.com.alura.mundobola.auxiliardoteste.textoNomeCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoNomeCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoMaisAntigo
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoMaisNovo
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoNomeAsc
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoNomeDesc
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoPrecoAsc
 import br.com.alura.mundobola.auxiliardoteste.textoOrdenacaoPrecoDesc
-import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoTituloNavigationDrawer
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
-import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaPosicaoDoElemento
 import br.com.alura.mundobola.auxiliardoteste.verificaSeExisteOComponentPeloTexto
@@ -121,8 +120,8 @@ class ListaDeBolasScreenKtTest{
     fun deveIrParaATelaDeCadastros_QuandoApertarNoBotaoDoFab(){
         testeDeUi.clicaNoElementoPelaDescricao(iconeFABDescricao)
         testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroBola)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeCadastroTela)
-        testeDeUi.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoNomeCadastroBola)
+        testeDeUi.verificaSeExisteOComponentPeloTexto(textoSalvarCadastroBola)
     }
     @Test
     fun deveMostrarOstTiposDeOrdenamento_QuandoCicarmosNoBotaoDeOrdenar(){

@@ -26,3 +26,10 @@ fun MarcaEntity.toMarca() = Marca(
     dataCriacao = dataCriacao,
     dataAlteracao = dataAlteracao,
 )
+fun Marca.toMarcaEntity() = MarcaEntity(
+    marcaId = marcaId,
+    nome = nome,
+    imagem = imagem,
+    dataCriacao = dataCriacao,
+    dataAlteracao = dataAlteracao,
+)

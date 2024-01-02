@@ -50,6 +50,12 @@ fun MundoBolaNavHost(
         CadastroDeMarcasNavController(
             voltarParaATelaAnterior = {
                 navHostController.popBackStack()
+            },
+            irParaATelaDeLista = {
+                navHostController.navegarParaListaDeBolas()
+            },
+            irParaATelaDeDetalhesDaMarca = {marcaId->
+                navHostController.navegarParaTelaDeDetalhesDaMarca(marcaId)
             }
         )
         DetalhesDaMarcaNavController(

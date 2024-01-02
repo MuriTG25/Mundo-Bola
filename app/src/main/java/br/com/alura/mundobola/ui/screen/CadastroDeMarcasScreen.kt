@@ -1,19 +1,33 @@
 package br.com.alura.mundobola.ui.screen
 
+import android.content.Context
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import br.com.alura.mundobola.aplicacao.extra.ID_GENERICO
-import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
+import br.com.alura.mundobola.ui.components.cadastrodebolas.TextoCampoObrigatorioComponent
+import br.com.alura.mundobola.ui.components.comum.BotaoComponent
+import br.com.alura.mundobola.ui.components.comum.CampoDeTextoComponent
+import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
+import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
+import br.com.alura.mundobola.ui.extra.tamanhoCaixaPadrao
 import br.com.alura.mundobola.ui.stateholder.CadastroDeMarcasUiState
 
 @Composable
@@ -21,7 +35,9 @@ fun CadastroDeMarcasScreen(
     modifier: Modifier = Modifier,
     state: CadastroDeMarcasUiState,
     tituloDaTela: String = "",
-    noClicaVolta: () -> Unit = {}
+    context: Context = LocalContext.current,
+    noClicaVolta: () -> Unit = {},
+    noClicarSalvar: () -> Unit = {}
 ) {
    ScaffoldScreen (
        titulo = tituloDaTela,
@@ -30,31 +46,62 @@ fun CadastroDeMarcasScreen(
    ){
        //TODO vou começar a implementar a tela de cadastro
        Column (
-           modifier = modifier.fillMaxSize(),
-           verticalArrangement = Arrangement.Center
+           modifier = modifier
+               .fillMaxSize()
+               .verticalScroll(rememberScrollState()),
            ){
-           TextoProdutoComponent(
-               modifier = Modifier.fillMaxWidth(),
-               texto = "Em breve",
-               textAlign = TextAlign.Center,
-               fontSize = 30.sp,
-               fontWeight = FontWeight.Bold
-           )
-           if(state.marcaId.isNotEmpty()){
-               TextoProdutoComponent(
-                   modifier = Modifier.fillMaxWidth(),
-                   texto = "ID da Marca: ${state.marcaId}",
-                   textAlign = TextAlign.Center,
-                   fontSize = 20.sp,
-                   fontWeight = FontWeight.Bold
+               ImagemBolaComponent(
+                   modifier = Modifier
+                       .background(MaterialTheme.colorScheme.primaryContainer)
+                       .fillMaxWidth()
+                       .height(tamanhoCaixaPadrao),
+                   imagemDaBola = state.urlImagem,
+                   escala = ContentScale.FillHeight
                )
-               TextoProdutoComponent(
-                   modifier = Modifier.fillMaxWidth(),
-                   texto = "Nome da Marca: ${state.nome}",
-                   textAlign = TextAlign.Center,
-                   fontSize = 20.sp,
-                   fontWeight = FontWeight.Bold
+           Column(
+               modifier = Modifier
+                   .fillMaxSize()
+                   .padding(margemPadrao),
+               verticalArrangement = Arrangement.spacedBy(margemPadrao)
+           ){
+               val focusManager = LocalFocusManager.current
+               val acaoDoTeclado = KeyboardActions(
+                   onNext = { focusManager.moveFocus(FocusDirection.Next) })
+               CampoDeTextoComponent(
+                   nomeDoCampo = "Url da Imagem",
+                   dicaDoCampo = "Insira o link contendo a imagem da marca",
+                   texto = state.urlImagem,
+                   naMudancaDeTexto = state.alteracaoDoCampouUrlImagem,
+                   acaoDoTeclado = acaoDoTeclado
                )
+               if (state.campoNomeObrigatorio && state.campoDoNome.isBlank()) {
+                   TextoCampoObrigatorioComponent(texto = "Nome")
+               }
+               CampoDeTextoComponent(
+                   nomeDoCampo = "Nome",
+                   dicaDoCampo = "Insira o nome da Marca",
+                   texto = state.campoDoNome,
+                   naMudancaDeTexto = state.alteracaoDoCampoNome,
+               )
+               BotaoComponent(
+                   modifier = Modifier.fillMaxWidth(),
+                   texto = "Salvar",
+                   noClicarBotao = noClicarSalvar,
+               )
+               if( state.mensagemErroCarregamento
+                   || state.mensagemCadastroConcluido
+                   || state.mensagemEdicaoConcluido
+               ){
+                   val mensagem:String = when {
+                       state.mensagemErroCarregamento -> "Marca não encontrada"
+                       state.mensagemCadastroConcluido -> "Marca cadastrada com sucesso"
+                       state.mensagemEdicaoConcluido -> "Marca editada com sucesso"
+                       else -> ""
+                   }
+                   LaunchedEffect(Unit){
+                       context.mensagemDeAviso(mensagem)
+                   }
+               }
            }
        }
    }
@@ -70,11 +117,12 @@ private fun CadastroDeMarcasScreenPreview() {
 }
 @Preview(showSystemUi = true)
 @Composable
-private fun EdicaoDeMarcasScreenPreview() {
+private fun EdicaoDeMarcasComCamposPreenchidosScreenPreview() {
     CadastroDeMarcasScreen(
         state = CadastroDeMarcasUiState(
-            nome = amostraDeListaDeMarcas.first().nome,
+            campoDoNome = amostraDeListaDeMarcas.first().nome,
             marcaId = amostraDeListaDeMarcas.first().marcaId,
+            urlImagem = amostraDeListaDeMarcas.first().imagem
         ),
         tituloDaTela = "Editar Marca",
     )

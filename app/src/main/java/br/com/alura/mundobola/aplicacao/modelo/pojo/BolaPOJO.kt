@@ -16,12 +16,4 @@ data class BolaPOJO(
     val imagem: String? = null,
     val dataAlteracao: LocalDateTime = LocalDateTime.now(),
 )
-fun Bola.toBolaPOJO() = BolaPOJO(
-    bolaId = bolaId,
-    nome = nome,
-    preco = preco,
-    marcaId = marcaId,
-    descricao = descricao,
-    imagem = imagem,
-    dataAlteracao = dataAlteracao ?: LocalDateTime.now(),
-)
+
