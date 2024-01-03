@@ -16,18 +16,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 
 @Composable
 fun DropdowmMenuComponent(
     modifier: Modifier = Modifier,
     expandir: Boolean = false,
     alteracaoDaExpansao: (Boolean) -> Unit = {},
-    noClicaNomeAsc: () -> Unit = {},
-    noClicaNomeDesc: () -> Unit = {},
-    noClicaPrecoAsc: () -> Unit = {},
-    noClicaPrecoDesc: () -> Unit = {},
-    noClicaMaisNovo: () -> Unit = {},
-    noClicaMaisAntigo: () -> Unit = {},
+    noClicaOrdenaPor: (OrdenacaoDaLista) -> Unit = {},
 ) {
     Box(
         modifier = modifier
@@ -54,37 +50,37 @@ fun DropdowmMenuComponent(
             DropdownMenuItemComponent(
                 texto = "Nome Asc",
                 noClicaItem = {
-                    noClicaNomeAsc()
+                    noClicaOrdenaPor(OrdenacaoDaLista.NOME_ASC)
                 }
             )
             DropdownMenuItemComponent(
                 texto = "Nome Desc",
                 noClicaItem = {
-                    noClicaNomeDesc()
+                    noClicaOrdenaPor(OrdenacaoDaLista.NOME_DESC)
                 }
             )
             DropdownMenuItemComponent(
                 texto = "Preço Asc",
                 noClicaItem = {
-                    noClicaPrecoAsc()
+                    noClicaOrdenaPor(OrdenacaoDaLista.PRECO_ASC)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Preço Desc",
                 noClicaItem = {
-                    noClicaPrecoDesc()
+                    noClicaOrdenaPor(OrdenacaoDaLista.PRECO_DESC)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Mais Novo",
                 noClicaItem = {
-                    noClicaMaisNovo()
+                    noClicaOrdenaPor(OrdenacaoDaLista.MAIS_NOVO)
                 },
             )
             DropdownMenuItemComponent(
                 texto = "Mais Antigo",
                 noClicaItem = {
-                    noClicaMaisAntigo()
+                    noClicaOrdenaPor(OrdenacaoDaLista.MAIS_ANTIGO)
                 },
             )
         }

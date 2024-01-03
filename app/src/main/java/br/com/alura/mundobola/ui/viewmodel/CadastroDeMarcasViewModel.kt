@@ -73,7 +73,7 @@ class CadastroDeMarcasViewModel @Inject constructor(
         irParaATelaDeDetalhesDaMarca: (String) -> Unit = {},
     ) {
         with(_uiState.value) {
-            if (campoDoNome.isNullOrBlank()) {
+            if (campoDoNome.isBlank()) {
                 _uiState.value = _uiState.value.copy(
                     campoNomeObrigatorio = true,
                 )

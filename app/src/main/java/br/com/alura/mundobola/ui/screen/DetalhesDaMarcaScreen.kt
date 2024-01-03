@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -19,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.alura.mundobola.aplicacao.extra.dataFormatada
@@ -26,8 +30,11 @@ import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 import br.com.alura.mundobola.ui.components.detalhesdabola.DialogImagemComponent
+import br.com.alura.mundobola.ui.components.listadebolas.ProdutoBolaComponent
+import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.tamanhoFonteMedia
 import br.com.alura.mundobola.ui.extra.tamanhoFonteMini
 import br.com.alura.mundobola.ui.extra.tamanhoFonteTitulo
 import br.com.alura.mundobola.ui.stateholder.DetalhesDaMarcaUiState
@@ -38,6 +45,7 @@ fun DetalhesDaMarcaScreen(
     modifier: Modifier = Modifier,
     state: DetalhesDaMarcaUiState,
     navegarDeVolta: () -> Unit = {},
+    navegarParaADescricaoDaBola: (String) -> Unit = {},
     noClicaEditaMarca: () -> Unit = {},
     noClicaDeletaMarca: () -> Unit = {},
 ) {
@@ -116,25 +124,56 @@ fun DetalhesDaMarcaScreen(
 
                     }
                 }
-                val icone = if (state.expandirListaDeBolas)
-                    Icons.Filled.KeyboardArrowUp
-                else Icons.Filled.KeyboardArrowDown
-                val textoBotao = if (state.expandirListaDeBolas)
-                    "Esconder lista de Bolas"
-                else "Mostrar lista de Bolas"
-                BotaoComponent(
-                    modifier = Modifier
-                        .padding(margemPadrao)
-                        .fillMaxWidth(),
-                    texto = textoBotao,
-                    temImagem = true,
-                    imagem = icone,
-                    noClicarBotao = {
-                        state.noClickDaExpansaoDaListaDeBolas(
-                            !state.expandirListaDeBolas
+                if (state.listaDeBolasDaMarca.isNotEmpty()) {
+                    Column (
+                        modifier = Modifier.fillMaxSize()
+                            .padding(top = margemPadrao)
+                    ){
+                    if(state.expandirListaDeBolas){
+                            TextoProdutoComponent(
+                                modifier = Modifier.fillMaxWidth(),
+                                texto = "Bolas da marca ${state.nome}",
+                                textAlign = TextAlign.Center,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = tamanhoFonteMedia
+                            )
+                            LazyVerticalGrid(
+                                modifier = modifier.padding(margemPadrao),
+                                verticalArrangement = Arrangement.spacedBy(margemPadrao),
+                                horizontalArrangement = Arrangement.spacedBy(margemPadrao),
+                                columns = GridCells.Fixed(2),
+                            ) {
+                                items(state.listaDeBolasDaMarca) { bola ->
+                                    ProdutoBolaComponent(
+                                        modifier = Modifier.clickable {
+                                            navegarParaADescricaoDaBola(bola.bolaId)
+                                        },
+                                        bola = bola,
+                                    )
+                                }
+                            }
+                        }
+                        val icone = if (state.expandirListaDeBolas)
+                            Icons.Filled.KeyboardArrowUp
+                        else Icons.Filled.KeyboardArrowDown
+                        val textoBotao = if (state.expandirListaDeBolas)
+                            "Esconder lista de Bolas"
+                        else "Mostrar lista de Bolas"
+                        BotaoComponent(
+                            modifier = Modifier
+                                .padding(margemPadrao)
+                                .fillMaxWidth(),
+                            texto = textoBotao,
+                            temImagem = true,
+                            imagem = icone,
+                            noClicarBotao = {
+                                state.noClickDaExpansaoDaListaDeBolas(
+                                    !state.expandirListaDeBolas
+                                )
+                            }
                         )
                     }
-                )
+                }
                 if (state.expandirImagem) {
                     DialogImagemComponent(
                         modifier = Modifier.padding(margemPadrao / 2),
@@ -175,6 +214,20 @@ private fun DetalhesDaMarcaScreenSemDataDeAlteracaoPreview() {
             nome = amostraDeListaDeMarcas.first().nome,
             marcaId = amostraDeListaDeMarcas.first().marcaId,
             dataCriacao = LocalDateTime.now().dataFormatada(),
+        )
+    )
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun DetalhesDaMarcaScreenComListaDeBolasPreview() {
+    DetalhesDaMarcaScreen(
+        state = DetalhesDaMarcaUiState(
+            nome = amostraDeListaDeMarcas.first().nome,
+            marcaId = amostraDeListaDeMarcas.first().marcaId,
+            dataCriacao = LocalDateTime.now().dataFormatada(),
+            listaDeBolasDaMarca = amostraDeListaDeBolas,
+            expandirListaDeBolas = true
         )
     )
 }

@@ -72,7 +72,7 @@ const val textoConfirmarScaffoldDetalhesTela = "Confirmar"
 
 const val textoDescricaoProdutoTelaDetalhes = "Sobre o produto:"
 const val textoMarcaTelaDetalhes = "Marca: "
-const val textoDataCriacaoTelaDetalhes = "Criado em: "
+const val textoDataCriacaoTelaDetalhesBola = "Criado em: "
 const val textoDataAlteracaoTelaDetalhes = "Alterado em: "
 
 const val nomeBolaTeste = "Mercurial"
@@ -116,3 +116,8 @@ const val textoNomeObrigatorioCadastroMarca = "*Campo de Nome é obrigatório"
 
 const val nomeMarcaTeste = "Umbro"
 const val imagemMarcaTeste = "https://marcas-logos.net/wp-content/uploads/2020/10/umbro-logo.png"
+
+const val textoDataCriacaoTelaDetalhesMarca = "Criado em: "
+const val textoDataAlteracaoTelaDetalhesMarca = "Alterado em: "
+const val textoBotaoExpansaoEsconderDetalhesMarca = "Esconder lista de Bolas"
+const val textoBotaoExpansaoMostrarDetalhesMarca = "Mostrar lista de Bolas"

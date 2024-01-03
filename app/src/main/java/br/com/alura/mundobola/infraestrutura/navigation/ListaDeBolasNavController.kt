@@ -6,6 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.viewmodel.ListaDeBolasViewModel
 import br.com.alura.mundobola.ui.screen.ListaDeBolasScreen
 
@@ -27,23 +28,8 @@ fun NavGraphBuilder.ListaDeBolasNavController(
             },
             navegarParaOCadastroDeMarca = navegarParaOCadastroDeMarca,
             noClicaFab = navegarParaCadastroDeBola,
-            noClicaNomeAsc = {
-                viewModel.listaDeBolasPorNomeAsc()
-            },
-            noClicaNomeDesc = {
-                viewModel.listaDeBolasPorNomeDesc()
-            },
-            noClicaPrecoAsc = {
-                viewModel.listaDeBolasPorPrecoAsc()
-            },
-            noClicaPrecoDesc = {
-                viewModel.listaDeBolasPorPrecoDesc()
-            },
-            noClicaMaisAntigo = {
-                viewModel.listaDeBolasPeloMaisAntigo()
-            },
-            noClicaMaisNovo = {
-                viewModel.listaDeBolasPeloMaisNovo()
+            noClicaOrdenaPor = {ordenacaoDaLista ->
+                viewModel.listaDeBolasOrdenada(ordenacaoDaLista)
             },
             noClicaMarca = {marcaId ->
                 navegarParaADescricaoDeMarca(marcaId)

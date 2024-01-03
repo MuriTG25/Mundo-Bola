@@ -1,6 +1,8 @@
 package br.com.alura.mundobola.aplicacao.repositorio
 
 
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
+import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBola
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBolaEntity
 import br.com.alura.mundobola.aplicacao.modelo.entity.toMarca
@@ -21,7 +23,7 @@ class MundoBolaRepositorio @Inject constructor(
     private val bolaDao: BolaDao,
     private val marcaDao: MarcaDao,
 ) {
-    suspend fun listaDeBolas(): Flow<List<Bola>> {
+    fun listaDeBolas(): Flow<List<Bola>> {
         return bolaDao.listaDeBolas().map { lista ->
             lista.map { bola ->
                 bola.toBola()
@@ -32,11 +34,12 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun adicionarBola(bola: Bola) {
         bolaDao.adicionarBola(bola.toBolaEntity())
     }
+
     suspend fun adicionarMarca(marca: Marca) {
         marcaDao.adicionarMarca(marca.toMarcaEntity())
     }
 
-    suspend fun listaDeMarcas(): Flow<List<Marca>> {
+    fun listaDeMarcas(): Flow<List<Marca>> {
         return marcaDao.listaDeMarcas().map { lista ->
             lista.map { marca ->
                 marca.toMarca()
@@ -44,14 +47,14 @@ class MundoBolaRepositorio @Inject constructor(
         }
     }
 
-    suspend fun encontrarBolaPeloId(id: String): Flow<Bola?> {
+    fun encontrarBolaPeloId(id: String): Flow<Bola?> {
         return bolaDao.encontrarBolaPeloId(id).map {
             it?.toBola()
         }
     }
 
-    suspend fun encontrarMarcaPeloId(id: String): Flow<Marca?> {
-        return marcaDao.encontrarMarcaPeloId(id).map {marca->
+    fun encontrarMarcaPeloId(id: String): Flow<Marca?> {
+        return marcaDao.encontrarMarcaPeloId(id).map { marca ->
             marca?.toMarca()
         }
     }
@@ -63,7 +66,8 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun editaBola(bola: BolaPOJO) {
         bolaDao.editaBola(bola)
     }
-    suspend fun editaMarca(marca: MarcaPOJO){
+
+    suspend fun editaMarca(marca: MarcaPOJO) {
         marcaDao.editaMarca(marca)
     }
 
@@ -75,44 +79,24 @@ class MundoBolaRepositorio @Inject constructor(
         }
     }
 
-    suspend fun listaDeBolasPorNomeAsc(): List<Bola> {
-        return bolaDao.listaDeBolasPorNomeAsc().map { bola ->
-            bola.toBola()
+    suspend fun listaDeBolasOrdenada(ordenacaoDaLista: OrdenacaoDaLista):List<Bola>{
+        val listas =  when(ordenacaoDaLista){
+            OrdenacaoDaLista.NOME_ASC -> bolaDao.listaDeBolasPorNomeAsc()
+            OrdenacaoDaLista.NOME_DESC -> bolaDao.listaDeBolasPorNomeDesc()
+            OrdenacaoDaLista.PRECO_ASC -> bolaDao.listaDeBolasPorPrecoAsc()
+            OrdenacaoDaLista.PRECO_DESC -> bolaDao.listaDeBolasPorPrecoDesc()
+            OrdenacaoDaLista.MAIS_ANTIGO -> bolaDao.listaDeBolasPeloMaisAntigo()
+            OrdenacaoDaLista.MAIS_NOVO -> bolaDao.listaDeBolasPeloMaisNovo()
+        }
+        return listas.map {
+            it.toBola()
         }
     }
-
-    suspend fun listaDeBolasPorNomeDesc(): List<Bola> {
-        return bolaDao.listaDeBolasPorNomeDesc().map { bola ->
-            bola.toBola()
-        }
-    }
-
-    suspend fun listaDeBolasPorPrecoAsc(): List<Bola> {
-        return bolaDao.listaDeBolasPorPrecoAsc().map { bola ->
-            bola.toBola()
-        }
-    }
-
-    suspend fun listaDeBolasPorPrecoDesc(): List<Bola> {
-        return bolaDao.listaDeBolasPorPrecoDesc().map { bola ->
-            bola.toBola()
-        }
-    }
-
-    suspend fun listaDeBolasPeloMaisNovo(): List<Bola> {
-        return bolaDao.listaDeBolasPeloMaisNovo().map { bola ->
-                bola.toBola()
-        }
-    }
-
-    suspend fun listaDeBolasPeloMaisAntigo(): List<Bola> {
-        return bolaDao.listaDeBolasPeloMaisAntigo().map { bola ->
-                bola.toBola()
-        }
-    }
-    suspend fun listaDeBolasPorMarca(marcaId: String): List<Bola>{
-        return bolaDao.listaDeBolasPorMarca(marcaId).map { bola ->
-            bola.toBola()
+    fun listaDeBolasPorMarca(marcaId: String): Flow<List<Bola>> {
+        return bolaDao.listaDeBolasPorMarca(marcaId).map {lista->
+            lista.map {
+                it.toBola()
+            }
         }
     }
 }

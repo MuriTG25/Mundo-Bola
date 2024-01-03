@@ -55,7 +55,7 @@ import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhes
-import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoMarcaCadastroBola
@@ -415,7 +415,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
     }
     @Test
@@ -437,7 +437,7 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDescricaoProdutoTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoMarcaTelaDetalhes)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhes)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataAlteracaoTelaDetalhes)

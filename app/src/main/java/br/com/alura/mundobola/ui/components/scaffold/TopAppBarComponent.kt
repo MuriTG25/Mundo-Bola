@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.R
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,13 +43,7 @@ fun TopAppBarComponent(
     noClicaHome: () -> Unit = {},
     expandirMenu: Boolean = false,
     alteracaoDaExpansaoMenu: (Boolean) -> Unit = {},
-    noClicaNomeAsc: () -> Unit = {},
-    noClicaNomeDesc: () -> Unit = {},
-    noClicaPrecoAsc: () -> Unit = {},
-    noClicaPrecoDesc: () -> Unit = {},
-    noClicaMaisAntigo: () -> Unit = {},
-    noClicaMaisNovo: () -> Unit = {},
-
+    noClicaOrdenaPor: (OrdenacaoDaLista) -> Unit = {},
     ) {
     CenterAlignedTopAppBar(
         title = {
@@ -76,12 +71,7 @@ fun TopAppBarComponent(
                 DropdowmMenuComponent(
                     expandir = expandirMenu,
                     alteracaoDaExpansao = alteracaoDaExpansaoMenu,
-                    noClicaNomeAsc = noClicaNomeAsc,
-                    noClicaNomeDesc = noClicaNomeDesc,
-                    noClicaPrecoAsc = noClicaPrecoAsc,
-                    noClicaPrecoDesc = noClicaPrecoDesc,
-                    noClicaMaisAntigo = noClicaMaisAntigo,
-                    noClicaMaisNovo = noClicaMaisNovo,
+                    noClicaOrdenaPor = noClicaOrdenaPor
                 )
             }
             IconTopAppBarComponent(

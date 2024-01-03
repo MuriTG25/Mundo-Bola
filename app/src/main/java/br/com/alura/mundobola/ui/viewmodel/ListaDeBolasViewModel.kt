@@ -2,6 +2,7 @@ package br.com.alura.mundobola.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.aplicacao.modelo.dto.paraBolaDTO
 import br.com.alura.mundobola.aplicacao.modelo.dto.paraMarcaDTO
 import br.com.alura.mundobola.aplicacao.repositorio.MundoBolaRepositorio
@@ -10,11 +11,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.future.future
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
@@ -92,75 +90,9 @@ class ListaDeBolasViewModel @Inject constructor(
                 }
         }
     }
-
-    fun listaDeBolasPorNomeAsc() {
+    fun listaDeBolasOrdenada(ordenacaoDaLista: OrdenacaoDaLista){
         viewModelScope.launch {
-            repositorio.listaDeBolasPorNomeAsc().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                    expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPorNomeDesc() {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPorNomeDesc().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                    expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPorPrecoAsc() {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPorPrecoAsc().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                    expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPorPrecoDesc() {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPorPrecoDesc().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                    expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPeloMaisNovo() {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPeloMaisNovo().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                    expandirOrdenacao = false
-                )
-            }
-        }
-    }
-
-    fun listaDeBolasPeloMaisAntigo() {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPeloMaisAntigo().let { lista ->
+            repositorio.listaDeBolasOrdenada(ordenacaoDaLista).let { lista ->
                 _uiState.value = _uiState.value.copy(
                     listaDeBolas = lista.map {
                         it.paraBolaDTO()

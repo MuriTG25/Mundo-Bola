@@ -7,6 +7,8 @@ import br.com.alura.mundobola.MainActivity
 import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
+import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaNova
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
@@ -19,8 +21,15 @@ import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
+import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
+import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
+import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoEsconderDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoMostrarDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
@@ -31,6 +40,7 @@ import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTex
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.verificaSeNaoExisteOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavelPelaDescricao
+import br.com.alura.mundobola.auxiliardoteste.verificaSeOElementoEClicavelPeloTexto
 import br.com.alura.mundobola.infraestrutura.database.MundoBolaDatabase
 import br.com.alura.mundobola.infraestrutura.database.dao.BolaDao
 import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
@@ -117,5 +127,33 @@ class DetalhesDaMarcaScreenKtTest{
         //TODO fazer a implementação do delete
         vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
         testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeDeletarDescricao)
+    }
+    @Test
+    fun deveMostarDataDeCriacaoDataAlteracaoENome_QuandoFormosEmUmaMarcaEditada(){
+        vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataAlteracaoTelaDetalhesMarca)
+    }
+    @Test
+    fun deveMostarDataDeCriacaoENome_QuandoFormosEmUmaMarcaNaoEditada() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoDataCriacaoTelaDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDataAlteracaoTelaDetalhesMarca)
+    }
+    @Test
+    fun deveSerClicavelOBotaoDeExpandirAsBolas_ImplementacaoAindaNaoFeita(){
+        //TODO essa implementação ainda não foi feita
+        vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeOElementoEClicavelPeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoEsconderDetalhesMarca)
     }
 }

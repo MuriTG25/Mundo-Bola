@@ -43,6 +43,6 @@ interface BolaDao {
     fun buscaBolasPorNome(nome: String): Flow<List<BolaEntity>>
 
     @Query("SELECT * FROM bola WHERE marcaId = :marcaId")
-    suspend fun listaDeBolasPorMarca(marcaId: String): List<BolaEntity>
+    fun listaDeBolasPorMarca(marcaId: String): Flow<List<BolaEntity>>
 }
 

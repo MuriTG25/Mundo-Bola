@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.alura.mundobola.R
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.components.listadebolas.NavigationDrawerComponent
 import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import br.com.alura.mundobola.ui.components.listadebolas.ProdutoBolaComponent
@@ -31,22 +32,17 @@ fun ListaDeBolasScreen(
     navegarParaADescricao: (String) -> Unit = {},
     navegarParaOCadastroDeMarca: () -> Unit = {},
     noClicaMarca: (String) -> Unit = {},
-    noClicaNomeAsc: () -> Unit = {},
-    noClicaNomeDesc: () -> Unit = {},
-    noClicaPrecoAsc: () -> Unit = {},
-    noClicaPrecoDesc: () -> Unit = {},
-    noClicaMaisAntigo: () -> Unit = {},
-    noClicaMaisNovo: () -> Unit = {},
+    noClicaOrdenaPor: (OrdenacaoDaLista) -> Unit = {},
 ) {
     //TODO tirar esse drawer state daqui
-    //TODO desativar a abertura ao arrastar para o lado
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed,
+    val drawerState = rememberDrawerState(
+        initialValue = DrawerValue.Closed,
     )
     val coroutineScope = rememberCoroutineScope()
     NavigationDrawerComponent(
         drawerState = drawerState,
         listaDeMarcas = state.listaDeMarcas,
-        noClicaMarca = {marcaId->
+        noClicaMarca = { marcaId ->
             noClicaMarca(marcaId)
             coroutineScope.launch {
                 drawerState.close()
@@ -73,12 +69,7 @@ fun ListaDeBolasScreen(
             },
             expandirBusca = state.expandirOrdenacao,
             alteracaoDaExpansaoBusca = state.alteracaoDaExpansaoOrdenacao,
-            noClicaNomeAsc = noClicaNomeAsc,
-            noClicaNomeDesc = noClicaNomeDesc,
-            noClicaPrecoAsc = noClicaPrecoAsc,
-            noClicaPrecoDesc = noClicaPrecoDesc,
-            noClicaMaisNovo = noClicaMaisNovo,
-            noClicaMaisAntigo = noClicaMaisAntigo
+            noClicaOrdenaPor = noClicaOrdenaPor
         ) {
             LazyVerticalGrid(
                 modifier = modifier.padding(margemPadrao),
@@ -132,6 +123,7 @@ private fun ListaDeBolasScreenComCampoDeBuscaDigitadoPreview() {
         )
     )
 }
+
 @Preview(showSystemUi = true)
 @Composable
 private fun ListaDeBolasScreenComMenuExpandidoPreview() {

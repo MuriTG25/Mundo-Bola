@@ -136,7 +136,7 @@ class CadastrodeBolasViewModel @Inject constructor(
         irParaATelaDeDetalhes: (String) -> Unit = {},
     ) {
         with(_uiState.value) {
-            if (campoDoNome.isNullOrBlank() || campoDoPreco.isNullOrBlank()) {
+            if (campoDoNome.isBlank() || campoDoPreco.isBlank()) {
                 _uiState.value = _uiState.value.copy(
                     campoNomeObrigatorio = true,
                     campoPrecoObrigatorio = true,

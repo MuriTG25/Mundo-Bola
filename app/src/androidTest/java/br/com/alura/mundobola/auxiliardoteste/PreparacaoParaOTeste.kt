@@ -25,7 +25,7 @@ private val marcaNike = MarcaEntity(
     nome = "Nike",
     imagem = "https://logospng.org/wp-content/uploads/nike.jpg",
     dataCriacao = dataMaisAntigo,
-    dataAlteracao = dataMaisNovo
+    dataAlteracao = LocalDateTime.now()
 )
 val bola1 = BolaEntity(
     bolaId = "a4216a2e-a33a-4857-b47d-1d17b921c1a6",
@@ -82,7 +82,7 @@ private val marca2 = MarcaEntity(
     idAdidas,
     "Adidas",
     "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Adidas_logo.png/1200px-Adidas_logo.png",
-    LocalDateTime.now()
+    LocalDateTime.now(),
 )
 
 private val marca3 = MarcaEntity(

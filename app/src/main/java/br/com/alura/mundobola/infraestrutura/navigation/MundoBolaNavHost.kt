@@ -62,9 +62,12 @@ fun MundoBolaNavHost(
             navegarParaTelaAnterior = {
                 navHostController.popBackStack()
             },
-            navegarParaATelaDeCadastro = { marcaId ->
+            navegarParaATelaDeCadastroDaMarca = { marcaId ->
                 navHostController.navegarParaCadastroDeMarcas(marcaId)
-            }
+            },
+            navegarParaADescricaoDaBola = {bolaId->
+                navHostController.navegarParaTelaDeDetalhesDaBola(bolaId)
+            },
         )
     }
 }

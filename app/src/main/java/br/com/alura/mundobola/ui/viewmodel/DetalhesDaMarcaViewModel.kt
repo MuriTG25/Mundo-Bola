@@ -11,6 +11,7 @@ import br.com.alura.mundobola.ui.stateholder.DetalhesDaMarcaUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -59,12 +60,13 @@ class DetalhesDaMarcaViewModel @Inject constructor(
                         dataAlteracao = dataAlteracao
                     )
                 }
+                listaDeBolasPorMarca(marca.marcaId)
             } ?: telaDeErro()
         }
     }
     fun listaDeBolasPorMarca(marcaId: String) {
         viewModelScope.launch {
-            repositorio.listaDeBolasPorMarca(marcaId).let { lista ->
+            repositorio.listaDeBolasPorMarca(marcaId).first().let { lista ->
                 _uiState.value = _uiState.value.copy(
                     listaDeBolasDaMarca = lista.map {
                         it.paraBolaDTO()
@@ -83,6 +85,6 @@ class DetalhesDaMarcaViewModel @Inject constructor(
     }
 
     fun deletaMarca(id: String) {
-
+        //TODO fazer a programação do delete
     }
 }

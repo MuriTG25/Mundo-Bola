@@ -19,8 +19,8 @@ internal const val detalhesDaMarcaRota = "${detalhesDaMarcaRotaInicio}/{$ID_MARC
 
 fun NavGraphBuilder.DetalhesDaMarcaNavController(
     navegarParaTelaAnterior: () -> Unit = {},
-    navegarParaATelaDeCadastro: (String) -> Unit = {},
-
+    navegarParaATelaDeCadastroDaMarca: (String) -> Unit = {},
+    navegarParaADescricaoDaBola: (String) -> Unit = {},
     ) {
     composable(detalhesDaMarcaRota) { backStackEntry ->
         backStackEntry.arguments?.getString(ID_MARCA)?.let { id ->
@@ -31,8 +31,9 @@ fun NavGraphBuilder.DetalhesDaMarcaNavController(
                 state = uiState,
                 navegarDeVolta = navegarParaTelaAnterior,
                 noClicaEditaMarca = {
-                    navegarParaATelaDeCadastro(id)
+                    navegarParaATelaDeCadastroDaMarca(id)
                 },
+                navegarParaADescricaoDaBola = navegarParaADescricaoDaBola,
                 noClicaDeletaMarca = {
                     coroutineScope.launch {
                         viewModel.deletaMarca(id)

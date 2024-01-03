@@ -9,6 +9,8 @@ import br.com.alura.mundobola.auxiliardoteste.campoImagemCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.campoNomeCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
+import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
+import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaNova
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.digitaNoCampoDeTexto
@@ -26,6 +28,7 @@ import br.com.alura.mundobola.auxiliardoteste.imagemMarcaTeste
 import br.com.alura.mundobola.auxiliardoteste.imagemNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
+import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.minimizarOAppEReabrir
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
@@ -223,7 +226,6 @@ class CadastroDeMarcasScreenKtTest {
         testeDeUi.digitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoNomeObrigatorioCadastroMarca)
     }
-    //TODO teste de UI precisa da implementação da tela de detalhes da marca para estar completo
     @Test
     fun deveCadastrarMarca_QuandoInserirmosApenasONome(){
         vaiParaATelaDeCadastroPelaLista()
@@ -234,5 +236,29 @@ class CadastroDeMarcasScreenKtTest {
         testeDeUi.clicaNoElementoPeloNome(nomeMarcaTeste)
         testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
     }
+    @Test
+    fun deveCadastrarMarca_QuandoInserirmosONomeEImagem(){
+        vaiParaATelaDeCadastroPelaLista()
+        testeDeUi.digitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.digitaNoCampoDeTexto(campoImagemCadastroMarca, imagemMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(nomeMarcaTeste)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
+    }
+    @Test
+    fun deveEditarUmaMarca_QuandoAlterarmosOsDadosCadastrais(){
+        vaiParaATelaDeEdicaoPeloDetalhes(marcaNikeTexto)
+        testeDeUi.limpaEDigitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaNova)
+    }
+
 }

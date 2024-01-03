@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.alura.mundobola.R
+import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.components.scaffold.FloatActionButtonComponent
 import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 
@@ -33,12 +34,7 @@ fun ScaffoldScreen(
     noClicaMenu: () -> Unit = {},
     expandirBusca: Boolean = false,
     alteracaoDaExpansaoBusca: (Boolean) -> Unit = {},
-    noClicaNomeAsc: () -> Unit = {},
-    noClicaNomeDesc: () -> Unit = {},
-    noClicaPrecoAsc: () -> Unit = {},
-    noClicaPrecoDesc: () -> Unit = {},
-    noClicaMaisAntigo: () -> Unit = {},
-    noClicaMaisNovo: () -> Unit = {},
+    noClicaOrdenaPor: (OrdenacaoDaLista) -> Unit = {},
     conteudo: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -61,12 +57,7 @@ fun ScaffoldScreen(
                 noClicaHome = noClicaMenu,
                 expandirMenu = expandirBusca,
                 alteracaoDaExpansaoMenu = alteracaoDaExpansaoBusca,
-                noClicaNomeAsc = noClicaNomeAsc,
-                noClicaNomeDesc = noClicaNomeDesc,
-                noClicaPrecoAsc = noClicaPrecoAsc,
-                noClicaPrecoDesc = noClicaPrecoDesc,
-                noClicaMaisAntigo = noClicaMaisAntigo,
-                noClicaMaisNovo = noClicaMaisNovo
+                noClicaOrdenaPor = noClicaOrdenaPor
                 )
         },
         floatingActionButton = {

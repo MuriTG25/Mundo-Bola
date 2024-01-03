@@ -7,30 +7,24 @@
       </entry>
       <entry key="app">
         <State>
-          <targetSelectedWithDropDown>
+          <runningDeviceTargetSelectedWithDropDown>
             <Target>
-              <type value="QUICK_BOOT_TARGET" />
+              <type value="RUNNING_DEVICE_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_26.avd" />
+                  <type value="SERIAL_NUMBER" />
+                  <value value="adb-51de3ed-5osLt6._adb-tls-connect._tcp" />
                 </Key>
               </deviceKey>
             </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-02T16:55:28.054443600Z" />
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-03T16:57:34.406771100Z" />
         </State>
       </entry>
-      <entry key="deveAparecerMensagemDeErro_QuandoClicarmosEmSalvarSemPreencherOsDados()">
+      <entry key="deveMostarDataDeCriacaoENome_QuandoFormosEmUmaMarcaNaoEditada()">
         <State />
       </entry>
-      <entry key="deveCadastrarMarca_QuandoInserirmosApenasONome()">
-        <State />
-      </entry>
-      <entry key="deveDesaparecerMensagemDeNomeObrigatorio_QuandoPreenchermosOCampoDoNome()">
-        <State />
-      </entry>
-      <entry key="deveMostrarNomePrecoDataCriacao_QuandoFormosNosDetalhes()">
+      <entry key="deveSerClicavelOBotaoDeExpandirAsBolas_ImplementacaoAindaNaoFeita()">
         <State />
       </entry>
     </value>
