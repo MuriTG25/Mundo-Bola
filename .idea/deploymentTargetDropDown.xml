@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ListaDeBolasScreenKtTest">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -21,10 +18,19 @@
           <timeTargetWasSelectedWithDropDown value="2024-01-03T16:57:34.406771100Z" />
         </State>
       </entry>
-      <entry key="deveMostarDataDeCriacaoENome_QuandoFormosEmUmaMarcaNaoEditada()">
+      <entry key="deveAparecerBotaoDeExpandirAsBolas_QuandoFormosEmUmaMarcaQueTemBola()">
         <State />
       </entry>
-      <entry key="deveSerClicavelOBotaoDeExpandirAsBolas_ImplementacaoAindaNaoFeita()">
+      <entry key="deveExpandirEEsconderALista_QuandoClicarmosNoBotaoDaLista()">
+        <State />
+      </entry>
+      <entry key="deveIrParaATelaDeDetalhesDaBola_QuandoClicarmosNumaBola()">
+        <State />
+      </entry>
+      <entry key="deveMostarOBotaoDaListaEALista_QuandoFormosEmUmaMarcaQueTemBola()">
+        <State />
+      </entry>
+      <entry key="deveNaoMostarOBotaoDaLista_QuandoFormosEmUmaMarcaQueNaoTemBola()">
         <State />
       </entry>
     </value>

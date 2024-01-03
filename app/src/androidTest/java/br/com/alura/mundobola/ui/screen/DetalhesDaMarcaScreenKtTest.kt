@@ -21,16 +21,24 @@ import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
+import br.com.alura.mundobola.auxiliardoteste.inserirMaisBolasNoDb
 import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente2
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra1
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra2
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra3
+import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoEsconderDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoMostrarDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoMarca
@@ -148,12 +156,64 @@ class DetalhesDaMarcaScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoDataAlteracaoTelaDetalhesMarca)
     }
     @Test
-    fun deveSerClicavelOBotaoDeExpandirAsBolas_ImplementacaoAindaNaoFeita(){
-        //TODO essa implementação ainda não foi feita
+    fun deveNaoMostarOBotaoDaLista_QuandoFormosEmUmaMarcaQueNaoTemBola() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoBotaoExpansaoEsconderDetalhesMarca)
+    }
+    @Test
+    fun deveAparecerBotaoDeExpandirAsBolas_QuandoFormosEmUmaMarcaQueTemBola(){
         vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
         testeDeUi.verificaSeOElementoEClicavelPeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+    }
+    @Test
+    fun deveMostarAListaDeBolasPorMarca_QuandoFormosEmUmaMarcaQueTemBola() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente2)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente3)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra1)
+        testeDeUi.scrollaAteOElementoPeloNome(nomeBolaExtra3)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra2)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
         testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente1)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente2)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExistente3)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra1)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra2)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+    }
+    @Test
+    fun deveExpandirEEsconderALista_QuandoClicarmosNoBotaoDaLista()= runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoBotaoExpansaoEsconderDetalhesMarca)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoEsconderDetalhesMarca)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoEsconderDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoBotaoExpansaoEsconderDetalhesMarca)
+    }
+    @Test
+    fun deveIrParaATelaDeDetalhesDaBola_QuandoClicarmosNumaBola(){
+        vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.clicaNoElementoPeloNome(nomeBolaExistente1)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
     }
 }
