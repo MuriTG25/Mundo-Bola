@@ -27,20 +27,25 @@ class DetalhesDaMarcaViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            id?.let {
-                buscaMarca(it)
+            id?.let {marcaId->
+                buscaMarca(marcaId)
             }
         }
         _uiState.update {detalhesDaMarcaUiState ->
             detalhesDaMarcaUiState.copy(
                 noClickDaExpansaoDaImagem = {
                     _uiState.value = _uiState.value.copy(
-                        expandirImagem = it
+                        expandirImagem = it,
                     )
                 },
                 noClickDaExpansaoDaListaDeBolas = {
                     _uiState.value = _uiState.value.copy(
-                        expandirListaDeBolas = it
+                        expandirListaDeBolas = it,
+                    )
+                },
+                noClickConfirmacaoExclusao = {
+                    _uiState.value = _uiState.value.copy(
+                        expandirConfirmacaoExclusao = it,
                     )
                 }
             )
@@ -84,7 +89,12 @@ class DetalhesDaMarcaViewModel @Inject constructor(
         }
     }
 
-    fun deletaMarca(id: String) {
-        //TODO fazer a programação do delete
+    suspend fun deletaMarca(marcaId: String) {
+        _uiState.update {
+            it.copy(
+                ativarToast = true
+            )
+        }
+        repositorio.deletaMarca(marcaId)
     }
 }

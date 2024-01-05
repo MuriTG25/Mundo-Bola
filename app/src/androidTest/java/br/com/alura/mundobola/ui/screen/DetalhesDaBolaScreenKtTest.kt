@@ -35,7 +35,7 @@ import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
-import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTela
+import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTelaBola
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
@@ -121,7 +121,7 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
-        testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoCancelarScaffoldDetalhesTela)
     }
@@ -131,7 +131,7 @@ class DetalhesDaBolaScreenKtTest{
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
-        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaBola)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)

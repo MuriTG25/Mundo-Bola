@@ -20,20 +20,22 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(
-        @ApplicationContext context: Context
-    ):MundoBolaDatabase{
+        @ApplicationContext context: Context,
+    ): MundoBolaDatabase {
         return Room.databaseBuilder(
             context,
             MundoBolaDatabase::class.java,
             DATABASE_NAME
         ).build()
     }
+
     @Provides
-    fun provideBolaDao(db:MundoBolaDatabase):BolaDao{
+    fun provideBolaDao(db: MundoBolaDatabase): BolaDao {
         return db.bolaDao()
     }
+
     @Provides
-    fun provideMarcaDao(db:MundoBolaDatabase):MarcaDao{
+    fun provideMarcaDao(db: MundoBolaDatabase): MarcaDao {
         return db.marcaDao()
     }
 }

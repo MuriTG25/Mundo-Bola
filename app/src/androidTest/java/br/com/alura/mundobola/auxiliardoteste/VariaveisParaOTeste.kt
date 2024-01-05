@@ -65,7 +65,8 @@ const val textoConfirmarScaffoldCadastroTela = "Confirmar"
 
 const val descricaoCardBola = "Card do produto"
 
-const val textoPerguntaScaffoldDetalhesTela = "Deseja mesmo excluir essa bola?"
+const val textoPerguntaScaffoldDetalhesTelaBola = "Deseja mesmo excluir essa bola?"
+const val textoPerguntaScaffoldDetalhesTelaMarca = "Deseja mesmo excluir essa marca?"
 val textoCancelarScaffoldDetalhesTela = "Cancelar"
 const val textoConfirmarScaffoldDetalhesTela = "Confirmar"
 

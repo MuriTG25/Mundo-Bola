@@ -3,34 +3,21 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="app">
-        <State>
-          <runningDeviceTargetSelectedWithDropDown>
-            <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="adb-51de3ed-5osLt6._adb-tls-connect._tcp" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-03T16:57:34.406771100Z" />
-        </State>
-      </entry>
-      <entry key="deveAparecerBotaoDeExpandirAsBolas_QuandoFormosEmUmaMarcaQueTemBola()">
         <State />
       </entry>
-      <entry key="deveExpandirEEsconderALista_QuandoClicarmosNoBotaoDaLista()">
+      <entry key="deveExcluirMArca_QuandoClicarParaExcluirMarca()">
         <State />
       </entry>
-      <entry key="deveIrParaATelaDeDetalhesDaBola_QuandoClicarmosNumaBola()">
+      <entry key="deveFecharDialogDeDeletar_QuandoClicaForaDoDialog()">
         <State />
       </entry>
-      <entry key="deveMostarOBotaoDaListaEALista_QuandoFormosEmUmaMarcaQueTemBola()">
+      <entry key="deveFecharDialogDeDeletar_QuandoClicarNoBotaoDeCancelar()">
         <State />
       </entry>
-      <entry key="deveNaoMostarOBotaoDaLista_QuandoFormosEmUmaMarcaQueNaoTemBola()">
+      <entry key="deveMostrarDialogDeDeletar_QuandoClicarNoBotaoDeDelete()">
+        <State />
+      </entry>
+      <entry key="devemManterDialogComImagem_QuandoRotacionarmosODispositivo()">
         <State />
       </entry>
     </value>

@@ -14,4 +14,7 @@ data class DetalhesDaMarcaUiState(
     val noClickDaExpansaoDaImagem: (Boolean) -> Unit = {},
     val expandirListaDeBolas: Boolean = false,
     val noClickDaExpansaoDaListaDeBolas: (Boolean) -> Unit = {},
+    val ativarToast: Boolean = false,
+    val expandirConfirmacaoExclusao: Boolean = false,
+    val noClickConfirmacaoExclusao: (Boolean) -> Unit = {},
 )

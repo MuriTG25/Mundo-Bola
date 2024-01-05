@@ -1,5 +1,6 @@
 package br.com.alura.mundobola.infraestrutura.database
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -12,7 +13,7 @@ import br.com.alura.mundobola.infraestrutura.database.dao.MarcaDao
 @Database(
     entities = [BolaEntity::class, MarcaEntity::class],
     exportSchema = true,
-    version = 1
+    version = 1,
 )
 @TypeConverters(Converters::class)
 abstract class MundoBolaDatabase : RoomDatabase() {

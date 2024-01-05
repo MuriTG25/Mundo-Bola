@@ -16,6 +16,7 @@ import br.com.alura.mundobola.ui.extra.tamanhoFontePequena
 @Composable
 fun DialogConfirmacaoExclusaoComponent(
     modifier: Modifier = Modifier,
+    texto: String = "",
     noClickDeletar: () -> Unit = {},
     noClickSair: () -> Unit = {},
 ) {
@@ -25,7 +26,7 @@ fun DialogConfirmacaoExclusaoComponent(
         alturaMinima = alturaDialogPequenaMin,
         alturaMaxima = alturaDialogPequenaMax,
     ) {
-        TextoProdutoComponent(texto = "Deseja mesmo excluir essa bola?")
+        TextoProdutoComponent(texto = texto)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,

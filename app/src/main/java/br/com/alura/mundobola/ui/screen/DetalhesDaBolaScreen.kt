@@ -180,6 +180,7 @@ fun DetalhesDaBolaScreen(
                 }
                 if (state.expandirConfirmacaoExclusao) {
                     DialogConfirmacaoExclusaoComponent(
+                        texto = "Deseja mesmo excluir essa bola?",
                         noClickDeletar = noClicaDeleta,
                         noClickSair = {
                             state.noClickConfirmacaoExclusao(false)

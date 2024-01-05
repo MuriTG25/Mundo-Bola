@@ -11,6 +11,9 @@ import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaNova
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
+import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempo
+import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempoPelaDescricao
+import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeDeletarDescricao
@@ -26,6 +29,7 @@ import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
+import br.com.alura.mundobola.auxiliardoteste.marcaPenaltyTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente2
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
@@ -35,8 +39,11 @@ import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra3
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoEsconderDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoMostrarDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
+import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTelaMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
@@ -131,11 +138,34 @@ class DetalhesDaMarcaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaEdicaoMarca)
     }
     @Test
-    fun deveVerSeOIconeDeDeletarEhClicavel_ImplementacaoNaoFeita(){
-        //TODO fazer a implementação do delete
+    fun deveMostrarDialogDeDeletar_QuandoClicarNoBotaoDeDelete(){
         vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
-        testeDeUi.verificaSeOElementoEClicavelPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCancelarScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
     }
+    @Test
+    fun deveFecharDialogDeDeletarSemExcluir_QuandoClicarNoBotaoDeCancelar(){
+        vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldDetalhesTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesMarca)
+    }
+    @Test
+    fun deveExcluirMArca_QuandoClicarParaExcluirMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.esperaAteATelaAparecerComTempoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
+    }
+    //TODO fazer o teste de alteracao dos dados de marca nas bolas, e exclusão de marcas que tenham bolas
     @Test
     fun deveMostarDataDeCriacaoDataAlteracaoENome_QuandoFormosEmUmaMarcaEditada(){
         vaiParaATelaDeDetalhesDaMarca(marcaNikeTexto)
@@ -216,4 +246,5 @@ class DetalhesDaMarcaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
     }
+
 }

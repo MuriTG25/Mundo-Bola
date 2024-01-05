@@ -1,5 +1,6 @@
 package br.com.alura.mundobola.ui.screen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,9 +19,11 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,11 +32,13 @@ import br.com.alura.mundobola.aplicacao.extra.dataFormatada
 import br.com.alura.mundobola.ui.components.comum.BotaoComponent
 import br.com.alura.mundobola.ui.components.comum.ImagemBolaComponent
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
+import br.com.alura.mundobola.ui.components.detalhesdabola.DialogConfirmacaoExclusaoComponent
 import br.com.alura.mundobola.ui.components.detalhesdabola.DialogImagemComponent
 import br.com.alura.mundobola.ui.components.listadebolas.ProdutoBolaComponent
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeBolas
 import br.com.alura.mundobola.ui.extra.amostraDeListaDeMarcas
 import br.com.alura.mundobola.ui.extra.margemPadrao
+import br.com.alura.mundobola.ui.extra.mensagemDeAviso
 import br.com.alura.mundobola.ui.extra.tamanhoFonteMedia
 import br.com.alura.mundobola.ui.extra.tamanhoFonteMini
 import br.com.alura.mundobola.ui.extra.tamanhoFonteTitulo
@@ -48,6 +53,7 @@ fun DetalhesDaMarcaScreen(
     navegarParaADescricaoDaBola: (String) -> Unit = {},
     noClicaEditaMarca: () -> Unit = {},
     noClicaDeletaMarca: () -> Unit = {},
+    context: Context = LocalContext.current,
 ) {
     if (state.marcaEncontrada) {
         ScaffoldScreen(
@@ -56,9 +62,10 @@ fun DetalhesDaMarcaScreen(
             noClicaVolta = navegarDeVolta,
             mostraEditaEDelete = true,
             noClicaEdita = noClicaEditaMarca,
-            noClicaDeleta = noClicaDeletaMarca,
+            noClicaDeleta = {
+                state.noClickConfirmacaoExclusao(true)
+            },
         ) {
-            //TODO vou começar a implementar a tela de detalhes
             Column(
                 modifier = modifier.fillMaxSize(),
             ) {
@@ -182,6 +189,20 @@ fun DetalhesDaMarcaScreen(
                         },
                         imagemDaBola = state.imagem,
                     )
+                }
+                if (state.expandirConfirmacaoExclusao) {
+                    DialogConfirmacaoExclusaoComponent(
+                        texto = "Deseja mesmo excluir essa marca?",
+                        noClickDeletar = noClicaDeletaMarca,
+                        noClickSair = {
+                            state.noClickConfirmacaoExclusao(false)
+                        }
+                    )
+                }
+                if(state.ativarToast){
+                    LaunchedEffect(key1 = Unit){
+                        context.mensagemDeAviso("Marca Deletada com sucesso")
+                    }
                 }
             }
         }

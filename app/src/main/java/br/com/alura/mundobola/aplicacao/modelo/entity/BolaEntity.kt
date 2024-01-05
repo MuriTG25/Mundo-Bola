@@ -15,7 +15,7 @@ import java.util.UUID
             entity = MarcaEntity::class,
             parentColumns = arrayOf("marcaId"),
             childColumns = arrayOf("marcaId"),
-            onDelete = ForeignKey.CASCADE
+            onDelete = ForeignKey.SET_NULL
         )
     ],
     tableName = "bola"

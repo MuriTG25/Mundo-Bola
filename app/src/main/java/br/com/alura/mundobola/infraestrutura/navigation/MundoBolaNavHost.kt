@@ -45,6 +45,9 @@ fun MundoBolaNavHost(
             },
             navegarParaTelaCadastro = { bolaId ->
                 navHostController.navegarParaCadastroDeBolas(bolaId)
+            },
+            navegarParaTelaDeLista = {
+                navHostController.navegarParaListaDeBolas()
             }
         )
         CadastroDeMarcasNavController(
@@ -68,6 +71,9 @@ fun MundoBolaNavHost(
             navegarParaADescricaoDaBola = {bolaId->
                 navHostController.navegarParaTelaDeDetalhesDaBola(bolaId)
             },
+            navegarParaTelaDeLista = {
+                navHostController.navegarParaListaDeBolas()
+            }
         )
     }
 }

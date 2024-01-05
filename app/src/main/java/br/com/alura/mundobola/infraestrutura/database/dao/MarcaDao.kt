@@ -22,4 +22,7 @@ interface MarcaDao {
 
     @Update(entity = MarcaEntity::class)
     suspend fun editaMarca(marca: MarcaPOJO)
+
+    @Query("DELETE FROM marca WHERE marcaId = :marcaId")
+    suspend fun deletaMarca(marcaId: String)
 }

@@ -20,6 +20,7 @@ internal const val detalhesDaBolaRota = "$detalhesDaBolaRotaInicio/{$ID_BOLA}"
 
 fun NavGraphBuilder.DetalhesDaBolaNavController(
     navegarParaTelaAnterior: () -> Unit = {},
+    navegarParaTelaDeLista: () -> Unit = {},
     navegarParaTelaCadastro: (String) -> Unit = {}
 ){
     composable(
@@ -39,7 +40,7 @@ fun NavGraphBuilder.DetalhesDaBolaNavController(
                     coroutineScope.launch {
                         viewModel.deletaBola(id)
                         launch(Dispatchers.Main){
-                            navegarParaTelaAnterior()
+                            navegarParaTelaDeLista()
                         }
                     }
                 }

@@ -19,6 +19,7 @@ internal const val detalhesDaMarcaRota = "${detalhesDaMarcaRotaInicio}/{$ID_MARC
 
 fun NavGraphBuilder.DetalhesDaMarcaNavController(
     navegarParaTelaAnterior: () -> Unit = {},
+    navegarParaTelaDeLista: () -> Unit = {},
     navegarParaATelaDeCadastroDaMarca: (String) -> Unit = {},
     navegarParaADescricaoDaBola: (String) -> Unit = {},
     ) {
@@ -38,7 +39,7 @@ fun NavGraphBuilder.DetalhesDaMarcaNavController(
                     coroutineScope.launch {
                         viewModel.deletaMarca(id)
                         launch (Dispatchers.Main){
-                            navegarParaTelaAnterior()
+                            navegarParaTelaDeLista()
                         }
                     }
                 }

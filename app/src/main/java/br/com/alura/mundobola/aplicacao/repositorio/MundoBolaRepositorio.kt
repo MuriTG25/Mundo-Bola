@@ -70,6 +70,9 @@ class MundoBolaRepositorio @Inject constructor(
     suspend fun editaMarca(marca: MarcaPOJO) {
         marcaDao.editaMarca(marca)
     }
+    suspend fun deletaMarca(marcaId: String){
+        marcaDao.deletaMarca(marcaId)
+    }
 
     fun buscaBolaPorNome(nome: String): Flow<List<Bola>> {
         return bolaDao.buscaBolasPorNome(nome).map { lista ->

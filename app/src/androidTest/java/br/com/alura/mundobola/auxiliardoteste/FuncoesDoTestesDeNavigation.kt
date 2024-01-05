@@ -14,6 +14,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
@@ -106,6 +107,16 @@ fun ComposeContentTestRule.esperaAteATelaAparecer(
             .size == vezes
     }
 }
+fun ComposeContentTestRule.esperaAteATelaAparecerPelaDescricao(
+    texto: String,
+    vezes: Int = 1,
+) {
+    waitUntil {
+        this.onAllNodesWithContentDescription(texto)
+            .fetchSemanticsNodes()
+            .size == vezes
+    }
+}
 
 @OptIn(ExperimentalTestApi::class)
 fun ComposeContentTestRule.esperaAteASumirOElemento(
@@ -128,6 +139,17 @@ fun ComposeContentTestRule.esperaAteATelaAparecerComTempo(
 ) {
     waitUntil(tempo) {
         this.onAllNodesWithText(texto)
+            .fetchSemanticsNodes()
+            .size == vezes
+    }
+}
+fun ComposeContentTestRule.esperaAteATelaAparecerComTempoPelaDescricao(
+    texto: String,
+    vezes: Int = 1,
+    tempo: Long = 3000L,
+) {
+    waitUntil(tempo) {
+        this.onAllNodesWithContentDescription(texto)
             .fetchSemanticsNodes()
             .size == vezes
     }
