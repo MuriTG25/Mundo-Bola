@@ -12,6 +12,7 @@ import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaNova
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
 import br.com.alura.mundobola.auxiliardoteste.descricaoImagemCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.digitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecer
 import br.com.alura.mundobola.auxiliardoteste.esperaAteATelaAparecerComTempoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeBuscaDescricao
@@ -27,6 +28,7 @@ import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.inserirMaisBolasNoDb
 import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
+import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaAdidasTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaPenaltyTexto
@@ -36,6 +38,8 @@ import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra1
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra2
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExtra3
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaTeste
+import br.com.alura.mundobola.auxiliardoteste.precoBolaLimpoTeste
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoEsconderDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoBotaoExpansaoMostrarDetalhesMarca
@@ -43,7 +47,11 @@ import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesMarca
+import br.com.alura.mundobola.auxiliardoteste.textoMarcaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.textoNomeCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTelaMarca
+import br.com.alura.mundobola.auxiliardoteste.textoPrecoCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
@@ -262,6 +270,80 @@ class DetalhesDaMarcaScreenKtTest{
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra1)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra2)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+    }
+    @Test
+    fun deveMostarABolaAdicionada_QuandoAbrirmosATelaDeBolasPorMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaTeste)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeFABDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroBola)
+        testeDeUi.digitaNoCampoDeTexto(textoNomeCadastroBola, nomeBolaTeste)
+        testeDeUi.digitaNoCampoDeTexto(textoPrecoCadastroBola, precoBolaLimpoTeste)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(marcaAdidasTexto)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+    }
+    @Test
+    fun deveMostarABolaEditada_QuandoAbrirmosATelaDeBolasPorMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra3)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaTeste)
+        testeDeUi.clicaNoElementoPeloNome(nomeBolaExtra3)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoBola)
+        testeDeUi.limpaEDigitaNoCampoDeTexto(textoNomeCadastroBola, nomeBolaTeste)
+        testeDeUi.scrollaAteOElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroBola)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        vaiParaATelaDeDetalhesDaMarca(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaTeste)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra3)
+    }
+    @Test
+    fun deveNaoMostrarABolaDeletada_QuandoAbrirmosATelaDeBolasPorMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        bolaDao.inserirMaisBolasNoDb()
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaPenaltyTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra2)
+        testeDeUi.clicaNoElementoPeloNome(nomeBolaExtra2)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesBola)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExtra1)
+        vaiParaATelaDeDetalhesDaMarca(marcaPenaltyTexto)
+        testeDeUi.clicaNoElementoPeloNome(textoBotaoExpansaoMostrarDetalhesMarca)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExtra1)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeBolaExtra2)
     }
     @Test
     fun deveExpandirEEsconderALista_QuandoClicarmosNoBotaoDaLista()= runBlocking{

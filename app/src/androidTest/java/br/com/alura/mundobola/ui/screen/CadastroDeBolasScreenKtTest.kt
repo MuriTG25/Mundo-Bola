@@ -60,6 +60,7 @@ import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.textoCadastroNavigationDrawer
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldCadastroTela
+import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoDataCriacaoTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoCadastroBola
@@ -76,7 +77,9 @@ import br.com.alura.mundobola.auxiliardoteste.textoUrlScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.urlBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
@@ -97,7 +100,6 @@ import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
 
-// TODO fazer o teste de ver se altera aba de marca com exlusão alteracao e adicao da marca
 @HiltAndroidTest
 class CadastroDeBolasScreenKtTest{
     @get:Rule(order = 0)
@@ -220,7 +222,51 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
     }
-    // TODO agora fazer os testes com alteração e exclusão da marca
+    @Test
+    fun deveMostarAMarcaAlteradaNoCampoDeMarcas_QuandoAlterarmosUmaMarca(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        scrollaAteOFinalDaTela()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoMarca)
+        testeDeUi.limpaEDigitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(marcaNikeTexto)
+    }
+    @Test
+    fun deveNaoMostarAMarcaNoCampoDeMarcas_QuandoExcluirmosAMarca() = runBlocking{
+        marcaDao.inserirMaisMarcasNoDb()
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        scrollaAteOFinalDaTela()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(marcaNikeTexto)
+    }
     @Test
     fun deveMostarOsTextosDoPlaceholder_QuandoClicarmosNoCampoDeTextoVazio(){
         vaiParaATelaDeCadastroPelaTelaDeLista()

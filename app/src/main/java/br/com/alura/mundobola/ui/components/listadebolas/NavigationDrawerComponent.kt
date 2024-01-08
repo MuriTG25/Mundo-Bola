@@ -35,12 +35,15 @@ fun NavigationDrawerComponent(
     noClicaCadastrarMarca: () -> Unit = {},
     conteudo: @Composable () -> Unit = {},
 ) {
+    val width = if (drawerState.isOpen) 0.75F
+     else 0F
     ModalNavigationDrawer(
         modifier = modifier,
         drawerState = drawerState,
+        gesturesEnabled = drawerState.isOpen,
         drawerContent = {
             ModalDrawerSheet (
-                modifier = Modifier.fillMaxWidth(0.75F)
+                modifier = Modifier.fillMaxWidth(width)
             ){
                 Column(
                     modifier = Modifier

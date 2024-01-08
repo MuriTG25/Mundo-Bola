@@ -5,20 +5,33 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="deveAlterarONomeDaMarca_QuandoAlterarmosAlgumaMarca()">
+      <entry key="dadoOGestureDONavigationDrawerFuncionarApenasOpen_deveFecharONAvigationDrawer_QuandoFizermosOSwipeComNavigationDrawerAberto()">
         <State />
       </entry>
-      <entry key="deveFecharDialogDaImagem_QuandoClicarForaDoDialog()">
+      <entry key="dadoOGestureDONavigationDrawerFuncionarApenasOpen_deveNaoAbrirONAvigationDrawer_QuandoFizermosOSwipeDaTela()">
         <State />
       </entry>
-      <entry key="deveMostarAMarcaAdicionada_QuandoCadastrarmosUmaMarca()">
+      <entry key="deveManterAOrdenacaoDaLista_AoMinimizarEReabrirOApp()">
         <State />
       </entry>
-      <entry key="deveMostrarDialogDaImagem_QuandoClicarNaImagem()">
+      <entry key="deveManterAOrdenacaoDaLista_QuandoNavegarmoEmMaisDe1TelaEVoltarmos()">
         <State />
       </entry>
-      <entry key="deveTerOValorDeNull_QuandoExcluirmosAlgumaMarca()">
-        <State />
+      <entry key="deveManterAOrdenacaoDaLista_QuandoRotacionarmosATela()">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\User\.android\avd\Pixel_XL_API_26_2.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-08T18:37:41.804567300Z" />
+        </State>
       </entry>
     </value>
   </component>
