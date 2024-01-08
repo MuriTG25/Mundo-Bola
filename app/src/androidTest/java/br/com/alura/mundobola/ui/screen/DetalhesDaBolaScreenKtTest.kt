@@ -5,6 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import br.com.alura.mundobola.MainActivity
 import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
+import br.com.alura.mundobola.auxiliardoteste.campoNomeCadastroMarca
+import br.com.alura.mundobola.auxiliardoteste.clicaNoCanto
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
@@ -24,8 +26,10 @@ import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
 import br.com.alura.mundobola.auxiliardoteste.imagemBolaExistente
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
+import br.com.alura.mundobola.auxiliardoteste.limpaEDigitaNoCampoDeTexto
 import br.com.alura.mundobola.auxiliardoteste.marcaNikeTexto
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
+import br.com.alura.mundobola.auxiliardoteste.nomeMarcaTeste
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteEditado
 import br.com.alura.mundobola.auxiliardoteste.precoBolaExistenteOriginal
 import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
@@ -35,11 +39,15 @@ import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldDetalhesTela
 import br.com.alura.mundobola.auxiliardoteste.textoDescricaoProdutoTelaDetalhes
+import br.com.alura.mundobola.auxiliardoteste.textoMarcaTelaDetalhes
 import br.com.alura.mundobola.auxiliardoteste.textoPerguntaScaffoldDetalhesTelaBola
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePeloTexto
 import br.com.alura.mundobola.auxiliardoteste.verificaSeMostraOComponentePelaDescricao
@@ -117,6 +125,18 @@ class DetalhesDaBolaScreenKtTest{
         )
     }
     @Test
+    fun deveFecharODialog_QuandoClicaForaDele(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.clicaNoElementoPelaDescricao(descricaoImagemCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePelaDescricaoMaisDe1Vez(
+            descricaoImagemCadastroBola, 2
+        )
+        uiDevice.clicaNoCanto()
+        testeDeUi.verificaSeMostraOComponentePelaDescricao(
+            descricaoImagemCadastroBola
+        )
+    }
+    @Test
     fun deveAbrirDialogDeConfirmacaDeExclusao_QuandoApertarNoBotaoDeDeletar(){
         testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
@@ -127,10 +147,21 @@ class DetalhesDaBolaScreenKtTest{
     }
     @Test
     fun deveVoltarParaTelaDeDetalhesSemExcluir_QuandoApertarNoBotaoDeCancelar(){
-        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
         testeDeUi.clicaNoElementoPeloNome(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaBola)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(tituloTelaDetalhesBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeBolaExistente1)
+    }
+    @Test
+    fun deveVoltarParaTelaDeDetalhesSemExcluir_QuandoClicarForaDoDialog(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.esperaAteATelaAparecer(textoPerguntaScaffoldDetalhesTelaBola)
+        uiDevice.clicaNoCanto()
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoPerguntaScaffoldDetalhesTelaBola)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoCancelarScaffoldCadastroTela)
         testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoConfirmarScaffoldDetalhesTela)
@@ -156,9 +187,45 @@ class DetalhesDaBolaScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(dataCriacaoBolaExistente)
     }
     @Test
-    fun deveSerPossivel_QuandoVerificarmosOCampoDeDetalhes(){
+    fun deveSerClicavelOCampoDeDetalhes_QuandoVerificarmosOMesmo(){
         vaiParaATelaDeDetalhes(nomeBolaExistente1)
         testeDeUi.verificaSeOElementoEClicavelPeloTexto(textoDescricaoProdutoTelaDetalhes)
+    }
+    @Test
+    fun deveAlterarONomeDaMarca_QuandoAlterarmosAlgumaMarca(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeEdicaoDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaEdicaoMarca)
+        testeDeUi.limpaEDigitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+    }
+    @Test
+    fun deveTerOValorDeNull_QuandoExcluirmosAlgumaMarca(){
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(marcaNikeTexto)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaDetalhesMarca)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeDeletarDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoConfirmarScaffoldDetalhesTela)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        vaiParaATelaDeDetalhes(nomeBolaExistente1)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(textoMarcaTelaDetalhes)
     }
     @Test
     fun deveVoltarParaATelaPrincipal_QuandoClicarmosNoBotaoVolta(){

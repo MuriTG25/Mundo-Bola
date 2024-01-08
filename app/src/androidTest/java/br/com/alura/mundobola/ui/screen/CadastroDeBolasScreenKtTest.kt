@@ -5,6 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import br.com.alura.mundobola.MainActivity
 import br.com.alura.mundobola.auxiliardoteste.apertaOBotaoDeVoltar
+import br.com.alura.mundobola.auxiliardoteste.campoImagemCadastroMarca
+import br.com.alura.mundobola.auxiliardoteste.campoNomeCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.dataCriacaoBolaExistente
@@ -27,6 +29,7 @@ import br.com.alura.mundobola.auxiliardoteste.iconeMenuDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeOrdenacaoDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltaPesquisaDescricao
 import br.com.alura.mundobola.auxiliardoteste.iconeVoltarDescricao
+import br.com.alura.mundobola.auxiliardoteste.imagemMarcaTeste
 import br.com.alura.mundobola.auxiliardoteste.insereDadosNoDb
 import br.com.alura.mundobola.auxiliardoteste.inserirMaisMarcasNoDb
 import br.com.alura.mundobola.auxiliardoteste.limpaDatabase
@@ -39,6 +42,8 @@ import br.com.alura.mundobola.auxiliardoteste.minimizarOAppEReabrir
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente1
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaTeste
 import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente2
+import br.com.alura.mundobola.auxiliardoteste.nomeBolaExistente3
+import br.com.alura.mundobola.auxiliardoteste.nomeMarcaTeste
 import br.com.alura.mundobola.auxiliardoteste.placeholderDescricaoCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.placeholderNomeCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.placeholderPrecoCadastroBola
@@ -52,6 +57,7 @@ import br.com.alura.mundobola.auxiliardoteste.precoComSimboloInvalido
 import br.com.alura.mundobola.auxiliardoteste.precoComSimboloNegativo
 import br.com.alura.mundobola.auxiliardoteste.rotacionarATela
 import br.com.alura.mundobola.auxiliardoteste.scrollaAteOElementoPeloNome
+import br.com.alura.mundobola.auxiliardoteste.textoCadastroNavigationDrawer
 import br.com.alura.mundobola.auxiliardoteste.textoCancelarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoConfirmarScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.textoDataAlteracaoTelaDetalhes
@@ -65,8 +71,10 @@ import br.com.alura.mundobola.auxiliardoteste.textoNomeObrigatorioCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoPrecoCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoPrecoObrigatorioCadastroBola
 import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.textoSalvarCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.textoUrlScaffoldCadastroTela
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroBola
+import br.com.alura.mundobola.auxiliardoteste.tituloTelaCadastroMarca
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaDetalhesBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaEdicaoBola
 import br.com.alura.mundobola.auxiliardoteste.tituloTelaLista
@@ -89,6 +97,7 @@ import org.junit.Rule
 import org.junit.Test
 import javax.inject.Inject
 
+// TODO fazer o teste de ver se altera aba de marca com exlusão alteracao e adicao da marca
 @HiltAndroidTest
 class CadastroDeBolasScreenKtTest{
     @get:Rule(order = 0)
@@ -190,6 +199,28 @@ class CadastroDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
     }
+    @Test
+    fun deveMostarAMarcaAdicionadaNoCampoDeMarcas_QuandoCadastrarmosUmaMarca(){
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        scrollaAteOFinalDaTela()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeNaoExisteOComponentePeloTexto(nomeMarcaTeste)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeVoltarDescricao)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaLista)
+        testeDeUi.clicaNoElementoPelaDescricao(iconeMenuDescricao)
+        testeDeUi.clicaNoElementoPeloNome(textoCadastroNavigationDrawer)
+        testeDeUi.esperaAteATelaAparecer(tituloTelaCadastroMarca)
+        testeDeUi.digitaNoCampoDeTexto(campoNomeCadastroMarca, nomeMarcaTeste)
+        testeDeUi.digitaNoCampoDeTexto(campoImagemCadastroMarca, imagemMarcaTeste)
+        testeDeUi.clicaNoElementoPeloNome(textoSalvarCadastroMarca)
+        testeDeUi.esperaAteATelaAparecer(nomeBolaExistente3)
+        vaiParaATelaDeCadastroPelaTelaDeLista()
+        testeDeUi.clicaNoElementoPeloNome(textoMarcaCadastroBola)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(nomeMarcaTeste)
+    }
+    // TODO agora fazer os testes com alteração e exclusão da marca
     @Test
     fun deveMostarOsTextosDoPlaceholder_QuandoClicarmosNoCampoDeTextoVazio(){
         vaiParaATelaDeCadastroPelaTelaDeLista()

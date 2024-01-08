@@ -2,7 +2,11 @@ package br.com.alura.mundobola.ui.screen
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.unit.dp
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
 import br.com.alura.mundobola.MainActivity
+import br.com.alura.mundobola.auxiliardoteste.arrastaParaADireita
+import br.com.alura.mundobola.auxiliardoteste.arrastaParaEsquerda
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPelaDescricao
 import br.com.alura.mundobola.auxiliardoteste.clicaNoElementoPeloNome
 import br.com.alura.mundobola.auxiliardoteste.descricaoCampoBusca
@@ -82,6 +86,9 @@ class ListaDeBolasScreenKtTest{
     lateinit var bolaDao: BolaDao
     @Inject
     lateinit var marcaDao: MarcaDao
+
+    private val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+
     private val nomePesquisaInvalido = "Aleatorio"
     private val altura1 = 80.dp
     private val altura2 = 326.dp
@@ -177,6 +184,29 @@ class ListaDeBolasScreenKtTest{
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaAdidasTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(marcaPenaltyTexto)
         testeDeUi.verificaSeMostraOComponentePeloTexto(textoCadastroNavigationDrawer)
+    }
+    @Test
+    fun deveAbrirONAvigationDrawer_QuandoFizermosOSwipeDaTela() {
+        testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExistente1)
+        uiDevice.arrastaParaADireita()
+        testeDeUi.esperaAteATelaAparecer(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoTituloNavigationDrawer)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCadastroNavigationDrawer)
+    }
+    @Test
+    fun deveFecharONAvigationDrawer_QuandoFizermosOSwipeComNavigationDrawerAberto() {
+        testeDeUi.esperaAteATelaAparecerComTempo(nomeBolaExistente1)
+        uiDevice.arrastaParaADireita()
+        testeDeUi.esperaAteATelaAparecer(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoTituloNavigationDrawer)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeMostraOComponentePeloTexto(textoCadastroNavigationDrawer)
+        uiDevice.arrastaParaEsquerda()
+        testeDeUi.esperaAteASumirOElemento(textoTituloNavigationDrawer)
+        testeDeUi.verificaSeNaoMostraOComponentePeloTexto(textoTituloNavigationDrawer)
+        testeDeUi.verificaSeNaoMostraOComponentePeloTexto(marcaNikeTexto)
+        testeDeUi.verificaSeNaoMostraOComponentePeloTexto(textoCadastroNavigationDrawer)
     }
 
     @Test

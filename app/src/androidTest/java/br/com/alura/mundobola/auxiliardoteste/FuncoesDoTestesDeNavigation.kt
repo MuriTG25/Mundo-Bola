@@ -4,7 +4,6 @@ import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasClickAction
-import androidx.compose.ui.test.assertHeightIsEqualTo
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertPositionInRootIsEqualTo
@@ -14,7 +13,6 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextClearance
@@ -121,14 +119,16 @@ fun ComposeContentTestRule.esperaAteATelaAparecerPelaDescricao(
 @OptIn(ExperimentalTestApi::class)
 fun ComposeContentTestRule.esperaAteASumirOElemento(
     texto: String,
+    tempo: Long = 3000L
 ) {
     waitUntilDoesNotExist(
-        SemanticsMatcher(
+        matcher = SemanticsMatcher(
             description = "até o texto sumir",
             matcher = {
                 onNodeWithText(texto).fetchSemanticsNode().equals(0)
             }
-        )
+        ),
+        timeoutMillis = tempo
     )
 }
 
@@ -193,6 +193,22 @@ fun UiDevice.rotacionarATela() {
 }
 fun UiDevice.voltarARotacaoDaTela(){
     setOrientationNatural()
+}
+fun UiDevice.arrastaParaEsquerda(){
+    val altura = displayHeight / 2
+    val larguraInicial = (displayWidth/1.5).toInt()
+    swipe(larguraInicial,altura,0,altura,10)
+}
+fun UiDevice.arrastaParaADireita(){
+    val altura = displayHeight / 2
+    val larguraFinal = displayWidth - 50
+    val larguraInicial = displayWidth/3
+    swipe(larguraInicial,altura,larguraFinal,altura,10)
+}
+fun UiDevice.clicaNoCanto(){
+    val y = 100
+    val x = displayWidth - 50
+    click(x,y)
 }
 
 fun UiDevice.minimizarOAppEReabrir() {

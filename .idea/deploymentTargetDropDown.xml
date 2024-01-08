@@ -5,19 +5,19 @@
       <entry key="app">
         <State />
       </entry>
-      <entry key="deveExcluirMArca_QuandoClicarParaExcluirMarca()">
+      <entry key="deveAlterarONomeDaMarca_QuandoAlterarmosAlgumaMarca()">
         <State />
       </entry>
-      <entry key="deveFecharDialogDeDeletar_QuandoClicaForaDoDialog()">
+      <entry key="deveFecharDialogDaImagem_QuandoClicarForaDoDialog()">
         <State />
       </entry>
-      <entry key="deveFecharDialogDeDeletar_QuandoClicarNoBotaoDeCancelar()">
+      <entry key="deveMostarAMarcaAdicionada_QuandoCadastrarmosUmaMarca()">
         <State />
       </entry>
-      <entry key="deveMostrarDialogDeDeletar_QuandoClicarNoBotaoDeDelete()">
+      <entry key="deveMostrarDialogDaImagem_QuandoClicarNaImagem()">
         <State />
       </entry>
-      <entry key="devemManterDialogComImagem_QuandoRotacionarmosODispositivo()">
+      <entry key="deveTerOValorDeNull_QuandoExcluirmosAlgumaMarca()">
         <State />
       </entry>
     </value>
