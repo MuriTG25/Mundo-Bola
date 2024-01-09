@@ -9,41 +9,15 @@ Além do aplicativo, farei um modelo físico do banco de dados, e também farei 
 O projeto está dividido em 4 fases<br />
 
 # Fase atual
-### Pré Alpha
 
-Nesta fase farei uma implementação mais simples, onde vou apenas fazer um sistema de cadastro de bolas.<br />
-Ele se constiste em 3 telas diferentes:<br />
- - Tela de produtos: é a tela principal, onde serão mostrados todos os modelos de bolas. Nesta tela será possivel ir para o cadastro de bola e a descrição da bola
- - Tela de cadastro e edição: tela onde será feita o cadastro de produtos e edição dos produtos já existentes. Mas para ser salvos, terão que passar por uma série de validações
- - Tela de detalhes do produto: tela onde veremos mais detalhes do produto, e onde poderemos editar e deletar o produto.
-
-Ele conta com sistema de navegação entre telas com o navigation, sistema de gerenciamento de estados com View Model e Ui State, injeção de dependências com o Hilt.<br />
-Serão feitos testes de unidade, testes de Mock e testes de UI.<br />
-O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada o banco de dados.<br />
-
-Plugin utilizados:
- - Hilt
- - Navigation
- - Jetpack Compose
- - Material 3
- - Coil Compose
- - Junit
- - Kluent
- - Navigation Test
- - Mockk
- - Ui Automator
- - Hilt Android Testing
- - Espresso
-
-# Fases futuras
 ### Alpha
 
-Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Room. Além disso, pretendo implementar outras features, como:
- - Busca de produtos pelo nome do produto e da marca
- - Tela de bolas por marca
- - Aba lateral que mostra a aba de marcas
- - Cadastro e alteração das marcas
- - Opções de ordenamento dos produtos
+Nesta fase haverá um foco em implementar o banco de dados no projeto, com o Room. Além disso, temos o acréscimo de outras features, como:
+ - Barra de pesquisa para encontrar a bola pelo nome
+ - Icones que ordenam a lista por nome, preco ou data de criação
+ - Tela de detalhes da marca
+ - Navigation Drawer que mostra as marcas 
+ - Tela de Cadastro e alteração das marcas
 
 Plugin utilizados:
  - Hilt
@@ -55,17 +29,22 @@ Plugin utilizados:
  - Junit
  - Kluent
  - Mockk
- - Navigation Test
  - Ui Automator
  - Hilt Android Testing
  - Espresso
+ - Leakcanary
+
+# Fases futuras
 
 ### Beta
 
 Nesta fase faremos um sistema de login de usuários, com sistema de limitação de acesso para algumas features apenas para aqueles que tem permissão de adm.<br />
-As imagens não serão mais salvas em url e sim num sistema de armazenamento interno do app, com possiblidade de buscar imagens dentro do aparelho android.<br />
+Com o acréscimo do sistema de usuários, teremos o acrescimo de migrations para a persistência de dados, mesmo com alterações em sua estrutura.<br />
+As imagens não serão mais salvas apenas em url, mas como também num sistema de armazenamento interno do app, com possiblidade de buscar imagens dentro do aparelho android.<br />
 Dentro da classe bola, haverá outra subclasse que adiciona mais detalhes da bola.</br>
 Terá um uma redesign maior na parte de UX/UI do aplicativo.<br />
+Faremos um reformulações nas transições de telas do Navigation.<br />
+Substituição do toast pelo Snackbar para mostrar avisos.<br />
 
 Plugin utilizados:
  - Hilt
@@ -79,10 +58,11 @@ Plugin utilizados:
  - Junit
  - Kluent
  - Mockk
- - Navigation Test
  - Ui Automator
  - Hilt Android Testing
  - Espresso
+  - Leakcanary
+ 
 
 ### Lançamento (1.0)
 Na fase final focaremos em aplicar um sistema online-first para o aplicativo, tendo um sistema de conversa com o servidor através de requisições Json com o Ktor (pode ser o Retrofit). <br />
@@ -112,7 +92,7 @@ Plugin utilizados(servidor em Kotlin):
  - Retrofit
  - Não defini o resto</br></br>
 
- # Mundo Bola Armazém
+ ### Mundo Bola Armazém
 
  Anteriormente na fase beta, percebi que essa implementação seria mais complexa e teria que crescer muito o projeto de uma maneira abrupta.</br>
  A implementação em questão era do sistema de estoque, onde criariamos um sistema de gerenciamento de quantidade de produtos em estoque para cada bola.</br>
@@ -120,6 +100,34 @@ Decidi então criar um aplicativo novo, separando em 2. Um deles, é o que já f
 E esse novo aplicativo, o Mundo Bola Armazem, que será um aplicativo focado em gerenciamento de quantidade de itens de uma loja.</br></br>
 Nesta fase  teremos 2 módulos no mesmo projeto. Ou seja, teremos um projeto multimodular, onde teremos reaproveitamento de implemetações do primeiro aplicativo no outro.</br>
 E além disso, alteramentos a versão do build.gradle para a versão Catalog, que é melhor para projetos multimodulares.
+
+# Fases anteriores
+
+### Pré Alpha
+
+Nesta fase farei uma implementação mais simples, onde vou apenas fazer um sistema de cadastro de bolas.<br />
+Ele se constiste em 3 telas diferentes:<br />
+ - Tela de produtos: é a tela principal, onde serão mostrados todos os modelos de bolas. Nesta tela será possivel ir para o cadastro de bola e a descrição da bola
+ - Tela de cadastro e edição: tela onde será feita o cadastro de produtos e edição dos produtos já existentes. Mas para ser salvos, terão que passar por uma série de validações
+ - Tela de detalhes do produto: tela onde veremos mais detalhes do produto, e onde poderemos editar e deletar o produto.
+
+Ele conta com sistema de navegação entre telas com o navigation, sistema de gerenciamento de estados com View Model e Ui State, injeção de dependências com o Hilt.<br />
+Serão feitos testes de unidade, testes de Mock e testes de UI.<br />
+O sistema de armazenamento ainda vai ser em lista, na próxima fase será implementada o banco de dados.<br />
+
+Plugin utilizados:
+ - Hilt
+ - Navigation
+ - Jetpack Compose
+ - Material 3
+ - Coil Compose
+ - Junit
+ - Kluent
+ - Navigation Test
+ - Mockk
+ - Ui Automator
+ - Hilt Android Testing
+ - Espresso
 
 
 
