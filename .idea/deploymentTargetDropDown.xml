@@ -2,26 +2,20 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="app">
+      <entry key="CadastroDeBolasScreenKtTest">
         <State />
       </entry>
-      <entry key="dadoOGestureDONavigationDrawerFuncionarApenasOpen_deveFecharONAvigationDrawer_QuandoFizermosOSwipeComNavigationDrawerAberto()">
+      <entry key="CadastroDeMarcasScreenKtTest">
         <State />
       </entry>
-      <entry key="dadoOGestureDONavigationDrawerFuncionarApenasOpen_deveNaoAbrirONAvigationDrawer_QuandoFizermosOSwipeDaTela()">
+      <entry key="DetalhesDaBolaScreenKtTest">
         <State />
       </entry>
-      <entry key="deveManterAOrdenacaoDaLista_AoMinimizarEReabrirOApp()">
-        <State />
-      </entry>
-      <entry key="deveManterAOrdenacaoDaLista_QuandoNavegarmoEmMaisDe1TelaEVoltarmos()">
-        <State />
-      </entry>
-      <entry key="deveManterAOrdenacaoDaLista_QuandoRotacionarmosATela()">
+      <entry key="ListaDeBolasScreenKtTest">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
+          <targetSelectedWithDropDown>
             <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
+              <type value="QUICK_BOOT_TARGET" />
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
@@ -29,9 +23,12 @@
                 </Key>
               </deviceKey>
             </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-01-08T18:37:41.804567300Z" />
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-01-09T12:07:53.100252300Z" />
         </State>
+      </entry>
+      <entry key="app">
+        <State />
       </entry>
     </value>
   </component>

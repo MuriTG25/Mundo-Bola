@@ -47,7 +47,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.2"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -66,25 +66,26 @@ android {
 }
 
 dependencies {
+    //TODO preciso achar o projeto que é criado com: Project.getConvention()
     // https://mvnrepository.com/artifact/io.coil-kt/coil-compose
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.1")
-    implementation(platform("androidx.compose:compose-bom:2023.09.02"))
+    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.1.2")
     // https://mvnrepository.com/artifact/androidx.datastore/datastore-preferences
     implementation ("androidx.datastore:datastore-preferences:1.0.0")
-    val navigationVersion = "2.7.5"
+    val navigationVersion = "2.7.6"
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-compose
     implementation ("androidx.navigation:navigation-compose:$navigationVersion")
     // https://mvnrepository.com/artifact/androidx.navigation/navigation-testing
     androidTestImplementation ("androidx.navigation:navigation-testing:$navigationVersion")
-    val hiltVersion = "2.48.1"
+    val hiltVersion = "2.50"
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
@@ -100,16 +101,16 @@ dependencies {
     testImplementation("androidx.room:room-testing:$roomVersion")
     testImplementation("org.amshove.kluent:kluent-android:1.73")
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
     // https://mvnrepository.com/artifact/io.mockk/mockk
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("io.mockk:mockk:1.13.9")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.02"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.10.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.4")
     // https://mvnrepository.com/artifact/androidx.test.uiautomator/uiautomator
-    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0-alpha05")
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.12")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0-beta01")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.13")
 }

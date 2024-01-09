@@ -20,7 +20,7 @@ fun DialogImagemComponent(
 
 ) {
     DialogComponent(
-        modifier = Modifier,
+        modifier = modifier,
         alturaMaxima = 800.dp,
         larguraMaxima = 600.dp,
         noClickSair = noClickkSair
