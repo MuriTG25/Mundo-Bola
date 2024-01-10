@@ -26,12 +26,10 @@ class DetalhesDaMarcaViewModel @Inject constructor(
     private val id = stateHandle.get<String>(ID_MARCA)
 
     init {
-        viewModelScope.launch {
-            id?.let {marcaId->
-                buscaMarca(marcaId)
-            }
+        id?.let { marcaId ->
+            buscaMarca(marcaId)
         }
-        _uiState.update {detalhesDaMarcaUiState ->
+        _uiState.update { detalhesDaMarcaUiState ->
             detalhesDaMarcaUiState.copy(
                 noClickDaExpansaoDaImagem = {
                     _uiState.value = _uiState.value.copy(
@@ -53,30 +51,31 @@ class DetalhesDaMarcaViewModel @Inject constructor(
         }
     }
 
-    private suspend fun buscaMarca(it: String) {
-        repositorio.encontrarMarcaPeloId(it).collect { marca ->
-            marca?.let {
-                with(it.paraMarcaDTO()) {
+    private fun buscaMarca(marcaId: String) {
+        viewModelScope.launch{
+            launch {
+                repositorio.encontrarMarcaPeloId(marcaId).collect { marca ->
+                    marca?.let {
+                        with(it.paraMarcaDTO()) {
+                            _uiState.value = _uiState.value.copy(
+                                marcaId = this.marcaId,
+                                nome = nome,
+                                imagem = imagem,
+                                dataCriacao = dataCriacao,
+                                dataAlteracao = dataAlteracao
+                            )
+                        }
+                    } ?: telaDeErro()
+                }
+            }
+            launch {
+                repositorio.listaDeBolasPorMarca(marcaId).collect{ lista ->
                     _uiState.value = _uiState.value.copy(
-                        marcaId = marcaId,
-                        nome = nome,
-                        imagem = imagem,
-                        dataCriacao = dataCriacao,
-                        dataAlteracao = dataAlteracao
+                        listaDeBolasDaMarca = lista.map {
+                            it.paraBolaDTO()
+                        }
                     )
                 }
-                listaDeBolasPorMarca(marca.marcaId)
-            } ?: telaDeErro()
-        }
-    }
-    fun listaDeBolasPorMarca(marcaId: String) {
-        viewModelScope.launch {
-            repositorio.listaDeBolasPorMarca(marcaId).first().let { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolasDaMarca = lista.map {
-                        it.paraBolaDTO()
-                    }
-                )
             }
         }
     }

@@ -10,6 +10,7 @@ import br.com.alura.mundobola.ui.stateholder.ListaDeBolasUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -23,9 +24,8 @@ class ListaDeBolasViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            carregaLista()
-        }
+        carregaLista()
+
         _uiState.update { listaDeBolasUiState ->
             listaDeBolasUiState.copy(
                 noClicaBusca = {
@@ -58,16 +58,19 @@ class ListaDeBolasViewModel @Inject constructor(
     }
 
 
-    private suspend fun carregaLista() {
-        repositorio.listaDeBolas()
-            .collect { lista ->
-                _uiState.value = _uiState.value.copy(
-                    listaDeBolas = lista.map {
-                        it.paraBolaDTO()
-                    },
-                )
-                //TODO preciso melhorar a implementação desse collect
-                repositorio.listaDeMarcas().first().let { marcas ->
+    private fun carregaLista() {
+        viewModelScope.launch {
+            launch {
+                repositorio.listaDeBolas().collect { bolas ->
+                    _uiState.value = _uiState.value.copy(
+                        listaDeBolas = bolas.map {
+                            it.paraBolaDTO()
+                        },
+                    )
+                }
+            }
+            launch {
+                repositorio.listaDeMarcas().collect{marcas->
                     _uiState.value = _uiState.value.copy(
                         listaDeMarcas = marcas.map {
                             it.paraMarcaDTO()
@@ -75,6 +78,39 @@ class ListaDeBolasViewModel @Inject constructor(
                     )
                 }
             }
+        }
+//        combine(repositorio.listaDeBolas(),repositorio.listaDeMarcas()){listaBolas,listaMarcas->
+//            listaBolas.let {bolas->
+//                _uiState.value = _uiState.value.copy(
+//                    listaDeBolas = bolas.map {
+//                        it.paraBolaDTO()
+//                    },
+//                )
+//            }
+//            listaMarcas.let {marcas->
+//                _uiState.value = _uiState.value.copy(
+//                    listaDeMarcas = marcas.map {
+//                        it.paraMarcaDTO()
+//                    }
+//                )
+//            }
+//        }
+//        repositorio.listaDeBolas()
+//            .collect { lista ->
+//                _uiState.value = _uiState.value.copy(
+//                    listaDeBolas = lista.map {
+//                        it.paraBolaDTO()
+//                    },
+//                )
+//                //TODO preciso melhorar a implementação desse collect
+//                repositorio.listaDeMarcas().first().let { marcas ->
+//                    _uiState.value = _uiState.value.copy(
+//                        listaDeMarcas = marcas.map {
+//                            it.paraMarcaDTO()
+//                        }
+//                    )
+//                }
+//            }
     }
 
 
@@ -90,7 +126,8 @@ class ListaDeBolasViewModel @Inject constructor(
                 }
         }
     }
-    fun listaDeBolasOrdenada(ordenacaoDaLista: OrdenacaoDaLista){
+
+    fun listaDeBolasOrdenada(ordenacaoDaLista: OrdenacaoDaLista) {
         viewModelScope.launch {
             repositorio.listaDeBolasOrdenada(ordenacaoDaLista).let { lista ->
                 _uiState.value = _uiState.value.copy(
