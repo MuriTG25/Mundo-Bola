@@ -66,7 +66,6 @@ android {
 }
 
 dependencies {
-    //TODO preciso achar o projeto que é criado com: Project.getConvention()
     // https://mvnrepository.com/artifact/io.coil-kt/coil-compose
     implementation("io.coil-kt:coil-compose:2.5.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")

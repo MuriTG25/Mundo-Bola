@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.alura.mundobola.R
-import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
+import br.com.alura.mundobola.ui.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.components.scaffold.FloatActionButtonComponent
 import br.com.alura.mundobola.ui.components.scaffold.TopAppBarComponent
 

@@ -1,8 +1,7 @@
 package br.com.alura.mundobola.aplicacao.repositorio
 
 
-import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
-import br.com.alura.mundobola.aplicacao.modelo.entity.BolaEntity
+import br.com.alura.mundobola.ui.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBola
 import br.com.alura.mundobola.aplicacao.modelo.entity.toBolaEntity
 import br.com.alura.mundobola.aplicacao.modelo.entity.toMarca

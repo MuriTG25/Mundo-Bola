@@ -5,7 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -20,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.alura.mundobola.R
-import br.com.alura.mundobola.aplicacao.extra.OrdenacaoDaLista
+import br.com.alura.mundobola.ui.extra.OrdenacaoDaLista
 import br.com.alura.mundobola.ui.components.comum.TextoProdutoComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
